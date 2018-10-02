@@ -34,12 +34,12 @@
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl7 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl8 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl10 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl11 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl12 = new DevExpress.XtraEditors.LabelControl();
+            this.txtName = new DevExpress.XtraEditors.LabelControl();
+            this.txtBirthDay = new DevExpress.XtraEditors.LabelControl();
+            this.txtIdentityNumber = new DevExpress.XtraEditors.LabelControl();
+            this.txtSex = new DevExpress.XtraEditors.LabelControl();
+            this.txtAddress = new DevExpress.XtraEditors.LabelControl();
+            this.txtNote = new DevExpress.XtraEditors.LabelControl();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.btnDone = new DevExpress.XtraEditors.SimpleButton();
             this.btnEdit = new DevExpress.XtraEditors.SimpleButton();
@@ -49,109 +49,121 @@
             // 
             // labelControl6
             // 
-            this.labelControl6.Location = new System.Drawing.Point(13, 169);
+            this.labelControl6.Location = new System.Drawing.Point(17, 208);
+            this.labelControl6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelControl6.Name = "labelControl6";
-            this.labelControl6.Size = new System.Drawing.Size(39, 13);
+            this.labelControl6.Size = new System.Drawing.Size(47, 16);
             this.labelControl6.TabIndex = 51;
             this.labelControl6.Text = "Ghi chú:";
             // 
             // labelControl5
             // 
-            this.labelControl5.Location = new System.Drawing.Point(13, 132);
+            this.labelControl5.Location = new System.Drawing.Point(17, 162);
+            this.labelControl5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelControl5.Name = "labelControl5";
-            this.labelControl5.Size = new System.Drawing.Size(36, 13);
+            this.labelControl5.Size = new System.Drawing.Size(45, 17);
             this.labelControl5.TabIndex = 50;
             this.labelControl5.Text = "Địa chỉ:";
             // 
             // labelControl4
             // 
-            this.labelControl4.Location = new System.Drawing.Point(13, 102);
+            this.labelControl4.Location = new System.Drawing.Point(17, 126);
+            this.labelControl4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelControl4.Name = "labelControl4";
-            this.labelControl4.Size = new System.Drawing.Size(42, 13);
+            this.labelControl4.Size = new System.Drawing.Size(53, 17);
             this.labelControl4.TabIndex = 49;
             this.labelControl4.Text = "Giới tính:";
             // 
             // labelControl3
             // 
-            this.labelControl3.Location = new System.Drawing.Point(13, 72);
+            this.labelControl3.Location = new System.Drawing.Point(17, 89);
+            this.labelControl3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(87, 13);
+            this.labelControl3.Size = new System.Drawing.Size(103, 16);
             this.labelControl3.TabIndex = 47;
             this.labelControl3.Text = "cmnd/passport/..:";
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(13, 43);
+            this.labelControl2.Location = new System.Drawing.Point(17, 53);
+            this.labelControl2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(51, 13);
+            this.labelControl2.Size = new System.Drawing.Size(60, 16);
             this.labelControl2.TabIndex = 45;
             this.labelControl2.Text = "Ngày sinh:";
             // 
             // labelControl1
             // 
-            this.labelControl1.Location = new System.Drawing.Point(13, 11);
+            this.labelControl1.Location = new System.Drawing.Point(17, 14);
+            this.labelControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(36, 13);
+            this.labelControl1.Size = new System.Drawing.Size(46, 17);
             this.labelControl1.TabIndex = 43;
             this.labelControl1.Text = "Họ tên:";
             // 
-            // labelControl7
+            // txtName
             // 
-            this.labelControl7.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.labelControl7.Location = new System.Drawing.Point(106, 14);
-            this.labelControl7.Name = "labelControl7";
-            this.labelControl7.Size = new System.Drawing.Size(111, 13);
-            this.labelControl7.TabIndex = 55;
-            this.labelControl7.Text = "Nguyen Quoc Tuyen";
+            this.txtName.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtName.Location = new System.Drawing.Point(141, 17);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(141, 17);
+            this.txtName.TabIndex = 55;
+            this.txtName.Text = "Nguyen Quoc Tuyen";
             // 
-            // labelControl8
+            // txtBirthDay
             // 
-            this.labelControl8.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.labelControl8.Location = new System.Drawing.Point(106, 43);
-            this.labelControl8.Name = "labelControl8";
-            this.labelControl8.Size = new System.Drawing.Size(68, 13);
-            this.labelControl8.TabIndex = 56;
-            this.labelControl8.Text = "26/06/1997";
+            this.txtBirthDay.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtBirthDay.Location = new System.Drawing.Point(141, 53);
+            this.txtBirthDay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBirthDay.Name = "txtBirthDay";
+            this.txtBirthDay.Size = new System.Drawing.Size(88, 17);
+            this.txtBirthDay.TabIndex = 56;
+            this.txtBirthDay.Text = "26/06/1997";
             // 
-            // labelControl9
+            // txtIdentityNumber
             // 
-            this.labelControl9.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.labelControl9.Location = new System.Drawing.Point(106, 72);
-            this.labelControl9.Name = "labelControl9";
-            this.labelControl9.Size = new System.Drawing.Size(63, 13);
-            this.labelControl9.TabIndex = 57;
-            this.labelControl9.Text = "184313135";
+            this.txtIdentityNumber.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtIdentityNumber.Location = new System.Drawing.Point(141, 89);
+            this.txtIdentityNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtIdentityNumber.Name = "txtIdentityNumber";
+            this.txtIdentityNumber.Size = new System.Drawing.Size(81, 17);
+            this.txtIdentityNumber.TabIndex = 57;
+            this.txtIdentityNumber.Text = "184313135";
             // 
-            // labelControl10
+            // txtSex
             // 
-            this.labelControl10.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.labelControl10.Location = new System.Drawing.Point(106, 102);
-            this.labelControl10.Name = "labelControl10";
-            this.labelControl10.Size = new System.Drawing.Size(25, 13);
-            this.labelControl10.TabIndex = 58;
-            this.labelControl10.Text = "Nam";
+            this.txtSex.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtSex.Location = new System.Drawing.Point(141, 126);
+            this.txtSex.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSex.Name = "txtSex";
+            this.txtSex.Size = new System.Drawing.Size(32, 17);
+            this.txtSex.TabIndex = 58;
+            this.txtSex.Text = "Nam";
             // 
-            // labelControl11
+            // txtAddress
             // 
-            this.labelControl11.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.labelControl11.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
-            this.labelControl11.Location = new System.Drawing.Point(106, 132);
-            this.labelControl11.Name = "labelControl11";
-            this.labelControl11.Size = new System.Drawing.Size(135, 13);
-            this.labelControl11.TabIndex = 59;
-            this.labelControl11.Text = "KTX Khu B DHQG TP.HCM";
+            this.txtAddress.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtAddress.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Horizontal;
+            this.txtAddress.Location = new System.Drawing.Point(141, 162);
+            this.txtAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(180, 17);
+            this.txtAddress.TabIndex = 59;
+            this.txtAddress.Text = "KTX Khu B DHQG TP.HCM";
             // 
-            // labelControl12
+            // txtNote
             // 
-            this.labelControl12.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.labelControl12.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
-            this.labelControl12.LineVisible = true;
-            this.labelControl12.Location = new System.Drawing.Point(108, 171);
-            this.labelControl12.MaximumSize = new System.Drawing.Size(260, 0);
-            this.labelControl12.Name = "labelControl12";
-            this.labelControl12.Size = new System.Drawing.Size(260, 39);
-            this.labelControl12.TabIndex = 60;
-            this.labelControl12.Text = "Bệnh đẹp traiBệnh đẹp traiBệnh đẹp traiBệnh đẹp traiBệnh đẹBệnh đẹp trai Bệnh đẹp" +
+            this.txtNote.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.txtNote.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.Vertical;
+            this.txtNote.LineVisible = true;
+            this.txtNote.Location = new System.Drawing.Point(144, 210);
+            this.txtNote.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNote.MaximumSize = new System.Drawing.Size(347, 0);
+            this.txtNote.Name = "txtNote";
+            this.txtNote.Size = new System.Drawing.Size(347, 34);
+            this.txtNote.TabIndex = 60;
+            this.txtNote.Text = "Bệnh đẹp traiBệnh đẹp traiBệnh đẹp traiBệnh đẹp traiBệnh đẹBệnh đẹp trai Bệnh đẹp" +
     " traip trai";
             // 
             // panelControl1
@@ -164,50 +176,54 @@
             this.panelControl1.AutoSize = true;
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl1.Controls.Add(this.labelControl3);
-            this.panelControl1.Controls.Add(this.labelControl12);
+            this.panelControl1.Controls.Add(this.txtNote);
             this.panelControl1.Controls.Add(this.labelControl1);
-            this.panelControl1.Controls.Add(this.labelControl11);
+            this.panelControl1.Controls.Add(this.txtAddress);
             this.panelControl1.Controls.Add(this.labelControl2);
-            this.panelControl1.Controls.Add(this.labelControl10);
+            this.panelControl1.Controls.Add(this.txtSex);
             this.panelControl1.Controls.Add(this.labelControl4);
-            this.panelControl1.Controls.Add(this.labelControl9);
+            this.panelControl1.Controls.Add(this.txtIdentityNumber);
             this.panelControl1.Controls.Add(this.labelControl5);
-            this.panelControl1.Controls.Add(this.labelControl8);
+            this.panelControl1.Controls.Add(this.txtBirthDay);
             this.panelControl1.Controls.Add(this.labelControl6);
-            this.panelControl1.Controls.Add(this.labelControl7);
-            this.panelControl1.Location = new System.Drawing.Point(3, 3);
+            this.panelControl1.Controls.Add(this.txtName);
+            this.panelControl1.Location = new System.Drawing.Point(4, 4);
+            this.panelControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(392, 239);
+            this.panelControl1.Size = new System.Drawing.Size(523, 294);
             this.panelControl1.TabIndex = 61;
             // 
             // btnDone
             // 
             this.btnDone.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnDone.Location = new System.Drawing.Point(198, 262);
+            this.btnDone.Location = new System.Drawing.Point(264, 322);
+            this.btnDone.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnDone.Name = "btnDone";
-            this.btnDone.Size = new System.Drawing.Size(68, 28);
+            this.btnDone.Size = new System.Drawing.Size(91, 34);
             this.btnDone.TabIndex = 62;
             this.btnDone.Text = "Xong";
             // 
             // btnEdit
             // 
             this.btnEdit.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnEdit.Location = new System.Drawing.Point(124, 262);
+            this.btnEdit.Location = new System.Drawing.Point(165, 322);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(68, 28);
+            this.btnEdit.Size = new System.Drawing.Size(91, 34);
             this.btnEdit.TabIndex = 63;
             this.btnEdit.Text = "Sửa";
             // 
             // Confirm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnDone);
             this.Controls.Add(this.panelControl1);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Confirm";
-            this.Size = new System.Drawing.Size(399, 312);
+            this.Size = new System.Drawing.Size(532, 384);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
@@ -223,12 +239,12 @@
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.LabelControl labelControl7;
-        private DevExpress.XtraEditors.LabelControl labelControl8;
-        private DevExpress.XtraEditors.LabelControl labelControl9;
-        private DevExpress.XtraEditors.LabelControl labelControl10;
-        private DevExpress.XtraEditors.LabelControl labelControl11;
-        private DevExpress.XtraEditors.LabelControl labelControl12;
+        private DevExpress.XtraEditors.LabelControl txtName;
+        private DevExpress.XtraEditors.LabelControl txtBirthDay;
+        private DevExpress.XtraEditors.LabelControl txtIdentityNumber;
+        private DevExpress.XtraEditors.LabelControl txtSex;
+        private DevExpress.XtraEditors.LabelControl txtAddress;
+        private DevExpress.XtraEditors.LabelControl txtNote;
         private DevExpress.XtraEditors.PanelControl panelControl1;
         private DevExpress.XtraEditors.SimpleButton btnDone;
         private DevExpress.XtraEditors.SimpleButton btnEdit;

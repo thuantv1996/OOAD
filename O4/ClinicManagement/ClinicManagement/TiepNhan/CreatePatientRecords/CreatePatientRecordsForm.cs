@@ -61,6 +61,7 @@ namespace ClinicManagement.TiepNhan.CreatePatientRecords
         private void btnCreate_Click(object sender, EventArgs e)
         {
             //fill data to confirm view
+            this.confirmView.fillInfo(this.formView.getTypingInfo());
             this.switchView(FormType.FormToConfirm);
         }
 
