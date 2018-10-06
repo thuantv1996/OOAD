@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.UserSkins;
 using DevExpress.Skins;
+using ClinicManagement.Features.Reception.Subform;
 
 namespace ClinicManagement
 {
@@ -20,7 +21,7 @@ namespace ClinicManagement
 
             BonusSkins.Register();
             SkinManager.EnableFormSkins();
-            Application.Run(new Form1());
+            Application.Run(new createRecordsForm());
         }
     }
 }

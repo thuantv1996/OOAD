@@ -34,14 +34,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.BonusSkins.v16.1" />
+    <Reference Include="DevExpress.CodeRush.Common, Version=16.1.4.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d" />
+    <Reference Include="DevExpress.CodeRush.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d" />
+    <Reference Include="DevExpress.CodeRush.Extensions, Version=16.1.4.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v16.1" />
+    <Reference Include="DevExpress.DXCore.Parser, Version=16.1.4.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d" />
     <Reference Include="DevExpress.Printing.v16.1.Core" />
     <Reference Include="DevExpress.Utils.v16.1" />
     <Reference Include="DevExpress.XtraBars.v16.1" />
     <Reference Include="DevExpress.Sparkline.v16.1.Core" />
     <Reference Include="DevExpress.XtraEditors.v16.1" />
+    <Reference Include="DevExpress.XtraGrid.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,20 +63,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\Reception\Home\ReceptionHomeForm.cs">
+    <Compile Include="Common\Model\Patient.cs" />
+    <Compile Include="Features\Reception\Home\ReceptionHomeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Features\Reception\Home\ReceptionHomeForm.Designer.cs">
-      <DependentUpon>ReceptionHomeForm.cs</DependentUpon>
+    <Compile Include="Features\Reception\Home\ReceptionHomeControl.Designer.cs">
+      <DependentUpon>ReceptionHomeControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\Reception\Subform\ConfirmInfomationForm.cs">
+    <Compile Include="Features\Reception\Subform\ConfirmInfomationControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Features\Reception\Subform\ConfirmInfomationForm.Designer.cs">
-      <DependentUpon>ConfirmInfomationForm.cs</DependentUpon>
+    <Compile Include="Features\Reception\Subform\ConfirmInfomationControl.Designer.cs">
+      <DependentUpon>ConfirmInfomationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Reception\Subform\CreateRecordsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\Subform\CreateRecordsControl.Designer.cs">
+      <DependentUpon>CreateRecordsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Features\Reception\Subform\CreateRecordsForm.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Features\Reception\Subform\CreateRecordsForm.Designer.cs">
       <DependentUpon>CreateRecordsForm.cs</DependentUpon>
@@ -78,6 +96,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Features\Reception\Home\ReceptionHomeControl.resx">
+      <DependentUpon>ReceptionHomeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Reception\Subform\ConfirmInfomationControl.resx">
+      <DependentUpon>ConfirmInfomationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Reception\Subform\CreateRecordsControl.resx">
+      <DependentUpon>CreateRecordsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Reception\Subform\CreateRecordsForm.resx">
+      <DependentUpon>CreateRecordsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,9 +134,13 @@
   <ItemGroup>
     <Folder Include="Common\DAO\" />
     <Folder Include="Common\Interface\" />
-    <Folder Include="Common\Model\" />
-    <Folder Include="Features\Analysis\" />
-    <Folder Include="Features\Examination\" />
+    <Folder Include="Features\Analysis\Bus\" />
+    <Folder Include="Features\Analysis\Home\" />
+    <Folder Include="Features\Analysis\Subform\" />
+    <Folder Include="Features\Examination\Bus\" />
+    <Folder Include="Features\Examination\Home\" />
+    <Folder Include="Features\Examination\Subform\" />
+    <Folder Include="Features\Reception\Bus\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

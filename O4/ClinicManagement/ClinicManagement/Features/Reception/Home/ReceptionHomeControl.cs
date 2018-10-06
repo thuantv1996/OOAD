@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ClinicManagement.Features.Reception.Subform
+namespace ClinicManagement.Features.Reception.Home
 {
-    public partial class ConfirmInfomationForm : UserControl
+    public partial class ReceptionHomeControl : UserControl
     {
-        public ConfirmInfomationForm()
+        public ReceptionHomeControl()
         {
             InitializeComponent();
         }
