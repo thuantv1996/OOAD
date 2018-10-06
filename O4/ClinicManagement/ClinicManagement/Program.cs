@@ -4,7 +4,6 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.UserSkins;
 using DevExpress.Skins;
-using ClinicManagement.TiepNhan.CreatePatientRecords;
 
 namespace ClinicManagement
 {
