@@ -52,6 +52,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Reception\Home\ReceptionHomeForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\Home\ReceptionHomeForm.Designer.cs">
+      <DependentUpon>ReceptionHomeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Reception\Subform\ConfirmInfomationForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\Subform\ConfirmInfomationForm.Designer.cs">
+      <DependentUpon>ConfirmInfomationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Reception\Subform\CreateRecordsForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\Subform\CreateRecordsForm.Designer.cs">
+      <DependentUpon>CreateRecordsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +81,7 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -81,6 +100,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\DAO\" />
+    <Folder Include="Common\Interface\" />
+    <Folder Include="Common\Model\" />
+    <Folder Include="Features\Analysis\" />
+    <Folder Include="Features\Examination\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
