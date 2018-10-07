@@ -21,7 +21,7 @@ namespace ClinicManagement
 
             BonusSkins.Register();
             SkinManager.EnableFormSkins();
-            Application.Run(new createRecordsForm());
+            Application.Run(new Form1());
         }
     }
 }

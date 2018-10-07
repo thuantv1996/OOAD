@@ -28,143 +28,71 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colBirthDay = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colSex = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colIdentityNumber = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colAddress = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colNote = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            this.btnCreateRecords = new DevExpress.XtraEditors.SimpleButton();
+            this.btnCreateCaseRecord = new DevExpress.XtraEditors.SimpleButton();
+            this.btnCreateBill = new DevExpress.XtraEditors.SimpleButton();
+            this.listOfPatientRecords = new ClinicManagement.Features.Common.ListOfRecord();
             this.SuspendLayout();
             // 
-            // gridControl1
+            // btnCreateRecords
             // 
-            this.gridControl1.Location = new System.Drawing.Point(0, 0);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(751, 537);
-            this.gridControl1.TabIndex = 0;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.btnCreateRecords.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreateRecords.Location = new System.Drawing.Point(623, 15);
+            this.btnCreateRecords.Name = "btnCreateRecords";
+            this.btnCreateRecords.Size = new System.Drawing.Size(102, 42);
+            this.btnCreateRecords.TabIndex = 1;
+            this.btnCreateRecords.Text = "Tạo hồ sơ";
+            this.btnCreateRecords.Click += new System.EventHandler(this.btnCreateRecords_Click);
             // 
-            // gridView1
+            // btnCreateCaseRecord
             // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colName,
-            this.colBirthDay,
-            this.colSex,
-            this.colIdentityNumber,
-            this.colAddress,
-            this.colNote});
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gridView1.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gridView1.OptionsBehavior.Editable = false;
-            this.gridView1.OptionsFind.AlwaysVisible = true;
-            this.gridView1.OptionsFind.SearchInPreview = true;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.btnCreateCaseRecord.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreateCaseRecord.Location = new System.Drawing.Point(623, 73);
+            this.btnCreateCaseRecord.Name = "btnCreateCaseRecord";
+            this.btnCreateCaseRecord.Size = new System.Drawing.Size(102, 42);
+            this.btnCreateCaseRecord.TabIndex = 2;
+            this.btnCreateCaseRecord.Text = "Tạo bệnh án";
+            this.btnCreateCaseRecord.Click += new System.EventHandler(this.btnCreateCaseRecord_Click);
             // 
-            // colName
+            // btnCreateBill
             // 
-            this.colName.Caption = "Họ tên";
-            this.colName.Name = "colName";
-            this.colName.Visible = true;
-            this.colName.VisibleIndex = 0;
+            this.btnCreateBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreateBill.Location = new System.Drawing.Point(623, 131);
+            this.btnCreateBill.Name = "btnCreateBill";
+            this.btnCreateBill.Size = new System.Drawing.Size(102, 42);
+            this.btnCreateBill.TabIndex = 3;
+            this.btnCreateBill.Text = "Lập hóa đơn";
+            this.btnCreateBill.Click += new System.EventHandler(this.btnCreateBill_Click);
             // 
-            // colBirthDay
+            // listOfPatientRecords
             // 
-            this.colBirthDay.Caption = "Ngày sinh";
-            this.colBirthDay.Name = "colBirthDay";
-            this.colBirthDay.Visible = true;
-            this.colBirthDay.VisibleIndex = 1;
-            // 
-            // colSex
-            // 
-            this.colSex.Caption = "Giới tính";
-            this.colSex.Name = "colSex";
-            this.colSex.Visible = true;
-            this.colSex.VisibleIndex = 2;
-            // 
-            // colIdentityNumber
-            // 
-            this.colIdentityNumber.Caption = "cmnd/passport";
-            this.colIdentityNumber.Name = "colIdentityNumber";
-            this.colIdentityNumber.Visible = true;
-            this.colIdentityNumber.VisibleIndex = 3;
-            // 
-            // colAddress
-            // 
-            this.colAddress.Caption = "Địa chỉ";
-            this.colAddress.Name = "colAddress";
-            this.colAddress.Visible = true;
-            this.colAddress.VisibleIndex = 4;
-            // 
-            // colNote
-            // 
-            this.colNote.Caption = "Ghi chú";
-            this.colNote.Name = "colNote";
-            this.colNote.Visible = true;
-            this.colNote.VisibleIndex = 5;
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Location = new System.Drawing.Point(766, 19);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(102, 42);
-            this.simpleButton1.TabIndex = 1;
-            this.simpleButton1.Text = "simpleButton1";
-            // 
-            // simpleButton2
-            // 
-            this.simpleButton2.Location = new System.Drawing.Point(766, 83);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(102, 42);
-            this.simpleButton2.TabIndex = 2;
-            this.simpleButton2.Text = "simpleButton2";
-            // 
-            // simpleButton3
-            // 
-            this.simpleButton3.Location = new System.Drawing.Point(766, 152);
-            this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(102, 42);
-            this.simpleButton3.TabIndex = 3;
-            this.simpleButton3.Text = "simpleButton3";
+            this.listOfPatientRecords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listOfPatientRecords.Location = new System.Drawing.Point(0, 0);
+            this.listOfPatientRecords.Name = "listOfPatientRecords";
+            this.listOfPatientRecords.Size = new System.Drawing.Size(606, 537);
+            this.listOfPatientRecords.TabIndex = 4;
             // 
             // ReceptionHomeControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.simpleButton3);
-            this.Controls.Add(this.simpleButton2);
-            this.Controls.Add(this.simpleButton1);
-            this.Controls.Add(this.gridControl1);
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Controls.Add(this.listOfPatientRecords);
+            this.Controls.Add(this.btnCreateBill);
+            this.Controls.Add(this.btnCreateCaseRecord);
+            this.Controls.Add(this.btnCreateRecords);
             this.Name = "ReceptionHomeControl";
-            this.Size = new System.Drawing.Size(886, 537);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            this.Size = new System.Drawing.Size(742, 537);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn colName;
-        private DevExpress.XtraGrid.Columns.GridColumn colBirthDay;
-        private DevExpress.XtraGrid.Columns.GridColumn colSex;
-        private DevExpress.XtraGrid.Columns.GridColumn colIdentityNumber;
-        private DevExpress.XtraGrid.Columns.GridColumn colAddress;
-        private DevExpress.XtraGrid.Columns.GridColumn colNote;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.SimpleButton simpleButton3;
+        private DevExpress.XtraEditors.SimpleButton btnCreateRecords;
+        private DevExpress.XtraEditors.SimpleButton btnCreateCaseRecord;
+        private DevExpress.XtraEditors.SimpleButton btnCreateBill;
+        private Common.ListOfRecord listOfPatientRecords;
     }
 }

@@ -31,7 +31,6 @@
             this.ribbonControl1 = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.confirmInfomationControl1 = new ClinicManagement.Features.Reception.Subform.ConfirmInfomationControl();
             ((System.ComponentModel.ISupportInitialize)(this.ribbonControl1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,21 +60,12 @@
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "ribbonPageGroup1";
             // 
-            // confirmInfomationControl1
-            // 
-            this.confirmInfomationControl1.Location = new System.Drawing.Point(74, 160);
-            this.confirmInfomationControl1.MinimumSize = new System.Drawing.Size(445, 465);
-            this.confirmInfomationControl1.Name = "confirmInfomationControl1";
-            this.confirmInfomationControl1.Size = new System.Drawing.Size(487, 465);
-            this.confirmInfomationControl1.TabIndex = 1;
-            // 
             // Form1
             // 
             this.AllowFormGlass = DevExpress.Utils.DefaultBoolean.False;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(819, 712);
-            this.Controls.Add(this.confirmInfomationControl1);
             this.Controls.Add(this.ribbonControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Form1";
@@ -92,7 +82,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonControl ribbonControl1;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
-        private Features.Reception.Subform.ConfirmInfomationControl confirmInfomationControl1;
     }
 }
 

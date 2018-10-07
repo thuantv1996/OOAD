@@ -1,6 +1,6 @@
 ﻿namespace ClinicManagement.Features.Reception.Subform
 {
-    partial class createRecordsForm
+    partial class CreateRecordsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,12 +30,12 @@
         {
             this.SuspendLayout();
             // 
-            // createRecordsForm
+            // CreateRecordsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(519, 597);
-            this.Name = "createRecordsForm";
+            this.Name = "CreateRecordsForm";
             this.Text = "CreateRecordsForm";
             this.ResumeLayout(false);
 

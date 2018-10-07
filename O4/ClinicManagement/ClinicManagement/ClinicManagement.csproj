@@ -64,6 +64,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Model\Patient.cs" />
+    <Compile Include="Features\Common\IFeatures.cs" />
+    <Compile Include="Features\Common\ListOfRecord.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Common\ListOfRecord.Designer.cs">
+      <DependentUpon>ListOfRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Examination\Home\ExaminationHomeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Examination\Home\ExaminationHomeControl.Designer.cs">
+      <DependentUpon>ExaminationHomeControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Features\Reception\Home\ReceptionHomeControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -96,6 +109,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Features\Common\ListOfRecord.resx">
+      <DependentUpon>ListOfRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Examination\Home\ExaminationHomeControl.resx">
+      <DependentUpon>ExaminationHomeControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\Reception\Home\ReceptionHomeControl.resx">
       <DependentUpon>ReceptionHomeControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,7 +157,6 @@
     <Folder Include="Features\Analysis\Home\" />
     <Folder Include="Features\Analysis\Subform\" />
     <Folder Include="Features\Examination\Bus\" />
-    <Folder Include="Features\Examination\Home\" />
     <Folder Include="Features\Examination\Subform\" />
     <Folder Include="Features\Reception\Bus\" />
   </ItemGroup>

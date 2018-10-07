@@ -11,9 +11,9 @@ using ClinicManagement.Features.Reception.Subform;
 
 namespace ClinicManagement.Features.Reception.Subform
 {
-    public partial class createRecordsForm : Form
+    public partial class CreateRecordsForm : Form
     {
-        public createRecordsForm()
+        public CreateRecordsForm()
         {
             InitializeComponent();
             this.setupView();
