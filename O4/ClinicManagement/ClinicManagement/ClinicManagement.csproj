@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{B6C1B3C8-C19B-4E72-AC4E-A2D644F66838}</ProjectGuid>
+    <ProjectGuid>{392F53A4-5A50-4ADE-9220-BD324F681E86}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ClinicManagement</RootNamespace>
@@ -33,9 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ClinicManagement">
-      <HintPath>obj\Debug\ClinicManagement.exe</HintPath>
-    </Reference>
     <Reference Include="DevExpress.BonusSkins.v16.1" />
     <Reference Include="DevExpress.CodeRush.Common, Version=16.1.4.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d" />
     <Reference Include="DevExpress.CodeRush.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d" />
@@ -50,7 +47,6 @@
     <Reference Include="DevExpress.XtraGrid.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraPrinting.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraVerticalGrid.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
@@ -67,6 +63,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Model\Patient.cs" />
+    <Compile Include="Features\Common\IFeatures.cs" />
+    <Compile Include="Features\Common\ListOfRecord.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Common\ListOfRecord.Designer.cs">
+      <DependentUpon>ListOfRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Examination\Home\ExaminationHomeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Examination\Home\ExaminationHomeControl.Designer.cs">
+      <DependentUpon>ExaminationHomeControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Reception\Home\ReceptionHomeControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\Home\ReceptionHomeControl.Designer.cs">
+      <DependentUpon>ReceptionHomeControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Reception\Subform\ConfirmInfomationControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\Subform\ConfirmInfomationControl.Designer.cs">
+      <DependentUpon>ConfirmInfomationControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Reception\Subform\CreateRecordsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\Subform\CreateRecordsControl.Designer.cs">
+      <DependentUpon>CreateRecordsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Reception\Subform\CreateRecordsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\Subform\CreateRecordsForm.Designer.cs">
+      <DependentUpon>CreateRecordsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,30 +109,24 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TiepNhan\CreatePatientRecords\Confirm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="TiepNhan\CreatePatientRecords\Confirm.Designer.cs">
-      <DependentUpon>Confirm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TiepNhan\CreatePatientRecords\CreatePatientRecordsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TiepNhan\CreatePatientRecords\CreatePatientRecordsForm.Designer.cs">
-      <DependentUpon>CreatePatientRecordsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TiepNhan\CreatePatientRecords\FormToCreate.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="TiepNhan\CreatePatientRecords\FormToCreate.Designer.cs">
-      <DependentUpon>FormToCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TiepNhan\HomeReceiver\HomeReceiver.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="TiepNhan\HomeReceiver\HomeReceiver.Designer.cs">
-      <DependentUpon>HomeReceiver.cs</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="Features\Common\ListOfRecord.resx">
+      <DependentUpon>ListOfRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Examination\Home\ExaminationHomeControl.resx">
+      <DependentUpon>ExaminationHomeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Reception\Home\ReceptionHomeControl.resx">
+      <DependentUpon>ReceptionHomeControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Reception\Subform\ConfirmInfomationControl.resx">
+      <DependentUpon>ConfirmInfomationControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Reception\Subform\CreateRecordsControl.resx">
+      <DependentUpon>CreateRecordsControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Reception\Subform\CreateRecordsForm.resx">
+      <DependentUpon>CreateRecordsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,18 +140,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="TiepNhan\CreatePatientRecords\Confirm.resx">
-      <DependentUpon>Confirm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TiepNhan\CreatePatientRecords\CreatePatientRecordsForm.resx">
-      <DependentUpon>CreatePatientRecordsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TiepNhan\CreatePatientRecords\FormToCreate.resx">
-      <DependentUpon>FormToCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="TiepNhan\HomeReceiver\HomeReceiver.resx">
-      <DependentUpon>HomeReceiver.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -135,8 +151,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="KhamBenh\" />
-    <Folder Include="XetNghiem\" />
+    <Folder Include="Common\DAO\" />
+    <Folder Include="Common\Interface\" />
+    <Folder Include="Features\Analysis\Bus\" />
+    <Folder Include="Features\Analysis\Home\" />
+    <Folder Include="Features\Analysis\Subform\" />
+    <Folder Include="Features\Examination\Bus\" />
+    <Folder Include="Features\Examination\Subform\" />
+    <Folder Include="Features\Reception\Bus\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

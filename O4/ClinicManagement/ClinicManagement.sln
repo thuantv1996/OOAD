@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagement", "ClinicManagement\ClinicManagement.csproj", "{B6C1B3C8-C19B-4E72-AC4E-A2D644F66838}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagement", "ClinicManagement\ClinicManagement.csproj", "{392F53A4-5A50-4ADE-9220-BD324F681E86}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{B6C1B3C8-C19B-4E72-AC4E-A2D644F66838}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B6C1B3C8-C19B-4E72-AC4E-A2D644F66838}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B6C1B3C8-C19B-4E72-AC4E-A2D644F66838}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B6C1B3C8-C19B-4E72-AC4E-A2D644F66838}.Release|Any CPU.Build.0 = Release|Any CPU
+		{392F53A4-5A50-4ADE-9220-BD324F681E86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{392F53A4-5A50-4ADE-9220-BD324F681E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{392F53A4-5A50-4ADE-9220-BD324F681E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{392F53A4-5A50-4ADE-9220-BD324F681E86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
