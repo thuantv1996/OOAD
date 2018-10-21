@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{392F53A4-5A50-4ADE-9220-BD324F681E86}</ProjectGuid>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{212C8906-3217-4EAF-A67B-0E23C790F066}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ClinicManagement</RootNamespace>
     <AssemblyName>ClinicManagement</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,102 +33,116 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.BonusSkins.v16.1" />
-    <Reference Include="DevExpress.CodeRush.Common, Version=16.1.4.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d" />
-    <Reference Include="DevExpress.CodeRush.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d" />
-    <Reference Include="DevExpress.CodeRush.Extensions, Version=16.1.4.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.Data.v16.1" />
-    <Reference Include="DevExpress.DXCore.Parser, Version=16.1.4.0, Culture=neutral, PublicKeyToken=35c9f04b7764aa3d" />
-    <Reference Include="DevExpress.Printing.v16.1.Core" />
-    <Reference Include="DevExpress.Utils.v16.1" />
-    <Reference Include="DevExpress.XtraBars.v16.1" />
-    <Reference Include="DevExpress.Sparkline.v16.1.Core" />
-    <Reference Include="DevExpress.XtraEditors.v16.1" />
-    <Reference Include="DevExpress.XtraGrid.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="DevExpress.XtraLayout.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="DevExpress.XtraPrinting.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
-    <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
+    <Reference Include="DevExpress.Data.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Printing.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Sparkline.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraEditors.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Design" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Model\Patient.cs" />
-    <Compile Include="Features\Common\IFeatures.cs" />
-    <Compile Include="Features\Common\ListOfRecord.cs">
+    <Compile Include="Common\Components\MenuControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Features\Common\ListOfRecord.Designer.cs">
-      <DependentUpon>ListOfRecord.cs</DependentUpon>
+    <Compile Include="Common\Components\MenuControl.Designer.cs">
+      <DependentUpon>MenuControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\Examination\Home\ExaminationHomeControl.cs">
+    <Compile Include="Common\Components\TableDataView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Features\Examination\Home\ExaminationHomeControl.Designer.cs">
-      <DependentUpon>ExaminationHomeControl.cs</DependentUpon>
+    <Compile Include="Common\Components\TableDataView.Designer.cs">
+      <DependentUpon>TableDataView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\Reception\Home\ReceptionHomeControl.cs">
+    <Compile Include="Common\Observable.cs" />
+    <Compile Include="Common\SourceLibrary.cs" />
+    <Compile Include="Features\Analysis\Main\AnalysisHome.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Features\Reception\Home\ReceptionHomeControl.Designer.cs">
-      <DependentUpon>ReceptionHomeControl.cs</DependentUpon>
+    <Compile Include="Features\Analysis\Main\AnalysisHome.Designer.cs">
+      <DependentUpon>AnalysisHome.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\Reception\Subform\ConfirmInfomationControl.cs">
+    <Compile Include="Features\Examination\Main\ExaminationHome.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Features\Reception\Subform\ConfirmInfomationControl.Designer.cs">
-      <DependentUpon>ConfirmInfomationControl.cs</DependentUpon>
+    <Compile Include="Features\Examination\Main\ExaminationHome.Designer.cs">
+      <DependentUpon>ExaminationHome.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\Reception\Subform\CreateRecordsControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Features\Reception\Subform\CreateRecordsControl.Designer.cs">
-      <DependentUpon>CreateRecordsControl.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Reception\Subform\CreateRecordsForm.cs">
+    <Compile Include="Features\Login\Main\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Features\Reception\Subform\CreateRecordsForm.Designer.cs">
-      <DependentUpon>CreateRecordsForm.cs</DependentUpon>
+    <Compile Include="Features\Login\Main\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Features\Login\SubForms\LoginControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Login\SubForms\LoginControl.Designer.cs">
+      <DependentUpon>LoginControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Reception\Main\ReceptionCreatePatientRecord.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\Main\ReceptionCreatePatientRecord.Designer.cs">
+      <DependentUpon>ReceptionCreatePatientRecord.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Reception\Main\ReceptionHome.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\Main\ReceptionHome.Designer.cs">
+      <DependentUpon>ReceptionHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Reception\Main\ReceptionReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\Main\ReceptionReport.Designer.cs">
+      <DependentUpon>ReceptionReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Reception\SubForms\FilterUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\SubForms\FilterUserControl.Designer.cs">
+      <DependentUpon>FilterUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Features\Common\ListOfRecord.resx">
-      <DependentUpon>ListOfRecord.cs</DependentUpon>
+    <EmbeddedResource Include="Common\Components\MenuControl.resx">
+      <DependentUpon>MenuControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\Examination\Home\ExaminationHomeControl.resx">
-      <DependentUpon>ExaminationHomeControl.cs</DependentUpon>
+    <EmbeddedResource Include="Common\Components\TableDataView.resx">
+      <DependentUpon>TableDataView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\Reception\Home\ReceptionHomeControl.resx">
-      <DependentUpon>ReceptionHomeControl.cs</DependentUpon>
+    <EmbeddedResource Include="Features\Login\Main\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\Reception\Subform\ConfirmInfomationControl.resx">
-      <DependentUpon>ConfirmInfomationControl.cs</DependentUpon>
+    <EmbeddedResource Include="Features\Login\SubForms\LoginControl.resx">
+      <DependentUpon>LoginControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\Reception\Subform\CreateRecordsControl.resx">
-      <DependentUpon>CreateRecordsControl.cs</DependentUpon>
+    <EmbeddedResource Include="Features\Reception\Main\ReceptionHome.resx">
+      <DependentUpon>ReceptionHome.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\Reception\Subform\CreateRecordsForm.resx">
-      <DependentUpon>CreateRecordsForm.cs</DependentUpon>
+    <EmbeddedResource Include="Features\Reception\SubForms\FilterUserControl.resx">
+      <DependentUpon>FilterUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -139,6 +153,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -151,17 +166,42 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Common\DAO\" />
-    <Folder Include="Common\Interface\" />
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Features\Analysis\Bus\" />
-    <Folder Include="Features\Analysis\Home\" />
-    <Folder Include="Features\Analysis\Subform\" />
+    <Folder Include="Features\Analysis\SubForms\" />
+    <Folder Include="Features\Common\" />
     <Folder Include="Features\Examination\Bus\" />
-    <Folder Include="Features\Examination\Subform\" />
+    <Folder Include="Features\Examination\SubForms\" />
+    <Folder Include="Features\Login\Bus\" />
     <Folder Include="Features\Reception\Bus\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loginBackground.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon\ico_closeform_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Components\Components.csproj">
+      <Project>{83a1e407-ad93-47b8-99ac-4af5084f87ec}</Project>
+      <Name>Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAO\DAO.csproj">
+      <Project>{4e93204f-40b0-4120-8193-01fb0becad00}</Project>
+      <Name>DAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{6c22cc07-0313-4730-8c9e-7745d710d68d}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon\ico_key_24.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

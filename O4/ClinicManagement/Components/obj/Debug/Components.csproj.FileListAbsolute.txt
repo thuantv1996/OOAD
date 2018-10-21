@@ -1,0 +1,7 @@
+D:\Project\OOAD\O4\ClinicManagement\Components\bin\Debug\Components.dll
+D:\Project\OOAD\O4\ClinicManagement\Components\bin\Debug\Components.pdb
+D:\Project\OOAD\O4\ClinicManagement\Components\obj\Debug\Components.csprojResolveAssemblyReference.cache
+D:\Project\OOAD\O4\ClinicManagement\Components\obj\Debug\Components.Common.NewTextField.resources
+D:\Project\OOAD\O4\ClinicManagement\Components\obj\Debug\Components.csproj.GenerateResource.Cache
+D:\Project\OOAD\O4\ClinicManagement\Components\obj\Debug\Components.dll
+D:\Project\OOAD\O4\ClinicManagement\Components\obj\Debug\Components.pdb

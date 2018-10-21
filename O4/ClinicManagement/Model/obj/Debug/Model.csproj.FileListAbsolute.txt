@@ -1,0 +1,5 @@
+D:\Project\OOAD\O4\ClinicManagement\Model\bin\Debug\Model.dll
+D:\Project\OOAD\O4\ClinicManagement\Model\bin\Debug\Model.pdb
+D:\Project\OOAD\O4\ClinicManagement\Model\obj\Debug\Model.dll
+D:\Project\OOAD\O4\ClinicManagement\Model\obj\Debug\Model.pdb
+D:\Project\OOAD\O4\ClinicManagement\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
