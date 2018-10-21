@@ -1,0 +1,5 @@
+D:\Project\OOAD\O4\ClinicManagement\DAO\bin\Debug\DAO.dll
+D:\Project\OOAD\O4\ClinicManagement\DAO\bin\Debug\DAO.pdb
+D:\Project\OOAD\O4\ClinicManagement\DAO\obj\Debug\DAO.dll
+D:\Project\OOAD\O4\ClinicManagement\DAO\obj\Debug\DAO.pdb
+D:\Project\OOAD\O4\ClinicManagement\DAO\obj\Debug\DAO.csprojResolveAssemblyReference.cache
