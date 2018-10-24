@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
-    public class Class1
+    public class DAOMessage
     {
+        public static string MES_DAO_001 = "Thực thi SQL nâng cao thất bại";
     }
 }

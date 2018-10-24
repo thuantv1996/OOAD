@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0b1e5e6f896047c291439541b607c881" Name="Diagram1">
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.BENHNHAN" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.CHITIETDONTHUOC" Width="1.5" PointX="9.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.DONTHUOC" Width="1.5" PointX="7.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.HOSOBENHAN" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.KETQUAXETNGHIEM" Width="1.5" PointX="10.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.LOAIHOSO" Width="1.5" PointX="3" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.LOAINHANVIEN" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.LUONCONGVIEC" Width="1.5" PointX="7.5" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.NHANVIEN" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.PHONG" Width="1.5" PointX="0.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.TAIKHOAN" Width="1.5" PointX="5.25" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.THANHTOAN" Width="1.5" PointX="7.5" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.THUOC" Width="1.5" PointX="7.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.TRANGTHAIPHONG" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QLPHONGKHAMModel.XETNGHIEM" Width="1.5" PointX="3" PointY="17.125" IsExpanded="true" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_HOSOBENHAN_BENHNHAN" ManuallyRouted="false" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_CHITIETDONTHUOC_DONTHUOC" ManuallyRouted="false" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_CHITIETDONTHUOC_THUOC" ManuallyRouted="false" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_DONTHUOC_HoSoBenhAn" ManuallyRouted="false" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_HOSOBENHAN_LOAIHOSO" ManuallyRouted="false" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_HOSOBENHAN_NhanVien" ManuallyRouted="false" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_KETQUAXETNGHIEM_HoSoBenhAn" ManuallyRouted="false" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_LUONCONGVIEC_HoSoBenhAn" ManuallyRouted="false" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_THANHTOAN_HoSoBenhAn" ManuallyRouted="false" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_KETQUAXETNGHIEM_NhanVien" ManuallyRouted="false" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_KETQUAXETNGHIEM_XETNGHIEM" ManuallyRouted="false" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_NHANVIEN_LOAINHANVIEN" ManuallyRouted="false" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_NHANVIEN_PHONG" ManuallyRouted="false" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_TAIKHOAN_NhanVien" ManuallyRouted="false" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_TRANGTHAIPHONG_PHONG" ManuallyRouted="false" />
+        <AssociationConnector Association="QLPHONGKHAMModel.FK_XETNGHIEM_PHONG" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
