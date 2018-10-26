@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -52,15 +53,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Imp\BaseDAO.cs" />
     <Compile Include="BENHNHAN.cs">
       <DependentUpon>QLPK.tt</DependentUpon>
     </Compile>
+    <Compile Include="Com\DAOUtils.cs" />
     <Compile Include="CHITIETDONTHUOC.cs">
       <DependentUpon>QLPK.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAOAdvance.cs" />
-    <Compile Include="DAOConstant.cs" />
-    <Compile Include="DAOMessage.cs" />
+    <Compile Include="Com\DAOConstant.cs" />
+    <Compile Include="Com\DAOMessage.cs" />
     <Compile Include="DONTHUOC.cs">
       <DependentUpon>QLPK.tt</DependentUpon>
     </Compile>
