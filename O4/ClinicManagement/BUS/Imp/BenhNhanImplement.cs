@@ -17,11 +17,53 @@ namespace BUS.Imp
             throw new NotImplementedException();
         }
 
+        // HÀM LẤY THÔNG TIN BỆNH NHÂN 
         public string GetInformationBenhNhan(string MaBenhNhan, out BENHNHAN InformationBenhNhan, out List<string> MessangeError)
         {
-            throw new NotImplementedException();
+            InformationBenhNhan = new BENHNHAN();
+            List<BENHNHAN> LstResult = null;
+            string IdResult = "";
+            // Khởi tạo Database
+            using (var db = new QLPHONGKHAMEntities())
+            {
+                //Khởi tạo transaction
+                using (var trans = db.Database.BeginTransaction())
+                {
+                    // Khởi tạo lớp DAO
+                    DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
+                    // Thực hiện lệnh SELECT
+                    IdResult = Dao.Select(db, bn => bn.MaBenhNhan.Equals(MaBenhNhan), out LstResult, out MessangeError);
+                    // Nếu không thực hiện được lệnh SELECT
+                    if (IdResult == BUS.Com.BusConstant.RES_FAI)
+                    {
+                        if (MessangeError == null)
+                        {
+                            MessangeError = new List<string>();
+                        }
+                        // Thêm thông báo lỗi
+                        MessangeError.Insert(0, "Lỗi Database trong truy vấn select table BENHNHAN");
+                        // Rollback dữ liệu
+                        trans.Rollback();
+                        // Return faild
+                        IdResult = BUS.Com.BusConstant.RES_FAI;
+                    }
+                    // Nếu không tìm thấy trường
+                    if (LstResult.Count == 0)
+                    {
+                        if (MessangeError == null)
+                        {
+                            MessangeError = new List<string>();
+                        }
+                        MessangeError.Insert(0, "Không select được dữ liệu (Data is empty)");
+                        trans.Rollback();
+                        IdResult = BUS.Com.BusConstant.RES_FAI;
+                    }
+                }
+            }
+            return IdResult;
         }
 
+        // HÀM LẤY DANH SÁCH BỆNH NHÂN
         public string GetListBenhNhan(out List<BenhNhanEnity> ListBenhNhan, out List<string> MessageError)
         {
             ListBenhNhan = new List<BenhNhanEnity>();
@@ -74,6 +116,7 @@ namespace BUS.Imp
             return IdResult;
         }
 
+        // HÀM TÌM KIẾM THÔNG TIN BỆNH NHÂN
         public string SearchBenhNhan(BenhNhanSearchEntity BenhNhanSearchEntity, out List<BenhNhanEnity> ListBenhNhan, out List<string> MessageError)
         {
             ListBenhNhan = new List<BenhNhanEnity>();
@@ -88,23 +131,34 @@ namespace BUS.Imp
                     // Khởi tạo lớp DAO
                     DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
                     // Thực hiện lệnh SELECT
-                    string sql = "select * "
-                        + "from BENHNHAN "
-                        + "where ";
-                    if(BenhNhanSearchEntity.MaBenhNhan != "")
+                    string sql = "SELECT * "
+                        + "FROM BENHNHAN "
+                        + "WHERE ";
+                    bool HasPrevCondition = false;
+                    if (BenhNhanSearchEntity.MaBenhNhan != "")
                     {
-                        sql = sql + "MaBenhNhan like '%{0}%' ";
+                        sql = sql + "MaBenhNhan LIKE '%{0}%' ";
                     }
                     if(BenhNhanSearchEntity.TenBenhNhan != "")
                     {
-                        sql = sql + "and TenBenhNhan like '%{1}%' ";
+                        if(HasPrevCondition)
+                        {
+                            sql += "AND ";
+                        }
+                        sql = sql + "TenBenhNhan LIKE '%{1}%' ";
+                        HasPrevCondition = true;
                     }
                     if (BenhNhanSearchEntity.CMND != "")
                     {
-                        sql = sql + "and CMND like '%{2}%'";
+                        if (HasPrevCondition)
+                        {
+                            sql += "AND ";
+                        }
+                        sql = sql + "TenBenhNhan LIKE '%{2}%' ";
+                        HasPrevCondition = true;
                     }
-
-                    IdResult = Dao.Select(db, out LstResult, out MessageError);
+                    object[] param = { BenhNhanSearchEntity.MaBenhNhan, BenhNhanSearchEntity.TenBenhNhan, BenhNhanSearchEntity.CMND };
+                    IdResult = Dao.Select(db, sql, param,out LstResult, out MessageError);
                     // Nếu không thực hiện được lệnh SELECT
                     if (IdResult == BUS.Com.BusConstant.RES_FAI)
                     {
