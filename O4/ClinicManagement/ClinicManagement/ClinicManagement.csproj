@@ -38,6 +38,7 @@
     <Reference Include="DevExpress.Sparkline.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraEditors.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -53,17 +54,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Components\MenuControl.cs">
+    <Compile Include="Common\ClinicBus.cs" />
+    <Compile Include="Common\ClinicComponents\FilterUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Common\Components\MenuControl.Designer.cs">
+    <Compile Include="Common\ClinicComponents\FilterUserControl.Designer.cs">
+      <DependentUpon>FilterUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\MenuControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\MenuControl.Designer.cs">
       <DependentUpon>MenuControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Common\Components\TableDataView.cs">
+    <Compile Include="Common\ClinicComponents\TableDataView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Common\Components\TableDataView.Designer.cs">
+    <Compile Include="Common\ClinicComponents\TableDataView.Designer.cs">
       <DependentUpon>TableDataView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\TableDataWithSearch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\TableDataWithSearch.Designer.cs">
+      <DependentUpon>TableDataWithSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\Observable.cs" />
     <Compile Include="Common\SourceLibrary.cs" />
@@ -91,6 +105,7 @@
     <Compile Include="Features\Login\SubForms\LoginControl.Designer.cs">
       <DependentUpon>LoginControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Features\Reception\Bus\ReceptionBus.cs" />
     <Compile Include="Features\Reception\Main\ReceptionCreatePatientRecord.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -109,11 +124,11 @@
     <Compile Include="Features\Reception\Main\ReceptionReport.Designer.cs">
       <DependentUpon>ReceptionReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\Reception\SubForms\FilterUserControl.cs">
+    <Compile Include="Features\Reception\SubForms\CreateFormControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Features\Reception\SubForms\FilterUserControl.Designer.cs">
-      <DependentUpon>FilterUserControl.cs</DependentUpon>
+    <Compile Include="Features\Reception\SubForms\CreateFormControl.Designer.cs">
+      <DependentUpon>CreateFormControl.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -123,11 +138,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Common\Components\MenuControl.resx">
+    <EmbeddedResource Include="Common\ClinicComponents\FilterUserControl.resx">
+      <DependentUpon>FilterUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\ClinicComponents\MenuControl.resx">
       <DependentUpon>MenuControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Common\Components\TableDataView.resx">
+    <EmbeddedResource Include="Common\ClinicComponents\TableDataView.resx">
       <DependentUpon>TableDataView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\ClinicComponents\TableDataWithSearch.resx">
+      <DependentUpon>TableDataWithSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Login\Main\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -135,11 +156,14 @@
     <EmbeddedResource Include="Features\Login\SubForms\LoginControl.resx">
       <DependentUpon>LoginControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\Reception\Main\ReceptionCreatePatientRecord.resx">
+      <DependentUpon>ReceptionCreatePatientRecord.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\Reception\Main\ReceptionHome.resx">
       <DependentUpon>ReceptionHome.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\Reception\SubForms\FilterUserControl.resx">
-      <DependentUpon>FilterUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="Features\Reception\SubForms\CreateFormControl.resx">
+      <DependentUpon>CreateFormControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -155,6 +179,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -175,7 +200,6 @@
     <Folder Include="Features\Examination\Bus\" />
     <Folder Include="Features\Examination\SubForms\" />
     <Folder Include="Features\Login\Bus\" />
-    <Folder Include="Features\Reception\Bus\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\loginBackground.jpeg" />
@@ -188,10 +212,6 @@
       <Project>{83a1e407-ad93-47b8-99ac-4af5084f87ec}</Project>
       <Name>Components</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DAO\DAO.csproj">
-      <Project>{4e93204f-40b0-4120-8193-01fb0becad00}</Project>
-      <Name>DAO</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{6c22cc07-0313-4730-8c9e-7745d710d68d}</Project>
       <Name>Model</Name>
@@ -199,6 +219,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon\ico_key_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon\ico_search_24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

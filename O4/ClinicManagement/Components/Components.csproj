@@ -42,24 +42,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\NewButton.cs">
+    <Compile Include="NewControl\NewButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Common\NewButton.Designer.cs">
+    <Compile Include="NewControl\NewButton.Designer.cs">
       <DependentUpon>NewButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="Common\NewTextField.cs">
+    <Compile Include="NewControl\NewComboBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Common\NewTextField.Designer.cs">
+    <Compile Include="NewControl\NewComboBox.Designer.cs">
+      <DependentUpon>NewComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewControl\NewTextField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NewControl\NewTextField.Designer.cs">
       <DependentUpon>NewTextField.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Common\NewTextField.resx">
+    <EmbeddedResource Include="NewControl\NewComboBox.resx">
+      <DependentUpon>NewComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewControl\NewTextField.resx">
       <DependentUpon>NewTextField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,8 +5,6 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicManagement", "ClinicManagement\ClinicManagement.csproj", "{212C8906-3217-4EAF-A67B-0E23C790F066}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAO", "DAO\DAO.csproj", "{4E93204F-40B0-4120-8193-01FB0BECAD00}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{6C22CC07-0313-4730-8C9E-7745D710D68D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Components", "Components\Components.csproj", "{83A1E407-AD93-47B8-99AC-4AF5084F87EC}"
@@ -21,10 +19,6 @@ Global
 		{212C8906-3217-4EAF-A67B-0E23C790F066}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{212C8906-3217-4EAF-A67B-0E23C790F066}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{212C8906-3217-4EAF-A67B-0E23C790F066}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4E93204F-40B0-4120-8193-01FB0BECAD00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E93204F-40B0-4120-8193-01FB0BECAD00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E93204F-40B0-4120-8193-01FB0BECAD00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E93204F-40B0-4120-8193-01FB0BECAD00}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6C22CC07-0313-4730-8C9E-7745D710D68D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6C22CC07-0313-4730-8C9E-7745D710D68D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C22CC07-0313-4730-8C9E-7745D710D68D}.Release|Any CPU.ActiveCfg = Release|Any CPU

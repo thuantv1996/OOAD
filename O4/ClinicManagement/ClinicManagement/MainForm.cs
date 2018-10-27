@@ -22,7 +22,9 @@ namespace ClinicManagement
 
         private void setupView()
         {
-            this.menuControl = new Common.Components.MenuControl();
+            this.panelFormControl.BackColor = Common.SourceLibrary.ClinicBackgroundColor;
+
+            this.menuControl = new Common.ClinicComponents.MenuControl();
             this.menuControl.Dock = DockStyle.Fill;
             this.panelMenu.Controls.Add(this.menuControl);
             this.listContent = new List<UserControl>();
@@ -94,7 +96,7 @@ namespace ClinicManagement
         }
 
         private Model.User user;
-        private Common.Components.MenuControl menuControl;
+        private Common.ClinicComponents.MenuControl menuControl;
         private List<UserControl> listContent;
     }
 }

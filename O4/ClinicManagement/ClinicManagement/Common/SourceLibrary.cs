@@ -11,5 +11,6 @@ namespace ClinicManagement.Common
     {
         static public Font ClinicFont = new Font("Century Gothic", 11);
         static public Color ClinicColor = Color.FromArgb(4, 132, 207);
+        static public Color ClinicBackgroundColor = Color.FromName("ActiveCaption");
     }
 }

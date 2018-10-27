@@ -33,9 +33,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnLogin = new Components.Common.NewButton(this.components);
-            this.newTextField1 = new Components.Common.NewTextField();
-            this.newTextField2 = new Components.Common.NewTextField();
+            this.btnLogin = new Components.NewControl.NewButton(this.components);
+            this.newTextField1 = new Components.NewControl.NewTextField();
+            this.newTextField2 = new Components.NewControl.NewTextField();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,7 +109,7 @@
             // 
             this.newTextField2.AutoSize = true;
             this.newTextField2.BackColor = System.Drawing.Color.White;
-            this.newTextField2.Icon = global::ClinicManagement.Properties.Resources.ico_closeform_24;
+            this.newTextField2.Icon = global::ClinicManagement.Properties.Resources.ico_key_24;
             this.newTextField2.Location = new System.Drawing.Point(33, 196);
             this.newTextField2.Name = "newTextField2";
             this.newTextField2.PlaceHolder = "Password";
@@ -146,8 +146,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private Components.Common.NewTextField newTextField2;
-        private Components.Common.NewTextField newTextField1;
-        private Components.Common.NewButton btnLogin;
+        private Components.NewControl.NewTextField newTextField2;
+        private Components.NewControl.NewTextField newTextField1;
+        private Components.NewControl.NewButton btnLogin;
     }
 }

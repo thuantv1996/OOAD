@@ -15,6 +15,21 @@ namespace ClinicManagement.Features.Reception.Main
         public ReceptionHome()
         {
             InitializeComponent();
+            this.setupView();
         }
+
+        private void setupView()
+        {
+            this.tableDataWithSearch.searchCompleted = new Action<Common.ClinicComponents.FilterUserControl.SearchResult>((result) =>
+            {
+                //MARK: - Dummy
+                Console.WriteLine("=============================");
+                Console.WriteLine(result.maBenhNhan);
+                Console.WriteLine(result.tenBenhNhan);
+                Console.WriteLine(result.cmnd);
+            });
+        }
+
+        private Bus.ReceptionBus bus = Bus.ReceptionBus.SharedInstance;
     }
 }
