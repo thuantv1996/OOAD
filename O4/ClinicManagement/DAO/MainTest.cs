@@ -67,8 +67,8 @@ namespace DAO
                     LOAIHOSO entity = new LOAIHOSO { MaLoaiHoSo = "LHS0000001", TenLoaiHoSo = "Hồ sơ khám mới" };
                     // thực thi insert 
                     IdResult = dao.Insert(entity, db, out MessageError);
-                    
-                    if(IdResult == DAO.Com.DAOConstant.RES_SUC)
+
+                    if (IdResult == DAO.Com.DAOConstant.RES_SUC)
                     {
                         // Cần phải commit data sau khi thực thi chuỗi nghiệp vụ
                         transaction.Commit();
@@ -81,6 +81,7 @@ namespace DAO
                 }
             }
             // Các lệnh Update, Delete sử dụng tương tự lệnh insert
+        }
     }
     class ExtendEmployee
     {
