@@ -4,9 +4,14 @@ using DAO;
 using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace UnitTest
 {
+    /// <summary>
+    /// Test Layer DAO 
+    /// Test on table LOAINHANVIEN
+    /// </summary>
     [TestClass]
     public class TestDAO
     {
@@ -18,13 +23,9 @@ namespace UnitTest
             db = new QLPHONGKHAMEntities();
             trans = db.Database.BeginTransaction();
             // Clear data
-            // delate data of Table NHANVIEN
+            // delate data of Table LOAINHANVIEN
             db.LOAINHANVIENs.SqlQuery("Delete from LOAINHANVIEN", new object[0]);
             //
-
-            // Create Data
-            // 
-            db.LOAINHANVIENs.AddRange(GetListLoaiNhanVien());
         }
 
         // Test Module DAO trường hợp Success all funtion 
@@ -62,18 +63,74 @@ namespace UnitTest
                 LstResultDesire.Add(DAO.Com.DAOConstant.RES_SUC);
             }
 
-            // Test
-            Assert.AreEqual(LstResultExecute, LstResultDesire);
+
+            CollectionAssert.AreEqual(LstResultExecute, LstResultDesire);
         }
+
+        // test Insert data
         [TestMethod]
         public void TestCase2()
         {
-            Console.WriteLine("Method2 executed.");
-            int i = 2;
-            Assert.AreEqual(i, 2);
+            List<string> LstResultExecute = new List<string>();
+            List<string> LstResultDesire = new List<string>();
+            // Chuẩn bị các thành phần 
+            List<LOAINHANVIEN> ListLoaiNhanVien = null;
+            List<string> MessageError = null;
+            DAO.Imp.BaseDAO dao = new DAO.Imp.BaseDAO();
+            LOAINHANVIEN lnv = new LOAINHANVIEN { MaLoaiNV = "LNV0000004", TenLoaiNV = "TEST UT" };
+            //
+            // Chạy function
+            // 
+            // execute function Insert 
+            LstResultExecute.Add(dao.Insert(lnv, db, out MessageError));
+            // Test 
+            Assert.AreEqual(lnv, db.LOAINHANVIENs.Find("LNV0000004"));
         }
-        
-        
+
+        // test Update data
+        [TestMethod]
+        public void TestCase3()
+        {
+            List<string> LstResultExecute = new List<string>();
+            List<string> LstResultDesire = new List<string>();
+            // Chuẩn bị các thành phần 
+            List<LOAINHANVIEN> ListLoaiNhanVien = null;
+            List<string> MessageError = null;
+            DAO.Imp.BaseDAO dao = new DAO.Imp.BaseDAO();
+            LOAINHANVIEN lnv = new LOAINHANVIEN { MaLoaiNV = "LNV0000005", TenLoaiNV = "TEST UT" };
+            db.LOAINHANVIENs.Add(lnv);
+            LOAINHANVIEN expected = new LOAINHANVIEN { MaLoaiNV = "LNV0000005", TenLoaiNV = "TEST UT Update" };
+            //
+            // Chạy function
+            // 
+            // execute function Insert 
+            LstResultExecute.Add(dao.Update(expected, db, out MessageError));
+            LOAINHANVIEN actual = db.LOAINHANVIENs.Find("LNV0000005");
+            // Test 
+            Assert.AreEqual(JsonConvert.SerializeObject(expected), JsonConvert.SerializeObject(actual));
+        }
+
+        // test delete
+        [TestMethod]
+        public void TestCase4()
+        {
+            List<string> LstResultExecute = new List<string>();
+            List<string> LstResultDesire = new List<string>();
+            // Chuẩn bị các thành phần 
+            List<LOAINHANVIEN> ListLoaiNhanVien = null;
+            List<string> MessageError = null;
+            DAO.Imp.BaseDAO dao = new DAO.Imp.BaseDAO();
+            LOAINHANVIEN lnv = new LOAINHANVIEN { MaLoaiNV = "LNV0000005", TenLoaiNV = "TEST UT" };
+            db.LOAINHANVIENs.Add(lnv);
+            // Chạy function
+            // 
+            // execute function Insert 
+            LstResultExecute.Add(dao.Delete(lnv, db, out MessageError));
+            LOAINHANVIEN actual = db.LOAINHANVIENs.Find("LNV0000005");
+            // Test 
+            Assert.AreEqual(null, actual);
+        }
+
         [TestCleanup]
         public void Clear()
         {
