@@ -16,12 +16,14 @@ namespace BUS.Imp
         {
             throw new NotImplementedException();
         }
-
-        // HÀM LẤY THÔNG TIN BỆNH NHÂN 
-        public string GetInformationBenhNhan(string MaBenhNhan, out BENHNHAN InformationBenhNhan, out List<string> MessangeError)
+     
+        public string GetInformationBenhNhan(string MaBenhNhan, out BenhNhanEnity InformationBenhNhan, out List<string> MessangeError)
         {
-            InformationBenhNhan = new BENHNHAN();
+            // khởi tạo đối tượng Bệnh Nhân (DTO) trả về
+            InformationBenhNhan = new BenhNhanEnity();
+            // Khai báo danh sách đối tượng Bệnh Nhân (DAO) đón nhận data từ function select 
             List<BENHNHAN> LstResult = null;
+            // Kết quả trả về
             string IdResult = "";
             // Khởi tạo Database
             using (var db = new QLPHONGKHAMEntities())
@@ -33,7 +35,7 @@ namespace BUS.Imp
                     DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
                     // Thực hiện lệnh SELECT
                     IdResult = Dao.Select(db, bn => bn.MaBenhNhan.Equals(MaBenhNhan), out LstResult, out MessangeError);
-                    // Nếu không thực hiện được lệnh SELECT
+                    // Nếu hàm select báo lỗi
                     if (IdResult == BUS.Com.BusConstant.RES_FAI)
                     {
                         if (MessangeError == null)
@@ -41,33 +43,46 @@ namespace BUS.Imp
                             MessangeError = new List<string>();
                         }
                         // Thêm thông báo lỗi
-                        MessangeError.Insert(0, "Lỗi Database trong truy vấn select table BENHNHAN");
+                        MessangeError.Insert(0, "Lỗi truy vấn select table BENHNHAN");
                         // Rollback dữ liệu
                         trans.Rollback();
                         // Return faild
                         IdResult = BUS.Com.BusConstant.RES_FAI;
                     }
-                    // Nếu không tìm thấy trường
+                    // Nếu hàm select không trả về bất kỳ record nào
                     if (LstResult.Count == 0)
                     {
                         if (MessangeError == null)
                         {
                             MessangeError = new List<string>();
                         }
+                        // Thêm thông báo lỗi
                         MessangeError.Insert(0, "Không select được dữ liệu (Data is empty)");
+                        // Rollback dữ liệu
                         trans.Rollback();
+                        // Return faild
                         IdResult = BUS.Com.BusConstant.RES_FAI;
                     }
                 }
             }
+            // Vì search trên Key nên chỉ trả về nhiều nhất 1 record 
+            // Lấy record trả về
+            BENHNHAN SearchResult = LstResult.ToList().ElementAt(0);
+            // Vì BENHNHAN là kiểu dữ liệu của DAO nên không thể gửi lên GUI
+            // => cần chuyển đối tượng DAO sang DTO vì GUI có thể sử dụng DTO
+            // convert SearchResult từ DAO sang DTO
+            BUS.Com.Utils.CopyPropertiesFrom(SearchResult, InformationBenhNhan);
+            // return 
             return IdResult;
         }
 
-        // HÀM LẤY DANH SÁCH BỆNH NHÂN
         public string GetListBenhNhan(out List<BenhNhanEnity> ListBenhNhan, out List<string> MessageError)
         {
+            // Danh sách bệnh nhân (DTO) trả về
             ListBenhNhan = new List<BenhNhanEnity>();
+            // Danh sách Bệnh Nhân (DAO) Nhận được từ function select
             List<BENHNHAN> LstResult = null;
+            // Result code
             string IdResult = "";
             // Khởi tạo Database
             using (var db = new QLPHONGKHAMEntities())
@@ -100,27 +115,33 @@ namespace BUS.Imp
                         {
                             MessageError = new List<string>();
                         }
+                        // Thêm thông báo lỗi
                         MessageError.Insert(0, "Không select được dữ liệu (Data is empty)");
+                        // Rollback dữ liệu
                         trans.Rollback();
+                        // Return faild
                         IdResult = BUS.Com.BusConstant.RES_FAI;
                     }                    
                 }   
             }
-            // Sau khi lấy được danh sách, convert đối tượng BenhNhan sang BenhNhanEnity
+            // Sau khi lấy được danh sách, convert đối tượng BenhNhan (DAO) sang BenhNhanEnity(DTO)
             foreach (BENHNHAN BenhNhan in LstResult)
             {
                 BenhNhanEnity temp = new BenhNhanEnity();
                 BUS.Com.Utils.CopyPropertiesFrom(BenhNhan, temp);
                 ListBenhNhan.Add(temp);
             } 
+            // return 
             return IdResult;
         }
-
-        // HÀM TÌM KIẾM THÔNG TIN BỆNH NHÂN
+        
         public string SearchBenhNhan(BenhNhanSearchEntity BenhNhanSearchEntity, out List<BenhNhanEnity> ListBenhNhan, out List<string> MessageError)
         {
+            // Danh sách bệnh nhân (DTO) trả về
             ListBenhNhan = new List<BenhNhanEnity>();
+            // Danh sách Bệnh Nhân (DAO) Nhận được từ function select
             List<BENHNHAN> LstResult = null;
+            // Result code
             string IdResult = "";
             // Khởi tạo Database
             using (var db = new QLPHONGKHAMEntities())
@@ -130,34 +151,11 @@ namespace BUS.Imp
                 {
                     // Khởi tạo lớp DAO
                     DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
-                    // Thực hiện lệnh SELECT
-                    string sql = "SELECT * "
-                        + "FROM BENHNHAN "
-                        + "WHERE ";
-                    bool HasPrevCondition = false;
-                    if (BenhNhanSearchEntity.MaBenhNhan != "")
-                    {
-                        sql = sql + "MaBenhNhan LIKE '%{0}%' ";
-                    }
-                    if(BenhNhanSearchEntity.TenBenhNhan != "")
-                    {
-                        if(HasPrevCondition)
-                        {
-                            sql += "AND ";
-                        }
-                        sql = sql + "TenBenhNhan LIKE '%{1}%' ";
-                        HasPrevCondition = true;
-                    }
-                    if (BenhNhanSearchEntity.CMND != "")
-                    {
-                        if (HasPrevCondition)
-                        {
-                            sql += "AND ";
-                        }
-                        sql = sql + "TenBenhNhan LIKE '%{2}%' ";
-                        HasPrevCondition = true;
-                    }
+                    // Tạo Paramester search
                     object[] param = { BenhNhanSearchEntity.MaBenhNhan, BenhNhanSearchEntity.TenBenhNhan, BenhNhanSearchEntity.CMND };
+                    // Lấy câu truy vấn sql từ function Com.BUSSql.SqlSearchBenhNhan(param)
+                    string sql = BUS.Com.BUSSql.SqlSearchBenhNhan(param);
+                    // thực thi hàm select 
                     IdResult = Dao.Select(db, sql, param,out LstResult, out MessageError);
                     // Nếu không thực hiện được lệnh SELECT
                     if (IdResult == BUS.Com.BusConstant.RES_FAI)
@@ -166,8 +164,11 @@ namespace BUS.Imp
                         {
                             MessageError = new List<string>();
                         }
+                        // Thêm thông báo lỗi
                         MessageError.Insert(0, "Lỗi Database trong truy vấn select table BENHNHAN");
+                        // Rollback dữ liệu
                         trans.Rollback();
+                        // Return faild
                         IdResult = BUS.Com.BusConstant.RES_FAI;
                     }
                     // Nếu không tìm thấy trường
@@ -177,23 +178,25 @@ namespace BUS.Imp
                         {
                             MessageError = new List<string>();
                         }
+                        // Thêm thông báo lỗi
                         MessageError.Insert(0, "Không select được dữ liệu (Data is empty)");
+                        // Rollback dữ liệu
                         trans.Rollback();
+                        // Return faild
                         IdResult = BUS.Com.BusConstant.RES_FAI;
                     }
                 }
                
             }
-            //
+            // Sau khi lấy được danh sách, convert đối tượng BenhNhan (DAO) sang BenhNhanEnity(DTO)
             foreach (BENHNHAN BenhNhan in LstResult)
             {
                 BenhNhanEnity temp = new BenhNhanEnity();
-                BenhNhanSearchEntity temp2 = new BenhNhanSearchEntity();
-
+                BUS.Com.Utils.CopyPropertiesFrom(BenhNhan, temp);
                 ListBenhNhan.Add(temp);
-
             }
-            return "0000";
+            // return 
+            return IdResult;
         }
     }
 }

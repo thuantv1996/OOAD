@@ -12,6 +12,7 @@ namespace DAO
     {
         public static void Main(string[] args)
         {
+            Test1();
             // Hướng dẫn sử dụng DAO
 
             /* Dùng DAO select Dữ liệu từ một bảng*/
@@ -82,11 +83,29 @@ namespace DAO
             }
             // Các lệnh Update, Delete sử dụng tương tự lệnh insert
         }
+
+        public static void Test1()
+        {
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                // Khai báo DAO
+                BaseDAO dao = new BaseDAO();
+                // Danh sách kết quả trả về
+                List<LOAIHOSO> LstRest = null;
+                // Danh sách MessageError
+                List<string> MessageError = null;
+
+                string sql = "Select * from LOAIHOSO where MaLoaiHoSo Like N''+{0}+'%' and TenLoaiHoSo LIKE N''+{1}+'%'";
+                object[] param = { "" , "" };
+                dao.Select(db, sql, param, out LstRest, out MessageError);
+                int end = 0;
+            }
+        }
     }
     class ExtendEmployee
     {
             public string TenNhanVien { get; set; }
             public String TenLoaiNhanVien { get; set; }
     }
-
+    
 }

@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Com\BUSConstant.cs" />
+    <Compile Include="Com\BUSSql.cs" />
     <Compile Include="Com\Utils.cs" />
     <Compile Include="Enities\BenhNhanSearchEntity.cs" />
     <Compile Include="Imp\BenhNhanImplement.cs" />
