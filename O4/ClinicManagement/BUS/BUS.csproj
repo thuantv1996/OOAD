@@ -57,6 +57,7 @@
     <Compile Include="Com\Utils.cs" />
     <Compile Include="Enities\BenhNhanSearchEntity.cs" />
     <Compile Include="Imp\BenhNhanImplement.cs" />
+    <Compile Include="Inc\BenhNhanInputCheck.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Service\IBenhNhanService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
