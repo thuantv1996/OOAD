@@ -43,6 +43,14 @@ namespace BUS.Service
         /// <param name="BenhNhan">Thông tin bệnh nhân</param>
         /// <param name="MessageError">Thông báo lỗi</param>
         /// <returns>ID Result</returns>
-        string AddBenhNhan(BenhNhanEnity BenhNhan, out List<string> MessageError);
+        string InsertBenhNhan(BenhNhanEnity BenhNhan, out List<string> MessageError);
+
+        /// <summary>
+        /// UPDATE THÔNG TIN BỆNH NHÂN
+        /// </summary>
+        /// <param name="BenhNhan"></param>
+        /// <param name="MessagError"></param>
+        /// <returns></returns>
+        string UpdateBenhNhan(BenhNhanEnity BenhNhan, out List<string> MessageError);
     }
 }

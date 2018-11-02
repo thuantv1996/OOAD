@@ -12,9 +12,43 @@ namespace BUS.Imp
 {
     public class BenhNhanImplement : IBenhNhanService
     {
-        public string AddBenhNhan(BenhNhanEnity BenhNhan, out List<string> MessangeError)
+        public string InsertBenhNhan(BenhNhanEnity BenhNhan, out List<string> MessangeError)
         {
-            throw new NotImplementedException();
+            // Kết quả trả về
+            string IdResult = "";
+            // Tạo đối tượng BENHNHAN kết quả
+            BENHNHAN BenhNhanResult = new BENHNHAN();
+            // Convert đối tượng từ DTO sang DAO
+            BUS.Com.Utils.CopyPropertiesFrom(BenhNhan, BenhNhanResult);
+            // Khởi tạo Database
+            using (var db = new QLPHONGKHAMEntities())
+            {
+                // Khởi tạo transaction 
+                using (var trans = db.Database.BeginTransaction())
+                {
+                    // Khởi tạo lớp DAO
+                    DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
+                    // Thực hiện lệnh INSERT
+                    IdResult = Dao.Insert(BenhNhanResult, db, out MessangeError);
+                    // Nếu hàm INSERT báo lỗi
+                    if(IdResult == BUS.Com.BusConstant.RES_FAI)
+                    {
+                        if(MessangeError == null)
+                        {
+                            MessangeError = new List<string>();
+                        }
+                        // Thêm thông báo lỗi
+                        MessangeError.Insert(0, "Lỗi truy vấn insert table BENHNHAN");
+                        // Rollback dữ liệu
+                        trans.Rollback();
+                        // Return faild
+                        IdResult = BUS.Com.BusConstant.RES_FAI;
+                        // return 
+                        return IdResult;
+                    }
+                }
+            }
+                return IdResult;
         }
      
         public string GetInformationBenhNhan(string MaBenhNhan, out BenhNhanEnity InformationBenhNhan, out List<string> MessangeError)
@@ -48,6 +82,8 @@ namespace BUS.Imp
                         trans.Rollback();
                         // Return faild
                         IdResult = BUS.Com.BusConstant.RES_FAI;
+                        // return 
+                        return IdResult;
                     }
                     // Nếu hàm select không trả về bất kỳ record nào
                     if (LstResult.Count == 0)
@@ -62,6 +98,8 @@ namespace BUS.Imp
                         trans.Rollback();
                         // Return faild
                         IdResult = BUS.Com.BusConstant.RES_FAI;
+                        // return 
+                        return IdResult;
                     }
                 }
             }
@@ -107,6 +145,8 @@ namespace BUS.Imp
                         trans.Rollback();
                         // Return faild
                         IdResult = BUS.Com.BusConstant.RES_FAI;
+                        // return 
+                        return IdResult;
                     }
                     // Nếu không tìm thấy trường
                     if(LstResult.Count == 0)
@@ -121,6 +161,8 @@ namespace BUS.Imp
                         trans.Rollback();
                         // Return faild
                         IdResult = BUS.Com.BusConstant.RES_FAI;
+                        // return 
+                        return IdResult;
                     }                    
                 }   
             }
@@ -130,9 +172,10 @@ namespace BUS.Imp
                 BenhNhanEnity temp = new BenhNhanEnity();
                 BUS.Com.Utils.CopyPropertiesFrom(BenhNhan, temp);
                 ListBenhNhan.Add(temp);
-            } 
+            }
             // return 
             return IdResult;
+
         }
         
         public string SearchBenhNhan(BenhNhanSearchEntity BenhNhanSearchEntity, out List<BenhNhanEnity> ListBenhNhan, out List<string> MessageError)
@@ -196,6 +239,45 @@ namespace BUS.Imp
                 ListBenhNhan.Add(temp);
             }
             // return 
+            return IdResult;
+        }
+
+        public string UpdateBenhNhan(BenhNhanEnity BenhNhan, out List<string> MessageError)
+        {
+            // Kết quả trả về
+            string IdResult = "";
+            // Tạo đối tượng BENHNHAN kết quả
+            BENHNHAN BenhNhanResult = new BENHNHAN();
+            // Convert đối tượng từ DTO sang DAO
+            BUS.Com.Utils.CopyPropertiesFrom(BenhNhan, BenhNhanResult);
+            // Khởi tạo Database
+            using (var db = new QLPHONGKHAMEntities())
+            {
+                // Khởi tạo transaction 
+                using (var trans = db.Database.BeginTransaction())
+                {
+                    // Khởi tạo lớp DAO
+                    DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
+                    // Thực hiện lệnh INSERT
+                    IdResult = Dao.Update(BenhNhanResult, db, out MessageError);
+                    // Nếu hàm INSERT báo lỗi
+                    if (IdResult == BUS.Com.BusConstant.RES_FAI)
+                    {
+                        if (MessageError == null)
+                        {
+                            MessageError = new List<string>();
+                        }
+                        // Thêm thông báo lỗi
+                        MessageError.Insert(0, "Lỗi truy vấn update table BENHNHAN");
+                        // Rollback dữ liệu
+                        trans.Rollback();
+                        // Return faild
+                        IdResult = BUS.Com.BusConstant.RES_FAI;
+                        // return 
+                        return IdResult;
+                    }
+                }
+            }
             return IdResult;
         }
     }
