@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using DTO;
-using BUS.Enities;
+using BUS.Entities;
 using DAO;
 using COM;
 
@@ -15,7 +11,7 @@ namespace BUS.Service
         // LẤY DANH SÁCH HỒ SƠ
         string GetListHoSo(out List<HoSoBenhAnEntity> ListHoSo, ref List<MessageError> Messages);
         // TÌM HỒ SƠ
-        string SearchHoSo(HoSoSearchEntity HoSoSearch, out List<HoSoBenhAnEntity> ListHoSo, ref List<MessageError> Messages);
+        string SearchHoSo( HoSoSearchEntity HoSoSearch, out List<HoSoBenhAnEntity> ListHoSo, ref List<MessageError> Messages);
         // LẤY THÔNG TIN MỘT HỒ SƠ
         string GetInfomationHoSo(string MaHoSo, out HoSoBenhAnEntity HoSo, ref List<MessageError> Messages);
         // INSERT MỘT HỒ SƠ

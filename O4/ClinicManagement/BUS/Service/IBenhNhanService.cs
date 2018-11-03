@@ -1,10 +1,8 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAO;
 using DTO;
+using COM;
+using BUS.Entities;
 
 
 namespace BUS.Service
@@ -17,7 +15,7 @@ namespace BUS.Service
         /// <param name="ListBenhNhan">Danh sách Bệnh nhân trả về</param>
         /// <param name="MessageError">Thông điệp lỗi</param>
         /// <returns>Result Code</returns>
-        string GetListBenhNhan(out List<BenhNhanEnity> ListBenhNhan, out List<string> MessageError);
+        string GetListBenhNhan(out List<BenhNhanEnity> ListBenhNhan, ref List<MessageError> Messages);
 
         /// <summary>
         /// TÌM KIẾM THÔNG TIN BỆNH NHÂN
@@ -26,7 +24,7 @@ namespace BUS.Service
         /// <param name="ListBenhNhan">Danh sách Bệnh nhân trả về</param>
         /// <param name="MessageError">Thông điệp lỗi</param>
         /// <returns>Result Code</returns>
-        string SearchBenhNhan(Enities.BenhNhanSearchEntity BenhNhanSearchEntity,out List<BenhNhanEnity> ListBenhNhan, out List<string> MessageError);
+        string SearchBenhNhan(BenhNhanSearchEntity BenhNhanSearchEntity,out List<BenhNhanEnity> ListBenhNhan, ref List<MessageError> Messages);
         
         /// <summary>
         /// LẤY THÔNG TIN BỆNH NHÂN KHI BIẾT MÃ
@@ -35,7 +33,7 @@ namespace BUS.Service
         /// <param name="InformationBenhNhan">Kết quả trả về</param>
         /// <param name="MessangeError">Thông điệp lỗi</param>
         /// <returns>Result Code</returns>
-        string GetInformationBenhNhan(string MaBenhNhan,out BenhNhanEnity InformationBenhNhan,out List<string> MessageError);
+        string GetInformationBenhNhan(string MaBenhNhan,out BenhNhanEnity InformationBenhNhan, ref List<MessageError> Messages);
         
         /// <summary>
         /// THÊM MỚI MỘT BỆNH NHÂN
@@ -43,7 +41,7 @@ namespace BUS.Service
         /// <param name="BenhNhan">Thông tin bệnh nhân</param>
         /// <param name="MessageError">Thông báo lỗi</param>
         /// <returns>ID Result</returns>
-        string InsertBenhNhan(BenhNhanEnity BenhNhan, out List<string> MessageError);
+        string InsertBenhNhan(BenhNhanEnity BenhNhan, ref List<MessageError> Messages);
 
         /// <summary>
         /// UPDATE THÔNG TIN BỆNH NHÂN
@@ -51,6 +49,6 @@ namespace BUS.Service
         /// <param name="BenhNhan"></param>
         /// <param name="MessagError"></param>
         /// <returns></returns>
-        string UpdateBenhNhan(BenhNhanEnity BenhNhan, out List<string> MessageError);
+        string UpdateBenhNhan(BenhNhanEnity BenhNhan, ref List<MessageError> Messages);
     }
 }

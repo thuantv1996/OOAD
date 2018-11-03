@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BUS.Enities;
+using BUS.Entities;
 using BUS.Service;
 using DTO;
 using DAO;
@@ -30,6 +30,7 @@ namespace BUS.Imp
             // Return fail
 
             // return success
+            return Constant.RES_SUC;
 
         }
 
@@ -50,6 +51,7 @@ namespace BUS.Imp
             // Return fail
 
             // return success
+            return Constant.RES_SUC;
         }
 
         public string GetInfomationHoSo(string MaHoSo, out HoSoBenhAnEntity HoSo, ref List<MessageError> Messages)
@@ -69,6 +71,7 @@ namespace BUS.Imp
             // Tạo đối tượng HoSoDAO get record thứ 0 của danh sách trả về
             // copy property HoSoDAO sang HoSo Entity
             // return succes
+            return Constant.RES_SUC;
         }
 
         public string GetListHoSo(out List<HoSoBenhAnEntity> ListHoSo, ref List<MessageError> Messages)
@@ -90,6 +93,7 @@ namespace BUS.Imp
             // Copy property của từng đối tượng trong danh sách DAO trả về cho HoSoEntity
             // Add HoSoEntity vào ListHoSo
             // return succes
+            return Constant.RES_SUC;
         }
 
         public string SearchHoSo(HoSoSearchEntity HoSoSearch, out List<HoSoBenhAnEntity> ListHoSo, ref List<MessageError> Messages)
@@ -111,6 +115,7 @@ namespace BUS.Imp
             // Copy property của từng đối tượng trong danh sách DAO trả về cho HoSoEntity
             // Add HoSoEntity vào ListHoSo
             // return succes
+            return Constant.RES_SUC;
         }
 
         public string UpdateHoSo(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSo, ref List<MessageError> Messages)
@@ -130,6 +135,7 @@ namespace BUS.Imp
             // Return fail
 
             // return success
+            return Constant.RES_SUC;
         }
     }
 }
