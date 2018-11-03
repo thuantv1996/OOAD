@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="Com\BUSConstant.cs" />
     <Compile Include="Com\BUSSql.cs" />
+    <Compile Include="Com\ObjectCommon.cs" />
     <Compile Include="Com\Utils.cs" />
     <Compile Include="Enities\BenhNhanSearchEntity.cs" />
     <Compile Include="Enities\DangNhapSearchEntity.cs" />
@@ -64,6 +65,8 @@
     <Compile Include="Inc\BenhNhanInputCheck.cs" />
     <Compile Include="Inc\DangNhapInputCheck.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Mdl\DangNhapModule.cs" />
+    <Compile Include="Mdl\ReceptionModule.cs" />
     <Compile Include="Service\IBenhNhanService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\IDangNhapService.cs" />
@@ -71,6 +74,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\COM\COM.csproj">
+      <Project>{cbeaa07f-6059-4736-a9bd-e24500d08946}</Project>
+      <Name>COM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DAO\DAO.csproj">
       <Project>{4e93204f-40b0-4120-8193-01fb0becad00}</Project>
       <Name>DAO</Name>
