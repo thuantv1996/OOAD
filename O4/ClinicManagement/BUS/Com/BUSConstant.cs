@@ -8,15 +8,6 @@ namespace BUS.Com
 {
     public class BusConstant
     {
-        // thành công
-        public static string RES_SUC = "0000";
-
-        // thất bại
-        public static string RES_FAI = "1111";
-
-        // check input thất bại
-        public static string RES_INC_FAI = "9999";
-
         // Độ dài họ tên bệnh nhân
         public static int LENGTH_HOTEN_BENHNHAN = 50;
         // Độ dài số cmnd bệnh nhân

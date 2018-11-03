@@ -56,11 +56,18 @@
     <Compile Include="Com\BUSSql.cs" />
     <Compile Include="Com\Utils.cs" />
     <Compile Include="Enities\BenhNhanSearchEntity.cs" />
+    <Compile Include="Enities\DangNhapSearchEntity.cs" />
+    <Compile Include="Enities\HoSoSearchEntity.cs" />
     <Compile Include="Imp\BenhNhanImplement.cs" />
+    <Compile Include="Imp\DangNhapImplement.cs" />
+    <Compile Include="Imp\HoSoImplement.cs" />
     <Compile Include="Inc\BenhNhanInputCheck.cs" />
+    <Compile Include="Inc\DangNhapInputCheck.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Service\IBenhNhanService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\IDangNhapService.cs" />
+    <Compile Include="Service\IHoSoService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -7,12 +7,13 @@ using BUS.Enities;
 using BUS.Service;
 using DTO;
 using DAO;
+using COM;
 
 namespace BUS.Imp
 {
     class HoSoImplement : IHoSoService
     {
-        public string AddHoSo(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSo, out List<string> MessageError)
+        public string AddHoSo(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSo, ref List<MessageError> Messages)
         {
             // Nếu HoSo là null thì 
             // Thêm message error 
@@ -32,7 +33,7 @@ namespace BUS.Imp
 
         }
 
-        public string DeleteHoSo(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSo, out List<string> MessageError)
+        public string DeleteHoSo(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSo, ref List<MessageError> Messages)
         {
             // Nếu HoSo là null thì 
             // Thêm message error 
@@ -51,7 +52,7 @@ namespace BUS.Imp
             // return success
         }
 
-        public string GetInfomationHoSo(string MaHoSo, out HoSoBenhAnEntity HoSo, out List<string> MessageError)
+        public string GetInfomationHoSo(string MaHoSo, out HoSoBenhAnEntity HoSo, ref List<MessageError> Messages)
         {
             // khởi tạo đối tượng HoSo
             // Khởi tạo danh sách HoSoDAO trả về 
@@ -70,7 +71,7 @@ namespace BUS.Imp
             // return succes
         }
 
-        public string GetListHoSo(out List<HoSoBenhAnEntity> ListHoSo, out List<string> MessageError)
+        public string GetListHoSo(out List<HoSoBenhAnEntity> ListHoSo, ref List<MessageError> Messages)
         {
             // khởi tạo đối tượng ListHoSo
             // Khởi tạo danh sách HoSoDAO trả về 
@@ -91,7 +92,7 @@ namespace BUS.Imp
             // return succes
         }
 
-        public string SearchHoSo(HoSoSearchEntity HoSoSearch, out List<HoSoBenhAnEntity> ListHoSo, out List<string> MessageError)
+        public string SearchHoSo(HoSoSearchEntity HoSoSearch, out List<HoSoBenhAnEntity> ListHoSo, ref List<MessageError> Messages)
         {
             // khởi tạo đối tượng ListHoSo
             // Khởi tạo danh sách HoSoDAO trả về 
@@ -112,7 +113,7 @@ namespace BUS.Imp
             // return succes
         }
 
-        public string UpdateHoSo(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSo, out List<string> MessageError)
+        public string UpdateHoSo(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSo, ref List<MessageError> Messages)
         {
             // Nếu HoSo là null thì 
             // Thêm message error 

@@ -5,6 +5,7 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
+using COM;
 
 namespace DAO.Imp
 {
@@ -18,9 +19,8 @@ namespace DAO.Imp
         /// <param name="db">Database</param>
         /// <param name="MessageError">List Error</param>
         /// <returns>Result Execute</returns>
-        public string Insert<T>(T Entity, DbContext db, out List<string> MessageError) where T : class
+        public string Insert<T>(T Entity, DbContext db, ref List<MessageError> Message) where T : class
         {
-            MessageError = null;
             try
             {
                 // Lấy table T từ Database
@@ -30,16 +30,16 @@ namespace DAO.Imp
                 // Lưu xữ lý
                 db.SaveChanges();
                 // Return success
-                return DAO.Com.DAOConstant.RES_SUC;
+                return Constant.RES_SUC;
             }
             catch (Exception e)
             {
-                // Tạo danh sách MessageError
-                MessageError = new List<string>();
-                // Thêm thông tin lỗi
-                MessageError.Add(DAO.Com.DAOUtils.GetErrorFromException(e));
+                // Tạo MessageError
+                MessageError Mes = new MessageError();
+                Mes.SetMessage(Constant.MES_DB, DAO.Com.DAOUtils.GetErrorFromException(e));
+                Message.Add(Mes);
                 // Return fail
-                return DAO.Com.DAOConstant.RES_FAI;
+                return Constant.RES_FAI;
             }
 
         }
@@ -52,9 +52,8 @@ namespace DAO.Imp
         /// <param name="db">Database</param>
         /// <param name="MessageError">List Error</param>
         /// <returns>Result Execute</returns>
-        public string Update<T>(T Entity, DbContext db, out List<string> MessageError) where T : class
+        public string Update<T>(T Entity, DbContext db, ref List<MessageError> Message) where T : class
         {
-            MessageError = null;
             try
             {
                 // Lấy Table T từ Database
@@ -65,12 +64,13 @@ namespace DAO.Imp
                 // Nếu Không tìm thấy đối tượng
                 if (UpdateObject == null)
                 {
-                    // Tạo mới MessageError
-                    MessageError = new List<string>();
-                    // Thông báo Mã lỗi
-                    MessageError.Add(DAO.Com.DAOMessage.MES_DAO_001);
+                    // Tạo danh sách MessageError
+                    MessageError Mes = new MessageError();
+                    Mes.SetMessage(Constant.MES_DB, "Update object is null");
+                    // Thêm thông tin lỗi
+                    Message.Add(Mes);
                     // Return fail
-                    return DAO.Com.DAOConstant.RES_FAI;
+                    return Constant.RES_FAI;
                 }
                 // Nếu tìm thấy đối tượng
                 // Sao chép giá trị các thuộc tính
@@ -78,16 +78,16 @@ namespace DAO.Imp
                 // Lưu xữ lý
                 db.SaveChanges();
                 // Return success
-                return DAO.Com.DAOConstant.RES_SUC;
+                return Constant.RES_SUC;
             }
             catch (Exception e)
             {
-                // Tạo danh sách MessageError
-                MessageError = new List<string>();
-                // Thêm thông tin lỗi
-                MessageError.Add(DAO.Com.DAOUtils.GetErrorFromException(e));
+                // Tạo MessageError
+                MessageError Mes = new MessageError();
+                Mes.SetMessage(Constant.MES_DB, DAO.Com.DAOUtils.GetErrorFromException(e));
+                Message.Add(Mes);
                 // Return fail
-                return DAO.Com.DAOConstant.RES_FAI;
+                return Constant.RES_FAI;
             }
         }
 
@@ -99,9 +99,8 @@ namespace DAO.Imp
         /// <param name="db">Database</param>
         /// <param name="MessageError">List Error</param>
         /// <returns>Result Execute</returns>
-        public string Delete<T>(T Entity, DbContext db, out List<string> MessageError) where T : class
+        public string Delete<T>(T Entity, DbContext db, ref List<MessageError> Message) where T : class
         {
-            MessageError = null;
             try
             {
                 // Lấy Table T từ Database
@@ -112,12 +111,12 @@ namespace DAO.Imp
                 // Nếu Không tìm thấy đối tượng
                 if (DeleteObject == null)
                 {
-                    // Tạo mới MessageError
-                    MessageError = new List<string>();
-                    // Thông báo Mã lỗi
-                    MessageError.Add(DAO.Com.DAOMessage.MES_DAO_001);
+                    // Tạo MessageError
+                    MessageError Mes = new MessageError();
+                    Mes.SetMessage(Constant.MES_DB, "Delete object is null");
+                    Message.Add(Mes);
                     // Return fail
-                    return DAO.Com.DAOConstant.RES_FAI;
+                    return Constant.RES_FAI;
                 }
                 // Nếu tìm thấy đối tượng
                 // Xóa đối tượng đó trong Table
@@ -125,16 +124,16 @@ namespace DAO.Imp
                 // Lưu xữ lý
                 db.SaveChanges();
                 // Return success
-                return DAO.Com.DAOConstant.RES_SUC;
+                return Constant.RES_SUC;
             }
             catch (Exception e)
             {
-                // Tạo danh sách MessageError
-                MessageError = new List<string>();
-                // Thêm thông tin lỗi
-                MessageError.Add(DAO.Com.DAOUtils.GetErrorFromException(e));
+                // Tạo MessageError
+                MessageError Mes = new MessageError();
+                Mes.SetMessage(Constant.MES_DB, DAO.Com.DAOUtils.GetErrorFromException(e));
+                Message.Add(Mes);
                 // Return fail
-                return DAO.Com.DAOConstant.RES_FAI;
+                return Constant.RES_FAI;
             }
         }
 
@@ -146,9 +145,8 @@ namespace DAO.Imp
         /// <param name="Result">List Result</param>
         /// <param name="MessageError">List Error</param>
         /// <returns>Result Execute</returns>
-        public string Select<T>(DbContext db, out List<T> Result, out List<string> MessageError) where T : class
+        public string Select<T>(DbContext db, out List<T> Result, ref List<MessageError> Message) where T : class
         {
-            MessageError = null;
             try
             {
                 // Lấy Table T từ Database
@@ -158,18 +156,18 @@ namespace DAO.Imp
                 // Lấy tất cả các record trong Table
                 Result = Table.ToList<T>();
                 // Return success
-                return DAO.Com.DAOConstant.RES_SUC;
+                return Constant.RES_SUC;
             }
             catch (Exception e)
             {
                 // Đặt kết quả trả về là null
                 Result = null;
-                // Tạo danh sách MessageError
-                MessageError = new List<string>();
-                // Thêm thông tin lỗi
-                MessageError.Add(DAO.Com.DAOUtils.GetErrorFromException(e));
+                // Tạo MessageError
+                MessageError Mes = new MessageError();
+                Mes.SetMessage(Constant.MES_DB, DAO.Com.DAOUtils.GetErrorFromException(e));
+                Message.Add(Mes);
                 // Return fail
-                return DAO.Com.DAOConstant.RES_FAI;
+                return Constant.RES_FAI;
             }
         }
 
@@ -183,10 +181,8 @@ namespace DAO.Imp
         /// <param name="MessageError">List Error</param>
         /// <returns>Result Execute</returns>
         public string Select<T>(DbContext db, Expression<Func<T, bool>> LinqSelector,
-                                out List<T> Result, out List<string> MessageError) where T : class
+                                out List<T> Result, ref List<MessageError> Message) where T : class
         {
-            MessageError = null;
-
             try
             {
                 // Lấy Table T từ Database
@@ -196,18 +192,18 @@ namespace DAO.Imp
                 // Lấy tất cả các record trong Table với d9eiu62 kiện search là LinqSelector
                 Result = Table.Where(LinqSelector).ToList<T>();
                 // Return success
-                return DAO.Com.DAOConstant.RES_SUC;
+                return Constant.RES_SUC;
             }
             catch (Exception e)
             {
                 // Đặt kết quả trả về là null
                 Result = null;
-                // Tạo danh sách MessageError
-                MessageError = new List<string>();
-                // Thêm thông tin lỗi
-                MessageError.Add(DAO.Com.DAOUtils.GetErrorFromException(e));
+                // Tạo MessageError
+                MessageError Mes = new MessageError();
+                Mes.SetMessage(Constant.MES_DB, DAO.Com.DAOUtils.GetErrorFromException(e));
+                Message.Add(Mes);
                 // Return fail
-                return DAO.Com.DAOConstant.RES_FAI;
+                return Constant.RES_FAI;
             }
         }
 
@@ -221,10 +217,8 @@ namespace DAO.Imp
         /// <param name="MessageError">List Error</param>
         /// <returns>Result Execute</returns>
         public string Select<T>(DbContext db, string sql, object[] param,
-                                out List<T> Result, out List<string> MessageError) where T : class
+                                out List<T> Result, ref List<MessageError> Message) where T : class
         {
-            MessageError = null;
-
             try
             {
                 // Lấy Table T từ Database
@@ -234,18 +228,18 @@ namespace DAO.Imp
                 // Lấy tất cả các record trong Table với điều kiện search là LinqSelector
                 Result = db.Database.SqlQuery<T>(sql,param).ToList<T>();
                 // Return success
-                return DAO.Com.DAOConstant.RES_SUC;
+                return Constant.RES_SUC;
             }
             catch (Exception e)
             {
                 // Đặt kết quả trả về là null
                 Result = null;
-                // Tạo danh sách MessageError
-                MessageError = new List<string>();
-                // Thêm thông tin lỗi
-                MessageError.Add(DAO.Com.DAOUtils.GetErrorFromException(e));
+                // Tạo MessageError
+                MessageError Mes = new MessageError();
+                Mes.SetMessage(Constant.MES_DB, DAO.Com.DAOUtils.GetErrorFromException(e));
+                Message.Add(Mes);
                 // Return fail
-                return DAO.Com.DAOConstant.RES_FAI;
+                return Constant.RES_FAI;
             }
         }
 
