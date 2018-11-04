@@ -11,7 +11,7 @@ namespace BUS.Imp
 {
     class DangNhapImplement : IDangNhapService
     {
-        
+        /*
         public string DangNhapSelect(TaiKhoanEnity MaTaiKhoan, TaiKhoanEnity MatKhau, out List<string> MessageError)
         {
             // Danh sách tai khoan (DTO) trả về
@@ -331,7 +331,7 @@ namespace BUS.Imp
             }
             throw new NotImplementedException();
         }
-
+        */
 
         // CODE ANH VIẾT TẠI ĐÂY
         public string EncodePassword(ref TaiKhoanEnity TaiKhoan)

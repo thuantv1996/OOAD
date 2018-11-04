@@ -61,7 +61,6 @@
     <Compile Include="CHITIETDONTHUOC.cs">
       <DependentUpon>QLPK.tt</DependentUpon>
     </Compile>
-    <Compile Include="Com\DAOConstant.cs" />
     <Compile Include="Com\DAOMessage.cs" />
     <Compile Include="DONTHUOC.cs">
       <DependentUpon>QLPK.tt</DependentUpon>
@@ -150,6 +149,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\COM\COM.csproj">
+      <Project>{cbeaa07f-6059-4736-a9bd-e24500d08946}</Project>
+      <Name>COM</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

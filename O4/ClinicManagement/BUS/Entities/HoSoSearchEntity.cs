@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BUS.Enities
+namespace BUS.Entities
 {
-    class HoSoSearchEntity
+    public class HoSoSearchEntity
     {
         public string MaHoSo { get; set; }
         public string TenBenhNhan { get; set; }

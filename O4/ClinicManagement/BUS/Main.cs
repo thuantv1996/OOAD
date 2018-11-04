@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAO;
-using BUS.Enities;
+using BUS.Entities;
+using COM;
 
 namespace BUS
 {
@@ -15,14 +16,14 @@ namespace BUS
             QLPHONGKHAMEntities db = new QLPHONGKHAMEntities();
             DAO.Imp.BaseDAO dao = new DAO.Imp.BaseDAO();
             List<LOAIHOSO> DSLHS = null;
-            List<string> Message = null;
+            List<MessageError> Message = null;
             // select all not condition
-            dao.Select<LOAIHOSO>(db, out DSLHS, out Message);
+            dao.Select<LOAIHOSO>(db, out DSLHS, ref Message);
             // select with condition
-            dao.Select<LOAIHOSO>(db, lhs=>lhs.MaLoaiHoSo.Equals("LHS0000001"), out DSLHS, out Message);
+            dao.Select<LOAIHOSO>(db, lhs=>lhs.MaLoaiHoSo.Equals("LHS0000001"), out DSLHS, ref Message);
             // select with SQL
             string sql = "SELECT * FROM LOAIHOSO WHERE ";
-            LoaiHoSoSearchEntity SearchEntity = new LoaiHoSoSearchEntity { Id = "LHS0000001", Name = "Hồ sơ khám mới" };
+            HoSoSearchEnity SearchEntity = new HoSoSearchEnity { Id = "LHS0000001", Name = "Hồ sơ khám mới" };
             bool HasPrevCondition = false;
             if (SearchEntity.Id != "")
             {
@@ -39,14 +40,14 @@ namespace BUS
                 HasPrevCondition = true;
             }
             object[] param = { "LHS0000001", SearchEntity.Name };
-            dao.Select<LOAIHOSO>(db, sql, param, out DSLHS, out Message);
+            dao.Select<LOAIHOSO>(db, sql, param, out DSLHS, ref Message);
            // BUS.Imp.BenhNhanImplement imp= new Imp.BenhNhanImplement();
             //imp.SearchBenhNhan();
             int end = 0;
         }
     }
 
-    class LoaiHoSoSearchEntity
+    class HoSoSearchEnity
     {
         public string Id { get; set; }
         public string Name { get; set; }
