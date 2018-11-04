@@ -15,20 +15,92 @@ namespace BUS.Imp
     {
         public string AddThanhToan(QLPHONGKHAMEntities db, ThanhToanEntity ThanhToan, ref List<MessageError> Messages)
         {
-            throw new NotImplementedException();
+            string ProgramName = "ThanhToanImplement-AddThanhToan";
+            string IdResult;
+            // Tạo đối tượng THANHTOAN kết quả
+            THANHTOAN ThanhToanResult = new THANHTOAN();
+            
+            // Convert đối tượng từ DTO sang DAO
+            BUS.Com.Utils.CopyPropertiesFrom(ThanhToan, ThanhToanResult);
+            // Khởi tạo Database
+            using (db = new QLPHONGKHAMEntities())
+            {
+                // Khởi tạo transaction 
+                using (var trans = db.Database.BeginTransaction())
+                {
+                    // Khởi tạo lớp DAO
+                    DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
+                    // Thực hiện lệnh INSERT
+                    IdResult = Dao.Insert(ThanhToanResult ,db, ref Messages);
+                    // Nếu hàm INSERT báo lỗi
+                    if (IdResult == Constant.RES_FAI)
+                    {
+                        // Thêm thông báo lỗi
+                        Messages.Add(new MessageError
+                        {
+                            IdError = Constant.MES_DB,
+                            Message = string.Format("Lỗi khi Update vao Table THANHTOAN - {0}", ProgramName)
+                        });
+                        // Rollback dữ liệu
+                        trans.Rollback();
+                        // Return faild
+                        IdResult = Constant.RES_FAI;
+                        // return 
+                        return IdResult;
+                    }
+                    else
+                    {
+                        trans.Commit();
+                    }
+                }
+            }
+            return Constant.RES_SUC;
         }
+
 
         public string UpdateThanhToan(QLPHONGKHAMEntities db, ThanhToanEntity ThanhToan, ref List<MessageError> Messages)
         {
-            string ProgramName = "ThanhToanImplement-Update";
-            // khai báo các biến đón kết quả rả về từ Select
-            List<THANHTOAN> ListSelectResult = null;
+            string ProgramName = "ThanhToanImplement-UpdateThanhToan";
             string IdResult;
-            THANHTOAN ThanhToanDAO = new THANHTOAN();
-            BUS.Com.Utils.CopyPropertiesFrom(ThanhToan, ThanhToanDAO);
-
-
-            throw new NotImplementedException();
+            // Tạo đối tượng THANHTOAN kết quả
+            THANHTOAN ThanhToanResult = new THANHTOAN();
+            // Convert đối tượng từ DTO sang DAO
+            BUS.Com.Utils.CopyPropertiesFrom(ThanhToan, ThanhToanResult);
+            // Khởi tạo Database
+            using (db = new QLPHONGKHAMEntities())
+            {
+                // Khởi tạo transaction 
+                using (var trans = db.Database.BeginTransaction())
+                {
+                    // Khởi tạo lớp DAO
+                    DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
+                    // Thực hiện lệnh Update
+                    IdResult = Dao.Update(ThanhToanResult, db, ref Messages);
+                    // Nếu hàm INSERT báo lỗi
+                    if (IdResult == Constant.RES_FAI)
+                    {
+                        // Thêm thông báo lỗi
+                        Messages.Add(new MessageError
+                        {
+                            IdError = Constant.MES_DB,
+                            Message = string.Format("Lỗi khi Update vao Table THANHTOAN - {0}", ProgramName)
+                        });
+                        // Rollback dữ liệu
+                        trans.Rollback();
+                        // Return faild
+                        IdResult = Constant.RES_FAI;
+                        // return 
+                        return IdResult;
+                    }
+                    else
+                    {
+                        trans.Commit();
+                    }
+                }
+            }
+            return Constant.RES_SUC;
         }
+
     }
+            
 }

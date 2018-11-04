@@ -45,11 +45,8 @@
     <Compile Include="TaiKhoanEnity.cs" />
     <Compile Include="HoSoBenhAnEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-<<<<<<< HEAD
     <Compile Include="TrangThaiPhongEnity.cs" />
-=======
     <Compile Include="ThanhToanEntity.cs" />
->>>>>>> 64660ad359dbf57124c0bbf7b8dc3c85dfd85722
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
