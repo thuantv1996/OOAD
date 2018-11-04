@@ -20,6 +20,10 @@ namespace ClinicManagement.Common.ClinicComponents
 
         private void setupView()
         {
+            this.filterUserControl.SearchCompleted += new EventHandler<FilterUserControl.SearchResult>((sender, e) =>
+            {
+                this.SearchCompleted?.Invoke(sender, e);
+            });
         }
 
         public void fetchData(DataTable table)
@@ -33,9 +37,6 @@ namespace ClinicManagement.Common.ClinicComponents
             set { this.tableControl.Columns = value; }
         }
 
-        public Action<FilterUserControl.SearchResult> searchCompleted
-        {
-            set { this.filterUserControl.searchCompleted = value; }
-        }
+        public event EventHandler<FilterUserControl.SearchResult> SearchCompleted;
     }
 }

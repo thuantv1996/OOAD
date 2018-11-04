@@ -8,11 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using DTO;
 
 namespace ClinicManagement.Features.Login.SubForms
 {
     public partial class LoginControl : UserControl
     {
+        public struct LoginInfo {
+            public string userName;
+            public string password;
+
+            public LoginInfo(string userName, string password)
+            {
+                this.userName = userName;
+                this.password = password;
+            }
+        }
+
         public LoginControl()
         {
             InitializeComponent();
@@ -35,10 +47,21 @@ namespace ClinicManagement.Features.Login.SubForms
             });
             this.btnLogin.Click += new EventHandler((sender, e) =>
             {
-                if (loginClick != null)
-                    this.loginClick(sender, e);
+                if (String.IsNullOrEmpty(this.userNameTextField.Text) || String.IsNullOrEmpty(this.passwordTextField.Text))
+                {
+                    //show dialog
+                    Console.WriteLine("UserName or Password is null");
+                }
+                else
+                {
+                    var account = new TaiKhoanEnity();
+                    account.TenDangNhap = this.userNameTextField.Text;
+                    account.MatKhau = this.passwordTextField.Text;
+                    this.loginCompleted?.Invoke(sender, account);
+                }
             });
         }
+
 
         private void setRegion()
         {
@@ -81,6 +104,6 @@ namespace ClinicManagement.Features.Login.SubForms
         private GraphicsPath path = new GraphicsPath();
         private int _radius = 10;
 
-        public System.EventHandler loginClick;
+        public event EventHandler<TaiKhoanEnity> loginCompleted;
     }
 }

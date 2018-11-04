@@ -142,9 +142,22 @@ namespace Components.NewControl
         {
             get { return this.comboBox; }
         }
+
+        public string[] Items
+        {
+            get { return this.items.ToArray(); }
+            set
+            {
+                this.comboBox.Items.Clear();
+                this.comboBox.Items.AddRange(value);
+                this.items.Clear();
+                this.items.AddRange(value);
+            }
+        }
+
         #endregion
 
-
+        private List<string> items = new List<string>();
         private string placeHolder = "Place Holder";
         private string text = "";
         private Color placeHolderColor = Color.LightGray;
