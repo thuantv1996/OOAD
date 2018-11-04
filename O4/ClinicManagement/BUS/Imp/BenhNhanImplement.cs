@@ -10,6 +10,12 @@ namespace BUS.Imp
 {
     public class BenhNhanImplement : IBenhNhanService
     {
+        /// <summary>
+        /// THÊM MỚI BỆNH NHÂN
+        /// </summary>
+        /// <param name="BenhNhan"></param>
+        /// <param name="Messages"></param>
+        /// <returns></returns>
         public string InsertBenhNhan(BenhNhanEnity BenhNhan, ref List<MessageError> Messages)
         {
             string ProgramName = "BenhNhanImplement_InsertBenhNhan";
@@ -49,7 +55,12 @@ namespace BUS.Imp
             }
                 return IdResult;
         }
-     
+        /// <summary>
+        /// LẤY THÔNG TIN BỆNH NHÂN
+        /// </summary>
+        /// <param name="BenhNhan"></param>
+        /// <param name="Messages"></param>
+        /// <returns></returns>
         public string GetInformationBenhNhan(string MaBenhNhan, out BenhNhanEnity InformationBenhNhan, ref List<MessageError> Messages)
         {
             string ProgramName = "BenhNhanImplement_GetInformationBenhNhan";
@@ -113,7 +124,12 @@ namespace BUS.Imp
             // return 
             return IdResult;
         }
-
+        /// <summary>
+        /// LẤY DANH SÁCH BỆNH NHÂN
+        /// </summary>
+        /// <param name="ListBenhNhan"></param>
+        /// <param name="Messages"></param>
+        /// <returns></returns>
         public string GetListBenhNhan(out List<BenhNhanEnity> ListBenhNhan, ref List<MessageError> Messages)
         {
             string ProgramName = "BenhNhanImplement_GetListBenhNhan";
@@ -176,7 +192,13 @@ namespace BUS.Imp
             return IdResult;
 
         }
-        
+        /// <summary>
+        /// TÌM KIẾM BỆNH NHÂN
+        /// </summary>
+        /// <param name="BenhNhanSearchEntity"></param>
+        /// <param name="ListBenhNhan"></param>
+        /// <param name="Messages"></param>
+        /// <returns></returns>
         public string SearchBenhNhan(BenhNhanSearchEntity BenhNhanSearchEntity, out List<BenhNhanEnity> ListBenhNhan, ref List<MessageError> Messages)
         {
             string ProgramName = "BenhNhanImplement_SearchBenhNhan";
@@ -239,7 +261,12 @@ namespace BUS.Imp
             // return 
             return IdResult;
         }
-
+        /// <summary>
+        /// UPDATE THÔNG TIN BỆNH NHÂN
+        /// </summary>
+        /// <param name="BenhNhan"></param>
+        /// <param name="Messages"></param>
+        /// <returns></returns>
         public string UpdateBenhNhan(BenhNhanEnity BenhNhan, ref List<MessageError> Messages)
         {
             string ProgramName = "BenhNhanImplement_UpdateBenhNhan";
