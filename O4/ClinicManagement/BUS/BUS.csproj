@@ -82,9 +82,6 @@
     <Compile Include="Entities\BenhNhanSearchEntity.cs" />
     <Compile Include="Entities\DangNhapSearchEntity.cs" />
     <Compile Include="Entities\HoSoSearchEntity.cs" />
-    <Compile Include="Imp\BenhNhanImplement.cs" />
-    <Compile Include="Imp\DangNhapImplement.cs" />
-    <Compile Include="Imp\HoSoImplement.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Mdl\DangNhapModule.cs" />
     <Compile Include="Mdl\ReceptionModule.cs" />
