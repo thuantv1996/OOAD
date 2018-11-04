@@ -41,12 +41,22 @@ namespace Model
         private string address;
         private string note;
         private string idNumber;
+        private string phoneNumber;
 
         public Patient(string name, DateTime birthDay, string idNumber, StructSex sex, string address, string note)
         {
             this.name = name;
             this.birthDay = birthDay;
             this.idNumber = idNumber;
+            this.sex = sex;
+            this.address = address;
+            this.note = note;
+        }
+
+        public Patient(string name, DateTime birthDay, StructSex sex, string address, string note)
+        {
+            this.name = name;
+            this.birthDay = birthDay;
             this.sex = sex;
             this.address = address;
             this.note = note;
@@ -60,6 +70,10 @@ namespace Model
             this.sex = sex;
             this.address = address;
             this.note = note;
+        }
+
+        public Patient()
+        {
         }
 
         private DateTime convertDateTime(string dateString)
@@ -106,6 +120,23 @@ namespace Model
         {
             get { return this.note; }
             set { this.note = value; }
+        }
+
+        public string PhoneNumber
+        {
+            get { return this.phoneNumber; }
+            set { this.phoneNumber = value; }
+        }
+
+        public string IdNumber
+        {
+            get { return this.idNumber; }
+            set { this.idNumber = value; }
+        }
+
+        public override string ToString()
+        {
+            return this.Name + "\n" + this.BirthDay + "\n" + this.IdentityCardNumber + "\n" + this.Sex.ToString() + "\n" + this.Address + "\n" + this.Note + "\n" + this.IdNumber + "\n" + this.PhoneNumber;
         }
     }
 }

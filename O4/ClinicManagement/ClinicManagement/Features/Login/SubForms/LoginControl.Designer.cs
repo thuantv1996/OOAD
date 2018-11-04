@@ -34,8 +34,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnLogin = new Components.NewControl.NewButton(this.components);
-            this.newTextField1 = new Components.NewControl.NewTextField();
-            this.newTextField2 = new Components.NewControl.NewTextField();
+            this.userNameTextField = new Components.NewControl.NewTextField();
+            this.passwordTextField = new Components.NewControl.NewTextField();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -91,33 +91,35 @@
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
             // 
-            // newTextField1
+            // userNameTextField
             // 
-            this.newTextField1.AutoSize = true;
-            this.newTextField1.BackColor = System.Drawing.Color.White;
-            this.newTextField1.Icon = global::ClinicManagement.Properties.Resources.ico_closeform_24;
-            this.newTextField1.Location = new System.Drawing.Point(33, 147);
-            this.newTextField1.Name = "newTextField1";
-            this.newTextField1.PlaceHolder = "User name";
-            this.newTextField1.PlaceHolderColor = System.Drawing.Color.LightGray;
-            this.newTextField1.Radius = 5;
-            this.newTextField1.Size = new System.Drawing.Size(492, 34);
-            this.newTextField1.TabIndex = 0;
-            this.newTextField1.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNameTextField.AutoSize = true;
+            this.userNameTextField.BackColor = System.Drawing.Color.White;
+            this.userNameTextField.Icon = global::ClinicManagement.Properties.Resources.ico_closeform_24;
+            this.userNameTextField.IsShowPassword = false;
+            this.userNameTextField.Location = new System.Drawing.Point(33, 147);
+            this.userNameTextField.Name = "userNameTextField";
+            this.userNameTextField.PlaceHolder = "User name";
+            this.userNameTextField.PlaceHolderColor = System.Drawing.Color.LightGray;
+            this.userNameTextField.Radius = 5;
+            this.userNameTextField.Size = new System.Drawing.Size(492, 34);
+            this.userNameTextField.TabIndex = 0;
+            this.userNameTextField.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
-            // newTextField2
+            // passwordTextField
             // 
-            this.newTextField2.AutoSize = true;
-            this.newTextField2.BackColor = System.Drawing.Color.White;
-            this.newTextField2.Icon = global::ClinicManagement.Properties.Resources.ico_key_24;
-            this.newTextField2.Location = new System.Drawing.Point(33, 196);
-            this.newTextField2.Name = "newTextField2";
-            this.newTextField2.PlaceHolder = "Password";
-            this.newTextField2.PlaceHolderColor = System.Drawing.Color.LightGray;
-            this.newTextField2.Radius = 5;
-            this.newTextField2.Size = new System.Drawing.Size(492, 34);
-            this.newTextField2.TabIndex = 1;
-            this.newTextField2.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordTextField.AutoSize = true;
+            this.passwordTextField.BackColor = System.Drawing.Color.White;
+            this.passwordTextField.Icon = global::ClinicManagement.Properties.Resources.ico_key_24;
+            this.passwordTextField.IsShowPassword = true;
+            this.passwordTextField.Location = new System.Drawing.Point(33, 196);
+            this.passwordTextField.Name = "passwordTextField";
+            this.passwordTextField.PlaceHolder = "Password";
+            this.passwordTextField.PlaceHolderColor = System.Drawing.Color.LightGray;
+            this.passwordTextField.Radius = 5;
+            this.passwordTextField.Size = new System.Drawing.Size(492, 34);
+            this.passwordTextField.TabIndex = 1;
+            this.passwordTextField.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
             // LoginControl
             // 
@@ -125,8 +127,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Controls.Add(this.btnLogin);
-            this.Controls.Add(this.newTextField1);
-            this.Controls.Add(this.newTextField2);
+            this.Controls.Add(this.userNameTextField);
+            this.Controls.Add(this.passwordTextField);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -146,8 +148,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private Components.NewControl.NewTextField newTextField2;
-        private Components.NewControl.NewTextField newTextField1;
+        private Components.NewControl.NewTextField passwordTextField;
+        private Components.NewControl.NewTextField userNameTextField;
         private Components.NewControl.NewButton btnLogin;
     }
 }

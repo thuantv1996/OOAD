@@ -55,6 +55,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ClinicBus.cs" />
+    <Compile Include="Common\ClinicComponents\ClinicForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\ClinicForm.Designer.cs">
+      <DependentUpon>ClinicForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\ClinicComponents\FilterUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -66,6 +72,12 @@
     </Compile>
     <Compile Include="Common\ClinicComponents\MenuControl.Designer.cs">
       <DependentUpon>MenuControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\PatientInformation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\PatientInformation.Designer.cs">
+      <DependentUpon>PatientInformation.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\ClinicComponents\TableDataView.cs">
       <SubType>UserControl</SubType>
@@ -93,6 +105,7 @@
     <Compile Include="Features\Examination\Main\ExaminationHome.Designer.cs">
       <DependentUpon>ExaminationHome.cs</DependentUpon>
     </Compile>
+    <Compile Include="Features\Login\Bus\LoginBus.cs" />
     <Compile Include="Features\Login\Main\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +137,12 @@
     <Compile Include="Features\Reception\Main\ReceptionReport.Designer.cs">
       <DependentUpon>ReceptionReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Features\Reception\SubForms\ConfirmFormControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\SubForms\ConfirmFormControl.Designer.cs">
+      <DependentUpon>ConfirmFormControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Features\Reception\SubForms\CreateFormControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -138,11 +157,17 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Common\ClinicComponents\ClinicForm.resx">
+      <DependentUpon>ClinicForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Common\ClinicComponents\FilterUserControl.resx">
       <DependentUpon>FilterUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Common\ClinicComponents\MenuControl.resx">
       <DependentUpon>MenuControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\ClinicComponents\PatientInformation.resx">
+      <DependentUpon>PatientInformation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Common\ClinicComponents\TableDataView.resx">
       <DependentUpon>TableDataView.cs</DependentUpon>
@@ -161,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Reception\Main\ReceptionHome.resx">
       <DependentUpon>ReceptionHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Reception\SubForms\ConfirmFormControl.resx">
+      <DependentUpon>ConfirmFormControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Reception\SubForms\CreateFormControl.resx">
       <DependentUpon>CreateFormControl.cs</DependentUpon>
@@ -199,7 +227,6 @@
     <Folder Include="Features\Common\" />
     <Folder Include="Features\Examination\Bus\" />
     <Folder Include="Features\Examination\SubForms\" />
-    <Folder Include="Features\Login\Bus\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\loginBackground.jpeg" />
@@ -208,9 +235,21 @@
     <None Include="Resources\icon\ico_closeform_24.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BUS\BUS.csproj">
+      <Project>{3dcb911a-91c7-4974-900a-2440eb9ac89f}</Project>
+      <Name>BUS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Components\Components.csproj">
       <Project>{83a1e407-ad93-47b8-99ac-4af5084f87ec}</Project>
       <Name>Components</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\COM\COM.csproj">
+      <Project>{cbeaa07f-6059-4736-a9bd-e24500d08946}</Project>
+      <Name>COM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{8173ea14-8393-4540-b2df-1ad6f7a9967e}</Project>
+      <Name>DTO</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{6c22cc07-0313-4730-8c9e-7745d710d68d}</Project>
