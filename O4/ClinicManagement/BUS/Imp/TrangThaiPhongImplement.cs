@@ -91,7 +91,7 @@ namespace BUS.Imp
             string ProgramName = "TrangThaiPhongImplement_UpdateTrangThaiPhong";
             // Kết quả trả về
             string IdResult = "";
-            // Tạo đối tượng BENHNHAN kết quả
+            // Tạo đối tượng TRANGTHAIPHONG kết quả
             TRANGTHAIPHONG TrangThaiPhongResult = new TRANGTHAIPHONG();
             // Convert đối tượng từ DTO sang DAO
             BUS.Com.Utils.CopyPropertiesFrom(TrangThaiPhong, TrangThaiPhongResult);
