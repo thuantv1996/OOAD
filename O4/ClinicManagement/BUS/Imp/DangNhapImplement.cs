@@ -387,6 +387,7 @@ namespace BUS.Imp
                     return Constant.RES_FAI;
                 }
             }
+            TaiKhoanOuput = ListSelectResult.ElementAt(0);
             return Constant.RES_SUC;
         }
         public string CheckDayLastChange(TAIKHOAN TaiKhoan)
