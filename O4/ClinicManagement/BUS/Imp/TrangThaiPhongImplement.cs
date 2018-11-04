@@ -10,14 +10,6 @@ namespace BUS.Imp
 {
     public class TrangThaiPhongImplement : ITrangThaiPhongService
     {
-        /// <summary>
-        /// LẤY THÔNG TIN TRẠNG THÁI PHÒNG
-        /// </summary>
-        /// <param name="MaPhongKham"></param>
-        /// <param name="NgayThang"></param>
-        /// <param name="TrangThaiPhong"></param>
-        /// <param name="Messages"></param>
-        /// <returns></returns>
         public string GetTrangThaiPhong(string MaPhongKham, string NgayThang, out TrangThaiPhongEnity TrangThaiPhong, ref List<MessageError> Messages)
         {
             string ProgramName = "TrangThaiPhongImplement_GetTrangThaiPhong";
@@ -80,21 +72,15 @@ namespace BUS.Imp
             }
         }
     
-        /// <summary>
-        /// UPDATE TRẠNG THÁI PHÒNG
-        /// </summary>
-        /// <param name="TrangThaiPhong"></param>
-        /// <param name="Messages"></param>
-        /// <returns></returns>
         public string UpdateTrangThaiPhong(TrangThaiPhongEnity TrangThaiPhong, ref List<MessageError> Messages)
         {
             string ProgramName = "TrangThaiPhongImplement_UpdateTrangThaiPhong";
             // Kết quả trả về
             string IdResult = "";
             // Tạo đối tượng TRANGTHAIPHONG kết quả
-            TRANGTHAIPHONG TrangThaiPhongResult = new TRANGTHAIPHONG();
+            TRANGTHAIPHONG TrangThaiPhongDAO = new TRANGTHAIPHONG();
             // Convert đối tượng từ DTO sang DAO
-            BUS.Com.Utils.CopyPropertiesFrom(TrangThaiPhong, TrangThaiPhongResult);
+            BUS.Com.Utils.CopyPropertiesFrom(TrangThaiPhong, TrangThaiPhongDAO);
             // Khởi tạo Database
             using (var db = new QLPHONGKHAMEntities())
             {
@@ -103,8 +89,8 @@ namespace BUS.Imp
                 {
                     // Khởi tạo lớp DAO
                     DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
-                    // Thực hiện lệnh INSERT
-                    IdResult = Dao.Update(TrangThaiPhongResult, db, ref Messages);
+                    // Thực hiện lệnh UPDATE
+                    IdResult = Dao.Update(TrangThaiPhongDAO, db, ref Messages);
                     // Nếu hàm INSERT báo lỗi
                     if (IdResult == Constant.RES_FAI)
                     {
@@ -125,6 +111,5 @@ namespace BUS.Imp
             }
             return IdResult;
         }
-    }
     }
 }
