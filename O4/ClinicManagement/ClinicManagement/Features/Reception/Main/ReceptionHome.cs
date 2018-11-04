@@ -20,13 +20,13 @@ namespace ClinicManagement.Features.Reception.Main
 
         private void setupView()
         {
-            this.tableDataWithSearch.searchCompleted = new Action<Common.ClinicComponents.FilterUserControl.SearchResult>((result) =>
+            this.tableDataWithSearch.SearchCompleted += new EventHandler<Common.ClinicComponents.FilterUserControl.SearchResult>((sender, e) =>
             {
                 //MARK: - Dummy
                 Console.WriteLine("=============================");
-                Console.WriteLine(result.maBenhNhan);
-                Console.WriteLine(result.tenBenhNhan);
-                Console.WriteLine(result.cmnd);
+                Console.WriteLine(e.MaBenhNhan);
+                Console.WriteLine(e.TenBenhNhan);
+                Console.WriteLine(e.CMND);
             });
         }
 

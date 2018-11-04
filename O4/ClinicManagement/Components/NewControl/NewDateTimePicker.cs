@@ -11,9 +11,9 @@ using System.Drawing.Drawing2D;
 
 namespace Components.NewControl
 {
-    public partial class NewTextField : UserControl
+    public partial class NewDateTimePicker : UserControl
     {
-        public NewTextField()
+        public NewDateTimePicker()
         {
             InitializeComponent();
             this.setupView();
@@ -22,35 +22,10 @@ namespace Components.NewControl
         private void setupView()
         {
             this.setRegion();
-            this.setText(true);
-            this.textBox.GotFocus += new EventHandler((sender, e) =>
-            {
-                this.setText();
-            });
-
-            this.textBox.LostFocus += new EventHandler((sender, e) =>
-            {
-                if (string.IsNullOrWhiteSpace(textBox.Text))
-                {
-                    this.setText(true);
-                }
-            });
-
-            this.textBox.KeyUp += new KeyEventHandler((sender, e) =>
-            {
-                this.text = (sender as TextBox).Text;
-            });
-
             this.SizeChanged += new EventHandler((sender, e) =>
             {
                 this.setRegion();
             });
-        }
-
-        private void setText(bool isPlaceHolder = false)
-        {
-            this.textBox.Text = isPlaceHolder ? this.placeHolder : this.text;
-            this.textBox.ForeColor = isPlaceHolder ? this.placeHolderColor : this.textColor;
         }
 
         private void setRegion()
@@ -85,31 +60,12 @@ namespace Components.NewControl
             return _path;
         }
 
+
         #region Public Properties
         public Font TextFont
         {
-            get { return this.textBox.Font; }
-            set { this.textBox.Font = value; }
-        }
-
-        public string PlaceHolder
-        {
-            get { return this.placeHolder; }
-            set
-            {
-                this.placeHolder = value;
-                this.setText(true);
-            }
-        }
-
-        public Color PlaceHolderColor
-        {
-            get { return this.placeHolderColor; }
-            set
-            {
-                this.placeHolderColor = value;
-                this.setText(true);
-            }
+            get { return this.dateTimePicker.Font; }
+            set { this.dateTimePicker.Font = value; }
         }
 
         public Image Icon
@@ -132,39 +88,17 @@ namespace Components.NewControl
 
         public Padding Margin
         {
-            get { return this.textBox.Margin; }
-            set { this.textBox.Margin = value; }
+            get { return this.dateTimePicker.Margin; }
+            set { this.dateTimePicker.Margin = value; }
         }
 
-        public TextBox TextBox
+        public DateTimePicker DateTimePicker
         {
-            get { return this.textBox; }
-        }
-
-        public bool IsShowPassword
-        {
-            get
-            {
-                return this.textBox.UseSystemPasswordChar;
-            }
-
-            set
-            {
-                this.textBox.UseSystemPasswordChar = value;
-            }
-        }
-
-        public string Text
-        {
-            get { return this.text; }
-            set { this.text = value; }
+            get { return this.dateTimePicker; }
+            set { this.dateTimePicker = value; }
         }
         #endregion
 
-        private string placeHolder = "Place Holder";
-        private string text = "";
-        private Color placeHolderColor = Color.LightGray;
-        private Color textColor = Color.Black;
         private GraphicsPath path = new GraphicsPath();
         private int radius = 5;
     }

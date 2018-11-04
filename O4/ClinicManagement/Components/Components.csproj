@@ -54,6 +54,12 @@
     <Compile Include="NewControl\NewComboBox.Designer.cs">
       <DependentUpon>NewComboBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewControl\NewDateTimePicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NewControl\NewDateTimePicker.Designer.cs">
+      <DependentUpon>NewDateTimePicker.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewControl\NewTextField.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -71,6 +77,9 @@
   <ItemGroup>
     <EmbeddedResource Include="NewControl\NewComboBox.resx">
       <DependentUpon>NewComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewControl\NewDateTimePicker.resx">
+      <DependentUpon>NewDateTimePicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewControl\NewTextField.resx">
       <DependentUpon>NewTextField.cs</DependentUpon>

@@ -14,15 +14,15 @@ namespace ClinicManagement.Common.ClinicComponents
     {
         public struct SearchResult
         {
-            public string maBenhNhan;
-            public string tenBenhNhan;
-            public string cmnd;
+            public string MaBenhNhan;
+            public string TenBenhNhan;
+            public string CMND;
 
             public SearchResult(string maBenhNhan, string tenBenhNhan, string cmnd) : this()
             {
-                this.maBenhNhan = maBenhNhan;
-                this.tenBenhNhan = tenBenhNhan;
-                this.cmnd = cmnd;
+                this.MaBenhNhan = maBenhNhan;
+                this.TenBenhNhan = tenBenhNhan;
+                this.CMND = cmnd;
             }
         }
         public FilterUserControl()
@@ -35,16 +35,14 @@ namespace ClinicManagement.Common.ClinicComponents
         {
             this.btnSearch.Click += new EventHandler((sender, e) =>
             {
-                if (searchCompleted != null)
-                    this.searchCompleted(new SearchResult(this.txtMaBenh.Text, this.txtHoTen.Text, this.txtCMND.Text));
+                this.SearchCompleted?.Invoke(sender, new SearchResult(this.txtMaBenh.Text, this.txtHoTen.Text, this.txtCMND.Text));
             });
 
             var enterEvent = new KeyEventHandler((sender, e) =>
             {
                 if (e.KeyCode != Keys.Enter)
                     return;
-                if (searchCompleted != null)
-                    this.searchCompleted(new SearchResult(this.txtMaBenh.Text, this.txtHoTen.Text, this.txtCMND.Text));
+                this.SearchCompleted?.Invoke(sender, new SearchResult(this.txtMaBenh.Text, this.txtHoTen.Text, this.txtCMND.Text));
             });
 
             this.txtMaBenh.TextBox.KeyDown += enterEvent;
@@ -52,7 +50,6 @@ namespace ClinicManagement.Common.ClinicComponents
             this.txtCMND.TextBox.KeyDown += enterEvent;
         }
 
-
-        public Action<SearchResult> searchCompleted;
+        public event EventHandler<SearchResult> SearchCompleted;
     }
 }
