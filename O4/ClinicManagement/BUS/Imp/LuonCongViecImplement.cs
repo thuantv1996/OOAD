@@ -11,22 +11,24 @@ using COM;
 
 namespace BUS.Imp
 {
-    class ThanhToanImplement : IThanhToanService
+    class LuonCongViecImplement : ILuonCongViecService
     {
-        public string AddThanhToan(QLPHONGKHAMEntities db, ThanhToanEntity ThanhToan, ref List<MessageError> Messages)
+        public string AddLuonCongViec(QLPHONGKHAMEntities db, LuonCongViecEnity LuonCongViec, ref List<MessageError> Messages)
         {
-            string ProgramName = "ThanhToanImplement-AddThanhToan";
+            string ProgramName = "LuonCongViecImplement-AddLuonCongViec";
             string IdResult;
-            // Tạo đối tượng THANHTOAN kết quả
-            THANHTOAN ThanhToanDAO = new THANHTOAN();
+            // Tạo đối tượng LUONCONGVIEC kết quả
+            LUONCONGVIEC LuonCongViecDAO = new LUONCONGVIEC();
 
             // Convert đối tượng từ DTO sang DAO
-            BUS.Com.Utils.CopyPropertiesFrom(ThanhToan, ThanhToanDAO);
+            BUS.Com.Utils.CopyPropertiesFrom(LuonCongViec, LuonCongViecDAO);
 
             // Khởi tạo lớp DAO
             DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
+
             // Thực hiện lệnh INSERT
-            IdResult = Dao.Insert(ThanhToanDAO, db, ref Messages);
+            IdResult = Dao.Insert(LuonCongViecDAO, db, ref Messages);
+
             // Nếu hàm INSERT báo lỗi
             if (IdResult == Constant.RES_FAI)
             {
@@ -34,7 +36,7 @@ namespace BUS.Imp
                 Messages.Add(new MessageError
                 {
                     IdError = Constant.MES_DB,
-                    Message = string.Format("Lỗi khi Insert vao Table THANHTOAN - {0}", ProgramName)
+                    Message = string.Format("Lỗi khi Insert vao Table LUONCONGVIEC - {0}", ProgramName)
                 });
                 // Return faild
                 return Constant.RES_FAI;
@@ -42,26 +44,33 @@ namespace BUS.Imp
             return Constant.RES_SUC;
         }
 
-        public string UpdateThanhToan(QLPHONGKHAMEntities db, ThanhToanEntity ThanhToan, ref List<MessageError> Messages)
+
+
+        public string UpdateLuonCongViec(QLPHONGKHAMEntities db, LuonCongViecEnity LuonCongViec, ref List<MessageError> Messages)
         {
-            string ProgramName = "ThanhToanImplement-UpdateThanhToan";
+            string ProgramName = "LuonCongViecImplement-UpdateLuonCongViec";
             string IdResult;
-            // Tạo đối tượng THANHTOAN kết quả
-            THANHTOAN ThanhToanDAO = new THANHTOAN();
+
+            // Tạo đối tượng LUONCONGVIEC kết quả
+            LUONCONGVIEC LuonCongViecDAO = new LUONCONGVIEC();
+
             // Convert đối tượng từ DTO sang DAO
-            BUS.Com.Utils.CopyPropertiesFrom(ThanhToan, ThanhToanDAO);
+            BUS.Com.Utils.CopyPropertiesFrom(LuonCongViec, LuonCongViecDAO);
+
             // Khởi tạo lớp DAO
             DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
+
             // Thực hiện lệnh Update
-            IdResult = Dao.Update(ThanhToanDAO, db, ref Messages);
-            // Nếu hàm INSERT báo lỗi
+            IdResult = Dao.Update(LuonCongViecDAO, db, ref Messages);
+
+            // Nếu hàm Update báo lỗi
             if (IdResult == Constant.RES_FAI)
             {
                 // Thêm thông báo lỗi
                 Messages.Add(new MessageError
                 {
                     IdError = Constant.MES_DB,
-                    Message = string.Format("Lỗi khi Update vao Table THANHTOAN - {0}", ProgramName)
+                    Message = string.Format("Lỗi khi Update vao Table LUONCONGVIEC - {0}", ProgramName)
                 });
                 // Return faild
                 return Constant.RES_FAI;
@@ -69,5 +78,5 @@ namespace BUS.Imp
             return Constant.RES_SUC;
         }
     }
-
 }
+

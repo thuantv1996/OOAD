@@ -12,11 +12,11 @@ namespace DTO
 
         public string MaHoSo { get; set; }
 
-        public Nullable<decimal> ChiPhiKham { get; set; }
+        public decimal ChiPhiKham { get; set; }
 
-        public Nullable<decimal> ChiPhiXetNghiem { get; set; }
+        public decimal ChiPhiXetNghiem { get; set; }
 
-        public Nullable<decimal> TongChiPhi { get; set; }
+        public decimal TongChiPhi { get; set; }
 
         public string NhanVienThu { get; set; }
 
