@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BenhNhanEnity.cs" />
+    <Compile Include="HoSoBenhNhanEnity.cs" />
+    <Compile Include="KetQuaXetNghiemEnity.cs" />
     <Compile Include="PhongKhamEnity.cs" />
     <Compile Include="TaiKhoanEnity.cs" />
     <Compile Include="HoSoBenhAnEntity.cs" />
