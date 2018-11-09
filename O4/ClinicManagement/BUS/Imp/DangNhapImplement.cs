@@ -114,7 +114,5 @@ namespace BUS.Imp
             }
             return Constant.RES_SUC;
         }
-
-
     }
 }

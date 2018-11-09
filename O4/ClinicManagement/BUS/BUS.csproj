@@ -71,18 +71,11 @@
     <Compile Include="Com\BUSSql.cs" />
     <Compile Include="Com\ObjectCommon.cs" />
     <Compile Include="Com\Utils.cs" />
-    <Compile Include="Enities\BenhNhanSearchEntity.cs" />
-    <Compile Include="Enities\DangNhapSearchEntity.cs" />
-    <Compile Include="Enities\HoSoSearchEntity.cs" />
     <Compile Include="Imp\BenhNhanImplement.cs" />
     <Compile Include="Imp\DangNhapImplement.cs" />
-    <Compile Include="Imp\HoSoBenhNhanImplement.cs" />
-    <Compile Include="Imp\HoSoImplement.cs" />
-<<<<<<< HEAD
+    <Compile Include="Imp\HoSoBenhAnImplement.cs" />
     <Compile Include="Imp\KetQuaXetNghiemImplement.cs" />
-=======
     <Compile Include="Imp\LuonCongViecImplement.cs" />
->>>>>>> e816acdf09b1a541fdec491f5a10a79f05c4778b
     <Compile Include="Imp\PhongKhamImplement.cs" />
     <Compile Include="Imp\TrangThaiPhongImplement.cs" />
     <Compile Include="Imp\ThanhToanImplement.cs" />
@@ -97,13 +90,9 @@
     <Compile Include="Service\IBenhNhanService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\IDangNhapService.cs" />
-    <Compile Include="Service\IHoSoBenhNhanService.cs" />
-    <Compile Include="Service\IHoSoService.cs" />
-<<<<<<< HEAD
+    <Compile Include="Service\IHoSoBenhAnService.cs" />
     <Compile Include="Service\IKetQuaXetNguyenService.cs" />
-=======
     <Compile Include="Service\ILuonCongViecService.cs" />
->>>>>>> e816acdf09b1a541fdec491f5a10a79f05c4778b
     <Compile Include="Service\IPhongKhamService.cs" />
     <Compile Include="Service\ITrangThaiPhongService.cs" />
     <Compile Include="Service\IThanhToanService.cs" />

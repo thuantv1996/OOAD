@@ -13,7 +13,7 @@ namespace BUS.Com
         {
             bool HasPrev = false;
             string SqlCode = "SELECT * FROM NHANVIEN WHERE ";
-            if(param[0]!=null && !param[0].Equals(""))
+            if (param[0] != null && !param[0].Equals(""))
             {
                 SqlCode += "MaBenhNhan LIKE N'%'+{0}+'%' ";
                 HasPrev = true;
@@ -38,5 +38,25 @@ namespace BUS.Com
             return SqlCode;
         }
 
+        // SQL SELECT SEARCH HO SO BENH AN
+        public static string SqlSearchHoSoBenhAn(object[] param)
+        {
+            bool HasPrev = false;
+            string SqlCode = "SELECT * FROM HOSOBENHAN WHERE ";
+            if (param[0] != null && !param[0].Equals(""))
+            {
+                SqlCode += "MaHoSo LIKE N'%'+{0}+'%' ";
+                HasPrev = true;
+            }
+            if (param[2] != null && !param[2].Equals(""))
+            {
+                if (HasPrev)
+                {
+                    SqlCode += "AND ";
+                }
+                SqlCode += "NgayTiepNhan LIKE {2}";
+            }
+            return SqlCode;
+        }
     }
 }

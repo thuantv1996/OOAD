@@ -41,12 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BenhNhanEnity.cs" />
-<<<<<<< HEAD
     <Compile Include="HoSoBenhNhanEnity.cs" />
     <Compile Include="KetQuaXetNghiemEnity.cs" />
-=======
     <Compile Include="LuonCongViecEnity.cs" />
->>>>>>> e816acdf09b1a541fdec491f5a10a79f05c4778b
     <Compile Include="PhongKhamEnity.cs" />
     <Compile Include="TaiKhoanEnity.cs" />
     <Compile Include="HoSoBenhAnEntity.cs" />

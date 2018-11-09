@@ -17,61 +17,37 @@ namespace BUS.Imp
         {
             string ProgramName = "KetQuaXetNghiemImplement-AddKetQuaXetNghiem";
             string IdResult;
-            KETQUAXETNGHIEM KetQuaXetNghiemResult = new KETQUAXETNGHIEM();
-            BUS.Com.Utils.CopyPropertiesFrom(KetQuaXetNghiem, KetQuaXetNghiemResult);
-            using (db = new QLPHONGKHAMEntities())
+            KETQUAXETNGHIEM KetQuaXetNghiemDAO = new KETQUAXETNGHIEM();
+            BUS.Com.Utils.CopyPropertiesFrom(KetQuaXetNghiem, KetQuaXetNghiemDAO);
+            DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
+            IdResult = Dao.Insert(KetQuaXetNghiemDAO, db, ref Messages);
+            if (IdResult == Constant.RES_FAI)
             {
-                using (var trans = db.Database.BeginTransaction())
+                Messages.Add(new MessageError
                 {
-                    DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
-                    IdResult = Dao.Insert(KetQuaXetNghiemResult, db, ref Messages);
-                    if (IdResult == Constant.RES_FAI)
-                    {
-                        Messages.Add(new MessageError
-                        {
-                            IdError = Constant.MES_DB,
-                            Message = string.Format("Lỗi khi Update vao Table KETQUAXETNGHIEM - {0}", ProgramName)
-                        });
-                        trans.Rollback();
-                        IdResult = Constant.RES_FAI;
-                        return IdResult;
-                    }
-                    else
-                    {
-                        trans.Commit();
-                    }
-                }
+                    IdError = Constant.MES_DB,
+                    Message = string.Format("Lỗi khi Update vao Table KETQUAXETNGHIEM - {0}", ProgramName)
+                });
+                return Constant.RES_FAI;
             }
             return Constant.RES_SUC;
         }
         public string UpdateKetQuaXetNghiem(QLPHONGKHAMEntities db, KetQuaXetNghiemEnity KetQuaXetNghiem, ref List<MessageError> Messages)
         {
-            using (db = new QLPHONGKHAMEntities())
+            string ProgramName = "KetQuaXetNghiemImplement-AddKetQuaXetNghiem";
+            string IdResult;
+            KETQUAXETNGHIEM KetQuaXetNghiemResult = new KETQUAXETNGHIEM();
+            BUS.Com.Utils.CopyPropertiesFrom(KetQuaXetNghiem, KetQuaXetNghiemResult);
+            DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
+            IdResult = Dao.Update(KetQuaXetNghiemResult, db, ref Messages);
+            if (IdResult == Constant.RES_FAI)
             {
-                string ProgramName = "KetQuaXetNghiemImplement-AddKetQuaXetNghiem";
-                string IdResult;
-                KETQUAXETNGHIEM KetQuaXetNghiemResult = new KETQUAXETNGHIEM();
-                BUS.Com.Utils.CopyPropertiesFrom(KetQuaXetNghiem, KetQuaXetNghiemResult);
-                using (var trans = db.Database.BeginTransaction())
+                Messages.Add(new MessageError
                 {
-                    DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
-                    IdResult = Dao.Update(KetQuaXetNghiemResult, db, ref Messages);
-                    if (IdResult == Constant.RES_FAI)
-                    {
-                        Messages.Add(new MessageError
-                        {
-                            IdError = Constant.MES_DB,
-                            Message = string.Format("Lỗi khi Update vao Table KETQUAXETNGHIEM - {0}", ProgramName)
-                        });
-                        trans.Rollback();
-                        IdResult = Constant.RES_FAI;
-                        return IdResult;
-                    }
-                    else
-                    {
-                        trans.Commit();
-                    }
-                }
+                    IdError = Constant.MES_DB,
+                    Message = string.Format("Lỗi khi Update vao Table KETQUAXETNGHIEM - {0}", ProgramName)
+                });
+                return Constant.RES_FAI;
             }
             return Constant.RES_SUC;
         }
