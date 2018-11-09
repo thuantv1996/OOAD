@@ -2,6 +2,7 @@
 using DTO;
 using COM;
 using BUS.Entities;
+using DAO;
 
 namespace BUS.Service
 {
@@ -22,6 +23,6 @@ namespace BUS.Service
         /// <param name="TrangThaiPhong"></param>
         /// <param name="Messages"></param>
         /// <returns></returns>
-        string UpdateTrangThaiPhong(TrangThaiPhongEnity TrangThaiPhong, ref List<MessageError> Messages);
+        string UpdateTrangThaiPhong(QLPHONGKHAMEntities db, TrangThaiPhongEnity TrangThaiPhong, ref List<MessageError> Messages);
     }
 }

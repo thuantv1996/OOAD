@@ -51,7 +51,7 @@ namespace BUS.Imp
                         // Thực hiện lệnh insert
                         IdResult = Dao.Insert(TrangThaiPhong, db, ref Messages);
                         // Nếu sai
-                        if(IdResult == Constant.RES_FAI)
+                        if (IdResult == Constant.RES_FAI)
                         {
                             return Constant.RES_FAI;
                         }
@@ -71,8 +71,8 @@ namespace BUS.Imp
                 return Constant.RES_SUC;
             }
         }
-    
-        public string UpdateTrangThaiPhong(TrangThaiPhongEnity TrangThaiPhong, ref List<MessageError> Messages)
+
+        public string UpdateTrangThaiPhong(QLPHONGKHAMEntities db, TrangThaiPhongEnity TrangThaiPhong, ref List<MessageError> Messages)
         {
             string ProgramName = "TrangThaiPhongImplement_UpdateTrangThaiPhong";
             // Kết quả trả về
@@ -81,33 +81,23 @@ namespace BUS.Imp
             TRANGTHAIPHONG TrangThaiPhongDAO = new TRANGTHAIPHONG();
             // Convert đối tượng từ DTO sang DAO
             BUS.Com.Utils.CopyPropertiesFrom(TrangThaiPhong, TrangThaiPhongDAO);
-            // Khởi tạo Database
-            using (var db = new QLPHONGKHAMEntities())
+            // Khởi tạo lớp DAO
+            DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
+            // Thực hiện lệnh UPDATE
+            IdResult = Dao.Update(TrangThaiPhongDAO, db, ref Messages);
+            // Nếu hàm INSERT báo lỗi
+            if (IdResult == Constant.RES_FAI)
             {
-                // Khởi tạo transaction 
-                using (var trans = db.Database.BeginTransaction())
+                // Thêm thông báo lỗi
+                Messages.Add(new MessageError
                 {
-                    // Khởi tạo lớp DAO
-                    DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
-                    // Thực hiện lệnh UPDATE
-                    IdResult = Dao.Update(TrangThaiPhongDAO, db, ref Messages);
-                    // Nếu hàm INSERT báo lỗi
-                    if (IdResult == Constant.RES_FAI)
-                    {
-                        // Thêm thông báo lỗi
-                        Messages.Add(new MessageError
-                        {
-                            IdError = Constant.MES_DB,
-                            Message = string.Format("Lỗi khi Update vao Table TRANGTHAIPHONG - {0}", ProgramName)
-                        });
-                        // Rollback dữ liệu
-                        trans.Rollback();
-                        // Return faild
-                        IdResult = Constant.RES_FAI;
-                        // return 
-                        return IdResult;
-                    }
-                }
+                    IdError = Constant.MES_DB,
+                    Message = string.Format("Lỗi khi Update vao Table TRANGTHAIPHONG - {0}", ProgramName)
+                });
+                // Return faild
+                IdResult = Constant.RES_FAI;
+                // return 
+                return IdResult;
             }
             return IdResult;
         }

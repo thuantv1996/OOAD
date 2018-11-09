@@ -20,5 +20,15 @@ namespace BUS.Service
         string UpdateHoSoBenhAn(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSoEntity, ref List<MessageError> Messages);
         // DELETE MỘT HỒ SƠ
         string DeleteHoSoBenhAn(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSoEntity, ref List<MessageError> Messages);
+        // LẤY DANH SÁCH HỒ SƠ KHÁM
+        // LẤY DANH SÁCH HỒ SƠ THANH TOÁN XÉT NGHIỆM
+        // LẤY DANH SÁCH HỒ SƠ XÉT NGHIỆM
+        // LẤY DANH SÁCH HỒ SƠ XÉT NGHIỆM XONG
+        // TẠO MÃ HỒ SƠ MỚI
+        string CreateIdHoSoBenhAn(out string Id, ref List<MessageError> Messages);
+        // LẤY HỒ SƠ GỐC
+        string GetRootHoSoBenhAn(QLPHONGKHAMEntities db, string MaHoSoTruoc, out HoSoBenhAnEntity hoSoBenhAnRoot, ref List<MessageError> Messages);
+        // LẤY DANH SÁCH HỒ SƠ THEO MÃ BỆNH NHÂN
+        string GetListHoSoBenhAnWithId(QLPHONGKHAMEntities db, string MaBenhNhan, out List<HoSoBenhAnEntity> ListHoSo,ref List<MessageError> Messages);
     }
 }

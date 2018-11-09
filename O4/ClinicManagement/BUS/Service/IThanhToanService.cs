@@ -18,5 +18,8 @@ namespace BUS.Service
         //UPDATE MOT THANH TOAN
         string UpdateThanhToan(QLPHONGKHAMEntities db, ThanhToanEntity ThanhToan, ref List<MessageError> Messages);
 
+        //CREATE ID THANH TOAN
+        string CreateIdThanhToan(out string Id, ref List<MessageError> Messages);
+
     }
 }

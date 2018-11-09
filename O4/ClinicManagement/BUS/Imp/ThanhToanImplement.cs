@@ -42,6 +42,46 @@ namespace BUS.Imp
             return Constant.RES_SUC;
         }
 
+        public string CreateIdThanhToan(out string Id, ref List<MessageError> Messages)
+        {
+            string ProgramName = "ThanhToanImplement-CreateIdThanhToan";
+            List<THANHTOAN> ListThanhToanDAO = new List<THANHTOAN>();
+            Id = "TT00000001";
+            using (var db = new QLPHONGKHAMEntities())
+            {
+                ListThanhToanDAO = (from tt in db.THANHTOANs
+                               orderby tt.MaThanhToan descending
+                               select tt).ToList();
+            }
+            if (ListThanhToanDAO.Count > 0)
+            {
+                string curId = ListThanhToanDAO.ElementAt(0).MaThanhToan;
+                try
+                {
+                    int curNumId = Int32.Parse(curId.Substring(2, 8));
+                    curNumId += 1;
+                    Id = "TT";
+                    for (int i = 0; i < (8 - curNumId.ToString().Length); i++)
+                    {
+                        Id += "0";
+                    }
+                    Id += curNumId.ToString();
+                }
+                catch
+                {
+                    // thêm Message Error
+                    Messages.Add(new MessageError
+                    {
+                        IdError = Constant.MES_SYS,
+                        Message = String.Format("Lỗi xãy ra khi Parse một chuổi sang Int32 - {0}", ProgramName)
+                    });
+                    // return fail;
+                    return Constant.RES_FAI;
+                }
+            }
+            return Constant.RES_SUC;
+        }
+
         public string UpdateThanhToan(QLPHONGKHAMEntities db, ThanhToanEntity ThanhToan, ref List<MessageError> Messages)
         {
             string ProgramName = "ThanhToanImplement-UpdateThanhToan";

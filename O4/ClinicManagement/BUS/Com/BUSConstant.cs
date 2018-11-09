@@ -20,5 +20,18 @@ namespace BUS.Com
         public static int LENGTH_DIACHI_BENHNHAN = 250;
         // Độ dài ghi chú bệnh nhân
         public static int LENGTH_GHICHU_BENHNHAN = 250;
+
+        // Loại hồ sơ
+        // Hồ sơ khám mới
+        public static string HS_KHAMMOI = "LHS0000001";
+        // Hồ sơ tái khám
+        public static string HS_TAIKHAM = "LHS0000002";
+
+        // Node trong luồn công việc
+        public static string NODE_KHAM = "00001";
+        public static string NODE_THANH_TOAN_XET_NGHIEM = "00002";
+        public static string NODE_XET_NGHIEM = "00003";
+        public static string NODE_KHAM_SAU_XN = "00004";
+        public static string NODE_HOAN_TAT = "00005";
     }
 }

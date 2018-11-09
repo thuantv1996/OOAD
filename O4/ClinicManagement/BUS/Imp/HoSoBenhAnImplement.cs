@@ -46,6 +46,102 @@ namespace BUS.Imp
             return Constant.RES_SUC;
         }
 
+        public string CreateIdHoSoBenhAn(out string Id, ref List<MessageError> Messages)
+        {
+            string ProgramName = "HoSoBenhAnImplement-CreateIdHoSoBenhAn";
+            List<HOSOBENHAN> ListHoSoDAO = new List<HOSOBENHAN>();
+            Id = "HS00000001";
+            using(var db = new QLPHONGKHAMEntities())
+            {
+                ListHoSoDAO = (from hs in db.HOSOBENHANs
+                               orderby hs.MaHoSo descending
+                               select hs).ToList();
+            }
+            if(ListHoSoDAO.Count > 0)
+            {
+                string curId = ListHoSoDAO.ElementAt(0).MaHoSo;
+                try
+                {
+                    int curNumId = Int32.Parse(curId.Substring(2, 8));
+                    curNumId += 1;
+                    Id = "HS";
+                    for (int i = 0; i < (8 - curNumId.ToString().Length); i++)
+                    {
+                        Id += "0";
+                    }
+                    Id += curNumId.ToString();
+                }
+                catch
+                {
+                    // thêm Message Error
+                    Messages.Add(new MessageError
+                    {
+                        IdError = Constant.MES_SYS,
+                        Message = String.Format("Lỗi xãy ra khi Parse một chuổi sang Int32 - {0}", ProgramName)
+                    });
+                    // return fail;
+                    return Constant.RES_FAI;
+                }
+            }
+            return Constant.RES_SUC;
+        }
+
+        public string GetRootHoSoBenhAn(QLPHONGKHAMEntities db, string MaHoSoTruoc, out HoSoBenhAnEntity hoSoBenhAnRoot, ref List<MessageError> Messages)
+        {
+            string ProgramName = "HoSoBenhAnImplement-GetRootHoSoBenhAn";
+            hoSoBenhAnRoot = new HoSoBenhAnEntity();
+            HOSOBENHAN hoso = new HOSOBENHAN();
+            try
+            {
+                hoso = db.HOSOBENHANs.Find(MaHoSoTruoc);
+            }
+            catch
+            {
+                // thêm Message Error
+                Messages.Add(new MessageError
+                {
+                    IdError = Constant.MES_DB,
+                    Message = String.Format("Lỗi xãy ra khi Find trên Table HOSOBENHAN - {0}", ProgramName)
+                });
+                return Constant.RES_FAI;
+            }
+            if(hoso == null)
+            {
+                // thêm Message Error
+                Messages.Add(new MessageError
+                {
+                    IdError = Constant.MES_DB,
+                    Message = String.Format("Lỗi xãy ra khi Find trên Table HOSOBENHAN - {0}", ProgramName)
+                });
+                return Constant.RES_FAI;
+            } 
+            if(hoso.MaHoSoTruoc == null || hoso.MaHoSoTruoc == "")
+            {
+                Utils.CopyPropertiesFrom(hoso, hoSoBenhAnRoot);
+                return Constant.RES_SUC;
+            }
+            else
+            {
+                return GetRootHoSoBenhAn(db, hoso.MaHoSoTruoc, out hoSoBenhAnRoot, ref Messages);
+            }
+        }
+
+        public string GetListHoSoBenhAnWithId(QLPHONGKHAMEntities db, string MaBenhNhan, out List<HoSoBenhAnEntity> ListHoSo, ref List<MessageError> Messages)
+        {
+            ListHoSo = new List<HoSoBenhAnEntity>();
+            List<HOSOBENHAN> ListHoSoDAO = new List<HOSOBENHAN>();
+            ListHoSoDAO = (from hs in db.HOSOBENHANs
+                           where hs.MaBenhNhan == MaBenhNhan
+                           select hs).ToList();
+            foreach(var hs in ListHoSoDAO)
+            {
+                HoSoBenhAnEntity hoSoBenhAn = new HoSoBenhAnEntity();
+                Utils.CopyPropertiesFrom(hs, hoSoBenhAn);
+                ListHoSo.Add(hoSoBenhAn);
+            }
+            return Constant.RES_SUC;
+        }
+
         public string DeleteHoSoBenhAn(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSoEntity, ref List<MessageError> Messages)
         {
             string ProgramName = "HoSoBenhAnImplement-DeleteHoSoBenhAn";
