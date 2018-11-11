@@ -41,15 +41,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BenhNhanEnity.cs" />
-    <Compile Include="HoSoBenhNhanEnity.cs" />
+    <Compile Include="ChiTietDonThuocEnity.cs" />
+    <Compile Include="DonThuocEnity.cs" />
     <Compile Include="KetQuaXetNghiemEnity.cs" />
+    <Compile Include="LoaiHoSoEnity.cs" />
     <Compile Include="LuonCongViecEnity.cs" />
+    <Compile Include="NhanVienEnity.cs" />
     <Compile Include="PhongKhamEnity.cs" />
     <Compile Include="TaiKhoanEnity.cs" />
     <Compile Include="HoSoBenhAnEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThuocEnity.cs" />
     <Compile Include="TrangThaiPhongEnity.cs" />
     <Compile Include="ThanhToanEntity.cs" />
+    <Compile Include="XetNghiemEnity.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

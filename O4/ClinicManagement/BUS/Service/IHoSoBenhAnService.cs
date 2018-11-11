@@ -10,6 +10,7 @@ namespace BUS.Service
     {
         // LẤY DANH SÁCH HỒ SƠ
         string GetListHoSo(out List<HoSoBenhAnEntity> ListHoSo, ref List<MessageError> Messages);
+        
         // TÌM HỒ SƠ
         string SearchHoSo( HoSoSearchEntity HoSoSearch, out List<HoSoBenhAnEntity> ListHoSo, ref List<MessageError> Messages);
         // LẤY THÔNG TIN MỘT HỒ SƠ
@@ -30,5 +31,7 @@ namespace BUS.Service
         string GetRootHoSoBenhAn(QLPHONGKHAMEntities db, string MaHoSoTruoc, out HoSoBenhAnEntity hoSoBenhAnRoot, ref List<MessageError> Messages);
         // LẤY DANH SÁCH HỒ SƠ THEO MÃ BỆNH NHÂN
         string GetListHoSoBenhAnWithId(QLPHONGKHAMEntities db, string MaBenhNhan, out List<HoSoBenhAnEntity> ListHoSo,ref List<MessageError> Messages);
+        // LẤY DANH SÁCH HỒ SƠ DỰA THEO MÃ PHÒNG VÀ NODE_KHAM
+        string GetListHoSoWithIdAndNodeKham(QLPHONGKHAMEntities db, string MaPhong, string Node_Kham, out List<HoSoBenhAnEntity> ListHoSo, ref List<MessageError> Messages);
     }
 }

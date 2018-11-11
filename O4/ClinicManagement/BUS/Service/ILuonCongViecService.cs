@@ -17,5 +17,8 @@ namespace BUS.Service
 
         //UPDATE MOT LUON CONG VIEC
         string UpdateLuonCongViec(QLPHONGKHAMEntities db, LuonCongViecEnity LuonCongViec, ref List<MessageError> Messages);
+
+        //LẤY THÔNG TIN MỘT LUỒN CÔNG VIỆC
+        string GetInformationLuonCongViec(string MaHoSo, out LuonCongViecEnity LuonCongViecEntity, ref List<MessageError> Messages);
     }
 }

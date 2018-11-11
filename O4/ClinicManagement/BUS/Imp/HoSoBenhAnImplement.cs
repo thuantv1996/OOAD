@@ -400,5 +400,35 @@ namespace BUS.Imp
             return Constant.RES_SUC;
         }
 
+        public string GetListHoSoWithIdAndNodeKham(QLPHONGKHAMEntities db, string MaPhong, string Node_Kham, out List<HoSoBenhAnEntity> ListHoSo, ref List<MessageError> Messages)
+        {
+            ListHoSo = new List<HoSoBenhAnEntity>();
+            List<HOSOBENHAN> ListHoSoDAO = new List<HOSOBENHAN>();
+            // Biến đón kết quả từ Dao
+            string IdResult;
+            // Lấy danh sách các hồ sơ trong phòng khám với MaPhong
+            ListHoSoDAO = (from hs in db.HOSOBENHANs
+                           where hs.MaPhongKham == MaPhong
+                           select hs).ToList();
+            foreach (var hs in ListHoSoDAO)
+            {
+                // Tạo đối tượng DAO
+                BaseDAO dao = new BaseDAO();
+                // Tạo đối tượng LuonCongViecImplement trả về
+                var luonCongViecImplement = new LuonCongViecImplement();
+                LuonCongViecEnity lcv = new LuonCongViecEnity();
+                // thực thi hàm select MaHoSo trong bảng LUONGCONGVIEC
+                if (luonCongViecImplement.GetInformationLuonCongViec(hs.MaHoSo, out lcv, ref Messages) == Constant.RES_SUC)
+                {
+                    if(lcv.NodeHienTai == Node_Kham)
+                    {
+                        HoSoBenhAnEntity hoSoBenhAn = new HoSoBenhAnEntity();
+                        Utils.CopyPropertiesFrom(hs, hoSoBenhAn);
+                        ListHoSo.Add(hoSoBenhAn);
+                    }
+                }
+            }
+            return Constant.RES_SUC;
+        }
     }
 }

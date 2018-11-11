@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAO;
-using COM;
+﻿using System.Collections.Generic;
 using DTO;
 using BUS.Entities;
+using DAO;
+using COM;
 
 namespace BUS.Service
 {
@@ -28,5 +24,9 @@ namespace BUS.Service
         /// <param name="Messages"></param>
         /// <returns></returns>
         string UpdateKetQuaXetNghiem(QLPHONGKHAMEntities db, KetQuaXetNghiemEnity KetQuaXetNghiem, ref List<MessageError> Messages);
+        // LẤY THÔNG TIN CHI TIẾT KẾT QUẢ XÉT NGHIỆM DỰA VÀO MÃ HỒ SƠ & MÃ XÉT NGHIỆM
+        string GetInformationWithId(string MaHoSo, string MaXetNghiem, KetQuaXetNghiemEnity KetQuaXetNghiem, ref List<MessageError> Messages);
+        // LẤY DANH SÁCH KẾT QUẢ XÉT NGHIỆM CỦA MỘT HỒ SƠ
+        string GetListKetQuaXetNghiemWithId(QLPHONGKHAMEntities db, string MaHoSo, out List<KetQuaXetNghiemEnity> ListKetQuaXetNghiem, ref List<MessageError> Messages)
     }
 }

@@ -72,13 +72,19 @@
     <Compile Include="Com\ObjectCommon.cs" />
     <Compile Include="Com\Utils.cs" />
     <Compile Include="Imp\BenhNhanImplement.cs" />
+    <Compile Include="Imp\ChiTietDonThuocImplement.cs" />
     <Compile Include="Imp\DangNhapImplement.cs" />
+    <Compile Include="Imp\DonThuocImplement.cs" />
     <Compile Include="Imp\HoSoBenhAnImplement.cs" />
     <Compile Include="Imp\KetQuaXetNghiemImplement.cs" />
+    <Compile Include="Imp\LoaiHoSoImplement.cs" />
     <Compile Include="Imp\LuonCongViecImplement.cs" />
+    <Compile Include="Imp\NhanVienImplement.cs" />
     <Compile Include="Imp\PhongKhamImplement.cs" />
+    <Compile Include="Imp\ThuocImplement.cs" />
     <Compile Include="Imp\TrangThaiPhongImplement.cs" />
     <Compile Include="Imp\ThanhToanImplement.cs" />
+    <Compile Include="Imp\XetNghiemImplement.cs" />
     <Compile Include="Inc\BenhNhanInputCheck.cs" />
     <Compile Include="Inc\DangNhapInputCheck.cs" />
     <Compile Include="Entities\BenhNhanSearchEntity.cs" />
@@ -89,13 +95,19 @@
     <Compile Include="Mdl\TiepNhanModule.cs" />
     <Compile Include="Service\IBenhNhanService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\IChiTietDonThuocService.cs" />
     <Compile Include="Service\IDangNhapService.cs" />
+    <Compile Include="Service\IDonThuocService.cs" />
     <Compile Include="Service\IHoSoBenhAnService.cs" />
     <Compile Include="Service\IKetQuaXetNguyenService.cs" />
+    <Compile Include="Service\ILoaiHoSoService.cs" />
     <Compile Include="Service\ILuonCongViecService.cs" />
+    <Compile Include="Service\INhanVienService.cs" />
     <Compile Include="Service\IPhongKhamService.cs" />
+    <Compile Include="Service\IThuocService.cs" />
     <Compile Include="Service\ITrangThaiPhongService.cs" />
     <Compile Include="Service\IThanhToanService.cs" />
+    <Compile Include="Service\IXetNghiemService.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">

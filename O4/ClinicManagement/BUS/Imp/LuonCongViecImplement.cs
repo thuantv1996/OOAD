@@ -8,6 +8,8 @@ using BUS.Service;
 using DTO;
 using DAO;
 using COM;
+using BUS.Com;
+using DAO.Imp;
 
 namespace BUS.Imp
 {
@@ -44,7 +46,52 @@ namespace BUS.Imp
             return Constant.RES_SUC;
         }
 
-
+        public string GetInformationLuonCongViec(string MaHoSo, out LuonCongViecEnity LuonCongViecEntity, ref List<MessageError> Messages)
+        {
+            string ProgramName = "LuonCongViecImplement-GetInformationLuonCongViec";
+            LuonCongViecEntity = new LuonCongViecEnity();
+            List<LUONCONGVIEC> ListLuonCongViecDAO = null;
+            string IdResult;
+            using (var db = new QLPHONGKHAMEntities())
+            {
+                BaseDAO dao = new BaseDAO();
+                IdResult = dao.Select(db, lcv => lcv.MaHoSo == MaHoSo, out ListLuonCongViecDAO, ref Messages);
+            }
+            // trường hợp select fail
+            if (IdResult.Equals(Constant.RES_FAI))
+            {
+                Messages.Add(new MessageError
+                {
+                    IdError = Constant.MES_DB,
+                    Message = String.Format("Lỗi xãy ra khi select dữ liệu từ Table LUONCONGVIEC - {0}", ProgramName)
+                });
+                return Constant.RES_FAI;
+            }
+            // trường hợp data rỗng
+            if (ListLuonCongViecDAO.Count == 0)
+            {
+                Messages.Add(new MessageError
+                {
+                    IdError = Constant.MES_DB,
+                    Message = String.Format("Lỗi empty dữ liệu từ Table LUONCONGVIEC - {0}", ProgramName)
+                });
+                return Constant.RES_FAI;
+            }
+            // trường hợp data trả về nhiều hơn 1 record
+            if (ListLuonCongViecDAO.Count > 1)
+            {
+                Messages.Add(new MessageError
+                {
+                    IdError = Constant.MES_DB,
+                    Message = String.Format("Lỗi select trên key nhiều hơn 1 record dữ liệu từ Table LUONCONGVIEC - {0}", ProgramName)
+                });
+                return Constant.RES_FAI;
+            }
+            // copy property
+            Utils.CopyPropertiesFrom(ListLuonCongViecDAO.ElementAt(0), LuonCongViecEntity);
+            // return success
+            return Constant.RES_SUC;
+        }
 
         public string UpdateLuonCongViec(QLPHONGKHAMEntities db, LuonCongViecEnity LuonCongViec, ref List<MessageError> Messages)
         {
