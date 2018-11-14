@@ -159,6 +159,12 @@ namespace Components.NewControl
             get { return this.text; }
             set { this.text = value; }
         }
+
+        public bool enableEdit
+        {
+            get { return this.textBox.Enabled; }
+            set { this.textBox.Enabled = value; }
+        }
         #endregion
 
         private string placeHolder = "Place Holder";

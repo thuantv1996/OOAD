@@ -17,19 +17,19 @@ namespace ClinicManagement.Common.ClinicComponents
             InitializeComponent();
         }
 
-        public void fillData(Model.Patient patient)
+        public void fillData(DTO.BenhNhanEnity patient)
         {
-            this.txtName.Text = patient.Name;
-            this.txtBirthDay.Text = patient.BirthDay.ToShortDateString();
-            this.txtPhoneNumber.Text = patient.PhoneNumber;
-            this.txtCMND.Text = patient.IdentityCardNumber;
-            this.txtSex.Text = patient.Sex.ToString();
-            this.txtAddress.Text = patient.Address;
-            this.txtNote.Text = patient.Note;
-            this.idNumber = patient.IdNumber;
+            this.txtName.Text = patient.HoTen;
+            this.txtBirthDay.Text = patient.NgaySinh;
+            this.txtPhoneNumber.Text = patient.SoDienThoai;
+            this.txtCMND.Text = patient.CMND;
+            this.txtSex.Text = patient.GioiTinh == true ? "Nam" : "Nữ";
+            this.txtAddress.Text = patient.DiaChi;
+            this.txtNote.Text = patient.GhiChu;
+            this.idNumber = patient.MaBenhNhan;
         }
 
-        public Model.Patient getData()
+        public DTO.BenhNhanEnity getData()
         {
             DateTime birthDay;
             try
@@ -42,10 +42,19 @@ namespace ClinicManagement.Common.ClinicComponents
             } catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return new Model.Patient();
+                return new DTO.BenhNhanEnity();
             }
 
-            return new Model.Patient(this.txtName.Text, birthDay, this.idNumber, new Model.StructSex(this.txtSex.Text), this.txtAddress.Text, this.txtNote.Text);
+            var patient = new DTO.BenhNhanEnity();
+            patient.HoTen = this.txtName.Text;
+            patient.GioiTinh = this.txtSex.Equals("Nam") ? true : false;
+            patient.MaBenhNhan = this.idNumber;
+            patient.NgaySinh = this.txtBirthDay.Text;
+            patient.SoDienThoai = this.txtPhoneNumber.Text;
+            patient.GhiChu = this.txtNote.Text;
+            patient.DiaChi = this.txtAddress.Text;
+            patient.CMND = this.txtCMND.Text;
+            return patient;
         }
 
         private string idNumber = "";

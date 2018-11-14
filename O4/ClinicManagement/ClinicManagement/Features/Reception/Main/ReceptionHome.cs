@@ -20,13 +20,25 @@ namespace ClinicManagement.Features.Reception.Main
 
         private void setupView()
         {
-            this.tableDataWithSearch.SearchCompleted += new EventHandler<Common.ClinicComponents.FilterUserControl.SearchResult>((sender, e) =>
+        }
+
+        private void ReceptionHome_Load(object sender, EventArgs e)
+        {
+            this.bus.fetchListBenhNhan((listBenhNhan, listMessageError, result) =>
             {
-                //MARK: - Dummy
-                Console.WriteLine("=============================");
-                Console.WriteLine(e.MaBenhNhan);
-                Console.WriteLine(e.TenBenhNhan);
-                Console.WriteLine(e.CMND);
+                if (result.Equals(COM.Constant.RES_SUC))
+                {
+                    this.tableDataView1.fetchData(listBenhNhan);
+                } else
+                {
+                    var msg = "";
+                    listMessageError.ForEach((error) =>
+                    {
+                        msg += error.Message + "\n";
+                    });
+                    MessageBox.Show(msg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             });
         }
 

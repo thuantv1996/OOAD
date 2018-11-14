@@ -26,9 +26,9 @@ namespace ClinicManagement.Common.ClinicComponents
             });
         }
 
-        public void fetchData(DataTable table)
+        public void fetchData(List<DTO.BenhNhanEnity> list)
         {
-            this.tableControl.fetchData(table);
+            this.tableControl.fetchData(list);
         }
 
         public ColumnTypes[] Columns

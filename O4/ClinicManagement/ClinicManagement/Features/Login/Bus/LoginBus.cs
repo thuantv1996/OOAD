@@ -40,5 +40,12 @@ namespace ClinicManagement.Features.Login.Bus
             var result = this.loginBusClient.DangNhapProcess(account, ref listMessageError, out idScreen);
             completion(listMessageError, idScreen, result);
         }
+
+        public void ChangePassword(TaiKhoanEnity account, Action<List<MessageError>, string> completion)
+        {
+            var listMessageError = new List<MessageError>();
+            var result = this.loginBusClient.ChangePasswordProcess(account, ref listMessageError);
+            completion(listMessageError, result);
+        }
     }
 }

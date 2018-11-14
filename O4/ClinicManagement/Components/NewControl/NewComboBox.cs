@@ -38,7 +38,7 @@ namespace Components.NewControl
 
             this.comboBox.KeyUp += new KeyEventHandler((sender, e) =>
             {
-                this.text = (sender as TextBox).Text;
+                this.text = (sender as ComboBox).Text;
             });
 
             this.SizeChanged += new EventHandler((sender, e) =>

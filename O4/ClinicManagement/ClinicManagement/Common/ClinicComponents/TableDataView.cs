@@ -39,16 +39,21 @@ namespace ClinicManagement.Common.ClinicComponents
             
         }
 
-        public void fetchData(DataTable table)
+        public void fetchData(List<DTO.BenhNhanEnity> danhSachBenhNhan)
         {
-            this.gridView.DataSource = table;
+            var list = new BindingList<DTO.BenhNhanEnity>(danhSachBenhNhan);
+            var source = new BindingSource(list, null);
+
+
+           
+            this.gridView.DataSource = ConvertToDatatable<DTO.BenhNhanEnity>(danhSachBenhNhan);
         }
 
         private string ColumnTypeToString(ColumnTypes type)
         {
             switch (type)
             {
-                case ColumnTypes.Name: return "Họ Tên";
+                case ColumnTypes.Name: return "HoTen";
                 case ColumnTypes.Address: return "Địa Chỉ";
                 case ColumnTypes.BirthDay: return "Ngày Sinh";
                 case ColumnTypes.IdentifyCardNumber: return "CMND/Passport";
@@ -82,5 +87,31 @@ namespace ClinicManagement.Common.ClinicComponents
             ColumnTypes.Address,
             ColumnTypes.Note
         };
+
+
+        private DataTable ConvertToDatatable<T>(List<T> data)
+        {
+            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(T));
+            DataTable table = new DataTable();
+            for (int i = 0; i < props.Count; i++)
+            {
+                PropertyDescriptor prop = props[i];
+                if (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    table.Columns.Add(prop.Name, prop.PropertyType.GetGenericArguments()[0]);
+                else
+                    table.Columns.Add(prop.Name, prop.PropertyType);
+            }
+
+            object[] values = new object[props.Count];
+            foreach (T item in data)
+            {
+                for (int i = 0; i < values.Length; i++)
+                {
+                    values[i] = props[i].GetValue(item);
+                }
+                table.Rows.Add(values);
+            }
+            return table;
+        }
     }
 }

@@ -117,32 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ico_closeform_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon\ico_closeform_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ico_key_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon\ico_key_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ico_add_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon\ico_add_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ico_key_241" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon\ico_key_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="loginBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\loginBackground.jpeg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ico_refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon\ico_refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ico_detail" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon\ico_detail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ico_search_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon\ico_search_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ico_user" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon\ico_user.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
 </root>

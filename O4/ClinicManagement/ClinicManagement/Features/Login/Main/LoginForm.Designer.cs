@@ -30,7 +30,6 @@
         {
             this.backgroundImage = new System.Windows.Forms.PictureBox();
             this.btnExit = new System.Windows.Forms.Button();
-            this.loginControl1 = new ClinicManagement.Features.Login.SubForms.LoginControl();
             ((System.ComponentModel.ISupportInitialize)(this.backgroundImage)).BeginInit();
             this.backgroundImage.SuspendLayout();
             this.SuspendLayout();
@@ -38,7 +37,6 @@
             // backgroundImage
             // 
             this.backgroundImage.Controls.Add(this.btnExit);
-            this.backgroundImage.Controls.Add(this.loginControl1);
             this.backgroundImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.backgroundImage.Image = global::ClinicManagement.Properties.Resources.loginBackground;
             this.backgroundImage.InitialImage = global::ClinicManagement.Properties.Resources.loginBackground;
@@ -65,17 +63,6 @@
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // loginControl1
-            // 
-            this.loginControl1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.loginControl1.Location = new System.Drawing.Point(286, 203);
-            this.loginControl1.MaximumSize = new System.Drawing.Size(562, 347);
-            this.loginControl1.MinimumSize = new System.Drawing.Size(562, 347);
-            this.loginControl1.Name = "loginControl1";
-            this.loginControl1.Radius = 10;
-            this.loginControl1.Size = new System.Drawing.Size(562, 347);
-            this.loginControl1.TabIndex = 2;
-            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -98,6 +85,5 @@
 
         private System.Windows.Forms.PictureBox backgroundImage;
         private System.Windows.Forms.Button btnExit;
-        private SubForms.LoginControl loginControl1;
     }
 }
