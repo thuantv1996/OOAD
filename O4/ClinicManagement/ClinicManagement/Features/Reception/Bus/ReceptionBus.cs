@@ -22,10 +22,24 @@ namespace ClinicManagement.Features.Reception.Bus
 
         public void fetchListBenhNhan(Action<List<DTO.BenhNhanEnity>, List<COM.MessageError>, string> completion)
         {
-            var listResult = new List<DTO.BenhNhanEnity>();
-            var listMessageError = new List<COM.MessageError>();
-            var result = this.benhNhanBus.GetListBenhNhan(out listResult, ref listMessageError);
-            completion(listResult, listMessageError, result);
+            Task.Run(() =>
+            {
+               var listResult = new List<DTO.BenhNhanEnity>();
+               var listMessageError = new List<COM.MessageError>();
+               var result = this.benhNhanBus.GetListBenhNhan(out listResult, ref listMessageError);
+               completion(listResult, listMessageError, result);
+            });
+        }
+
+        public void searchBenhNhan(BUS.Entities.BenhNhanSearchEntity benhNhanEntity, Action<List<DTO.BenhNhanEnity>, List<COM.MessageError>, string> completion)
+        {
+            Task.Run(() =>
+            {
+                var listResult = new List<DTO.BenhNhanEnity>();
+                var listMessageError = new List<COM.MessageError>();
+                var result = this.benhNhanBus.SearchBenhNhan(benhNhanEntity, out listResult, ref listMessageError);
+                completion(listResult, listMessageError, result);
+            });
         }
 
         static protected ReceptionBus sharedInstance;

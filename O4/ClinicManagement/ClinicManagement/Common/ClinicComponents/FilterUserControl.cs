@@ -12,19 +12,6 @@ namespace ClinicManagement.Common.ClinicComponents
 {
     public partial class FilterUserControl : UserControl
     {
-        public struct SearchResult
-        {
-            public string MaBenhNhan;
-            public string TenBenhNhan;
-            public string CMND;
-
-            public SearchResult(string maBenhNhan, string tenBenhNhan, string cmnd) : this()
-            {
-                this.MaBenhNhan = maBenhNhan;
-                this.TenBenhNhan = tenBenhNhan;
-                this.CMND = cmnd;
-            }
-        }
         public FilterUserControl()
         {
             InitializeComponent();
@@ -33,16 +20,15 @@ namespace ClinicManagement.Common.ClinicComponents
 
         private void setupView()
         {
-            this.btnSearch.Click += new EventHandler((sender, e) =>
-            {
-                this.SearchCompleted?.Invoke(sender, new SearchResult(this.txtMaBenh.Text, this.txtHoTen.Text, this.txtCMND.Text));
-            });
-
             var enterEvent = new KeyEventHandler((sender, e) =>
             {
                 if (e.KeyCode != Keys.Enter)
                     return;
-                this.SearchCompleted?.Invoke(sender, new SearchResult(this.txtMaBenh.Text, this.txtHoTen.Text, this.txtCMND.Text));
+                var entity = new BUS.Entities.BenhNhanSearchEntity();
+                entity.MaBenhNhan = this.txtMaBenh.Text;
+                entity.TenBenhNhan = this.txtHoTen.Text;
+                entity.CMND = this.txtCMND.Text;
+                this.SearchCompleted?.Invoke(this, entity);
             });
 
             this.txtMaBenh.TextBox.KeyDown += enterEvent;
@@ -50,6 +36,17 @@ namespace ClinicManagement.Common.ClinicComponents
             this.txtCMND.TextBox.KeyDown += enterEvent;
         }
 
-        public event EventHandler<SearchResult> SearchCompleted;
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            var entity = new BUS.Entities.BenhNhanSearchEntity();
+            entity.MaBenhNhan = this.txtMaBenh.Text;
+            entity.TenBenhNhan = this.txtHoTen.Text;
+            entity.CMND = this.txtCMND.Text;
+
+            this.SearchCompleted?.Invoke(this, entity);
+        }
+
+        public event EventHandler<BUS.Entities.BenhNhanSearchEntity> SearchCompleted;
+
     }
 }

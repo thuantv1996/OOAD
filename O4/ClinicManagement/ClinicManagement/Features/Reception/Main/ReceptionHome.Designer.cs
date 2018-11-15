@@ -28,39 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableDataView1 = new ClinicManagement.Common.ClinicComponents.TableDataView();
-            this.btnDetail = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnDetail = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.tableDataView1 = new ClinicManagement.Common.ClinicComponents.TableDataView();
             this.SuspendLayout();
-            // 
-            // tableDataView1
-            // 
-            this.tableDataView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableDataView1.Columns = new ClinicManagement.Common.ClinicComponents.ColumnTypes[] {
-        ClinicManagement.Common.ClinicComponents.ColumnTypes.Name,
-        ClinicManagement.Common.ClinicComponents.ColumnTypes.BirthDay,
-        ClinicManagement.Common.ClinicComponents.ColumnTypes.Sex,
-        ClinicManagement.Common.ClinicComponents.ColumnTypes.IdentifyCardNumber,
-        ClinicManagement.Common.ClinicComponents.ColumnTypes.Address,
-        ClinicManagement.Common.ClinicComponents.ColumnTypes.Note};
-            this.tableDataView1.Location = new System.Drawing.Point(0, 81);
-            this.tableDataView1.Name = "tableDataView1";
-            this.tableDataView1.Size = new System.Drawing.Size(869, 572);
-            this.tableDataView1.TabIndex = 0;
-            // 
-            // btnDetail
-            // 
-            this.btnDetail.BackColor = System.Drawing.Color.White;
-            this.btnDetail.Image = global::ClinicManagement.Properties.Resources.ico_detail;
-            this.btnDetail.Location = new System.Drawing.Point(124, 30);
-            this.btnDetail.Name = "btnDetail";
-            this.btnDetail.Size = new System.Drawing.Size(45, 45);
-            this.btnDetail.TabIndex = 3;
-            this.btnDetail.UseVisualStyleBackColor = false;
             // 
             // btnRefresh
             // 
@@ -71,6 +44,19 @@
             this.btnRefresh.Size = new System.Drawing.Size(45, 45);
             this.btnRefresh.TabIndex = 4;
             this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnDetail
+            // 
+            this.btnDetail.BackColor = System.Drawing.Color.White;
+            this.btnDetail.Enabled = false;
+            this.btnDetail.Image = global::ClinicManagement.Properties.Resources.ico_detail;
+            this.btnDetail.Location = new System.Drawing.Point(124, 30);
+            this.btnDetail.Name = "btnDetail";
+            this.btnDetail.Size = new System.Drawing.Size(45, 45);
+            this.btnDetail.TabIndex = 3;
+            this.btnDetail.UseVisualStyleBackColor = false;
+            this.btnDetail.Click += new System.EventHandler(this.btnDetail_Click);
             // 
             // btnAdd
             // 
@@ -91,16 +77,33 @@
             this.btnSearch.Size = new System.Drawing.Size(45, 45);
             this.btnSearch.TabIndex = 1;
             this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // tableDataView1
+            // 
+            this.tableDataView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableDataView1.Columns = new ClinicManagement.Common.ClinicComponents.ColumnTypes[] {
+        ClinicManagement.Common.ClinicComponents.ColumnTypes.HoTen,
+        ClinicManagement.Common.ClinicComponents.ColumnTypes.NgaySinh,
+        ClinicManagement.Common.ClinicComponents.ColumnTypes.GioiTinh,
+        ClinicManagement.Common.ClinicComponents.ColumnTypes.MaBenhNhan,
+        ClinicManagement.Common.ClinicComponents.ColumnTypes.DiaChi};
+            this.tableDataView1.Location = new System.Drawing.Point(0, 81);
+            this.tableDataView1.Name = "tableDataView1";
+            this.tableDataView1.Size = new System.Drawing.Size(869, 569);
+            this.tableDataView1.TabIndex = 5;
             // 
             // ReceptionHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tableDataView1);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnDetail);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.tableDataView1);
             this.Name = "ReceptionHome";
             this.Size = new System.Drawing.Size(869, 653);
             this.Load += new System.EventHandler(this.ReceptionHome_Load);
@@ -109,11 +112,10 @@
         }
 
         #endregion
-
-        private Common.ClinicComponents.TableDataView tableDataView1;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnDetail;
         private System.Windows.Forms.Button btnRefresh;
+        private Common.ClinicComponents.TableDataView tableDataView1;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ClinicManagement.Common.ClinicComponents
 {
-    partial class PatientInformation
+    partial class PatientEdit
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,21 +29,24 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.txtNote = new System.Windows.Forms.Label();
+            this.address = new System.Windows.Forms.TextBox();
+            this.identify = new System.Windows.Forms.TextBox();
+            this.phoneNumber = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.txtAddress = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.txtSex = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtCMND = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.txtPhoneNumber = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtBirthDay = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.name = new System.Windows.Forms.TextBox();
+            this.note = new System.Windows.Forms.RichTextBox();
+            this.birthDay = new DevExpress.XtraEditors.DateEdit();
+            this.gender = new DevExpress.XtraEditors.ComboBoxEdit();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.birthDay.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.birthDay.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gender.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -51,22 +54,21 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 146F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.txtNote, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.address, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.identify, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.phoneNumber, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label13, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.txtAddress, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label11, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.txtSex, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label9, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.txtCMND, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.txtPhoneNumber, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtBirthDay, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.name, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.note, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.birthDay, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.gender, 1, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
@@ -80,16 +82,32 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(479, 398);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // txtNote
+            // address
             // 
-            this.txtNote.AutoSize = true;
-            this.txtNote.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNote.Location = new System.Drawing.Point(149, 240);
-            this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(327, 158);
-            this.txtNote.TabIndex = 13;
-            this.txtNote.Text = "Bệnh đẹp trai";
+            this.address.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.address.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.address.Location = new System.Drawing.Point(149, 203);
+            this.address.Name = "address";
+            this.address.Size = new System.Drawing.Size(327, 26);
+            this.address.TabIndex = 18;
+            // 
+            // identify
+            // 
+            this.identify.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.identify.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.identify.Location = new System.Drawing.Point(149, 123);
+            this.identify.Name = "identify";
+            this.identify.Size = new System.Drawing.Size(327, 26);
+            this.identify.TabIndex = 16;
+            // 
+            // phoneNumber
+            // 
+            this.phoneNumber.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.phoneNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.phoneNumber.Location = new System.Drawing.Point(149, 83);
+            this.phoneNumber.Name = "phoneNumber";
+            this.phoneNumber.Size = new System.Drawing.Size(327, 26);
+            this.phoneNumber.TabIndex = 15;
             // 
             // label13
             // 
@@ -102,17 +120,6 @@
             this.label13.TabIndex = 12;
             this.label13.Text = "Ghi chú:";
             // 
-            // txtAddress
-            // 
-            this.txtAddress.AutoSize = true;
-            this.txtAddress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAddress.Location = new System.Drawing.Point(149, 200);
-            this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(327, 40);
-            this.txtAddress.TabIndex = 11;
-            this.txtAddress.Text = "KTX Khu B";
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -123,17 +130,6 @@
             this.label11.Size = new System.Drawing.Size(140, 40);
             this.label11.TabIndex = 10;
             this.label11.Text = "Địa chỉ:";
-            // 
-            // txtSex
-            // 
-            this.txtSex.AutoSize = true;
-            this.txtSex.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSex.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSex.Location = new System.Drawing.Point(149, 160);
-            this.txtSex.Name = "txtSex";
-            this.txtSex.Size = new System.Drawing.Size(327, 40);
-            this.txtSex.TabIndex = 9;
-            this.txtSex.Text = "Nam";
             // 
             // label9
             // 
@@ -146,17 +142,6 @@
             this.label9.TabIndex = 8;
             this.label9.Text = "Giới tính:";
             // 
-            // txtCMND
-            // 
-            this.txtCMND.AutoSize = true;
-            this.txtCMND.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtCMND.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCMND.Location = new System.Drawing.Point(149, 120);
-            this.txtCMND.Name = "txtCMND";
-            this.txtCMND.Size = new System.Drawing.Size(327, 40);
-            this.txtCMND.TabIndex = 7;
-            this.txtCMND.Text = "184313100";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -167,17 +152,6 @@
             this.label7.Size = new System.Drawing.Size(140, 40);
             this.label7.TabIndex = 6;
             this.label7.Text = "CMND:";
-            // 
-            // txtPhoneNumber
-            // 
-            this.txtPhoneNumber.AutoSize = true;
-            this.txtPhoneNumber.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtPhoneNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPhoneNumber.Location = new System.Drawing.Point(149, 80);
-            this.txtPhoneNumber.Name = "txtPhoneNumber";
-            this.txtPhoneNumber.Size = new System.Drawing.Size(327, 40);
-            this.txtPhoneNumber.TabIndex = 5;
-            this.txtPhoneNumber.Text = "0968329208";
             // 
             // label5
             // 
@@ -190,17 +164,6 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Số điện thoại:";
             // 
-            // txtBirthDay
-            // 
-            this.txtBirthDay.AutoSize = true;
-            this.txtBirthDay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtBirthDay.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBirthDay.Location = new System.Drawing.Point(149, 40);
-            this.txtBirthDay.Name = "txtBirthDay";
-            this.txtBirthDay.Size = new System.Drawing.Size(327, 40);
-            this.txtBirthDay.TabIndex = 3;
-            this.txtBirthDay.Text = "26/06/1997";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -211,17 +174,6 @@
             this.label3.Size = new System.Drawing.Size(140, 40);
             this.label3.TabIndex = 2;
             this.label3.Text = "Ngày sinh:";
-            // 
-            // txtName
-            // 
-            this.txtName.AutoSize = true;
-            this.txtName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtName.Location = new System.Drawing.Point(149, 0);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(327, 40);
-            this.txtName.TabIndex = 1;
-            this.txtName.Text = "Nguyễn Quốc Tuyến";
             // 
             // label1
             // 
@@ -234,15 +186,74 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Họ tên:";
             // 
-            // PatientInformation
+            // name
+            // 
+            this.name.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.name.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.name.Location = new System.Drawing.Point(149, 3);
+            this.name.Name = "name";
+            this.name.Size = new System.Drawing.Size(327, 26);
+            this.name.TabIndex = 13;
+            // 
+            // note
+            // 
+            this.note.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.note.Location = new System.Drawing.Point(149, 243);
+            this.note.Name = "note";
+            this.note.Size = new System.Drawing.Size(327, 152);
+            this.note.TabIndex = 19;
+            this.note.Text = "";
+            // 
+            // birthDay
+            // 
+            this.birthDay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.birthDay.EditValue = null;
+            this.birthDay.Location = new System.Drawing.Point(149, 43);
+            this.birthDay.Name = "birthDay";
+            this.birthDay.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.birthDay.Properties.Appearance.Options.UseFont = true;
+            this.birthDay.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.birthDay.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.birthDay.Properties.DisplayFormat.FormatString = "dd/MM/yyyy";
+            this.birthDay.Properties.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.birthDay.Properties.EditFormat.FormatString = "dd/MM/yyyy";
+            this.birthDay.Properties.EditFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.birthDay.Properties.FirstDayOfWeek = System.DayOfWeek.Monday;
+            this.birthDay.Properties.Mask.EditMask = "dd/MM/yyyy";
+            this.birthDay.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.birthDay.Size = new System.Drawing.Size(327, 28);
+            this.birthDay.TabIndex = 21;
+            // 
+            // gender
+            // 
+            this.gender.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gender.Location = new System.Drawing.Point(149, 163);
+            this.gender.Name = "gender";
+            this.gender.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.gender.Properties.Appearance.Options.UseFont = true;
+            this.gender.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.gender.Properties.Items.AddRange(new object[] {
+            "Nam",
+            "Nữ"});
+            this.gender.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            this.gender.Size = new System.Drawing.Size(327, 28);
+            this.gender.TabIndex = 22;
+            // 
+            // PatientEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "PatientInformation";
+            this.Name = "PatientEdit";
             this.Size = new System.Drawing.Size(479, 398);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.birthDay.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.birthDay.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gender.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -251,18 +262,18 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label txtNote;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label txtAddress;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label txtSex;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label txtCMND;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label txtPhoneNumber;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label txtBirthDay;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label txtName;
+        private System.Windows.Forms.TextBox name;
+        private System.Windows.Forms.TextBox address;
+        private System.Windows.Forms.TextBox identify;
+        private System.Windows.Forms.TextBox phoneNumber;
+        private System.Windows.Forms.RichTextBox note;
+        private DevExpress.XtraEditors.DateEdit birthDay;
+        private DevExpress.XtraEditors.ComboBoxEdit gender;
     }
 }

@@ -38,6 +38,17 @@
     <Reference Include="DevExpress.Sparkline.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraEditors.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -73,6 +84,18 @@
     <Compile Include="Common\ClinicComponents\MenuControl.Designer.cs">
       <DependentUpon>MenuControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Features\Reception\SubForms\PatientDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\SubForms\PatientDetail.Designer.cs">
+      <DependentUpon>PatientDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\PatientEdit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\PatientEdit.Designer.cs">
+      <DependentUpon>PatientEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\ClinicComponents\PatientInformation.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -84,12 +107,6 @@
     </Compile>
     <Compile Include="Common\ClinicComponents\TableDataView.Designer.cs">
       <DependentUpon>TableDataView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Common\ClinicComponents\TableDataWithSearch.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Common\ClinicComponents\TableDataWithSearch.Designer.cs">
-      <DependentUpon>TableDataWithSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\Observable.cs" />
     <Compile Include="Common\SourceLibrary.cs" />
@@ -111,6 +128,12 @@
     </Compile>
     <Compile Include="Features\Login\Main\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Login\SubForms\ChangePasswordControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Login\SubForms\ChangePasswordControl.Designer.cs">
+      <DependentUpon>ChangePasswordControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Features\Login\SubForms\LoginControl.cs">
       <SubType>UserControl</SubType>
@@ -166,17 +189,23 @@
     <EmbeddedResource Include="Common\ClinicComponents\MenuControl.resx">
       <DependentUpon>MenuControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\Reception\SubForms\PatientDetail.resx">
+      <DependentUpon>PatientDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\ClinicComponents\PatientEdit.resx">
+      <DependentUpon>PatientEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Common\ClinicComponents\PatientInformation.resx">
       <DependentUpon>PatientInformation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Common\ClinicComponents\TableDataView.resx">
       <DependentUpon>TableDataView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Common\ClinicComponents\TableDataWithSearch.resx">
-      <DependentUpon>TableDataWithSearch.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Features\Login\Main\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Login\SubForms\ChangePasswordControl.resx">
+      <DependentUpon>ChangePasswordControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Login\SubForms\LoginControl.resx">
       <DependentUpon>LoginControl.cs</DependentUpon>
@@ -261,6 +290,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon\ico_search_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon\ico_add_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon\ico_detail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon\ico_refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon\ico_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon\ico_card.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon\ico_cmnd.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

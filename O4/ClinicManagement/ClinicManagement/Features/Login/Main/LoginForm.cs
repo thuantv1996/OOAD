@@ -35,9 +35,9 @@ namespace ClinicManagement.Features.Login.Main
 
         private void setupChangePassword(string userName, string password)
         {
-            var account = new DTO.TaiKhoanEnity();
-            account.TenDangNhap = userName;
-            account.MatKhau = password;
+            var account = new DTO.TaiKhoanEnity() {
+                TenDangNhap = userName,
+                MatKhau = password };
             this.changePasswordControl = new SubForms.ChangePasswordControl(account);
             var initX = (this.Size.Width - this.changePasswordControl.Size.Width) / 2;
             var initY = (this.Size.Height - this.changePasswordControl.Size.Height) / 2;

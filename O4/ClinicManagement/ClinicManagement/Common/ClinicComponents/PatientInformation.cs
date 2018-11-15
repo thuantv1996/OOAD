@@ -20,7 +20,11 @@ namespace ClinicManagement.Common.ClinicComponents
         public void fillData(DTO.BenhNhanEnity patient)
         {
             this.txtName.Text = patient.HoTen;
-            this.txtBirthDay.Text = patient.NgaySinh;
+            int year = int.Parse(patient.NgaySinh.Substring(0, 4));
+            int month = int.Parse(patient.NgaySinh.Substring(4, 2));
+            int day = int.Parse(patient.NgaySinh.Substring(6, 2));
+
+            this.txtBirthDay.Text = string.Format("{0}/{1}/{2}", day, month, year);
             this.txtPhoneNumber.Text = patient.SoDienThoai;
             this.txtCMND.Text = patient.CMND;
             this.txtSex.Text = patient.GioiTinh == true ? "Nam" : "Nữ";
@@ -31,29 +35,20 @@ namespace ClinicManagement.Common.ClinicComponents
 
         public DTO.BenhNhanEnity getData()
         {
-            DateTime birthDay;
-            try
-            {
-                var dateListString = this.txtBirthDay.Text.Split('/');
-                int day = int.Parse(dateListString.First());
-                int month = int.Parse(dateListString[1]);
-                int year = int.Parse(dateListString.Last());
-                birthDay = new DateTime(year, month, day);
-            } catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return new DTO.BenhNhanEnity();
-            }
+            var list = this.txtBirthDay.Text.Split('/');
+            var year = int.Parse(list.Last());
+            var month = int.Parse(list[1]);
+            var day = int.Parse(list.First());
 
-            var patient = new DTO.BenhNhanEnity();
-            patient.HoTen = this.txtName.Text;
-            patient.GioiTinh = this.txtSex.Equals("Nam") ? true : false;
-            patient.MaBenhNhan = this.idNumber;
-            patient.NgaySinh = this.txtBirthDay.Text;
-            patient.SoDienThoai = this.txtPhoneNumber.Text;
-            patient.GhiChu = this.txtNote.Text;
-            patient.DiaChi = this.txtAddress.Text;
-            patient.CMND = this.txtCMND.Text;
+            var patient = new DTO.BenhNhanEnity() {
+                HoTen = this.txtName.Text,
+                GioiTinh = this.txtSex.Text.Equals("Nam") ? true : false,
+                MaBenhNhan = this.idNumber,
+                NgaySinh = string.Format("{0}{1}{2}", year, month > 10 ? month.ToString(): "0" + month, day > 10 ? day.ToString() : "0" + day),
+                SoDienThoai = this.txtPhoneNumber.Text,
+                GhiChu = this.txtNote.Text,
+                DiaChi = this.txtAddress.Text,
+                CMND = this.txtCMND.Text };
             return patient;
         }
 
