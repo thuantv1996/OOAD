@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAO.Com
+namespace DAO.Interface
 {
-    public class DAOMessage
+    interface ILuonCongViecServices : IBaseDAO<LUONCONGVIEC>
     {
-        public static string MES_DAO_001 = "Thực thi SQL nâng cao thất bại";
     }
 }

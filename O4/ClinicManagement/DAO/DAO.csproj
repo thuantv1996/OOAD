@@ -77,21 +77,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Imp\BaseDAO.cs" />
+    <Compile Include="Common\DAOCommon.cs" />
+    <Compile Include="Common\LogManager.cs" />
+    <Compile Include="Implement\BenhNhanImplement.cs" />
     <Compile Include="BENHNHAN.cs">
       <DependentUpon>QLPK.tt</DependentUpon>
     </Compile>
-    <Compile Include="Com\DAOUtils.cs" />
     <Compile Include="CHITIETDONTHUOC.cs">
       <DependentUpon>QLPK.tt</DependentUpon>
     </Compile>
-    <Compile Include="Com\DAOMessage.cs" />
     <Compile Include="DONTHUOC.cs">
       <DependentUpon>QLPK.tt</DependentUpon>
     </Compile>
     <Compile Include="HOSOBENHAN.cs">
       <DependentUpon>QLPK.tt</DependentUpon>
     </Compile>
+    <Compile Include="Interface\IBaseDAO.cs" />
+    <Compile Include="Interface\IBenhNhanServices.cs" />
+    <Compile Include="Interface\IChiThietDonThuocServices.cs" />
+    <Compile Include="Interface\IDonThuocServices.cs" />
+    <Compile Include="Interface\IHoSoBenhAnServices.cs" />
+    <Compile Include="Interface\IKetQuaXetNghiemServices.cs" />
+    <Compile Include="Interface\ILoaiHoSoServices.cs" />
+    <Compile Include="Interface\ILoaiNhanVienServices.cs" />
+    <Compile Include="Interface\ILuonCongViecServices.cs" />
+    <Compile Include="Interface\INhanVienServices.cs" />
+    <Compile Include="Interface\INhanVienSevices.cs" />
+    <Compile Include="Interface\IPhongSevices.cs" />
+    <Compile Include="Interface\ITaiKhoanServices.cs" />
+    <Compile Include="Interface\IThanhToanServices.cs" />
+    <Compile Include="Interface\IThuocServices.cs" />
+    <Compile Include="Interface\ITrangThaiPhongServices.cs" />
+    <Compile Include="Interface\IXetNhiemServices.cs" />
     <Compile Include="KETQUAXETNGHIEM.cs">
       <DependentUpon>QLPK.tt</DependentUpon>
     </Compile>
@@ -180,6 +197,7 @@
       <Name>COM</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
