@@ -84,6 +84,12 @@
     <Compile Include="Common\ClinicComponents\MenuControl.Designer.cs">
       <DependentUpon>MenuControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Features\Reception\SubForms\AddPatientControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\SubForms\AddPatientControl.Designer.cs">
+      <DependentUpon>AddPatientControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Features\Reception\SubForms\PatientDetail.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -172,6 +178,12 @@
     <Compile Include="Features\Reception\SubForms\CreateFormControl.Designer.cs">
       <DependentUpon>CreateFormControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Features\Reception\SubForms\ReceptionControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\SubForms\ReceptionControl.Designer.cs">
+      <DependentUpon>ReceptionControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +200,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Common\ClinicComponents\MenuControl.resx">
       <DependentUpon>MenuControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Reception\SubForms\AddPatientControl.resx">
+      <DependentUpon>AddPatientControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Reception\SubForms\PatientDetail.resx">
       <DependentUpon>PatientDetail.cs</DependentUpon>
@@ -221,6 +236,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Reception\SubForms\CreateFormControl.resx">
       <DependentUpon>CreateFormControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Reception\SubForms\ReceptionControl.resx">
+      <DependentUpon>ReceptionControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -308,6 +326,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon\ico_cmnd.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon\ico_search16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

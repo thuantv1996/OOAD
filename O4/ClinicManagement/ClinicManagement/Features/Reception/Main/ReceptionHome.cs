@@ -77,17 +77,17 @@ namespace ClinicManagement.Features.Reception.Main
         private void btnSearch_Click(object sender, EventArgs e)
         {
             ClinicManagement.Common.ClinicComponents.FilterUserControl filterControl = new Common.ClinicComponents.FilterUserControl();
-            Form formContainer = new Form();
-            formContainer.Controls.Add(filterControl);
-            formContainer.AutoSize = true;
-            formContainer.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            formContainer.StartPosition = FormStartPosition.CenterParent;
+            Form formContainer = new Form() {
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                StartPosition = FormStartPosition.CenterParent };
 
             filterControl.Left = 0;
             filterControl.Top = 0;
             filterControl.Anchor = AnchorStyles.Left | AnchorStyles.Top;
             filterControl.SearchCompleted += FilterControl_SearchCompleted;
             
+            formContainer.Controls.Add(filterControl);
             formContainer.ShowDialog();
         }
 
@@ -117,17 +117,70 @@ namespace ClinicManagement.Features.Reception.Main
         private void btnDetail_Click(object sender, EventArgs e)
         {
             var currentPatient = this.tableDataView1.PatientSelected;
-            Form formContainer = new Form();
-            formContainer.AutoSize = true;
-            formContainer.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            formContainer.StartPosition = FormStartPosition.CenterParent;
+            Form formContainer = new Form() {
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                StartPosition = FormStartPosition.CenterParent };
 
             var detailControl = new SubForms.PatientDetail(currentPatient);
             detailControl.Left = detailControl.Top = 0;
             detailControl.Anchor = AnchorStyles.Left | AnchorStyles.Top;
+            detailControl.CreateClick += DetailControl_CreateClick;
 
             formContainer.Controls.Add(detailControl);
             formContainer.ShowDialog();
+        }
+
+        private void DetailControl_CreateClick(object sender, EventArgs e)
+        {
+            var formContainer = (sender as UserControl).Parent;
+            var receptionControl = new SubForms.ReceptionControl();
+            receptionControl.Left = receptionControl.Top = 0;
+            receptionControl.Anchor = AnchorStyles.Left | AnchorStyles.Top;
+
+            formContainer.Controls.Add(receptionControl);
+            receptionControl.BringToFront();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            Form formContainer = new Form()
+            {
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                StartPosition = FormStartPosition.CenterParent
+            };
+
+            var addPatientControl = new SubForms.AddPatientControl();
+            addPatientControl.Left = addPatientControl.Top = 0;
+            addPatientControl.Anchor = AnchorStyles.Left | AnchorStyles.Top;
+            addPatientControl.CreateCompleted += AddPatientControl_CreateCompleted;
+
+            formContainer.Controls.Add(addPatientControl);
+            formContainer.ShowDialog();
+        }
+
+        private void AddPatientControl_CreateCompleted(object sender, DTO.BenhNhanEnity e)
+        {
+            this.bus.insertBenhNhan(e, (listMessageError, result) =>
+            {
+                if (result.Equals(COM.Constant.RES_SUC))
+                {
+                    MessageBox.Show("Thêm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.fetchData((msg, rslt) =>
+                    {
+                    });
+                } else
+                {
+                    var msg = "";
+                    listMessageError.ForEach((error) =>
+                    {
+                        msg += error.Message + "\n";
+                    });
+                    MessageBox.Show(msg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            });
         }
     }
 }

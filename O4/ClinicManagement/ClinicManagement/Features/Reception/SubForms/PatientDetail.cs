@@ -37,7 +37,7 @@ namespace ClinicManagement.Features.Reception.SubForms
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            //Hiển thị màn hình tạo hồ sơ bệnh án
+            this.CreateClick?.Invoke(this, e);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -53,5 +53,7 @@ namespace ClinicManagement.Features.Reception.SubForms
             this.patientInformation.BringToFront();
             this.btnEdit.BringToFront();
         }
+
+        public event EventHandler CreateClick;
     }
 }
