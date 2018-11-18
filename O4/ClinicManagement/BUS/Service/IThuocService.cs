@@ -9,6 +9,6 @@ namespace BUS.Service
     interface IThuocService
     {
         // LẤY DANH SÁCH THUỐC
-        string GetListThuoc(out List<ThuocEnity> ListThuocEntity, ref List<MessageError> Messages);
+        string GetListThuoc(QLPHONGKHAMEntities db,  out List<ThuocEnity> ListThuocEntity);
     }
 }

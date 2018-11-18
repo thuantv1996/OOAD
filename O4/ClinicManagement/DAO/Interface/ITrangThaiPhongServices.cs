@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAO.Interface
 {
-    interface ITrangThaiPhongServices : IBaseDAO<TRANGTHAIPHONG>
+    public interface ITrangThaiPhongServices : IBaseDAO<TRANGTHAIPHONG>
     {
     }
 }

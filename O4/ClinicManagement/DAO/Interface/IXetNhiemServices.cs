@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAO.Interface
 {
-    interface IXetNhiemServices : IBaseDAO<XETNGHIEM>
+    public interface IXetNhiemServices : IBaseDAO<XETNGHIEM>
     {
     }
 }
