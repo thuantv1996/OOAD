@@ -7,7 +7,7 @@ using DAO.Interface;
 
 namespace DAO.Implement
 {
-    class ThanhToanImplement : IThanhToanServices
+    public class ThanhToanImplement : IThanhToanServices
     {
         public string Delete(DbContext db, THANHTOAN entity)
         {

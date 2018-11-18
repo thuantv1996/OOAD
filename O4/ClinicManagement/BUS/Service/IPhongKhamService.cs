@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using DTO;
-using COM;
-using BUS.Entities;
+using DAO;
 
 namespace BUS.Service
 {
@@ -13,7 +12,7 @@ namespace BUS.Service
         /// <param name="ListPhongKham"></param>
         /// <param name="Messages"></param>
         /// <returns></returns>
-        string GetListPhongKham(out List<PhongKhamEnity> ListPhongKham, ref List<MessageError> Messages);
+        string GetListPhongKham(QLPHONGKHAMEntities db, out List<PhongKhamEnity> ListPhongKham);
         /// <summary>
         /// LẤY THÔNG TIN PHÒNG KHÁM DỰA TRÊN MÃ PHÒNG KHÁM
         /// </summary>
@@ -21,6 +20,6 @@ namespace BUS.Service
         /// <param name="InformationPhongKham"></param>
         /// <param name="Messages"></param>
         /// <returns></returns>
-        string GetInformationPhongKham(string MaPhongKham, out PhongKhamEnity InformationPhongKham, ref List<MessageError> Messages);
+        string GetInformationPhongKham(QLPHONGKHAMEntities db, string MaPhongKham, out PhongKhamEnity InformationPhongKham);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using DTO;
-using COM;
-using BUS.Entities;
+using DAO; 
 
 namespace BUS.Service
 {
@@ -13,7 +12,7 @@ namespace BUS.Service
         /// <param name="ListLoaiHoSo"></param>
         /// <param name="Messages"></param>
         /// <returns></returns>
-        string GetListLoaiHoSo(out List<LoaiHoSoEnity> ListLoaiHoSo, ref List<MessageError> Messages);
+        string GetListLoaiHoSo(QLPHONGKHAMEntities db, out List<LoaiHoSoEnity> ListLoaiHoSo);
         /// <summary>
         /// LẤY THÔNG TIN LOẠI HỒ SƠ
         /// </summary>
@@ -21,6 +20,6 @@ namespace BUS.Service
         /// <param name="InformationLoaiHoSo"></param>
         /// <param name="Messages"></param>
         /// <returns></returns>
-        string GetInformationLoaiHoSo(string MaLoaiHoSo, out LoaiHoSoEnity InformationLoaiHoSo, ref List<MessageError> Messages);
+        string GetInformationLoaiHoSo(QLPHONGKHAMEntities db, string MaLoaiHoSo, out LoaiHoSoEnity InformationLoaiHoSo);
     }
 }

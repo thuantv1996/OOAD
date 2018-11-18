@@ -7,7 +7,7 @@ using DAO.Interface;
 
 namespace DAO.Implement
 {
-    class PhongImplement : IPhongSevices
+    public class PhongImplement : IPhongSevices
     {
         public string Delete(DbContext db, PHONG entity)
         {
