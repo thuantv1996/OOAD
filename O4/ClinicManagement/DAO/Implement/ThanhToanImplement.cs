@@ -88,5 +88,45 @@ namespace DAO.Implement
             }
             return DAOCommon.SUCCESS;
         }
+
+        public string CreateId(QLPHONGKHAMEntities db, out string id)
+        {
+            List<THANHTOAN> listThanhToanDAO = new List<THANHTOAN>();
+            id = "TT00000001";
+            listThanhToanDAO = (from tt in db.THANHTOANs
+                                    orderby tt.MaThanhToan descending
+                                    select tt).ToList();
+            if(listThanhToanDAO == null)
+            {
+                return DAOCommon.SUCCESS;
+            }
+            if(listThanhToanDAO.Count == 0)
+            {
+                return DAOCommon.SUCCESS;
+            }
+            if (listThanhToanDAO.Count > 0)
+            {
+                string curId = listThanhToanDAO.ElementAt(0).MaThanhToan;
+                try
+                {
+                    int curNumId = Int32.Parse(curId.Substring(2, 8));
+                    curNumId += 1;
+                    id = "TT";
+                    for (int i = 0; i < (8 - curNumId.ToString().Length); i++)
+                    {
+                        id += "0";
+                    }
+                    id += curNumId.ToString();
+                }
+                catch(Exception e)
+                {
+                    string log = LogManager.GetErrorFromException(e);
+                    LogManager.WriteLog(log);
+                    // return fail;
+                    return DAOCommon.FAIL;
+                }
+            }
+            return DAOCommon.SUCCESS;
+        }
     }
 }

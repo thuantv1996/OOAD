@@ -82,7 +82,6 @@
     <Compile Include="Implement\ThuocImplement.cs" />
     <Compile Include="Implement\TrangThaiPhongImplement.cs" />
     <Compile Include="Implement\XetNghiemImplement.cs" />
-    <Compile Include="Interface\Abc.cs" />
     <Compile Include="Interface\IBaseDAO.cs" />
     <Compile Include="Interface\IBenhNhanServices.cs" />
     <Compile Include="Interface\IChiThietDonThuocServices.cs" />

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DAO.Interface
 {
-    interface IThanhToanServices : IBaseDAO<THANHTOAN>
+    public interface IThanhToanServices : IBaseDAO<THANHTOAN>
     {
+        string CreateId(QLPHONGKHAMEntities db, out string id);
     }
 }

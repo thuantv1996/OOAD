@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAO.Interface
 {
-    interface ILuonCongViecServices : IBaseDAO<LUONCONGVIEC>
+    public interface ILuonCongViecServices : IBaseDAO<LUONCONGVIEC>
     {
     }
 }

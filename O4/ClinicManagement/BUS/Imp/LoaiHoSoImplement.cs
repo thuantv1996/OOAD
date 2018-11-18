@@ -8,7 +8,7 @@ namespace BUS.Imp
 {
     public class LoaiHoSoImplement : ILoaiHoSoService
     {
-        DAO.Implement.LoaiHoSoImplement loaiHoSoService = null;
+        DAO.Interface.ILoaiHoSoServices loaiHoSoService = null;
 
         public LoaiHoSoImplement()
         {

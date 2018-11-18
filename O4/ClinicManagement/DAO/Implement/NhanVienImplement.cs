@@ -88,5 +88,23 @@ namespace DAO.Implement
             }
             return DAOCommon.SUCCESS;
         }
+
+        public string GetListNhanVienWithIdRoom(QLPHONGKHAMEntities db, object[] param, out List<NHANVIEN> listEntity)
+        {
+            listEntity = null;
+            try
+            {
+                listEntity = (from nv in db.NHANVIENs
+                              where nv.MaPhong == param[0].ToString()
+                              select nv).ToList();
+            }
+            catch (Exception e)
+            {
+                string log = LogManager.GetErrorFromException(e);
+                LogManager.WriteLog(log);
+                return DAOCommon.FAIL;
+            }
+            return DAOCommon.SUCCESS;
+        }
     }
 }

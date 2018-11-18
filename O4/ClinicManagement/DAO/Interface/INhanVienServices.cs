@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DAO.Interface
 {
-    interface INhanVienServices : IBaseDAO<NHANVIEN>
+    public interface INhanVienServices : IBaseDAO<NHANVIEN>
     {
+        string GetListNhanVienWithIdRoom(QLPHONGKHAMEntities db, object[] param, out List<NHANVIEN> listEntity);
     }
 }

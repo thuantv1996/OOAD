@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAO.Interface
 {
-    interface ILoaiNhanVienServices : IBaseDAO<LOAINHANVIEN>
+    public interface ILoaiNhanVienServices : IBaseDAO<LOAINHANVIEN>
     {
     }
 }

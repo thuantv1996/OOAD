@@ -7,7 +7,7 @@ namespace BUS.Imp
 {
     public class NhanVienImplement : INhanVienService
     {
-        DAO.Implement.NhanVienImplement nhanVienService = null;
+        DAO.Interface.INhanVienServices nhanVienService = null;
 
         public NhanVienImplement()
         {
@@ -36,6 +36,28 @@ namespace BUS.Imp
             ListNhanVienEntity = new List<NhanVienEnity>();
             List<NHANVIEN> listObjectDAO = null;
             if (nhanVienService.Select(db, out listObjectDAO) == Constant.RES_FAI)
+            {
+                return Constant.RES_FAI;
+            }
+            if (listObjectDAO == null)
+            {
+                return Constant.RES_FAI;
+            }
+            foreach (NHANVIEN nv in listObjectDAO)
+            {
+                NhanVienEnity nhanVienEnity = new NhanVienEnity();
+                BUS.Com.Utils.CopyPropertiesFrom(nv, nhanVienEnity);
+                ListNhanVienEntity.Add(nhanVienEnity);
+            }
+            return Constant.RES_SUC;
+        }
+
+        public string GetListNhanVienWithIdRoom(QLPHONGKHAMEntities db, string maPhong, out List<NhanVienEnity> ListNhanVienEntity)
+        {
+            ListNhanVienEntity = new List<NhanVienEnity>();
+            List<NHANVIEN> listObjectDAO = null;
+            object[] param = { maPhong };
+            if (nhanVienService.GetListNhanVienWithIdRoom(db, param, out listObjectDAO) == Constant.RES_FAI)
             {
                 return Constant.RES_FAI;
             }

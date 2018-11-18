@@ -8,7 +8,7 @@ namespace BUS.Imp
 {
     public class PhongKhamImplement : IPhongKhamService
     {
-        DAO.Implement.PhongImplement phongKhamService = null;
+        DAO.Interface.IPhongSevices phongKhamService = null;
 
         public PhongKhamImplement()
         {

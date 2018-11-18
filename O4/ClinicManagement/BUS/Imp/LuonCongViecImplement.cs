@@ -7,7 +7,7 @@ namespace BUS.Imp
 {
     public class LuonCongViecImplement : ILuonCongViecService
     {
-        DAO.Implement.LuonCongViecImplement luonCongViecService = null;
+        DAO.Interface.ILuonCongViecServices luonCongViecService = null;
 
         public LuonCongViecImplement()
         {
