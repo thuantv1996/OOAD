@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DAO.Interface
 {
-    interface IKetQuaXetNghiemServices : IBaseDAO<KETQUAXETNGHIEM>
+    public interface IKetQuaXetNghiemServices : IBaseDAO<KETQUAXETNGHIEM>
     {
+        string GetKetQuaXetNghiemWithIdHoSo(QLPHONGKHAMEntities db, string MaHoSo, out List<KETQUAXETNGHIEM> ListKetQuaXetNghiem);
     }
 }

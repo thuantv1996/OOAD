@@ -1,311 +1,89 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using BUS.Service;
-using DAO;
 using DTO;
-using COM;
 using BUS.Entities;
+using DAO;
+using COM;
 
 namespace BUS.Imp
 {
     public class BenhNhanImplement : IBenhNhanService
     {
-        /// <summary>
-        /// THÊM MỚI BỆNH NHÂN
-        /// </summary>
-        /// <param name="BenhNhan"></param>
-        /// <param name="Messages"></param>
-        /// <returns></returns>
-        public string InsertBenhNhan(BenhNhanEnity BenhNhan, ref List<MessageError> Messages)
+        DAO.Implement.BenhNhanImplement benhNhanService = null;
+
+        public BenhNhanImplement()
         {
-            string ProgramName = "BenhNhanImplement_InsertBenhNhan";
-            // Kết quả trả về
-            string IdResult = "";
-            // Tạo đối tượng BENHNHAN kết quả
-            BENHNHAN BenhNhanResult = new BENHNHAN();
-            // Convert đối tượng từ DTO sang DAO
-            BUS.Com.Utils.CopyPropertiesFrom(BenhNhan, BenhNhanResult);
-            // Khởi tạo Database
-            using (var db = new QLPHONGKHAMEntities())
-            {
-                // Khởi tạo transaction 
-                using (var trans = db.Database.BeginTransaction())
-                {
-                    // Khởi tạo lớp DAO
-                    DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
-                    // Thực hiện lệnh INSERT
-                    IdResult = Dao.Insert(BenhNhanResult, db, ref Messages);
-                    // Nếu hàm INSERT báo lỗi
-                    if(IdResult == Constant.RES_FAI)
-                    {
-                        // Thêm thông báo lỗi
-                        Messages.Add(new MessageError
-                        {
-                            IdError = Constant.MES_DB,
-                            Message = string.Format("Lỗi khi Insert vao Table BENHNHAN - {0}", ProgramName)
-                        });
-                        // Rollback dữ liệu
-                        trans.Rollback();
-                        // Return faild
-                        IdResult = Constant.RES_FAI;
-                        // return 
-                        return IdResult;
-                    }
-                }
-            }
-                return IdResult;
+            benhNhanService = new DAO.Implement.BenhNhanImplement();
         }
-        /// <summary>
-        /// LẤY THÔNG TIN BỆNH NHÂN
-        /// </summary>
-        /// <param name="BenhNhan"></param>
-        /// <param name="Messages"></param>
-        /// <returns></returns>
-        public string GetInformationBenhNhan(string MaBenhNhan, out BenhNhanEnity InformationBenhNhan, ref List<MessageError> Messages)
+
+        public string GetInformationBenhNhan(QLPHONGKHAMEntities db, string MaBenhNhan, out BenhNhanEnity InformationBenhNhan)
         {
-            string ProgramName = "BenhNhanImplement_GetInformationBenhNhan";
-            // khởi tạo đối tượng Bệnh Nhân (DTO) trả về
             InformationBenhNhan = new BenhNhanEnity();
-            // Khai báo danh sách đối tượng Bệnh Nhân (DAO) đón nhận data từ function select 
-            List<BENHNHAN> LstResult = null;
-            // Kết quả trả về
-            string IdResult = "";
-            // Khởi tạo Database
-            using (var db = new QLPHONGKHAMEntities())
+            BENHNHAN entity = null;
+            object[] id = { MaBenhNhan };
+            if(benhNhanService.FindById(db, id, out entity) == Constant.RES_FAI)
             {
-                //Khởi tạo transaction
-                using (var trans = db.Database.BeginTransaction())
-                {
-                    // Khởi tạo lớp DAO
-                    DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
-                    // Thực hiện lệnh SELECT
-                    IdResult = Dao.Select(db, bn => bn.MaBenhNhan.Equals(MaBenhNhan), out LstResult, ref Messages);
-                    // Nếu hàm select báo lỗi
-                    if (IdResult == Constant.RES_FAI)
-                    {
-                        
-                        // Thêm thông báo lỗi
-                        Messages.Add(new MessageError
-                        {
-                            IdError = Constant.MES_DB,
-                            Message = string.Format("Lỗi truy vấn select table BENHNHAN - {0}", ProgramName)
-                        });
-                        // Rollback dữ liệu
-                        trans.Rollback();
-                        // Return faild
-                        IdResult = Constant.RES_FAI;
-                        // return 
-                        return IdResult;
-                    }
-                    // Nếu hàm select không trả về bất kỳ record nào
-                    if (LstResult.Count == 0)
-                    {
-                        Messages.Add(new MessageError
-                        {
-                            IdError = Constant.MES_DB,
-                            Message = string.Format("Không select được dữ liệu (Data is empty) - {0}", ProgramName)
-                        });
-                        // Rollback dữ liệu
-                        trans.Rollback();
-                        // Return faild
-                        IdResult = Constant.RES_FAI;
-                        // return 
-                        return IdResult;
-                    }
-                }
+                return Constant.RES_FAI;
             }
-            // Vì search trên Key nên chỉ trả về nhiều nhất 1 record 
-            // Lấy record trả về
-            BENHNHAN SearchResult = LstResult.ToList().ElementAt(0);
-            // Vì BENHNHAN là kiểu dữ liệu của DAO nên không thể gửi lên GUI
-            // => cần chuyển đối tượng DAO sang DTO vì GUI có thể sử dụng DTO
-            // convert SearchResult từ DAO sang DTO
-            BUS.Com.Utils.CopyPropertiesFrom(SearchResult, InformationBenhNhan);
-            // return 
-            return IdResult;
-        }
-        /// <summary>
-        /// LẤY DANH SÁCH BỆNH NHÂN
-        /// </summary>
-        /// <param name="ListBenhNhan"></param>
-        /// <param name="Messages"></param>
-        /// <returns></returns>
-        public string GetListBenhNhan(out List<BenhNhanEnity> ListBenhNhan, ref List<MessageError> Messages)
-        {
-            string ProgramName = "BenhNhanImplement_GetListBenhNhan";
-            // Danh sách bệnh nhân (DTO) trả về
-            ListBenhNhan = new List<BenhNhanEnity>();
-            // Danh sách Bệnh Nhân (DAO) Nhận được từ function select
-            List<BENHNHAN> LstResult = null;
-            // Result code
-            string IdResult = "";
-            // Khởi tạo Database
-            using (var db = new QLPHONGKHAMEntities())
+            if(entity == null)
             {
-                // Khởi tạo Transaction
-                using (var trans = db.Database.BeginTransaction())
-                {
-                    // Khởi tạo lớp DAO
-                    DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();   
-                    // Thực hiện lệnh SELECT
-                    IdResult = Dao.Select(db, out LstResult, ref Messages);
-                    // Nếu không thực hiện được lệnh SELECT
-                    if(IdResult == Constant.RES_FAI)
-                    {
-                        Messages.Add(new MessageError
-                        {
-                            IdError = Constant.MES_DB,
-                            Message = string.Format("Lỗi Database trong truy vấn select table BENHNHAN - {0}", ProgramName)
-                        });
-                        // Rollback dữ liệu
-                        trans.Rollback();
-                        // Return faild
-                        IdResult = Constant.RES_FAI;
-                        // return 
-                        return IdResult;
-                    }
-                    // Nếu không tìm thấy trường
-                    if(LstResult.Count == 0)
-                    {
-                        Messages.Add(new MessageError
-                        {
-                            IdError = Constant.MES_DB,
-                            Message = string.Format("Không select được dữ liệu (Data is empty) - {0}", ProgramName)
-                        });
-                        // Rollback dữ liệu
-                        trans.Rollback();
-                        // Return faild
-                        IdResult = Constant.RES_FAI;
-                        // return 
-                        return IdResult;
-                    }                    
-                }   
+                return Constant.RES_FAI;
             }
-            // Sau khi lấy được danh sách, convert đối tượng BenhNhan (DAO) sang BenhNhanEnity(DTO)
-            foreach (BENHNHAN BenhNhan in LstResult)
-            {
-                BenhNhanEnity temp = new BenhNhanEnity();
-                BUS.Com.Utils.CopyPropertiesFrom(BenhNhan, temp);
-                ListBenhNhan.Add(temp);
-            }
-            // return 
-            return IdResult;
-
-        }
-        /// <summary>
-        /// TÌM KIẾM BỆNH NHÂN
-        /// </summary>
-        /// <param name="BenhNhanSearchEntity"></param>
-        /// <param name="ListBenhNhan"></param>
-        /// <param name="Messages"></param>
-        /// <returns></returns>
-        public string SearchBenhNhan(BenhNhanSearchEntity BenhNhanSearchEntity, out List<BenhNhanEnity> ListBenhNhan, ref List<MessageError> Messages)
-        {
-            string ProgramName = "BenhNhanImplement_SearchBenhNhan";
-            // Danh sách bệnh nhân (DTO) trả về
-            ListBenhNhan = new List<BenhNhanEnity>();
-            // Danh sách Bệnh Nhân (DAO) Nhận được từ function select
-            List<BENHNHAN> LstResult = null;
-            // Result code
-            string IdResult = "";
-            // Khởi tạo Database
-            using (var db = new QLPHONGKHAMEntities())
-            {
-                // Khởi tạo Transaction
-                using (var trans = db.Database.BeginTransaction())
-                {
-                    // Khởi tạo lớp DAO
-                    DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
-                    // Tạo Paramester search
-                    object[] param = { BenhNhanSearchEntity.MaBenhNhan, BenhNhanSearchEntity.TenBenhNhan, BenhNhanSearchEntity.CMND };
-                    // Lấy câu truy vấn sql từ function Com.BUSSql.SqlSearchBenhNhan(param)
-                    string sql = BUS.Com.BUSSql.SqlSearchBenhNhan(param);
-                    // thực thi hàm select 
-                    IdResult = Dao.Select(db, sql, param,out LstResult, ref Messages);
-                    // Nếu không thực hiện được lệnh SELECT
-                    if (IdResult == Constant.RES_FAI)
-                    {
-                        Messages.Add(new MessageError
-                        {
-                            IdError = Constant.MES_DB,
-                            Message = string.Format("Lỗi Database trong truy vấn select table BENHNHAN - {0}", ProgramName)
-                        });
-                        // Rollback dữ liệu
-                        trans.Rollback();
-                        // Return faild
-                        IdResult = Constant.RES_FAI;
-                    }
-                    // Nếu không tìm thấy trường
-                    if (LstResult.Count == 0)
-                    {
-                        Messages.Add(new MessageError
-                        {
-                            IdError = Constant.MES_DB,
-                            Message = string.Format("Không select được dữ liệu (Data is empty) - {0}", ProgramName)
-                        });
-                        // Rollback dữ liệu
-                        trans.Rollback();
-                        // Return faild
-                        IdResult = Constant.RES_FAI;
-                    }
-                }
-               
-            }
-            // Sau khi lấy được danh sách, convert đối tượng BenhNhan (DAO) sang BenhNhanEnity(DTO)
-            foreach (BENHNHAN BenhNhan in LstResult)
-            {
-                BenhNhanEnity temp = new BenhNhanEnity();
-                BUS.Com.Utils.CopyPropertiesFrom(BenhNhan, temp);
-                ListBenhNhan.Add(temp);
-            }
-            // return 
-            return IdResult;
-        }
-        /// <summary>
-        /// UPDATE THÔNG TIN BỆNH NHÂN
-        /// </summary>
-        /// <param name="BenhNhan"></param>
-        /// <param name="Messages"></param>
-        /// <returns></returns>
-        public string UpdateBenhNhan(BenhNhanEnity BenhNhan, ref List<MessageError> Messages)
-        {
-            string ProgramName = "BenhNhanImplement_UpdateBenhNhan";
-            // Kết quả trả về
-            string IdResult = "";
-            // Tạo đối tượng BENHNHAN kết quả
-            BENHNHAN BenhNhanResult = new BENHNHAN();
-            // Convert đối tượng từ DTO sang DAO
-            BUS.Com.Utils.CopyPropertiesFrom(BenhNhan, BenhNhanResult);
-            // Khởi tạo Database
-            using (var db = new QLPHONGKHAMEntities())
-            {
-                // Khởi tạo transaction 
-                using (var trans = db.Database.BeginTransaction())
-                {
-                    // Khởi tạo lớp DAO
-                    DAO.Imp.BaseDAO Dao = new DAO.Imp.BaseDAO();
-                    // Thực hiện lệnh INSERT
-                    IdResult = Dao.Update(BenhNhanResult, db, ref Messages);
-                    // Nếu hàm INSERT báo lỗi
-                    if (IdResult == Constant.RES_FAI)
-                    {
-                        // Thêm thông báo lỗi
-                        Messages.Add(new MessageError
-                        {
-                            IdError = Constant.MES_DB,
-                            Message = string.Format("Lỗi khi Update vao Table BENHNHAN - {0}", ProgramName)
-                        });
-                        // Rollback dữ liệu
-                        trans.Rollback();
-                        // Return faild
-                        IdResult = Constant.RES_FAI;
-                        // return 
-                        return IdResult;
-                    }
-                }
-            }
-            return IdResult;
+            BUS.Com.Utils.CopyPropertiesFrom(entity, InformationBenhNhan);
+            return Constant.RES_SUC;
         }
 
+        public string GetListBenhNhan(QLPHONGKHAMEntities db, out List<BenhNhanEnity> ListBenhNhan)
+        {
+            ListBenhNhan = new List<BenhNhanEnity>();
+            List<BENHNHAN> listObjectDAO = null;
+            if (benhNhanService.Select(db, out listObjectDAO) == Constant.RES_FAI)
+            {
+                return Constant.RES_FAI;
+            }
+            if (listObjectDAO == null)
+            {
+                return Constant.RES_FAI;
+            }
+            foreach(BENHNHAN bn in listObjectDAO)
+            {
+                BenhNhanEnity benhNhanEnity = new BenhNhanEnity();
+                BUS.Com.Utils.CopyPropertiesFrom(bn, benhNhanEnity);
+                ListBenhNhan.Add(benhNhanEnity);
+            }
+            return Constant.RES_SUC;
+        }
+
+        public string InsertBenhNhan(QLPHONGKHAMEntities db, BenhNhanEnity BenhNhan)
+        {
+            BENHNHAN benhNhanDAO = new BENHNHAN();
+            BUS.Com.Utils.CopyPropertiesFrom(BenhNhan, benhNhanDAO);
+            return benhNhanService.Save(db, benhNhanDAO);
+        }
+
+        public string SearchBenhNhan(QLPHONGKHAMEntities db, BenhNhanSearchEntity BenhNhanSearchEntity, out List<BenhNhanEnity> ListBenhNhan)
+        {
+            ListBenhNhan = new List<BenhNhanEnity>();
+            List<BENHNHAN> listBenhNhanDAO = null;
+            object[] param = { BenhNhanSearchEntity.MaBenhNhan, BenhNhanSearchEntity.TenBenhNhan, BenhNhanSearchEntity.CMND };
+            if(benhNhanService.GetDataWithParameter(db, param, out listBenhNhanDAO) == Constant.RES_FAI)
+            {
+                return Constant.RES_FAI;
+            }
+            foreach (BENHNHAN bn in listBenhNhanDAO)
+            {
+                BenhNhanEnity benhNhanEnity = new BenhNhanEnity();
+                BUS.Com.Utils.CopyPropertiesFrom(bn, benhNhanEnity);
+                ListBenhNhan.Add(benhNhanEnity);
+            }
+            return Constant.RES_SUC;
+        }
+
+        public string UpdateBenhNhan(QLPHONGKHAMEntities db, BenhNhanEnity BenhNhan)
+        {
+            BENHNHAN benhNhanDAO = new BENHNHAN();
+            BUS.Com.Utils.CopyPropertiesFrom(BenhNhan, benhNhanDAO);
+            return benhNhanService.Save(db, benhNhanDAO);
+        }
     }
 }

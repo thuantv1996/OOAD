@@ -7,7 +7,7 @@ using DAO.Interface;
 
 namespace DAO.Implement
 {
-    class KetQuaXetNghiemImplement : IKetQuaXetNghiemServices
+    public class KetQuaXetNghiemImplement : IKetQuaXetNghiemServices
     {
         public string Delete(DbContext db, KETQUAXETNGHIEM entity)
         {
@@ -85,6 +85,24 @@ namespace DAO.Implement
                     LogManager.WriteLog(log);
                     return DAOCommon.FAIL;
                 }
+            }
+            return DAOCommon.SUCCESS;
+        }
+
+        public string GetKetQuaXetNghiemWithIdHoSo(QLPHONGKHAMEntities db, string MaHoSo, out List<KETQUAXETNGHIEM> ListKetQuaXetNghiem)
+        {
+            ListKetQuaXetNghiem = new List<KETQUAXETNGHIEM>();
+            try
+            {
+                ListKetQuaXetNghiem = (from kq in db.KETQUAXETNGHIEMs
+                                       where kq.MaHoSo == MaHoSo
+                                       select kq).ToList();
+            }
+            catch (Exception e)
+            {
+                string log = LogManager.GetErrorFromException(e);
+                LogManager.WriteLog(log);
+                return DAOCommon.FAIL;
             }
             return DAOCommon.SUCCESS;
         }

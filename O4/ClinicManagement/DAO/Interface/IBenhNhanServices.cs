@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace DAO.Interface
 {
-    interface IBenhNhanServices : IBaseDAO<BENHNHAN>
+    public interface IBenhNhanServices : IBaseDAO<BENHNHAN>
     {
-
+        string GetDataWithParameter(QLPHONGKHAMEntities db, object[] param, out List<BENHNHAN> listBenhNhan);
     }
 }

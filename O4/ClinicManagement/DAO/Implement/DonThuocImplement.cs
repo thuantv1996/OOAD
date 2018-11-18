@@ -9,7 +9,7 @@ using DAO.Interface;
 
 namespace DAO.Implement
 {
-    class DonThuocImplement : IDonThuocServices
+    public class DonThuocImplement : IDonThuocServices
     {
         public string Delete(DbContext db, DONTHUOC entity)
         {
@@ -87,6 +87,24 @@ namespace DAO.Implement
                     LogManager.WriteLog(log);
                     return DAOCommon.FAIL;
                 }
+            }
+            return DAOCommon.SUCCESS;
+        }
+
+        public string FindByParameter(DbContext db, string maHoSo, out DONTHUOC entity)
+        {
+            entity = new DONTHUOC();
+            try
+            {
+                entity = (from dt in (db as QLPHONGKHAMEntities).DONTHUOCs
+                          where dt.MaHoSo == maHoSo
+                          select dt).FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                string log = LogManager.GetErrorFromException(e);
+                LogManager.WriteLog(log);
+                return DAOCommon.FAIL;
             }
             return DAOCommon.SUCCESS;
         }

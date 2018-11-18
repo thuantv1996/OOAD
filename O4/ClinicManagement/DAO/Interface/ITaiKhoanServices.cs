@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DAO.Interface
 {
-    interface ITaiKhoanServices : IBaseDAO<TAIKHOAN>
+    public interface ITaiKhoanServices : IBaseDAO<TAIKHOAN>
     {
+        string FindByParameter(QLPHONGKHAMEntities db, object[] param, out TAIKHOAN taiKhoan);
     }
 }

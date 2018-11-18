@@ -1,14 +1,9 @@
-﻿using COM;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAO.Interface
 {
-    interface IBaseDAO<T> where T : class
+    public interface IBaseDAO<T> where T : class
     {
         string Save(DbContext db, T entity);
 

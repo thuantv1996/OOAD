@@ -9,29 +9,25 @@ namespace BUS.Service
     interface IHoSoBenhAnService
     {
         // LẤY DANH SÁCH HỒ SƠ
-        string GetListHoSo(out List<HoSoBenhAnEntity> ListHoSo, ref List<MessageError> Messages);
+        string GetListHoSo(QLPHONGKHAMEntities db, out List<HoSoBenhAnEntity> ListHoSo);
         
         // TÌM HỒ SƠ
-        string SearchHoSo( HoSoSearchEntity HoSoSearch, out List<HoSoBenhAnEntity> ListHoSo, ref List<MessageError> Messages);
+        string SearchHoSo(QLPHONGKHAMEntities db, HoSoSearchEntity HoSoSearch, out List<HoSoBenhAnEntity> ListHoSo);
         // LẤY THÔNG TIN MỘT HỒ SƠ
-        string GetInfomationHoSo(string MaHoSo, out HoSoBenhAnEntity HoSoEntity, ref List<MessageError> Messages);
+        string GetInfomationHoSo(QLPHONGKHAMEntities db, string MaHoSo, out HoSoBenhAnEntity HoSoEntity);
         // INSERT MỘT HỒ SƠ
-        string AddHoSoBenhAn(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSoEntity, ref List<MessageError> Messages);
+        string AddHoSoBenhAn(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSoEntity);
         // UPDATE MỘT HỒ SƠ
-        string UpdateHoSoBenhAn(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSoEntity, ref List<MessageError> Messages);
+        string UpdateHoSoBenhAn(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSoEntity);
         // DELETE MỘT HỒ SƠ
-        string DeleteHoSoBenhAn(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSoEntity, ref List<MessageError> Messages);
-        // LẤY DANH SÁCH HỒ SƠ KHÁM
-        // LẤY DANH SÁCH HỒ SƠ THANH TOÁN XÉT NGHIỆM
-        // LẤY DANH SÁCH HỒ SƠ XÉT NGHIỆM
-        // LẤY DANH SÁCH HỒ SƠ XÉT NGHIỆM XONG
+        string DeleteHoSoBenhAn(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSoEntity);
         // TẠO MÃ HỒ SƠ MỚI
-        string CreateIdHoSoBenhAn(out string Id, ref List<MessageError> Messages);
+        string CreateIdHoSoBenhAn(QLPHONGKHAMEntities db, out string Id);
         // LẤY HỒ SƠ GỐC
-        string GetRootHoSoBenhAn(QLPHONGKHAMEntities db, string MaHoSoTruoc, out HoSoBenhAnEntity hoSoBenhAnRoot, ref List<MessageError> Messages);
+        string GetRootHoSoBenhAn(QLPHONGKHAMEntities db, string MaHoSoTruoc, out HoSoBenhAnEntity hoSoBenhAnRoot);
         // LẤY DANH SÁCH HỒ SƠ THEO MÃ BỆNH NHÂN
-        string GetListHoSoBenhAnWithId(QLPHONGKHAMEntities db, string MaBenhNhan, out List<HoSoBenhAnEntity> ListHoSo,ref List<MessageError> Messages);
+        string GetListHoSo(QLPHONGKHAMEntities db, string MaBenhNhan, out List<HoSoBenhAnEntity> ListHoSo);
         // LẤY DANH SÁCH HỒ SƠ DỰA THEO MÃ PHÒNG VÀ NODE_KHAM
-        string GetListHoSoWithIdAndNodeKham(QLPHONGKHAMEntities db, string MaPhong, string Node_Kham, out List<HoSoBenhAnEntity> ListHoSo, ref List<MessageError> Messages);
+        string GetListHoSo(QLPHONGKHAMEntities db, string MaPhong, string NodeKham, out List<HoSoBenhAnEntity> ListHoSo);
     }
 }

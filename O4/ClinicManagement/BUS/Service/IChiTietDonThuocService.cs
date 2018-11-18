@@ -9,8 +9,8 @@ namespace BUS.Service
     interface IChiTietDonThuocService
     {
         // LƯU MỘT CHI TIẾT ĐƠN THUÔC
-        string SaveChiTietDonThuoc(QLPHONGKHAMEntities db, ChiTietDonThuocEnity ChiTietDonThuocEntity, ref List<MessageError> Messages);
+        string SaveChiTietDonThuoc(QLPHONGKHAMEntities db, ChiTietDonThuocEnity ChiTietDonThuocEntity);
         // UPDATE MỘT CHI TIẾT ĐƠN THUỐC
-        string UpdateChiTietDonThuoc(QLPHONGKHAMEntities db, ChiTietDonThuocEnity ChiTietDonThuocEntity, ref List<MessageError> Messages);
+        string UpdateChiTietDonThuoc(QLPHONGKHAMEntities db, ChiTietDonThuocEnity ChiTietDonThuocEntity);
     }
 }

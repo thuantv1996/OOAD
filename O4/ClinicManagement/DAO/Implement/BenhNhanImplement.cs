@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using COM;
 using DAO.Common;
 using DAO.Interface;
+
 namespace DAO.Implement
 {
-    class BenhNhanImplement : IBenhNhanServices
+    public class BenhNhanImplement : IBenhNhanServices
     {
         public string Delete(DbContext db, BENHNHAN entity)
         {
@@ -87,6 +85,26 @@ namespace DAO.Implement
                 }
             }
             
+            return DAOCommon.SUCCESS;
+        }
+
+        public string GetDataWithParameter(QLPHONGKHAMEntities db, object[] param, out List<BENHNHAN> listBenhNhan)
+        {
+            listBenhNhan = new List<BENHNHAN>();
+            try
+            {
+                listBenhNhan = (from bn in db.BENHNHANs
+                                where bn.MaBenhNhan.Contains(param[0].ToString()) &&
+                                      bn.HoTen.Contains(param[1].ToString()) &&
+                                      bn.CMND.Contains(param[2].ToString())
+                                select bn).ToList();
+            }
+            catch(Exception e)
+            {
+                string log = LogManager.GetErrorFromException(e);
+                LogManager.WriteLog(log);
+                return DAOCommon.FAIL;
+            }
             return DAOCommon.SUCCESS;
         }
     }

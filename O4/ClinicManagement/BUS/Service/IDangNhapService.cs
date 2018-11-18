@@ -10,10 +10,10 @@ namespace BUS.Service
         // HÀM MÃ HÓA MẬT KHẨU
         string EncodePassword(ref TaiKhoanEnity TaiKhoan);
         // HÀM KIỂM TRA
-        string CheckTaiKhoan(TaiKhoanEnity TaiKhoanInput, out TAIKHOAN TaiKhoanOuput, ref List<MessageError> Messages);
+        string CheckTaiKhoan(QLPHONGKHAMEntities db, TaiKhoanEnity TaiKhoanInput, out TAIKHOAN TaiKhoanOuput);
         // HÀM KIỂM TRA NGÀY THAY ĐỔI PASSWORD CUỐI CÙNG
         string CheckDayLastChange(TAIKHOAN TaiKhoan);
         // UPDATE VÀ SAVE
-        string Update(TaiKhoanEnity TaiKhoanUpdate, ref List<MessageError> Messages);
+        string Update(QLPHONGKHAMEntities db, TaiKhoanEnity TaiKhoanUpdate);
     }
 }

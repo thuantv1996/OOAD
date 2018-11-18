@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BUS.Entities;
 using BUS.Service;
 using DTO;
 using DAO;
 using COM;
 using BUS.Com;
-using DAO.Imp;
 namespace BUS.Imp
 {
     class XetNghiemImplement : IXetNghiemService

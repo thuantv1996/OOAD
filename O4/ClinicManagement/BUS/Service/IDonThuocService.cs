@@ -6,11 +6,11 @@ using COM;
 
 namespace BUS.Service
 {
-    interface IDonThuocService
+    public interface IDonThuocService
     {
         // LƯU MỘT ĐƠN THUÔC
-        string SaveDonThuoc(QLPHONGKHAMEntities db, DonThuocEnity DonThuocEntity, ref List<MessageError> Messages);
+        string SaveDonThuoc(QLPHONGKHAMEntities db, DonThuocEnity DonThuocEntity);
         // LẤY THÔNG TIN ĐƠN THUỐC DỰA VÀO MÃ HỒ SƠ BỆNH ÁN
-        string GetInformationDonThuocWithId(string MaHoSo, DonThuocEnity DonThuocEntity, ref List<MessageError> Messages);
+        string GetInformationDonThuocWithId(QLPHONGKHAMEntities db, string MaHoSo, out DonThuocEnity DonThuocEntity);
     }
 }

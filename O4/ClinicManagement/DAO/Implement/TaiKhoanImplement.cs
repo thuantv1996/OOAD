@@ -7,7 +7,7 @@ using DAO.Interface;
 
 namespace DAO.Implement
 {
-    class TaiKhoanImplement : ITaiKhoanServices
+    public class TaiKhoanImplement : ITaiKhoanServices
     {
         public string Delete(DbContext db, TAIKHOAN entity)
         {
@@ -85,6 +85,28 @@ namespace DAO.Implement
                     LogManager.WriteLog(log);
                     return DAOCommon.FAIL;
                 }
+            }
+            return DAOCommon.SUCCESS;
+        }
+       
+        public string FindByParameter(QLPHONGKHAMEntities db, object[] param, out TAIKHOAN taiKhoan)
+        {
+            taiKhoan = null;
+            try
+            {
+                taiKhoan = (from tk in db.TAIKHOANs
+                            where tk.TenDangNhap == param[0].ToString() &&
+                                  tk.MatKhau == param[1].ToString()
+                            select tk).FirstOrDefault();
+            }catch(Exception e)
+            {
+                string log = LogManager.GetErrorFromException(e);
+                LogManager.WriteLog(log);
+                return DAOCommon.FAIL;
+            }
+            if(taiKhoan == null)
+            {
+                return DAOCommon.FAIL;
             }
             return DAOCommon.SUCCESS;
         }
