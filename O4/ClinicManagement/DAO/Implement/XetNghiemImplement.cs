@@ -7,7 +7,7 @@ using DAO.Interface;
 
 namespace DAO.Implement
 {
-    class XetNghiemImplement : IXetNhiemServices
+    public class XetNghiemImplement : IXetNhiemServices
     {
         public string Delete(DbContext db, XETNGHIEM entity)
         {

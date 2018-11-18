@@ -1,24 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAO;
-using COM;
+﻿using DAO;
 using DTO;
-using BUS.Entities;
 
 namespace BUS.Service
 {
     interface ILuonCongViecService
     {
         //INSERT MOT LUON CONG VIEC
-        string AddLuonCongViec(QLPHONGKHAMEntities db,  LuonCongViecEnity LuonCongViec , ref List<MessageError> Messages);
+        string AddLuonCongViec(QLPHONGKHAMEntities db,  LuonCongViecEnity LuonCongViec);
 
         //UPDATE MOT LUON CONG VIEC
-        string UpdateLuonCongViec(QLPHONGKHAMEntities db, LuonCongViecEnity LuonCongViec, ref List<MessageError> Messages);
+        string UpdateLuonCongViec(QLPHONGKHAMEntities db, LuonCongViecEnity LuonCongViec);
 
         //LẤY THÔNG TIN MỘT LUỒN CÔNG VIỆC
-        string GetInformationLuonCongViec(string MaHoSo, out LuonCongViecEnity LuonCongViecEntity, ref List<MessageError> Messages);
+        string GetInformationLuonCongViec(QLPHONGKHAMEntities db, string MaHoSo, out LuonCongViecEnity LuonCongViecEntity);
     }
 }

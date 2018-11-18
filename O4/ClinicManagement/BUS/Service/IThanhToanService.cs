@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAO;
-using COM;
+﻿using DAO;
 using DTO;
-using BUS.Entities;
 
 namespace BUS.Service
 {
     interface IThanhToanService
     {
         //INSERT MOT THANH TOAN
-        string AddThanhToan(QLPHONGKHAMEntities db, ThanhToanEntity ThanhToan, ref List<MessageError> Messages);
+        string InsertThanhToan(QLPHONGKHAMEntities db, ThanhToanEntity ThanhToan);
 
         //UPDATE MOT THANH TOAN
-        string UpdateThanhToan(QLPHONGKHAMEntities db, ThanhToanEntity ThanhToan, ref List<MessageError> Messages);
+        string UpdateThanhToan(QLPHONGKHAMEntities db, ThanhToanEntity ThanhToan);
 
         //CREATE ID THANH TOAN
-        string CreateIdThanhToan(out string Id, ref List<MessageError> Messages);
+        string CreateIdThanhToan(QLPHONGKHAMEntities db, out string Id);
 
     }
 }

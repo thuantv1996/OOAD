@@ -7,7 +7,7 @@ using DAO.Interface;
 
 namespace DAO.Implement
 {
-    class NhanVienImplement : INhanVienServices
+    public class NhanVienImplement : INhanVienServices
     {
         public string Delete(DbContext db, NHANVIEN entity)
         {
