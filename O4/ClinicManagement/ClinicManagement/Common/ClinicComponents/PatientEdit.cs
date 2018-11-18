@@ -16,6 +16,8 @@ namespace ClinicManagement.Common.ClinicComponents
         public PatientEdit()
         {
             InitializeComponent();
+            this.birthDay.DateTime = DateTime.Today;
+            this.gender.SelectedIndex = 0;
         }
 
         public bool fillCompleted()

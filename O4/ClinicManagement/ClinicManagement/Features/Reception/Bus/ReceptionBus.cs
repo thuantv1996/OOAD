@@ -42,6 +42,16 @@ namespace ClinicManagement.Features.Reception.Bus
             });
         }
 
+        public void insertBenhNhan(DTO.BenhNhanEnity patient, Action<List<COM.MessageError>, string> completion)
+        {
+            Task.Run(() =>
+            {
+                var listMessageError = new List<COM.MessageError>();
+                var result = this.benhNhanBus.InsertBenhNhan(patient, ref listMessageError);
+                completion(listMessageError, result);
+            });
+        }
+
         static protected ReceptionBus sharedInstance;
 
         private BUS.Imp.BenhNhanImplement benhNhanBus = new BUS.Imp.BenhNhanImplement();

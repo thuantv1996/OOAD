@@ -143,6 +143,16 @@ namespace ClinicManagement.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ico_search16 {
+            get {
+                object obj = ResourceManager.GetObject("ico_search16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ico_user {
             get {
                 object obj = ResourceManager.GetObject("ico_user", resourceCulture);

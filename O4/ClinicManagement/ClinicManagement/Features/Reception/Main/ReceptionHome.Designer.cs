@@ -67,6 +67,7 @@
             this.btnAdd.Size = new System.Drawing.Size(45, 45);
             this.btnAdd.TabIndex = 2;
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnSearch
             // 
