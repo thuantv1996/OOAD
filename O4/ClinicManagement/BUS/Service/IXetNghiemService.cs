@@ -2,12 +2,14 @@
 using DTO;
 using COM;
 using BUS.Entities;
+using DAO;
+
 
 namespace BUS.Service
 {
     interface IXetNghiemService
     {
-        string GetListXetNghiem(out List<XetNghiemEnity> ListHoSo, ref List<MessageError> Messages);
-        string GetInfomationXetNghiem(string MaXetNghiem, out XetNghiemEnity XetNghiemEntity, ref List<MessageError> Messages);
+        string GetListXetNghiem(QLPHONGKHAMEntities db, out List<XetNghiemEnity> ListHoSo);
+        string GetInfomationXetNghiem(QLPHONGKHAMEntities db, string MaXetNghiem, out XetNghiemEnity XetNghiemEntity);
     }
 }

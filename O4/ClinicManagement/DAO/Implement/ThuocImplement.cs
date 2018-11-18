@@ -7,7 +7,7 @@ using DAO.Interface;
 
 namespace DAO.Implement
 {
-    class ThuocImplement : IThuocServices
+    public class ThuocImplement : IThuocServices
     {
         public string Delete(DbContext db, THUOC entity)
         {

@@ -16,13 +16,13 @@ namespace BUS.Service
         /// <param name="TrangThaiPhong"></param>
         /// <param name="Messages"></param>
         /// <returns></returns>
-        string GetTrangThaiPhong(string MaPhongKham, string NgayThang, out TrangThaiPhongEnity TrangThaiPhong, ref List<MessageError> Messages);
+        string GetTrangThaiPhong(QLPHONGKHAMEntities db, string MaPhongKham, string NgayThang, out TrangThaiPhongEnity TrangThaiPhong);
         /// <summary>
         /// UPDATE TRẠNG THÁI PHÒNG
         /// </summary>
         /// <param name="TrangThaiPhong"></param>
         /// <param name="Messages"></param>
         /// <returns></returns>
-        string UpdateTrangThaiPhong(QLPHONGKHAMEntities db, TrangThaiPhongEnity TrangThaiPhong, ref List<MessageError> Messages);
+        string UpdateTrangThaiPhong(QLPHONGKHAMEntities db, TrangThaiPhongEnity TrangThaiPhong);
     }
 }

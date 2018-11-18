@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAO.Interface
 {
-    interface IThuocServices : IBaseDAO<THUOC>
+    public interface IThuocServices : IBaseDAO<THUOC>
     {
     }
 }
