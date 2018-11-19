@@ -20,11 +20,63 @@ namespace ClinicManagement.Common.ClinicComponents
         SoDienThoai,
         DiaChi,
         GhiChu
-}
+    }
 
-    public partial class TableDataView : UserControl
+    public partial class PatientTable : UserControl
     {
-        public TableDataView()
+        private struct BenhNhanView
+        {
+            public string MaBenhNhan { get; set; }
+            public string HoTen { get; set; }
+            public string CMND { get; set; }
+            public string NgaySinh { get; set; }
+            public string GioiTinh { get; set; }
+            public string SoDienThoai { get; set; }
+            public string DiaChi { get; set; }
+            public string GhiChu { get; set; }
+
+            public BenhNhanView(DTO.BenhNhanEnity entity)
+            {
+                this.MaBenhNhan = entity.MaBenhNhan;
+                this.HoTen = entity.HoTen;
+                this.CMND = entity.CMND;
+                this.NgaySinh = convertDate(entity.NgaySinh);
+                this.GioiTinh = entity.GioiTinh ? "Nam" : "Nữ";
+                this.SoDienThoai = entity.SoDienThoai;
+                this.DiaChi = entity.DiaChi;
+                this.GhiChu = entity.GhiChu;
+            }
+
+            static private string convertDate(string date)
+            {
+                var year = date.Substring(0, 4);
+                var month = date.Substring(4, 2);
+                var day = date.Substring(6, 2);
+                return String.Format("{0}/{1}/{2}", day, month, year);
+            }
+
+            public DTO.BenhNhanEnity ToBenhNhanEntity()
+            {
+                var list = this.NgaySinh.Split('/');
+                var day = list.First();
+                var year = list.Last();
+                var month = list[1];
+
+                return new DTO.BenhNhanEnity
+                {
+                    MaBenhNhan = this.MaBenhNhan,
+                    HoTen = this.HoTen,
+                    CMND = this.CMND,
+                    NgaySinh = String.Format("{0}{1}{2}", year, month, day),
+                    GioiTinh = this.GioiTinh.Equals("Nam") ? true : false,
+                    SoDienThoai = this.SoDienThoai,
+                    DiaChi = this.DiaChi,
+                    GhiChu = this.GhiChu
+                };
+            }
+        }
+
+        public PatientTable()
         {
             InitializeComponent();
             this.setupView();
@@ -32,6 +84,7 @@ namespace ClinicManagement.Common.ClinicComponents
 
         private void setupView()
         {
+            this.gridView1.Columns.Clear();
             this.columns.ToList().ForEach(type =>
             {
                 DevExpress.XtraGrid.Columns.GridColumn col = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -50,9 +103,12 @@ namespace ClinicManagement.Common.ClinicComponents
                 this.Invoke(new Action<List<DTO.BenhNhanEnity>>(fetchData), new object[] { danhSachBenhNhan });
             } else
             {
-                var list = new BindingList<DTO.BenhNhanEnity>(danhSachBenhNhan);
-                var source = new BindingSource(list, null);
-                this.gridControl1.DataSource = ConvertToDatatable<DTO.BenhNhanEnity>(danhSachBenhNhan);
+                var listViews = new List<BenhNhanView>();
+                danhSachBenhNhan.ForEach((entity) =>
+                {
+                    listViews.Add(new BenhNhanView(entity));
+                });
+                this.gridControl1.DataSource = ConvertToDatatable<BenhNhanView>(listViews);
             }
         }
 
@@ -100,6 +156,7 @@ namespace ClinicManagement.Common.ClinicComponents
                         tempList.Add(type);
                 });
                 this.columns = tempList.ToArray();
+                this.setupView();
             }
         }
 
@@ -148,16 +205,16 @@ namespace ClinicManagement.Common.ClinicComponents
             {
                 int selectedIntexRow = this.gridView1.GetSelectedRows().First();
                 DataRow row = this.gridView1.GetDataRow(selectedIntexRow);
-                var patient = new DTO.BenhNhanEnity();
+                var patient = new BenhNhanView();
                 patient.HoTen = row[ColumnTypes.HoTen.ToString()].ToString();
                 patient.MaBenhNhan = row[ColumnTypes.MaBenhNhan.ToString()].ToString();
                 patient.NgaySinh = row[ColumnTypes.NgaySinh.ToString()].ToString();
                 patient.SoDienThoai = row[ColumnTypes.SoDienThoai.ToString()].ToString();
-                patient.GioiTinh = (bool)row[ColumnTypes.GioiTinh.ToString()];
+                patient.GioiTinh = row[ColumnTypes.GioiTinh.ToString()].ToString();
                 patient.CMND = row[ColumnTypes.CMND.ToString()].ToString();
                 patient.DiaChi = row[ColumnTypes.DiaChi.ToString()].ToString();
 
-                return patient;
+                return patient.ToBenhNhanEntity();
             }
         }
 

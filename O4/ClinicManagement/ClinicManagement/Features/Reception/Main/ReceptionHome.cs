@@ -131,10 +131,10 @@ namespace ClinicManagement.Features.Reception.Main
             formContainer.ShowDialog();
         }
 
-        private void DetailControl_CreateClick(object sender, EventArgs e)
+        private void DetailControl_CreateClick(object sender, DTO.BenhNhanEnity patient)
         {
             var formContainer = (sender as UserControl).Parent;
-            var receptionControl = new SubForms.ReceptionControl();
+            var receptionControl = new SubForms.ReceptionControl(patient);
             receptionControl.Left = receptionControl.Top = 0;
             receptionControl.Anchor = AnchorStyles.Left | AnchorStyles.Top;
 

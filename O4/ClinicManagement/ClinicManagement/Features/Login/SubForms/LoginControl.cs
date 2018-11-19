@@ -54,12 +54,14 @@ namespace ClinicManagement.Features.Login.SubForms
                 }
                 else
                 {
-                    var account = new TaiKhoanEnity();
-                    account.TenDangNhap = this.userNameTextField.Text;
-                    account.MatKhau = this.passwordTextField.Text;
+                    var account = new TaiKhoanEnity() {
+                        TenDangNhap = this.userNameTextField.Text,
+                        MatKhau = this.passwordTextField.Text };
                     this.loginCompleted?.Invoke(sender, account);
                 }
             });
+
+            this.userNameTextField.Focus();
         }
 
 

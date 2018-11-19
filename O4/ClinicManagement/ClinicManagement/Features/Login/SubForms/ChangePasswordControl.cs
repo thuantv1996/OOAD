@@ -95,5 +95,12 @@ namespace ClinicManagement.Features.Login.SubForms
         private int _radius = 10;
         public event EventHandler<DTO.TaiKhoanEnity> changeCompletion;
         private DTO.TaiKhoanEnity account;
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.CloseClick?.Invoke(this, e);
+        }
+
+        public event EventHandler CloseClick;
     }
 }

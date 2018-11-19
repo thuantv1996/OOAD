@@ -32,13 +32,13 @@ namespace ClinicManagement
             {
                 case Model.UserType.reception:
                     {
-                        this.updateMenuControl(new string[] { "Home", "New patient record", "Report" });
+                        this.updateMenuControl(new string[] { "Trang chủ", "Tiếp nhận bệnh nhân", "Hồ sơ mới"});
                         this.listContent.Clear();
                         this.listContent.AddRange(new UserControl[]
                         {
                             new ClinicManagement.Features.Reception.Main.ReceptionHome(),
-                            new ClinicManagement.Features.Reception.Main.ReceptionCreatePatientRecord(),
-                            new ClinicManagement.Features.Reception.Main.ReceptionReport()
+                            new ClinicManagement.Features.Reception.Main.Reception(),
+                            new ClinicManagement.Features.Reception.Main.ReceptionCreatePatientRecord()
                         });
                         this.listContent.ForEach(control =>
                         {

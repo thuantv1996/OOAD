@@ -48,17 +48,6 @@ namespace ClinicManagement.Features.Reception.SubForms
             this.btnEdit.UseVisualStyleBackColor = false;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // btnSave
-            // 
-            this.btnSave.BackColor = System.Drawing.Color.White;
-            this.btnSave.Location = new System.Drawing.Point(278, 459);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(118, 35);
-            this.btnSave.TabIndex = 1;
-            this.btnSave.Text = "Lưu";
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // btnCreate
             // 
             this.btnCreate.BackColor = System.Drawing.Color.White;
@@ -70,16 +59,27 @@ namespace ClinicManagement.Features.Reception.SubForms
             this.btnCreate.UseVisualStyleBackColor = false;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.White;
+            this.btnSave.Location = new System.Drawing.Point(278, 459);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(118, 35);
+            this.btnSave.TabIndex = 1;
+            this.btnSave.Text = "Lưu";
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // patientInformation
             // 
-            this.patientInformation.Location = new System.Drawing.Point(161, 55);
+            this.patientInformation.Location = new System.Drawing.Point(250, 55);
             this.patientInformation.Name = "patientInformation";
             this.patientInformation.Size = new System.Drawing.Size(479, 398);
             this.patientInformation.TabIndex = 0;
             // 
             // patientEdit
             // 
-            this.patientEdit.Location = new System.Drawing.Point(161, 55);
+            this.patientEdit.Location = new System.Drawing.Point(250, 55);
             this.patientEdit.Name = "patientEdit";
             this.patientEdit.Size = new System.Drawing.Size(479, 398);
             this.patientEdit.TabIndex = 0;

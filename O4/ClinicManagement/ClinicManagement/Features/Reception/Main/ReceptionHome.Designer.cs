@@ -32,7 +32,7 @@
             this.btnDetail = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.tableDataView1 = new ClinicManagement.Common.ClinicComponents.TableDataView();
+            this.tableDataView1 = new ClinicManagement.Common.ClinicComponents.PatientTable();
             this.SuspendLayout();
             // 
             // btnRefresh
@@ -117,6 +117,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnDetail;
         private System.Windows.Forms.Button btnRefresh;
-        private Common.ClinicComponents.TableDataView tableDataView1;
+        private Common.ClinicComponents.PatientTable tableDataView1;
     }
 }

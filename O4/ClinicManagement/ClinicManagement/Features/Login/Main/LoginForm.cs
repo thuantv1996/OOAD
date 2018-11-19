@@ -17,7 +17,6 @@ namespace ClinicManagement.Features.Login.Main
         public LoginForm()
         {
             InitializeComponent();
-
             this.setupLogin();
         }
 
@@ -45,6 +44,13 @@ namespace ClinicManagement.Features.Login.Main
             this.changePasswordControl.Anchor = AnchorStyles.None;
             this.backgroundImage.Controls.Add(this.changePasswordControl);
             this.changePasswordControl.changeCompletion += ChangePasswordControl_changeCompletion;
+            this.changePasswordControl.CloseClick += ChangePasswordControl_CloseClick;
+        }
+
+        private void ChangePasswordControl_CloseClick(object sender, EventArgs e)
+        {
+            this.backgroundImage.Controls.Remove(this.changePasswordControl);
+            this.setupLogin();
         }
 
         private void ChangePasswordControl_changeCompletion(object sender, DTO.TaiKhoanEnity e)
@@ -72,8 +78,11 @@ namespace ClinicManagement.Features.Login.Main
 
         private void LoginControl_loginCompleted(object sender, DTO.TaiKhoanEnity loginInfo)
         {
+            DevExpress.Utils.WaitDialogForm f = new DevExpress.Utils.WaitDialogForm();
+
             this.bus.Login(loginInfo, (listMessageError, idScreen, result) =>
             {
+                f.Close();
                 if (result.Equals(COM.Constant.RES_SUC))
                 {
                     this.loginSuccessful(loginInfo);
