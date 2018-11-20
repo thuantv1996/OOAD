@@ -34,13 +34,19 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Pdf.v16.1.Drawing, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.RichEdit.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Sparkline.v16.1.Core, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraEditors.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraPrinting.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraRichEdit.v16.1, Version=16.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -84,6 +90,18 @@
     <Compile Include="Common\ClinicComponents\MenuControl.Designer.cs">
       <DependentUpon>MenuControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\ClinicComponents\PatientTableWithSearch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\PatientTableWithSearch.Designer.cs">
+      <DependentUpon>PatientTableWithSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Reception\Main\Reception.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\Main\Reception.Designer.cs">
+      <DependentUpon>Reception.cs</DependentUpon>
+    </Compile>
     <Compile Include="Features\Reception\SubForms\AddPatientControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -108,11 +126,11 @@
     <Compile Include="Common\ClinicComponents\PatientInformation.Designer.cs">
       <DependentUpon>PatientInformation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Common\ClinicComponents\TableDataView.cs">
+    <Compile Include="Common\ClinicComponents\PatientTable.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Common\ClinicComponents\TableDataView.Designer.cs">
-      <DependentUpon>TableDataView.cs</DependentUpon>
+    <Compile Include="Common\ClinicComponents\PatientTable.Designer.cs">
+      <DependentUpon>PatientTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\Observable.cs" />
     <Compile Include="Common\SourceLibrary.cs" />
@@ -160,12 +178,6 @@
     <Compile Include="Features\Reception\Main\ReceptionHome.Designer.cs">
       <DependentUpon>ReceptionHome.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\Reception\Main\ReceptionReport.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Features\Reception\Main\ReceptionReport.Designer.cs">
-      <DependentUpon>ReceptionReport.cs</DependentUpon>
-    </Compile>
     <Compile Include="Features\Reception\SubForms\ConfirmFormControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -201,6 +213,12 @@
     <EmbeddedResource Include="Common\ClinicComponents\MenuControl.resx">
       <DependentUpon>MenuControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Common\ClinicComponents\PatientTableWithSearch.resx">
+      <DependentUpon>PatientTableWithSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Reception\Main\Reception.resx">
+      <DependentUpon>Reception.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\Reception\SubForms\AddPatientControl.resx">
       <DependentUpon>AddPatientControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -213,8 +231,8 @@
     <EmbeddedResource Include="Common\ClinicComponents\PatientInformation.resx">
       <DependentUpon>PatientInformation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Common\ClinicComponents\TableDataView.resx">
-      <DependentUpon>TableDataView.cs</DependentUpon>
+    <EmbeddedResource Include="Common\ClinicComponents\PatientTable.resx">
+      <DependentUpon>PatientTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Login\Main\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -329,6 +347,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon\ico_search16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon\ico_close_16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -29,21 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnLogin = new Components.NewControl.NewButton(this.components);
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.userNameTextField = new Components.NewControl.NewTextField();
             this.passwordTextField = new Components.NewControl.NewTextField();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // label1
             // 
@@ -78,39 +73,58 @@
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Radius = 10;
             this.btnLogin.Size = new System.Drawing.Size(108, 47);
-            this.btnLogin.TabIndex = 2;
+            this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "Đăng nhập";
             this.btnLogin.UseVisualStyleBackColor = false;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.3493F));
+            this.tableLayoutPanel1.Controls.Add(this.userNameTextField, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.passwordTextField, 0, 1);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(31, 137);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(501, 73);
+            this.tableLayoutPanel1.TabIndex = 4;
             // 
             // userNameTextField
             // 
             this.userNameTextField.AutoSize = true;
             this.userNameTextField.BackColor = System.Drawing.Color.White;
+            this.userNameTextField.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userNameTextField.enableEdit = true;
             this.userNameTextField.Icon = global::ClinicManagement.Properties.Resources.ico_user;
             this.userNameTextField.IsShowPassword = false;
-            this.userNameTextField.Location = new System.Drawing.Point(33, 147);
+            this.userNameTextField.Location = new System.Drawing.Point(3, 3);
             this.userNameTextField.Name = "userNameTextField";
-            this.userNameTextField.PlaceHolder = "User name";
+            this.userNameTextField.PlaceHolder = "Place Holder";
             this.userNameTextField.PlaceHolderColor = System.Drawing.Color.LightGray;
             this.userNameTextField.Radius = 5;
-            this.userNameTextField.Size = new System.Drawing.Size(492, 34);
+            this.userNameTextField.Size = new System.Drawing.Size(495, 30);
             this.userNameTextField.TabIndex = 0;
-            this.userNameTextField.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNameTextField.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
             // passwordTextField
             // 
             this.passwordTextField.AutoSize = true;
             this.passwordTextField.BackColor = System.Drawing.Color.White;
+            this.passwordTextField.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.passwordTextField.enableEdit = true;
             this.passwordTextField.Icon = global::ClinicManagement.Properties.Resources.ico_key_24;
             this.passwordTextField.IsShowPassword = true;
-            this.passwordTextField.Location = new System.Drawing.Point(33, 196);
+            this.passwordTextField.Location = new System.Drawing.Point(3, 39);
             this.passwordTextField.Name = "passwordTextField";
-            this.passwordTextField.PlaceHolder = "Password";
+            this.passwordTextField.PlaceHolder = "Place Holder";
             this.passwordTextField.PlaceHolderColor = System.Drawing.Color.LightGray;
             this.passwordTextField.Radius = 5;
-            this.passwordTextField.Size = new System.Drawing.Size(492, 34);
+            this.passwordTextField.Size = new System.Drawing.Size(495, 31);
             this.passwordTextField.TabIndex = 1;
-            this.passwordTextField.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordTextField.TextFont = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
             // pictureBox1
             // 
@@ -126,9 +140,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.btnLogin);
-            this.Controls.Add(this.userNameTextField);
-            this.Controls.Add(this.passwordTextField);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -136,6 +149,8 @@
             this.MinimumSize = new System.Drawing.Size(562, 347);
             this.Name = "LoginControl";
             this.Size = new System.Drawing.Size(562, 347);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -143,13 +158,12 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private Components.NewControl.NewTextField passwordTextField;
-        private Components.NewControl.NewTextField userNameTextField;
         private Components.NewControl.NewButton btnLogin;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private Components.NewControl.NewTextField userNameTextField;
+        private Components.NewControl.NewTextField passwordTextField;
     }
 }

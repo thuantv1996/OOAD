@@ -29,14 +29,15 @@
         private void InitializeComponent()
         {
             this.btnCreate = new System.Windows.Forms.Button();
-            this.patientEdit = new ClinicManagement.Common.ClinicComponents.PatientEdit();
-            this.patientInformation = new ClinicManagement.Common.ClinicComponents.PatientInformation();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
+            this.patientEdit = new ClinicManagement.Common.ClinicComponents.PatientEdit();
+            this.patientInformation = new ClinicManagement.Common.ClinicComponents.PatientInformation();
             this.SuspendLayout();
             // 
             // btnCreate
             // 
+            this.btnCreate.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
             this.btnCreate.BackColor = System.Drawing.Color.White;
             this.btnCreate.Location = new System.Drawing.Point(235, 475);
             this.btnCreate.Name = "btnCreate";
@@ -46,22 +47,9 @@
             this.btnCreate.UseVisualStyleBackColor = false;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
-            // patientEdit
-            // 
-            this.patientEdit.Location = new System.Drawing.Point(161, 50);
-            this.patientEdit.Name = "patientEdit";
-            this.patientEdit.Size = new System.Drawing.Size(479, 398);
-            this.patientEdit.TabIndex = 0;
-            // 
-            // patientInformation
-            // 
-            this.patientInformation.Location = new System.Drawing.Point(161, 50);
-            this.patientInformation.Name = "patientInformation";
-            this.patientInformation.Size = new System.Drawing.Size(479, 398);
-            this.patientInformation.TabIndex = 1;
-            // 
             // btnConfirm
             // 
+            this.btnConfirm.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
             this.btnConfirm.BackColor = System.Drawing.Color.White;
             this.btnConfirm.Location = new System.Drawing.Point(406, 475);
             this.btnConfirm.Name = "btnConfirm";
@@ -73,6 +61,7 @@
             // 
             // btnBack
             // 
+            this.btnBack.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
             this.btnBack.BackColor = System.Drawing.Color.White;
             this.btnBack.Location = new System.Drawing.Point(235, 475);
             this.btnBack.Name = "btnBack";
@@ -81,6 +70,22 @@
             this.btnBack.Text = "Quay lại";
             this.btnBack.UseVisualStyleBackColor = false;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // patientEdit
+            // 
+            this.patientEdit.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
+            this.patientEdit.Location = new System.Drawing.Point(161, 50);
+            this.patientEdit.Name = "patientEdit";
+            this.patientEdit.Size = new System.Drawing.Size(479, 398);
+            this.patientEdit.TabIndex = 0;
+            // 
+            // patientInformation
+            // 
+            this.patientInformation.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left;
+            this.patientInformation.Location = new System.Drawing.Point(161, 50);
+            this.patientInformation.Name = "patientInformation";
+            this.patientInformation.Size = new System.Drawing.Size(479, 398);
+            this.patientInformation.TabIndex = 1;
             // 
             // AddPatientControl
             // 

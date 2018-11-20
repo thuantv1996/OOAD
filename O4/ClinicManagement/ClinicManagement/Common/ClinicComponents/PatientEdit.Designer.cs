@@ -197,6 +197,7 @@
             // 
             // note
             // 
+            this.note.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.note.Dock = System.Windows.Forms.DockStyle.Fill;
             this.note.Location = new System.Drawing.Point(149, 243);
             this.note.Name = "note";

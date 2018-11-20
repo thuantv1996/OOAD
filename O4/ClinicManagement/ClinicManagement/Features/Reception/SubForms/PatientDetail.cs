@@ -25,11 +25,6 @@ namespace ClinicManagement.Features.Reception.SubForms
             this.fillData(patient);
         }
 
-        private void setupView()
-        {
-            this.Controls.Remove(this.patientEdit);
-        }
-
         public void fillData(DTO.BenhNhanEnity patient)
         {
             this.patientInformation.fillData(patient);
@@ -37,7 +32,8 @@ namespace ClinicManagement.Features.Reception.SubForms
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            this.CreateClick?.Invoke(this, e);
+            var patient = this.patientInformation.getData();
+            this.CreateClick?.Invoke(this, patient);
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -45,15 +41,22 @@ namespace ClinicManagement.Features.Reception.SubForms
             this.patientEdit.fillData(this.patientInformation.getData());
             this.patientEdit.BringToFront();
             this.btnSave.BringToFront();
+            this.btnCreate.Enabled = false;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            this.patientInformation.fillData(this.patientEdit.getData());
+            //update database
+            var patient = this.patientEdit.getData();
+            this.SaveClick?.Invoke(this, patient);
+
+            this.patientInformation.fillData(patient);
             this.patientInformation.BringToFront();
             this.btnEdit.BringToFront();
+            this.btnCreate.Enabled = true;
         }
 
-        public event EventHandler CreateClick;
+        public event EventHandler<DTO.BenhNhanEnity> CreateClick;
+        public event EventHandler<DTO.BenhNhanEnity> SaveClick;
     }
 }

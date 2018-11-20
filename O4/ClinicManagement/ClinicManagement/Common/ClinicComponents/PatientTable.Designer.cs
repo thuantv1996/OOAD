@@ -1,6 +1,6 @@
 ﻿namespace ClinicManagement.Common.ClinicComponents
 {
-    partial class TableDataView
+    partial class PatientTable
     {
         /// <summary> 
         /// Required designer variable.

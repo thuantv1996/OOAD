@@ -18,8 +18,10 @@ namespace ClinicManagement.Features.Reception.SubForms
             InitializeComponent();
         }
 
-        private void ReceptionControl_Load(object sender, EventArgs e)
+        public ReceptionControl(DTO.BenhNhanEnity patient)
         {
+            InitializeComponent();
+            this.patient = patient;
             this.fillCoreInformation();
             this.fillMainInformation();
         }
