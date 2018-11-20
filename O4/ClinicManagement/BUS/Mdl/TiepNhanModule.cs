@@ -222,11 +222,13 @@ namespace BUS.Mdl
                         trans.Rollback();
                         return Constant.RES_FAI;
                     }
-                    db.SaveChanges();
+                    
                     trans.Commit();
-                    return Constant.RES_SUC;
+                    
                 }
+                db.SaveChanges();
             }
+            return Constant.RES_SUC;
         }
     }
 }
