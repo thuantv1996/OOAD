@@ -7,11 +7,11 @@ namespace BUS.Service
     interface INhanVienService
     {
         // LẤY DANH SÁCH NHÂN VIÊN
-        string GetListNhanVien(QLPHONGKHAMEntities db, out List<NhanVienEnity> ListNhanVienEntity);
+        string GetListNhanVien(QLPHONGKHAMEntities db, out List<NhanVienDTO> ListNhanVienEntity);
         // LẤY THÔNG TIN CHI TIẾT CỦA 1 NHÂN VIÊN
-        string GetInfomationNhanVien(QLPHONGKHAMEntities db, string MaNhanVien, out NhanVienEnity NhanVienEntity);
+        string GetInfomationNhanVien(QLPHONGKHAMEntities db, string MaNhanVien, out NhanVienDTO NhanVienEntity);
         // LẤY DANH SÁCH NHAN VIÊN THEO PHÒNG
-        string GetListNhanVienWithIdRoom(QLPHONGKHAMEntities db, string maPhong, out List<NhanVienEnity> ListNhanVienEntity);
+        string GetListNhanVienWithIdRoom(QLPHONGKHAMEntities db, string maPhong, out List<NhanVienDTO> ListNhanVienEntity);
 
     }
 }

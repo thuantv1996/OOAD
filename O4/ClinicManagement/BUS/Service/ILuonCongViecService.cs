@@ -6,12 +6,12 @@ namespace BUS.Service
     interface ILuonCongViecService
     {
         //INSERT MOT LUON CONG VIEC
-        string AddLuonCongViec(QLPHONGKHAMEntities db,  LuonCongViecEnity LuonCongViec);
+        string AddLuonCongViec(QLPHONGKHAMEntities db,  LuonCongViecDTO LuonCongViec);
 
         //UPDATE MOT LUON CONG VIEC
-        string UpdateLuonCongViec(QLPHONGKHAMEntities db, LuonCongViecEnity LuonCongViec);
+        string UpdateLuonCongViec(QLPHONGKHAMEntities db, LuonCongViecDTO LuonCongViec);
 
         //LẤY THÔNG TIN MỘT LUỒN CÔNG VIỆC
-        string GetInformationLuonCongViec(QLPHONGKHAMEntities db, string MaHoSo, out LuonCongViecEnity LuonCongViecEntity);
+        string GetInformationLuonCongViec(QLPHONGKHAMEntities db, string MaHoSo, out LuonCongViecDTO LuonCongViecEntity);
     }
 }

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using DTO;
-using COM;
-using BUS.Entities;
+﻿using DTO;
 using DAO;
 
 namespace BUS.Service
@@ -16,13 +13,13 @@ namespace BUS.Service
         /// <param name="TrangThaiPhong"></param>
         /// <param name="Messages"></param>
         /// <returns></returns>
-        string GetTrangThaiPhong(QLPHONGKHAMEntities db, string MaPhongKham, string NgayThang, out TrangThaiPhongEnity TrangThaiPhong);
+        string GetTrangThaiPhong(QLPHONGKHAMEntities db, string MaPhongKham, string NgayThang, out TrangThaiPhongDTO TrangThaiPhong);
         /// <summary>
         /// UPDATE TRẠNG THÁI PHÒNG
         /// </summary>
         /// <param name="TrangThaiPhong"></param>
         /// <param name="Messages"></param>
         /// <returns></returns>
-        string UpdateTrangThaiPhong(QLPHONGKHAMEntities db, TrangThaiPhongEnity TrangThaiPhong);
+        string UpdateTrangThaiPhong(QLPHONGKHAMEntities db, TrangThaiPhongDTO TrangThaiPhong);
     }
 }

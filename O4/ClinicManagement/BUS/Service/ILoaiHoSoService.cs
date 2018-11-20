@@ -12,7 +12,7 @@ namespace BUS.Service
         /// <param name="ListLoaiHoSo"></param>
         /// <param name="Messages"></param>
         /// <returns></returns>
-        string GetListLoaiHoSo(QLPHONGKHAMEntities db, out List<LoaiHoSoEnity> ListLoaiHoSo);
+        string GetListLoaiHoSo(QLPHONGKHAMEntities db, out List<LoaiHoSoDTO> ListLoaiHoSo);
         /// <summary>
         /// LẤY THÔNG TIN LOẠI HỒ SƠ
         /// </summary>
@@ -20,6 +20,6 @@ namespace BUS.Service
         /// <param name="InformationLoaiHoSo"></param>
         /// <param name="Messages"></param>
         /// <returns></returns>
-        string GetInformationLoaiHoSo(QLPHONGKHAMEntities db, string MaLoaiHoSo, out LoaiHoSoEnity InformationLoaiHoSo);
+        string GetInformationLoaiHoSo(QLPHONGKHAMEntities db, string MaLoaiHoSo, out LoaiHoSoDTO InformationLoaiHoSo);
     }
 }

@@ -12,7 +12,7 @@ namespace BUS.Service
         /// <param name="ListPhongKham"></param>
         /// <param name="Messages"></param>
         /// <returns></returns>
-        string GetListPhongKham(QLPHONGKHAMEntities db, out List<PhongKhamEnity> ListPhongKham);
+        string GetListPhongKham(QLPHONGKHAMEntities db, out List<PhongKhamDTO> ListPhongKham);
         /// <summary>
         /// LẤY THÔNG TIN PHÒNG KHÁM DỰA TRÊN MÃ PHÒNG KHÁM
         /// </summary>
@@ -20,6 +20,6 @@ namespace BUS.Service
         /// <param name="InformationPhongKham"></param>
         /// <param name="Messages"></param>
         /// <returns></returns>
-        string GetInformationPhongKham(QLPHONGKHAMEntities db, string MaPhongKham, out PhongKhamEnity InformationPhongKham);
+        string GetInformationPhongKham(QLPHONGKHAMEntities db, string MaPhongKham, out PhongKhamDTO InformationPhongKham);
     }
 }
