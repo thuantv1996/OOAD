@@ -8,7 +8,7 @@ using DAO.Interface;
 
 namespace DAO.Implement
 {
-    public class LoaiNhanVienImplement : ILoaiNhanVienServices
+    public class LoaiNhanVienDAO : IBaseDAO<LOAINHANVIEN>
     {
         public string Delete(DbContext db, LOAINHANVIEN entity)
         {

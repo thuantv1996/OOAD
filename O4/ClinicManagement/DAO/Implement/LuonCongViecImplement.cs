@@ -7,7 +7,7 @@ using DAO.Interface;
 
 namespace DAO.Implement
 {
-    public class LuonCongViecImplement : ILuonCongViecServices
+    public class LuonCongViecDAO : IBaseDAO<LUONCONGVIEC>
     {
         public string Delete(DbContext db, LUONCONGVIEC entity)
         {

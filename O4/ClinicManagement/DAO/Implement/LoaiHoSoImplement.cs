@@ -7,7 +7,7 @@ using DAO.Interface;
 
 namespace DAO.Implement
 {
-    public class LoaiHoSoImplement : ILoaiHoSoServices
+    public class LoaiHoSoDAO : IBaseDAO<LOAIHOSO>
     {
         public string Delete(DbContext db, LOAIHOSO entity)
         {

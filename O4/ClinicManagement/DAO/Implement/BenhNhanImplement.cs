@@ -7,7 +7,7 @@ using DAO.Interface;
 
 namespace DAO.Implement
 {
-    public class BenhNhanImplement : IBenhNhanServices
+    public class BenhNhanDAO : IBaseDAO<BENHNHAN>
     {
         public string Delete(DbContext db, BENHNHAN entity)
         {
@@ -88,7 +88,7 @@ namespace DAO.Implement
             return DAOCommon.SUCCESS;
         }
 
-        public string GetDataWithParameter(QLPHONGKHAMEntities db, object[] param, out List<BENHNHAN> listBenhNhan)
+        public string SearchWithParameter(QLPHONGKHAMEntities db, object[] param, out List<BENHNHAN> listBenhNhan)
         {
             listBenhNhan = new List<BENHNHAN>();
             try

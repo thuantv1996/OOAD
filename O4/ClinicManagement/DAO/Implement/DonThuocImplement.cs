@@ -9,7 +9,7 @@ using DAO.Interface;
 
 namespace DAO.Implement
 {
-    public class DonThuocImplement : IDonThuocServices
+    public class DonThuocDAO : IBaseDAO<DONTHUOC>
     {
         public string Delete(DbContext db, DONTHUOC entity)
         {

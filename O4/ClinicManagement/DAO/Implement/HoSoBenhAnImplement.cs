@@ -7,7 +7,7 @@ using DAO.Interface;
 
 namespace DAO.Implement
 {
-    public class HoSoBenhAnImplement : IHoSoBenhAnServices
+    public class HoSoBenhAnDAO : IBaseDAO<HOSOBENHAN>
     {
         public string Delete(DbContext db, HOSOBENHAN entity)
         {

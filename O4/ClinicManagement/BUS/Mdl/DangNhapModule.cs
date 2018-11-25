@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DTO;
+﻿using System.Collections.Generic;
 using COM;
 using BUS.Imp;
 using DAO;
 using BUS.Com;
+using DTO;
 
 namespace BUS.Mdl
 {
@@ -17,12 +13,12 @@ namespace BUS.Mdl
         const int ID_ERROR_BACK_LOGIN = 1;
         const int ID_ERROR_CHANGE_PASSWORD = 2;
 
-        public string DangNhapProcess(TaiKhoanEnity TaiKhoan, ref List<MessageError> Messages, out int IdScreen)
+        public string DangNhapProcess(TaiKhoanDTO taiKhoan, ref List<MessageError> Messages, out int IdScreen)
         {
             TAIKHOAN TaiKhoanDAO = new TAIKHOAN();
             DangNhapImplement dangNhapImplement = new DangNhapImplement();
-            dangNhapImplement.EncodePassword(ref TaiKhoan);
-            if(dangNhapImplement.CheckTaiKhoan(TaiKhoan, out TaiKhoanDAO, ref Messages).Equals(Constant.RES_FAI))
+            dangNhapImplement.EncodePassword(ref taiKhoan);
+            if(dangNhapImplement.CheckTaiKhoan(taiKhoan, out TaiKhoanDAO, ref Messages).Equals(Constant.RES_FAI))
             {
                 Messages.Add(new MessageError { IdError = Constant.MES_PRE, Message = "Tài khoản hoặc mật khẩu không đúng!"});
                 IdScreen = ID_ERROR_BACK_LOGIN;

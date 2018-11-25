@@ -1,27 +1,27 @@
 ﻿using System.Collections.Generic;
-using BUS.Service;
-using DTO;
 using BUS.Entities;
 using DAO;
 using COM;
+using DTO;
+using DAO.Implement;
 
 namespace BUS.Imp
 {
-    public class BenhNhanImplement : IBenhNhanService
+    public class BenhNhanImplement
     {
-        DAO.Implement.BenhNhanImplement benhNhanService = null;
+        BenhNhanDAO benhNhanDao = null;
 
         public BenhNhanImplement()
         {
-            benhNhanService = new DAO.Implement.BenhNhanImplement();
+            benhNhanDao = new BenhNhanDAO();
         }
 
-        public string GetInformationBenhNhan(QLPHONGKHAMEntities db, string MaBenhNhan, out BenhNhanEnity InformationBenhNhan)
+        public string GetInformationBenhNhan(QLPHONGKHAMEntities db, string MaBenhNhan, out BenhNhanDTO InformationBenhNhan)
         {
-            InformationBenhNhan = new BenhNhanEnity();
+            InformationBenhNhan = new BenhNhanDTO();
             BENHNHAN entity = null;
             object[] id = { MaBenhNhan };
-            if(benhNhanService.FindById(db, id, out entity) == Constant.RES_FAI)
+            if(benhNhanDao.FindById(db, id, out entity) == Constant.RES_FAI)
             {
                 return Constant.RES_FAI;
             }
@@ -33,11 +33,11 @@ namespace BUS.Imp
             return Constant.RES_SUC;
         }
 
-        public string GetListBenhNhan(QLPHONGKHAMEntities db, out List<BenhNhanEnity> ListBenhNhan)
+        public string GetListBenhNhan(QLPHONGKHAMEntities db, out List<BenhNhanDTO> ListBenhNhan)
         {
-            ListBenhNhan = new List<BenhNhanEnity>();
+            ListBenhNhan = new List<BenhNhanDTO>();
             List<BENHNHAN> listObjectDAO = null;
-            if (benhNhanService.Select(db, out listObjectDAO) == Constant.RES_FAI)
+            if (benhNhanDao.Select(db, out listObjectDAO) == Constant.RES_FAI)
             {
                 return Constant.RES_FAI;
             }
@@ -47,43 +47,43 @@ namespace BUS.Imp
             }
             foreach(BENHNHAN bn in listObjectDAO)
             {
-                BenhNhanEnity benhNhanEnity = new BenhNhanEnity();
-                BUS.Com.Utils.CopyPropertiesFrom(bn, benhNhanEnity);
-                ListBenhNhan.Add(benhNhanEnity);
+                BenhNhanDTO BenhNhanDTO = new BenhNhanDTO();
+                BUS.Com.Utils.CopyPropertiesFrom(bn, BenhNhanDTO);
+                ListBenhNhan.Add(BenhNhanDTO);
             }
             return Constant.RES_SUC;
         }
 
-        public string InsertBenhNhan(QLPHONGKHAMEntities db, BenhNhanEnity BenhNhan)
+        public string InsertBenhNhan(QLPHONGKHAMEntities db, BenhNhanDTO BenhNhan)
         {
             BENHNHAN benhNhanDAO = new BENHNHAN();
             BUS.Com.Utils.CopyPropertiesFrom(BenhNhan, benhNhanDAO);
-            return benhNhanService.Save(db, benhNhanDAO);
+            return benhNhanDao.Save(db, benhNhanDAO);
         }
 
-        public string SearchBenhNhan(QLPHONGKHAMEntities db, BenhNhanSearchEntity BenhNhanSearchEntity, out List<BenhNhanEnity> ListBenhNhan)
+        public string SearchBenhNhan(QLPHONGKHAMEntities db, BenhNhanSearchEntity BenhNhanSearchEntity, out List<BenhNhanDTO> ListBenhNhan)
         {
-            ListBenhNhan = new List<BenhNhanEnity>();
+            ListBenhNhan = new List<BenhNhanDTO>();
             List<BENHNHAN> listBenhNhanDAO = null;
             object[] param = { BenhNhanSearchEntity.MaBenhNhan, BenhNhanSearchEntity.TenBenhNhan, BenhNhanSearchEntity.CMND };
-            if(benhNhanService.GetDataWithParameter(db, param, out listBenhNhanDAO) == Constant.RES_FAI)
+            if(benhNhanDao.SearchWithParameter(db, param, out listBenhNhanDAO) == Constant.RES_FAI)
             {
                 return Constant.RES_FAI;
             }
             foreach (BENHNHAN bn in listBenhNhanDAO)
             {
-                BenhNhanEnity benhNhanEnity = new BenhNhanEnity();
-                BUS.Com.Utils.CopyPropertiesFrom(bn, benhNhanEnity);
-                ListBenhNhan.Add(benhNhanEnity);
+                BenhNhanDTO BenhNhanDTO = new BenhNhanDTO();
+                BUS.Com.Utils.CopyPropertiesFrom(bn, BenhNhanDTO);
+                ListBenhNhan.Add(BenhNhanDTO);
             }
             return Constant.RES_SUC;
         }
 
-        public string UpdateBenhNhan(QLPHONGKHAMEntities db, BenhNhanEnity BenhNhan)
+        public string UpdateBenhNhan(QLPHONGKHAMEntities db, BenhNhanDTO BenhNhan)
         {
             BENHNHAN benhNhanDAO = new BENHNHAN();
             BUS.Com.Utils.CopyPropertiesFrom(BenhNhan, benhNhanDAO);
-            return benhNhanService.Save(db, benhNhanDAO);
+            return benhNhanDao.Save(db, benhNhanDAO);
         }
     }
 }

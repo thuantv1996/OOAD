@@ -7,7 +7,7 @@ using DAO.Interface;
 
 namespace DAO.Implement
 {
-    public class TaiKhoanImplement : ITaiKhoanServices
+    public class TaiKhoanDAO : IBaseDAO<TAIKHOAN>
     {
         public string Delete(DbContext db, TAIKHOAN entity)
         {

@@ -83,21 +83,6 @@
     <Compile Include="Implement\TrangThaiPhongImplement.cs" />
     <Compile Include="Implement\XetNghiemImplement.cs" />
     <Compile Include="Interface\IBaseDAO.cs" />
-    <Compile Include="Interface\IBenhNhanServices.cs" />
-    <Compile Include="Interface\IChiThietDonThuocServices.cs" />
-    <Compile Include="Interface\IDonThuocServices.cs" />
-    <Compile Include="Interface\IHoSoBenhAnServices.cs" />
-    <Compile Include="Interface\IKetQuaXetNghiemServices.cs" />
-    <Compile Include="Interface\ILoaiHoSoServices.cs" />
-    <Compile Include="Interface\ILoaiNhanVienServices.cs" />
-    <Compile Include="Interface\ILuonCongViecServices.cs" />
-    <Compile Include="Interface\INhanVienServices.cs" />
-    <Compile Include="Interface\IPhongSevices.cs" />
-    <Compile Include="Interface\ITaiKhoanServices.cs" />
-    <Compile Include="Interface\IThanhToanServices.cs" />
-    <Compile Include="Interface\IThuocServices.cs" />
-    <Compile Include="Interface\ITrangThaiPhongServices.cs" />
-    <Compile Include="Interface\IXetNhiemServices.cs" />
     <Compile Include="KETQUAXETNGHIEM.cs">
       <DependentUpon>QLPK.tt</DependentUpon>
     </Compile>
