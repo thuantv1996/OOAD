@@ -1,23 +1,23 @@
 ﻿using System.Collections.Generic;
-using BUS.Service;
 using DAO;
 using DTO;
 using COM;
+using DAO.Implement;
 
 namespace BUS.Imp
 {
-    public class PhongKhamImplement : IPhongKhamService
+    public class PhongKhamBUS
     {
-        DAO.Interface.IPhongSevices phongKhamService = null;
+        private PhongDAO phongKhamService = null;
 
-        public PhongKhamImplement()
+        public PhongKhamBUS()
         {
-            phongKhamService = new DAO.Implement.PhongImplement();
+            phongKhamService = new PhongDAO();
         }
 
-        public string GetInformationPhongKham(QLPHONGKHAMEntities db, string MaPhongKham, out PhongKhamEnity InformationPhongKham)
+        public string GetInformationPhongKham(QLPHONGKHAMEntities db, string MaPhongKham, out PhongKhamDTO InformationPhongKham)
         {
-            InformationPhongKham = new PhongKhamEnity();
+            InformationPhongKham = new PhongKhamDTO();
             PHONG entity = null;
             object[] id = { MaPhongKham };
             if (phongKhamService.FindById(db, id, out entity) == Constant.RES_FAI)
@@ -32,9 +32,9 @@ namespace BUS.Imp
             return Constant.RES_SUC;
         }
 
-        public string GetListPhongKham(QLPHONGKHAMEntities db, out List<PhongKhamEnity> ListPhongKham)
+        public string GetListPhongKham(QLPHONGKHAMEntities db, out List<PhongKhamDTO> ListPhongKham)
         {
-            ListPhongKham = new List<PhongKhamEnity>();
+            ListPhongKham = new List<PhongKhamDTO>();
             List<PHONG> listObjectDAO = null;
             if (phongKhamService.Select(db, out listObjectDAO) == Constant.RES_FAI)
             {
@@ -46,9 +46,9 @@ namespace BUS.Imp
             }
             foreach (PHONG pk in listObjectDAO)
             {
-                PhongKhamEnity phongKhamEnity = new PhongKhamEnity();
-                BUS.Com.Utils.CopyPropertiesFrom(pk, phongKhamEnity);
-                ListPhongKham.Add(phongKhamEnity);
+                PhongKhamDTO PhongKhamDTO = new PhongKhamDTO();
+                BUS.Com.Utils.CopyPropertiesFrom(pk, PhongKhamDTO);
+                ListPhongKham.Add(PhongKhamDTO);
             }
             return Constant.RES_SUC;
         }

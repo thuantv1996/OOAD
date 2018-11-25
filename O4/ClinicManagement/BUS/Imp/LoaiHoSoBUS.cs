@@ -1,23 +1,23 @@
 ﻿using System.Collections.Generic;
-using BUS.Service;
 using DTO;
 using DAO;
 using COM;
+using DAO.Implement;
 
 namespace BUS.Imp
 {
-    public class LoaiHoSoImplement : ILoaiHoSoService
+    public class LoaiHoSoBUS
     {
-        DAO.Interface.ILoaiHoSoServices loaiHoSoService = null;
+        private LoaiHoSoDAO loaiHoSoService = null;
 
-        public LoaiHoSoImplement()
+        public LoaiHoSoBUS()
         {
-            loaiHoSoService = new DAO.Implement.LoaiHoSoImplement();
+            loaiHoSoService = new LoaiHoSoDAO();
         }
 
-        public string GetListLoaiHoSo(QLPHONGKHAMEntities db, out List<LoaiHoSoEnity> ListLoaiHoSo)
+        public string GetListLoaiHoSo(QLPHONGKHAMEntities db, out List<LoaiHoSoDTO> ListLoaiHoSo)
         {
-            ListLoaiHoSo = new List<LoaiHoSoEnity>();
+            ListLoaiHoSo = new List<LoaiHoSoDTO>();
             List<LOAIHOSO> listObjectDAO = null;
             if (loaiHoSoService.Select(db, out listObjectDAO) == Constant.RES_FAI)
             {
@@ -29,16 +29,16 @@ namespace BUS.Imp
             }
             foreach (LOAIHOSO lhs in listObjectDAO)
             {
-                LoaiHoSoEnity loaiHoSoEnity = new LoaiHoSoEnity();
+                LoaiHoSoDTO loaiHoSoEnity = new LoaiHoSoDTO();
                 BUS.Com.Utils.CopyPropertiesFrom(lhs, loaiHoSoEnity);
                 ListLoaiHoSo.Add(loaiHoSoEnity);
             }
             return Constant.RES_SUC;
         }
 
-        public string GetInformationLoaiHoSo(QLPHONGKHAMEntities db, string MaLoaiHoSo, out LoaiHoSoEnity InformationLoaiHoSo)
+        public string GetInformationLoaiHoSo(QLPHONGKHAMEntities db, string MaLoaiHoSo, out LoaiHoSoDTO InformationLoaiHoSo)
         {
-            InformationLoaiHoSo = new LoaiHoSoEnity();
+            InformationLoaiHoSo = new LoaiHoSoDTO();
             LOAIHOSO entity = null;
             object[] id = { MaLoaiHoSo };
             if(loaiHoSoService.FindById(db, id, out entity) == Constant.RES_FAI)

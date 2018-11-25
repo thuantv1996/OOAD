@@ -1,24 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using BUS.Enities;
-using BUS.Service;
 using DAO;
-using DTO;
 using COM;
+using DAO.Implement;
+using DTO;
 
 namespace BUS.Imp
 {
-    class DangNhapImplement : IDangNhapService
+    class DangNhapBUS
     {
-        private DAO.Interface.ITaiKhoanServices taiKhoanServices = null;
+        private TaiKhoanDAO taiKhoanServices = null;
 
-        public DangNhapImplement()
+        public DangNhapBUS()
         {
-            taiKhoanServices = new DAO.Implement.TaiKhoanImplement();
+            taiKhoanServices = new TaiKhoanDAO();
         }
 
-        public string EncodePassword(ref TaiKhoanEnity TaiKhoan)
+        public string EncodePassword(ref TaiKhoanDTO TaiKhoan)
         {
             TaiKhoan.MatKhau = BUS.Com.Utils.CreateMD5(TaiKhoan.MatKhau);
             return Constant.RES_SUC;
@@ -42,13 +39,13 @@ namespace BUS.Imp
             return Constant.RES_SUC;
         }
 
-        public string CheckTaiKhoan(QLPHONGKHAMEntities db, TaiKhoanEnity TaiKhoanInput, out TAIKHOAN TaiKhoanOuput)
+        public string CheckTaiKhoan(QLPHONGKHAMEntities db, TaiKhoanDTO TaiKhoanInput, out TAIKHOAN TaiKhoanOuput)
         {
             object[] param = { TaiKhoanInput.TenDangNhap, TaiKhoanInput.MatKhau};
             return taiKhoanServices.FindByParameter(db, param, out TaiKhoanOuput);
         }
 
-        public string Update(QLPHONGKHAMEntities db, TaiKhoanEnity TaiKhoanUpdate)
+        public string Update(QLPHONGKHAMEntities db, TaiKhoanDTO TaiKhoanUpdate)
         {
             TAIKHOAN taiKhoanDAO = new TAIKHOAN();
             BUS.Com.Utils.CopyPropertiesFrom(TaiKhoanUpdate, taiKhoanDAO);

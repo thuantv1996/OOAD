@@ -1,26 +1,23 @@
 ﻿using System.Collections.Generic;
-using BUS.Service;
 using DTO;
-using BUS.Entities;
 using DAO;
 using COM;
-
-
+using DAO.Implement;
 
 namespace BUS.Imp
 {
-    class ThuocImplement : IThuocService
+    class ThuocBUS
     {
-        DAO.Interface.IThuocServices donThuocService = null;
+        private ThuocDAO donThuocService = null;
 
-        public ThuocImplement()
+        public ThuocBUS()
         {
-            donThuocService = new DAO.Implement.ThuocImplement();
+            donThuocService = new ThuocDAO();
         }
 
-        public string GetListThuoc(QLPHONGKHAMEntities db, out List<ThuocEnity> ListThuocEntity)
+        public string GetListThuoc(QLPHONGKHAMEntities db, out List<ThuocDTO> ListThuocEntity)
         {
-            ListThuocEntity = new List<ThuocEnity>();
+            ListThuocEntity = new List<ThuocDTO>();
             List<THUOC> listObjectDAO = null;
             if (donThuocService.Select(db, out listObjectDAO) == Constant.RES_FAI)
             {
@@ -33,7 +30,7 @@ namespace BUS.Imp
             foreach (var thuoc in listObjectDAO)
             {
                 // tạo đối tượng entity
-                ThuocEnity thuocEntity = new ThuocEnity();
+                ThuocDTO thuocEntity = new ThuocDTO();
                 // copy property
                 BUS.Com.Utils.CopyPropertiesFrom(thuoc, thuocEntity);
                 // add vào list ouput

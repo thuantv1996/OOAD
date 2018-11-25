@@ -1,23 +1,23 @@
 ﻿using System.Collections.Generic;
 using BUS.Entities;
-using BUS.Service;
 using DTO;
 using DAO;
 using COM;
+using DAO.Implement;
 
 namespace BUS.Imp
 {
-    class HoSoBenhAnImplement : IHoSoBenhAnService
+    class HoSoBenhAnBUS
     {
 
-        private DAO.Interface.IHoSoBenhAnServices hoSoBenhAnService = null;
+        private HoSoBenhAnDAO hoSoBenhAnService = null;
 
-        public HoSoBenhAnImplement()
+        public HoSoBenhAnBUS()
         {
-            hoSoBenhAnService = new DAO.Implement.HoSoBenhAnImplement();
+            hoSoBenhAnService = new HoSoBenhAnDAO();
         }
 
-        public string AddHoSoBenhAn(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSoEntity)
+        public string AddHoSoBenhAn(QLPHONGKHAMEntities db, HoSoBenhAnDTO HoSoEntity)
         {
             HOSOBENHAN hoSoBenhAnDAO = new HOSOBENHAN();
             BUS.Com.Utils.CopyPropertiesFrom(HoSoEntity, hoSoBenhAnDAO);
@@ -30,9 +30,9 @@ namespace BUS.Imp
             return hoSoBenhAnService.CreateId(db,out Id);
         }
 
-        public string GetRootHoSoBenhAn(QLPHONGKHAMEntities db, string MaHoSoTruoc, out HoSoBenhAnEntity hoSoBenhAnRoot)
+        public string GetRootHoSoBenhAn(QLPHONGKHAMEntities db, string MaHoSoTruoc, out HoSoBenhAnDTO hoSoBenhAnRoot)
         {
-            hoSoBenhAnRoot = new HoSoBenhAnEntity();
+            hoSoBenhAnRoot = new HoSoBenhAnDTO();
             HOSOBENHAN rootDAO = null;
             if(hoSoBenhAnService.GetRootHoSo(db,MaHoSoTruoc,out rootDAO) == COM.Constant.RES_FAI)
             {
@@ -42,9 +42,9 @@ namespace BUS.Imp
             return COM.Constant.RES_SUC;
         }
 
-        public string GetListHoSo(QLPHONGKHAMEntities db, string MaBenhNhan, out List<HoSoBenhAnEntity> ListHoSo)
+        public string GetListHoSo(QLPHONGKHAMEntities db, string MaBenhNhan, out List<HoSoBenhAnDTO> ListHoSo)
         {
-            ListHoSo = new List<HoSoBenhAnEntity>();
+            ListHoSo = new List<HoSoBenhAnDTO>();
             List<HOSOBENHAN> hoSoDAO = null;
             if(hoSoBenhAnService.GetListHoSoWithIdBenhNhan(db, MaBenhNhan, out hoSoDAO) == Constant.RES_FAI)
             {
@@ -52,14 +52,14 @@ namespace BUS.Imp
             }
             foreach(var hs in hoSoDAO)
             {
-                HoSoBenhAnEntity entity = new HoSoBenhAnEntity();
+                HoSoBenhAnDTO entity = new HoSoBenhAnDTO();
                 BUS.Com.Utils.CopyPropertiesFrom(hs, entity);
                 ListHoSo.Add(entity);
             }
             return Constant.RES_SUC;
         }
 
-        public string DeleteHoSoBenhAn(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSoEntity)
+        public string DeleteHoSoBenhAn(QLPHONGKHAMEntities db, HoSoBenhAnDTO HoSoEntity)
         {
             object[] id = { HoSoEntity.MaHoSo };
             HOSOBENHAN hoSoBenhAnDAO = null;
@@ -74,9 +74,9 @@ namespace BUS.Imp
             return hoSoBenhAnService.Delete(db, hoSoBenhAnDAO);
         }
 
-        public string GetInfomationHoSo(QLPHONGKHAMEntities db, string MaHoSo, out HoSoBenhAnEntity HoSoEntity)
+        public string GetInfomationHoSo(QLPHONGKHAMEntities db, string MaHoSo, out HoSoBenhAnDTO HoSoEntity)
         {
-            HoSoEntity = new HoSoBenhAnEntity();
+            HoSoEntity = new HoSoBenhAnDTO();
             object[] id = { MaHoSo };
             HOSOBENHAN hoSoBenhAnDAO = null;
             if (hoSoBenhAnService.FindById(db, id, out hoSoBenhAnDAO) == COM.Constant.RES_FAI)
@@ -91,9 +91,9 @@ namespace BUS.Imp
             return COM.Constant.RES_SUC;
         }
 
-        public string GetListHoSo(QLPHONGKHAMEntities db, out List<HoSoBenhAnEntity> ListHoSoEntity)
+        public string GetListHoSo(QLPHONGKHAMEntities db, out List<HoSoBenhAnDTO> ListHoSoEntity)
         {
-            ListHoSoEntity = new List<HoSoBenhAnEntity>();
+            ListHoSoEntity = new List<HoSoBenhAnDTO>();
             List<HOSOBENHAN> listHoSoDAO = null;
             if(hoSoBenhAnService.Select(db, out listHoSoDAO) == COM.Constant.RES_FAI)
             {
@@ -105,7 +105,7 @@ namespace BUS.Imp
             }
             foreach(var hs in listHoSoDAO)
             {
-                HoSoBenhAnEntity entity = new HoSoBenhAnEntity();
+                HoSoBenhAnDTO entity = new HoSoBenhAnDTO();
                 BUS.Com.Utils.CopyPropertiesFrom(hs, entity);
                 ListHoSoEntity.Add(entity);
             }
@@ -113,9 +113,9 @@ namespace BUS.Imp
 
         }
 
-        public string SearchHoSo(QLPHONGKHAMEntities db, HoSoSearchEntity HoSoSearch, out List<HoSoBenhAnEntity> ListHoSoEntity)
+        public string SearchHoSo(QLPHONGKHAMEntities db, HoSoSearchEntity HoSoSearch, out List<HoSoBenhAnDTO> ListHoSoEntity)
         {
-            ListHoSoEntity = new List<HoSoBenhAnEntity>();
+            ListHoSoEntity = new List<HoSoBenhAnDTO>();
             List<HOSOBENHAN> listHoSoDAO = null;
             object[] param = { HoSoSearch.MaHoSo, HoSoSearch.TenBenhNhan, HoSoSearch.NgayKham };
             if (hoSoBenhAnService.SearchHoSo(db,param, out listHoSoDAO) == COM.Constant.RES_FAI)
@@ -128,24 +128,24 @@ namespace BUS.Imp
             }
             foreach (var hs in listHoSoDAO)
             {
-                HoSoBenhAnEntity entity = new HoSoBenhAnEntity();
+                HoSoBenhAnDTO entity = new HoSoBenhAnDTO();
                 BUS.Com.Utils.CopyPropertiesFrom(hs, entity);
                 ListHoSoEntity.Add(entity);
             }
             return COM.Constant.RES_SUC;
         }
 
-        public string UpdateHoSoBenhAn(QLPHONGKHAMEntities db, HoSoBenhAnEntity HoSoEntity)
+        public string UpdateHoSoBenhAn(QLPHONGKHAMEntities db, HoSoBenhAnDTO HoSoEntity)
         {
             HOSOBENHAN hoSoBenhAnDAO = new HOSOBENHAN();
             BUS.Com.Utils.CopyPropertiesFrom(HoSoEntity, hoSoBenhAnDAO);
             return hoSoBenhAnService.Save(db, hoSoBenhAnDAO);
         }
 
-        public string GetListHoSo(QLPHONGKHAMEntities db, string MaPhong, string NodeKham, out List<HoSoBenhAnEntity> ListHoSo)
+        public string GetListHoSo(QLPHONGKHAMEntities db, string MaPhong, string NodeKham, out List<HoSoBenhAnDTO> ListHoSo)
         {
             List<HOSOBENHAN> listHoSoDAO = null;
-            ListHoSo = new List<HoSoBenhAnEntity>();
+            ListHoSo = new List<HoSoBenhAnDTO>();
             object[] param = { MaPhong, NodeKham };
             if (hoSoBenhAnService.GetListHoSoWithRoomAndNode(db,param,out listHoSoDAO) == COM.Constant.RES_FAI)
             {
@@ -157,7 +157,7 @@ namespace BUS.Imp
             }
             foreach (var hs in listHoSoDAO)
             {
-                HoSoBenhAnEntity entity = new HoSoBenhAnEntity();
+                HoSoBenhAnDTO entity = new HoSoBenhAnDTO();
                 BUS.Com.Utils.CopyPropertiesFrom(hs, entity);
                 ListHoSo.Add(entity);
             }

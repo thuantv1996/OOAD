@@ -1,24 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using BUS.Service;
-using DAO;
+﻿using DAO;
 using DTO;
 using COM;
-using BUS.Entities;
+using DAO.Implement;
 
 namespace BUS.Imp
 {
-    public class TrangThaiPhongImplement : ITrangThaiPhongService
+    public class TrangThaiPhongBUS
     {
-        DAO.Interface.ITrangThaiPhongServices trangThaiPhongServices = null;
-        public TrangThaiPhongImplement()
+        private TrangThaiPhongDAO trangThaiPhongServices = null;
+        public TrangThaiPhongBUS()
         {
-            trangThaiPhongServices = new DAO.Implement.TrangThaiPhongImplement();
+            trangThaiPhongServices = new TrangThaiPhongDAO();
         }
 
-        public string GetTrangThaiPhong(QLPHONGKHAMEntities db, string MaPhongKham, string NgayThang, out TrangThaiPhongEnity TrangThaiPhong)
+        public string GetTrangThaiPhong(QLPHONGKHAMEntities db, string MaPhongKham, string NgayThang, out TrangThaiPhongDTO TrangThaiPhong)
         {
-            TrangThaiPhong = new TrangThaiPhongEnity();
+            TrangThaiPhong = new TrangThaiPhongDTO();
             TRANGTHAIPHONG entity = null;
             object[] id = { MaPhongKham, NgayThang };
             if(trangThaiPhongServices.FindById(db, id, out entity) == Constant.RES_FAI )
@@ -37,7 +34,7 @@ namespace BUS.Imp
             
         }
 
-        public string UpdateTrangThaiPhong(QLPHONGKHAMEntities db, TrangThaiPhongEnity TrangThaiPhong)
+        public string UpdateTrangThaiPhong(QLPHONGKHAMEntities db, TrangThaiPhongDTO TrangThaiPhong)
         {
             TRANGTHAIPHONG trangthaiphongDAO = new TRANGTHAIPHONG();
             BUS.Com.Utils.CopyPropertiesFrom(TrangThaiPhong, trangthaiphongDAO);

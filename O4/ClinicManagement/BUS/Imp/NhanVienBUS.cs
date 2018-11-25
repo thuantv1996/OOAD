@@ -1,22 +1,23 @@
 ﻿using System.Collections.Generic;
-using BUS.Service;
 using DTO;
 using DAO;
 using COM;
+using DAO.Implement;
+
 namespace BUS.Imp
 {
-    public class NhanVienImplement : INhanVienService
+    public class NhanVienBUS
     {
-        DAO.Interface.INhanVienServices nhanVienService = null;
+        private NhanVienDAO nhanVienService = null;
 
-        public NhanVienImplement()
+        public NhanVienBUS()
         {
-            nhanVienService = new DAO.Implement.NhanVienImplement();
+            nhanVienService = new NhanVienDAO();
         }
 
-        public string GetInfomationNhanVien(QLPHONGKHAMEntities db, string MaNhanVien, out NhanVienEnity NhanVienEntity)
+        public string GetInfomationNhanVien(QLPHONGKHAMEntities db, string MaNhanVien, out NhanVienDTO NhanVienEntity)
         {
-            NhanVienEntity = new NhanVienEnity();
+            NhanVienEntity = new NhanVienDTO();
             NHANVIEN entity = null;
             object[] id = { MaNhanVien };
             if (nhanVienService.FindById(db, id, out entity) == Constant.RES_FAI)
@@ -31,9 +32,9 @@ namespace BUS.Imp
             return Constant.RES_SUC;
         }
 
-        public string GetListNhanVien(QLPHONGKHAMEntities db, out List<NhanVienEnity> ListNhanVienEntity)
+        public string GetListNhanVien(QLPHONGKHAMEntities db, out List<NhanVienDTO> ListNhanVienEntity)
         {
-            ListNhanVienEntity = new List<NhanVienEnity>();
+            ListNhanVienEntity = new List<NhanVienDTO>();
             List<NHANVIEN> listObjectDAO = null;
             if (nhanVienService.Select(db, out listObjectDAO) == Constant.RES_FAI)
             {
@@ -45,16 +46,16 @@ namespace BUS.Imp
             }
             foreach (NHANVIEN nv in listObjectDAO)
             {
-                NhanVienEnity nhanVienEnity = new NhanVienEnity();
-                BUS.Com.Utils.CopyPropertiesFrom(nv, nhanVienEnity);
-                ListNhanVienEntity.Add(nhanVienEnity);
+                NhanVienDTO NhanVienDTO = new NhanVienDTO();
+                BUS.Com.Utils.CopyPropertiesFrom(nv, NhanVienDTO);
+                ListNhanVienEntity.Add(NhanVienDTO);
             }
             return Constant.RES_SUC;
         }
 
-        public string GetListNhanVienWithIdRoom(QLPHONGKHAMEntities db, string maPhong, out List<NhanVienEnity> ListNhanVienEntity)
+        public string GetListNhanVienWithIdRoom(QLPHONGKHAMEntities db, string maPhong, out List<NhanVienDTO> ListNhanVienEntity)
         {
-            ListNhanVienEntity = new List<NhanVienEnity>();
+            ListNhanVienEntity = new List<NhanVienDTO>();
             List<NHANVIEN> listObjectDAO = null;
             object[] param = { maPhong };
             if (nhanVienService.GetListNhanVienWithIdRoom(db, param, out listObjectDAO) == Constant.RES_FAI)
@@ -67,9 +68,9 @@ namespace BUS.Imp
             }
             foreach (NHANVIEN nv in listObjectDAO)
             {
-                NhanVienEnity nhanVienEnity = new NhanVienEnity();
-                BUS.Com.Utils.CopyPropertiesFrom(nv, nhanVienEnity);
-                ListNhanVienEntity.Add(nhanVienEnity);
+                NhanVienDTO NhanVienDTO = new NhanVienDTO();
+                BUS.Com.Utils.CopyPropertiesFrom(nv, NhanVienDTO);
+                ListNhanVienEntity.Add(NhanVienDTO);
             }
             return Constant.RES_SUC;
         }

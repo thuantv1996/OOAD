@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using BUS.Service;
-using DTO;
+﻿using DTO;
 using DAO;
-using COM;
+using DAO.Implement;
 
 namespace BUS.Imp
 {
-    public class ThanhToanImplement : IThanhToanService
-    {
-        DAO.Interface.IThanhToanServices thanhToanService = null;
+    public class ThanhToanBUS
+    { 
+        private ThanhToanDAO thanhToanService = null;
 
-        public ThanhToanImplement()
+        public ThanhToanBUS()
         {
-            thanhToanService = new DAO.Implement.ThanhToanImplement();
+            thanhToanService = new ThanhToanDAO();
         }
 
-        public string InsertThanhToan(QLPHONGKHAMEntities db, ThanhToanEntity ThanhToan)
+        public string InsertThanhToan(QLPHONGKHAMEntities db, ThanhToanDTO ThanhToan)
         {
             THANHTOAN thanhToanDAO = new THANHTOAN();
             BUS.Com.Utils.CopyPropertiesFrom(ThanhToan, thanhToanDAO);
@@ -29,7 +25,7 @@ namespace BUS.Imp
             return thanhToanService.CreateId(db, out Id);
         }
 
-        public string UpdateThanhToan(QLPHONGKHAMEntities db, ThanhToanEntity ThanhToan)
+        public string UpdateThanhToan(QLPHONGKHAMEntities db, ThanhToanDTO ThanhToan)
         {
             THANHTOAN thanhToanDAO = new THANHTOAN();
             BUS.Com.Utils.CopyPropertiesFrom(ThanhToan, thanhToanDAO);

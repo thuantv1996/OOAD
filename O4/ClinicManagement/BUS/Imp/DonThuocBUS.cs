@@ -1,22 +1,21 @@
-﻿using System;
-using BUS.Service;
-using DTO;
+﻿using DTO;
 using DAO;
+using DAO.Implement;
 
 namespace BUS.Imp
 {
-    public class DonThuocImplement : IDonThuocService
+    public class DonThuocBUS
     {
-        DAO.Interface.IDonThuocServices donThuocService = null;
+        private DonThuocDAO donThuocService = null;
 
-        public DonThuocImplement()
+        public DonThuocBUS()
         {
-            donThuocService = new DAO.Implement.DonThuocImplement();
+            donThuocService = new DonThuocDAO();
         }
 
-        public string GetInformationDonThuocWithId(QLPHONGKHAMEntities db, string MaHoSo,out DonThuocEnity DonThuocEntity)
+        public string GetInformationDonThuocWithId(QLPHONGKHAMEntities db, string MaHoSo,out DonThuocDTO DonThuocEntity)
         {
-            DonThuocEntity = new DonThuocEnity();
+            DonThuocEntity = new DonThuocDTO();
             DONTHUOC donThuocDAO = null;
             if(donThuocService.FindByParameter(db, MaHoSo, out donThuocDAO) == COM.Constant.RES_FAI)
             {
@@ -30,7 +29,7 @@ namespace BUS.Imp
             return COM.Constant.RES_SUC;
         }
 
-        public string SaveDonThuoc(QLPHONGKHAMEntities db, DonThuocEnity donThuocEntity)
+        public string SaveDonThuoc(QLPHONGKHAMEntities db, DonThuocDTO donThuocEntity)
         {
             DONTHUOC donThuocDAO = new DONTHUOC();
             BUS.Com.Utils.CopyPropertiesFrom(donThuocEntity, donThuocDAO);

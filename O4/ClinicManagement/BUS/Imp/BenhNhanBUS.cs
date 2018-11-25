@@ -7,11 +7,11 @@ using DAO.Implement;
 
 namespace BUS.Imp
 {
-    public class BenhNhanImplement
+    public class BenhNhanBUS
     {
         BenhNhanDAO benhNhanDao = null;
 
-        public BenhNhanImplement()
+        public BenhNhanBUS()
         {
             benhNhanDao = new BenhNhanDAO();
         }

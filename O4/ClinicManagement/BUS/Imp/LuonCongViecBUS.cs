@@ -1,29 +1,29 @@
-﻿using BUS.Service;
-using DTO;
+﻿using DTO;
 using DAO;
 using COM;
+using DAO.Implement;
 
 namespace BUS.Imp
 {
-    public class LuonCongViecImplement : ILuonCongViecService
+    public class LuonCongViecBUS
     {
-        DAO.Interface.ILuonCongViecServices luonCongViecService = null;
+        private LuonCongViecDAO luonCongViecService = null;
 
-        public LuonCongViecImplement()
+        public LuonCongViecBUS()
         {
-            luonCongViecService = new DAO.Implement.LuonCongViecImplement();
+            luonCongViecService = new LuonCongViecDAO();
         }
 
-        public string AddLuonCongViec(QLPHONGKHAMEntities db, LuonCongViecEnity LuonCongViec)
+        public string AddLuonCongViec(QLPHONGKHAMEntities db, LuonCongViecDTO LuonCongViec)
         {
             LUONCONGVIEC luonCongViecDAO = new LUONCONGVIEC();
             BUS.Com.Utils.CopyPropertiesFrom(LuonCongViec, luonCongViecDAO);
             return luonCongViecService.Save(db, luonCongViecDAO);
         }
 
-        public string GetInformationLuonCongViec(QLPHONGKHAMEntities db, string MaHoSo, out LuonCongViecEnity LuonCongViecEntity)
+        public string GetInformationLuonCongViec(QLPHONGKHAMEntities db, string MaHoSo, out LuonCongViecDTO LuonCongViecEntity)
         {
-            LuonCongViecEntity = new LuonCongViecEnity();
+            LuonCongViecEntity = new LuonCongViecDTO();
             LUONCONGVIEC entity = null;
             object[] id = { MaHoSo };
             if (luonCongViecService.FindById(db, id, out entity) == Constant.RES_FAI)
@@ -38,7 +38,7 @@ namespace BUS.Imp
             return Constant.RES_SUC;
         }
 
-        public string UpdateLuonCongViec(QLPHONGKHAMEntities db, LuonCongViecEnity LuonCongViec)
+        public string UpdateLuonCongViec(QLPHONGKHAMEntities db, LuonCongViecDTO LuonCongViec)
         {
             LUONCONGVIEC luonCongViecDAO = new LUONCONGVIEC();
             BUS.Com.Utils.CopyPropertiesFrom(LuonCongViec, luonCongViecDAO);

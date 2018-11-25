@@ -1,23 +1,22 @@
 ﻿using System.Collections.Generic;
-using BUS.Service;
 using DTO;
-using BUS.Entities;
 using DAO;
 using COM;
+using DAO.Implement;
 
 namespace BUS.Imp
 {
-    class XetNghiemImplement : IXetNghiemService
+    class XetNghiemBUS
     {
-        DAO.Interface.IXetNhiemServices xetNghiemServices = null;
-        public XetNghiemImplement()
+        private XetNghiemDAO xetNghiemServices = null;
+        public XetNghiemBUS()
         {
-            xetNghiemServices = new DAO.Implement.XetNghiemImplement();
+            xetNghiemServices = new XetNghiemDAO();
         }
 
-        public string GetListXetNghiem(QLPHONGKHAMEntities db, out List<XetNghiemEnity> ListHoSo)
+        public string GetListXetNghiem(QLPHONGKHAMEntities db, out List<XetNghiemDTO> ListHoSo)
         {
-            ListHoSo = new List<XetNghiemEnity>();
+            ListHoSo = new List<XetNghiemDTO>();
             List<XETNGHIEM> listObjectDAO = null;
             if (xetNghiemServices.Select(db, out listObjectDAO) == Constant.RES_FAI)
             {
@@ -32,7 +31,7 @@ namespace BUS.Imp
             foreach (var xetnghiem in listObjectDAO)
             {
                 // tạo đối tượng entity
-                XetNghiemEnity xetNghiemEntity = new XetNghiemEnity();
+                XetNghiemDTO xetNghiemEntity = new XetNghiemDTO();
                 // copy property
                 BUS.Com.Utils.CopyPropertiesFrom(xetnghiem, xetNghiemEntity);
                 // add vào list ouput
@@ -42,9 +41,9 @@ namespace BUS.Imp
         }
 
         // LẤY THÔNG TIN CHI TIẾT CỦA 1 XÉT NGHIỆM
-        public string GetInfomationXetNghiem(QLPHONGKHAMEntities db, string MaXetNghiem, out XetNghiemEnity XetNghiemEntity)
+        public string GetInfomationXetNghiem(QLPHONGKHAMEntities db, string MaXetNghiem, out XetNghiemDTO XetNghiemEntity)
         {
-            XetNghiemEntity = new XetNghiemEnity();
+            XetNghiemEntity = new XetNghiemDTO();
             XETNGHIEM entity = null;
             object[] id = { MaXetNghiem };
 
