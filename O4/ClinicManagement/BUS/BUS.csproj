@@ -68,23 +68,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Com\BUSConstant.cs" />
-    <Compile Include="Com\BUSSql.cs" />
     <Compile Include="Com\ObjectCommon.cs" />
     <Compile Include="Com\Utils.cs" />
-    <Compile Include="Imp\BenhNhanImplement.cs" />
-    <Compile Include="Imp\ChiTietDonThuocImplement.cs" />
-    <Compile Include="Imp\DangNhapImplement.cs" />
-    <Compile Include="Imp\DonThuocImplement.cs" />
-    <Compile Include="Imp\HoSoBenhAnImplement.cs" />
-    <Compile Include="Imp\KetQuaXetNghiemImplement.cs" />
-    <Compile Include="Imp\LoaiHoSoImplement.cs" />
-    <Compile Include="Imp\LuonCongViecImplement.cs" />
-    <Compile Include="Imp\NhanVienImplement.cs" />
-    <Compile Include="Imp\PhongKhamImplement.cs" />
-    <Compile Include="Imp\ThuocImplement.cs" />
-    <Compile Include="Imp\TrangThaiPhongImplement.cs" />
-    <Compile Include="Imp\ThanhToanImplement.cs" />
-    <Compile Include="Imp\XetNghiemImplement.cs" />
+    <Compile Include="Imp\BenhNhanBUS.cs" />
+    <Compile Include="Imp\ChiTietDonThuocBUS.cs" />
+    <Compile Include="Imp\DangNhapBUS.cs" />
+    <Compile Include="Imp\DonThuocBUS.cs" />
+    <Compile Include="Imp\HoSoBenhAnBUS.cs" />
+    <Compile Include="Imp\KetQuaXetNghiemBUS.cs" />
+    <Compile Include="Imp\LoaiHoSoBUS.cs" />
+    <Compile Include="Imp\LuonCongViecBUS.cs" />
+    <Compile Include="Imp\NhanVienBUS.cs" />
+    <Compile Include="Imp\PhongKhamBUS.cs" />
+    <Compile Include="Imp\ThuocBUS.cs" />
+    <Compile Include="Imp\TrangThaiPhongBUS.cs" />
+    <Compile Include="Imp\ThanhToanBUS.cs" />
+    <Compile Include="Imp\XetNghiemBUS.cs" />
     <Compile Include="Inc\BenhNhanInputCheck.cs" />
     <Compile Include="Inc\DangNhapInputCheck.cs" />
     <Compile Include="Entities\BenhNhanSearchEntity.cs" />
@@ -119,6 +118,10 @@
     <ProjectReference Include="..\DAO\DAO.csproj">
       <Project>{4e93204f-40b0-4120-8193-01fb0becad00}</Project>
       <Name>DAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{8173ea14-8393-4540-b2df-1ad6f7a9967e}</Project>
+      <Name>DTO</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

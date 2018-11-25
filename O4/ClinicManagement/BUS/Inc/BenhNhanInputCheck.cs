@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DTO;
 using BUS.Com;
 using System.Globalization;
+using DTO;
 
 namespace BUS.Inc
 {
     class BenhNhanInputCheck
     {
-        public string CheckInput(BenhNhanEnity BenhNhan, out List<string> MessageError)
+        public string CheckInput(BenhNhanDTO BenhNhan, out List<string> MessageError)
         {
             string ProgramName = "BenhNhanInputCheck_CheckInput";
             MessageError = new List<string>();
@@ -19,7 +16,7 @@ namespace BUS.Inc
             if(BenhNhan == null)
             {
                 MessageError.Add(String.Format("Dữ liệu bệnh nhân là null - [{0}]",ProgramName));
-                return BusConstant.RES_INC_FAI;
+                return COM.Constant.RES_FAI;
             }
             // Kiểm tra độ dài tên
             if(BenhNhan.HoTen.Length > BusConstant.LENGTH_HOTEN_BENHNHAN)
@@ -100,9 +97,9 @@ namespace BUS.Inc
 
             if (NumberError != 0)
             {
-                return BusConstant.RES_INC_FAI;
+                return COM.Constant.RES_FAI;
             } 
-            return BusConstant.RES_SUC;
+            return COM.Constant.RES_SUC;
         }
     }
 }

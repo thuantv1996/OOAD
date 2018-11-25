@@ -55,7 +55,7 @@
   <ItemGroup>
     <Compile Include="Common\DAOCommon.cs" />
     <Compile Include="Common\LogManager.cs" />
-    <Compile Include="Implement\BenhNhanImplement.cs" />
+    <Compile Include="Implement\BenhNhanDAO.cs" />
     <Compile Include="BENHNHAN.cs">
       <DependentUpon>QLPK.tt</DependentUpon>
     </Compile>
@@ -68,20 +68,20 @@
     <Compile Include="HOSOBENHAN.cs">
       <DependentUpon>QLPK.tt</DependentUpon>
     </Compile>
-    <Compile Include="Implement\ChiTietDonThuocImplement.cs" />
-    <Compile Include="Implement\DonThuocImplement.cs" />
-    <Compile Include="Implement\HoSoBenhAnImplement.cs" />
-    <Compile Include="Implement\KetQuaXetNghiemImplement.cs" />
-    <Compile Include="Implement\LoaiHoSoImplement.cs" />
-    <Compile Include="Implement\LoaiNhanVienImplement.cs" />
-    <Compile Include="Implement\LuonCongViecImplement.cs" />
-    <Compile Include="Implement\NhanVienImplement.cs" />
-    <Compile Include="Implement\PhongImplement.cs" />
-    <Compile Include="Implement\TaiKhoanImplement.cs" />
-    <Compile Include="Implement\ThanhToanImplement.cs" />
-    <Compile Include="Implement\ThuocImplement.cs" />
-    <Compile Include="Implement\TrangThaiPhongImplement.cs" />
-    <Compile Include="Implement\XetNghiemImplement.cs" />
+    <Compile Include="Implement\ChiTietDonThuocDAO.cs" />
+    <Compile Include="Implement\DonThuocDAO.cs" />
+    <Compile Include="Implement\HoSoBenhAnDAO.cs" />
+    <Compile Include="Implement\KetQuaXetNghiemDAO.cs" />
+    <Compile Include="Implement\LoaiHoSoDAO.cs" />
+    <Compile Include="Implement\LoaiNhanVienDAO.cs" />
+    <Compile Include="Implement\LuonCongViecDAO.cs" />
+    <Compile Include="Implement\NhanVienDAO.cs" />
+    <Compile Include="Implement\PhongDAO.cs" />
+    <Compile Include="Implement\TaiKhoanDAO.cs" />
+    <Compile Include="Implement\ThanhToanDAO.cs" />
+    <Compile Include="Implement\ThuocDAO.cs" />
+    <Compile Include="Implement\TrangThaiPhongDAO.cs" />
+    <Compile Include="Implement\XetNghiemDAO.cs" />
     <Compile Include="Interface\IBaseDAO.cs" />
     <Compile Include="KETQUAXETNGHIEM.cs">
       <DependentUpon>QLPK.tt</DependentUpon>

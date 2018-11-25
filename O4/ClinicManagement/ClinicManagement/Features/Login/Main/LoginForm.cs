@@ -76,7 +76,7 @@ namespace ClinicManagement.Features.Login.Main
             });
         }
 
-        private void LoginControl_loginCompleted(object sender, DTO.TaiKhoanEnity loginInfo)
+        private void LoginControl_loginCompleted(object sender, DTO.TaiKhoanDTO loginInfo)
         {
             DevExpress.Utils.WaitDialogForm f = new DevExpress.Utils.WaitDialogForm();
 
@@ -121,7 +121,7 @@ namespace ClinicManagement.Features.Login.Main
         }
 
 
-        private void loginSuccessful(DTO.TaiKhoanEnity account)
+        private void loginSuccessful(DTO.TaiKhoanDTO account)
         {
             var mainForm = new ClinicManagement.MainForm(new Model.User(Model.UserType.reception));
             this.Hide();

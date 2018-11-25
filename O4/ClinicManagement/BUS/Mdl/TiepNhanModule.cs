@@ -10,6 +10,7 @@ namespace BUS.Mdl
 {
     public class TiepNhanModule
     {
+        /*
         // trường hợp quay về màn hình list
         const int ID_SCREEN_BACK = 0;
         // trường hợp chuyển sang mành hình tạo mới
@@ -226,5 +227,6 @@ namespace BUS.Mdl
             }
             return Constant.RES_SUC;
         }
+        */
     }
 }

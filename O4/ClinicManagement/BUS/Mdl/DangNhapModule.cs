@@ -8,46 +8,28 @@ using DTO;
 namespace BUS.Mdl
 {
     public class DangNhapModule
-    {   
-        const int ID_SUCCESS = 0;
-        const int ID_ERROR_BACK_LOGIN = 1;
-        const int ID_ERROR_CHANGE_PASSWORD = 2;
-
-        public string DangNhapProcess(TaiKhoanDTO taiKhoan, ref List<MessageError> Messages, out int IdScreen)
+    {
+        public string DangNhapProcess(TaiKhoanDTO taiKhoan, ref List<MessageError> Messages)
         {
-            TAIKHOAN TaiKhoanDAO = new TAIKHOAN();
-            DangNhapImplement dangNhapImplement = new DangNhapImplement();
-            dangNhapImplement.EncodePassword(ref taiKhoan);
-            if(dangNhapImplement.CheckTaiKhoan(taiKhoan, out TaiKhoanDAO, ref Messages).Equals(Constant.RES_FAI))
+            // khởi tạo BUS
+            DangNhapBUS dangNhapBUS = new DangNhapBUS();
+            // biến đón kết quả trả về
+            string result;
+            // tạo kết nối database
+            using(QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
-                Messages.Add(new MessageError { IdError = Constant.MES_PRE, Message = "Tài khoản hoặc mật khẩu không đúng!"});
-                IdScreen = ID_ERROR_BACK_LOGIN;
+                // thực hiện mã hóa mật khẩu
+                dangNhapBUS.EncodePassword(ref taiKhoan);
+                // thực hiện check tài khoản
+                result = dangNhapBUS.CheckTaiKhoan(db, taiKhoan,out ObjectCommon.UserLogin);
+            }
+            // nếu kết quả check là fail
+            if (result == Constant.RES_FAI)
+            {
+                // return fail
                 return Constant.RES_FAI;
             }
-            if (dangNhapImplement.CheckDayLastChange(TaiKhoanDAO).Equals(Constant.RES_FAI))
-            {
-                Messages.Add(new MessageError { IdError = Constant.MES_PRE, Message = "Tài khoản của bạn cần thay đổi mật khẩu!" });
-                IdScreen = ID_ERROR_CHANGE_PASSWORD;
-                return Constant.RES_FAI;
-            }
-            IdScreen = ID_SUCCESS;
-            ObjectCommon.UserLogin = new TAIKHOAN();
-            Utils.CopyPropertiesFrom(TaiKhoanDAO, ObjectCommon.UserLogin);
-            return Constant.RES_SUC;
-        }
-
-        public string ChangePasswordProcess(TaiKhoanEnity TaiKhoan, ref List<MessageError> Messages)
-        {
-            // check Validation
-            DangNhapImplement dangNhapImplement = new DangNhapImplement();
-            dangNhapImplement.EncodePassword(ref TaiKhoan);
-            if(dangNhapImplement.Update(TaiKhoan, ref Messages).Equals(Constant.RES_FAI))
-            {
-                Messages.Add(new MessageError { IdError = Constant.MES_PRE, Message = "Thay đồi mật khẩu không thành công!" });
-                return Constant.RES_FAI;
-            }
-            ObjectCommon.UserLogin = new TAIKHOAN();
-            Utils.CopyPropertiesFrom(TaiKhoan, ObjectCommon.UserLogin);
+            // return success
             return Constant.RES_SUC;
         }
     }
