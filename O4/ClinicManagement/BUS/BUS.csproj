@@ -90,6 +90,7 @@
     <Compile Include="Entities\DangNhapSearchEntity.cs" />
     <Compile Include="Entities\HoSoSearchEntity.cs" />
     <Compile Include="Mdl\DangNhapModule.cs" />
+    <Compile Include="Mdl\KhamModule.cs" />
     <Compile Include="Mdl\TiepNhanModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

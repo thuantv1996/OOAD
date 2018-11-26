@@ -42,7 +42,7 @@ namespace BUS.Imp
             return COM.Constant.RES_SUC;
         }
 
-        public string GetListHoSo(QLPHONGKHAMEntities db, string MaBenhNhan, out List<HoSoBenhAnDTO> ListHoSo)
+        public string GetListHoSoWithIdBenhNhan(QLPHONGKHAMEntities db, string MaBenhNhan, out List<HoSoBenhAnDTO> ListHoSo)
         {
             ListHoSo = new List<HoSoBenhAnDTO>();
             List<HOSOBENHAN> hoSoDAO = null;

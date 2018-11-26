@@ -28,7 +28,9 @@ namespace DAO.Implement
             listObject = new List<BENHNHAN>();
             try
             {
-                listObject = (db as QLPHONGKHAMEntities).BENHNHANs.ToList();
+                listObject = (from bn in (db as QLPHONGKHAMEntities).BENHNHANs
+                              orderby bn.HoTen ascending
+                              select bn).ToList();
             }
             catch (Exception e)
             {
@@ -97,6 +99,7 @@ namespace DAO.Implement
                                 where bn.MaBenhNhan.Contains(param[0].ToString()) &&
                                       bn.HoTen.Contains(param[1].ToString()) &&
                                       bn.CMND.Contains(param[2].ToString())
+                                orderby bn.HoTen ascending
                                 select bn).ToList();
             }
             catch(Exception e)

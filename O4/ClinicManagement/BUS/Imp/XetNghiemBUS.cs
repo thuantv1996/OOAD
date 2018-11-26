@@ -14,9 +14,9 @@ namespace BUS.Imp
             xetNghiemServices = new XetNghiemDAO();
         }
 
-        public string GetListXetNghiem(QLPHONGKHAMEntities db, out List<XetNghiemDTO> ListHoSo)
+        public string GetListXetNghiem(QLPHONGKHAMEntities db, out List<XetNghiemDTO> ListXetNghiem)
         {
-            ListHoSo = new List<XetNghiemDTO>();
+            ListXetNghiem = new List<XetNghiemDTO>();
             List<XETNGHIEM> listObjectDAO = null;
             if (xetNghiemServices.Select(db, out listObjectDAO) == Constant.RES_FAI)
             {
@@ -35,7 +35,7 @@ namespace BUS.Imp
                 // copy property
                 BUS.Com.Utils.CopyPropertiesFrom(xetnghiem, xetNghiemEntity);
                 // add vào list ouput
-                ListHoSo.Add(xetNghiemEntity);
+                ListXetNghiem.Add(xetNghiemEntity);
             }
             return Constant.RES_SUC;
         }
