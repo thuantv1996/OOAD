@@ -82,6 +82,7 @@ namespace BUS.Mdl
                 {
                     luonCongViecBUS.GetInformationLuonCongViec(db, hoSoBenhAn.MaHoSo, out luonCongViec);
                     luonCongViec.NodeHienTai = BusConstant.NODE_HOAN_TAT;
+                    luonCongViec.KhamBenh = true;
                 }
                 catch
                 {
