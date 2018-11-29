@@ -85,5 +85,11 @@ namespace BUS.Imp
             BUS.Com.Utils.CopyPropertiesFrom(BenhNhan, benhNhanDAO);
             return benhNhanDao.Save(db, benhNhanDAO);
         }
+
+        public string CreateIdBenhNhan(QLPHONGKHAMEntities db, out string Id)
+        {
+            Id = null;
+            return benhNhanDao.CreateId(db, out Id);
+        }
     }
 }

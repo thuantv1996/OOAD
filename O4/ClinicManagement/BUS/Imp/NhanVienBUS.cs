@@ -74,5 +74,26 @@ namespace BUS.Imp
             }
             return Constant.RES_SUC;
         }
+
+        public string GetListNhanVienWithLNV(QLPHONGKHAMEntities db, string MaLoaiNhanVien, out List<NhanVienDTO> ListNhanVienEntity)
+        {
+            ListNhanVienEntity = new List<NhanVienDTO>();
+            List<NHANVIEN> listObjectDAO = null;
+            if (nhanVienService.GetListNhanVienWithLNV(db, MaLoaiNhanVien, out listObjectDAO) == Constant.RES_FAI)
+            {
+                return Constant.RES_FAI;
+            }
+            if (listObjectDAO == null)
+            {
+                return Constant.RES_FAI;
+            }
+            foreach (NHANVIEN nv in listObjectDAO)
+            {
+                NhanVienDTO NhanVienDTO = new NhanVienDTO();
+                BUS.Com.Utils.CopyPropertiesFrom(nv, NhanVienDTO);
+                ListNhanVienEntity.Add(NhanVienDTO);
+            }
+            return Constant.RES_SUC;
+        }
     }
 }

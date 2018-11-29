@@ -113,5 +113,36 @@ namespace DAO.Implement
             }
             return DAOCommon.SUCCESS;
         }
+
+        public string CreateId(QLPHONGKHAMEntities db, out string Id)
+        {
+            List<BENHNHAN> ListHoSoDAO = new List<BENHNHAN>();
+            Id = "BN00000001";
+            ListHoSoDAO = (from hs in db.BENHNHANs
+                           orderby hs.MaBenhNhan descending
+                           select hs).ToList();
+            if (ListHoSoDAO.Count > 0)
+            {
+                string curId = ListHoSoDAO.ElementAt(0).MaBenhNhan;
+                try
+                {
+                    int curNumId = Int32.Parse(curId.Substring(2, 8));
+                    curNumId += 1;
+                    Id = "BN";
+                    for (int i = 0; i < (8 - curNumId.ToString().Length); i++)
+                    {
+                        Id += "0";
+                    }
+                    Id += curNumId.ToString();
+                }
+                catch (Exception e)
+                {
+                    string log = LogManager.GetErrorFromException(e);
+                    LogManager.WriteLog(log);
+                    return DAOCommon.FAIL;
+                }
+            }
+            return DAOCommon.FAIL;
+        }
     }
 }

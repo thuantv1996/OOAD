@@ -23,5 +23,7 @@ namespace COM
         public static string MES_DB = "MES_DB";
         // Is Erorr Present
         public static string MES_PRE = "MES_PRE";
+        // id room tiep nhan
+        public static string ID_LNV_TN = "LNV0000001";
     }
 }

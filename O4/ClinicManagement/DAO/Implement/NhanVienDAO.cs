@@ -107,5 +107,25 @@ namespace DAO.Implement
             }
             return DAOCommon.SUCCESS;
         }
+        public string GetListNhanVienWithLNV(QLPHONGKHAMEntities db, string MaLNV, out List<NHANVIEN> listEntity)
+        {
+            listEntity = null;
+            try
+            {
+                listEntity = (from nv in db.NHANVIENs
+                              where nv.MaLoaiNV == MaLNV
+                              select nv).ToList();
+            }
+            catch (Exception e)
+            {
+                string log = LogManager.GetErrorFromException(e);
+                LogManager.WriteLog(log);
+                return DAOCommon.FAIL;
+            }
+            return DAOCommon.SUCCESS;
+        }
+
+
+        
     }
 }

@@ -224,6 +224,49 @@ namespace BUS.Mdl
             }
             return Constant.RES_SUC;
         }
-        
+
+        public string InsertBenhNhan(BenhNhanDTO benhNhan)
+        {
+            BenhNhanBUS benhNhanBUS = new BenhNhanBUS();
+            using(QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                string id = "";
+                benhNhanBUS.CreateIdBenhNhan(db, out id);
+                benhNhan.MaBenhNhan = id;
+                if (benhNhanBUS.InsertBenhNhan(db, benhNhan) == Constant.RES_FAI)
+                {
+                    return Constant.RES_FAI;
+                }
+            }
+            return Constant.RES_SUC;
+        }
+
+        public string UpdateBenhNhan(BenhNhanDTO benhNhan)
+        {
+            BenhNhanBUS benhNhanBUS = new BenhNhanBUS();
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                if (benhNhanBUS.UpdateBenhNhan(db, benhNhan) == Constant.RES_FAI)
+                {
+                    return Constant.RES_FAI;
+                }
+            }
+            return Constant.RES_SUC;
+        }
+
+        public string GetListNhanVienTiepNhan(out List<NhanVienDTO> listNhanVienTN)
+        {
+            listNhanVienTN = new List<NhanVienDTO>();
+            NhanVienBUS nhanVienBUS = new NhanVienBUS();
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                if (nhanVienBUS.GetListNhanVienWithLNV(db, COM.Constant.ID_LNV_TN, out listNhanVienTN) == Constant.RES_FAI)
+                {
+                    return Constant.RES_FAI;
+                }
+            }
+            return Constant.RES_SUC;
+        }
+
     }
 }
