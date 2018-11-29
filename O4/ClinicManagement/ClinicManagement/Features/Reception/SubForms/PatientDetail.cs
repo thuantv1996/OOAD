@@ -18,14 +18,14 @@ namespace ClinicManagement.Features.Reception.SubForms
             this.patientInformation.BringToFront();
         }
 
-        public PatientDetail(DTO.BenhNhanEnity patient)
+        public PatientDetail(DTO.BenhNhanDTO patient)
         {
             InitializeComponent();
             this.patientInformation.BringToFront();
             this.fillData(patient);
         }
 
-        public void fillData(DTO.BenhNhanEnity patient)
+        public void fillData(DTO.BenhNhanDTO patient)
         {
             this.patientInformation.fillData(patient);
         }
@@ -48,15 +48,20 @@ namespace ClinicManagement.Features.Reception.SubForms
         {
             //update database
             var patient = this.patientEdit.getData();
-            this.SaveClick?.Invoke(this, patient);
 
-            this.patientInformation.fillData(patient);
-            this.patientInformation.BringToFront();
-            this.btnEdit.BringToFront();
-            this.btnCreate.Enabled = true;
+            this.bus.saveBenhNhan(patient, (result) =>
+            {
+                if (result.Equals(COM.Constant.RES_SUC))
+                    this.patientInformation.fillData(patient);
+                else
+                    MessageBox.Show("Lưu thông tin không thành công", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.patientInformation.BringToFront();
+                this.btnEdit.BringToFront();
+                this.btnCreate.Enabled = true;
+            });
         }
 
-        public event EventHandler<DTO.BenhNhanEnity> CreateClick;
-        public event EventHandler<DTO.BenhNhanEnity> SaveClick;
+        public event EventHandler<DTO.BenhNhanDTO> CreateClick;
+        private Bus.ReceptionBus bus = Bus.ReceptionBus.SharedInstance;
     }
 }

@@ -86,15 +86,16 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableDataView1.Columns = new ClinicManagement.Common.ClinicComponents.ColumnTypes[] {
-        ClinicManagement.Common.ClinicComponents.ColumnTypes.HoTen,
-        ClinicManagement.Common.ClinicComponents.ColumnTypes.NgaySinh,
-        ClinicManagement.Common.ClinicComponents.ColumnTypes.GioiTinh,
         ClinicManagement.Common.ClinicComponents.ColumnTypes.MaBenhNhan,
+        ClinicManagement.Common.ClinicComponents.ColumnTypes.HoTen,
+        ClinicManagement.Common.ClinicComponents.ColumnTypes.CMND,
+        ClinicManagement.Common.ClinicComponents.ColumnTypes.NgaySinh,
         ClinicManagement.Common.ClinicComponents.ColumnTypes.DiaChi};
             this.tableDataView1.Location = new System.Drawing.Point(0, 81);
             this.tableDataView1.Name = "tableDataView1";
             this.tableDataView1.Size = new System.Drawing.Size(869, 569);
             this.tableDataView1.TabIndex = 5;
+            this.tableDataView1.DoubleClick += new System.EventHandler<DTO.BenhNhanDTO>(this.tableDataView1_DoubleClick);
             // 
             // ReceptionHome
             // 

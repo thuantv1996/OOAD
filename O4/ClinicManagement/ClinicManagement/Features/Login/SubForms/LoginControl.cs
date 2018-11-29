@@ -45,25 +45,17 @@ namespace ClinicManagement.Features.Login.SubForms
             {
                 this.setRegion();
             });
-            this.btnLogin.Click += new EventHandler((sender, e) =>
-            {
-                if (String.IsNullOrEmpty(this.userNameTextField.Text) || String.IsNullOrEmpty(this.passwordTextField.Text))
-                {
-                    //show dialog
-                    Console.WriteLine("UserName or Password is null");
-                }
-                else
-                {
-                    var account = new TaiKhoanEnity() {
-                        TenDangNhap = this.userNameTextField.Text,
-                        MatKhau = this.passwordTextField.Text };
-                    this.loginCompleted?.Invoke(sender, account);
-                }
-            });
 
             this.userNameTextField.Focus();
+            this.userNameTextField.TextBox.KeyUp += TextBox_KeyUp;
+            this.passwordTextField.TextBox.KeyUp += TextBox_KeyUp;
         }
 
+        private void TextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                this.btnLogin_Click(null, null);
+        }
 
         private void setRegion()
         {
@@ -106,6 +98,24 @@ namespace ClinicManagement.Features.Login.SubForms
         private GraphicsPath path = new GraphicsPath();
         private int _radius = 10;
 
-        public event EventHandler<TaiKhoanEnity> loginCompleted;
+        public event EventHandler<TaiKhoanDTO> loginCompleted;
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(this.userNameTextField.Text) || String.IsNullOrEmpty(this.passwordTextField.Text))
+            {
+                //show dialog
+                Console.WriteLine("UserName or Password is null");
+            }
+            else
+            {
+                var account = new TaiKhoanDTO()
+                {
+                    TenDangNhap = this.userNameTextField.Text,
+                    MatKhau = this.passwordTextField.Text
+                };
+                this.loginCompleted?.Invoke(sender, account);
+            }
+        }
     }
 }

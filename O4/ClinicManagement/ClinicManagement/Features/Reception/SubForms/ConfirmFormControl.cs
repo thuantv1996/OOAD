@@ -30,12 +30,12 @@ namespace ClinicManagement.Features.Reception.SubForms
             };
         }
 
-        public void fillData(DTO.BenhNhanEnity patient)
+        public void fillData(DTO.BenhNhanDTO patient)
         {
             this.patientInformation1.fillData(patient);
         }
 
         public event EventHandler BackClick;
-        public event EventHandler<DTO.BenhNhanEnity> ConfirmClick;
+        public event EventHandler<DTO.BenhNhanDTO> ConfirmClick;
     }
 }

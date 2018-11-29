@@ -35,7 +35,7 @@ namespace ClinicManagement.Common.ClinicComponents
             public string DiaChi { get; set; }
             public string GhiChu { get; set; }
 
-            public BenhNhanView(DTO.BenhNhanEnity entity)
+            public BenhNhanView(DTO.BenhNhanDTO entity)
             {
                 this.MaBenhNhan = entity.MaBenhNhan;
                 this.HoTen = entity.HoTen;
@@ -55,14 +55,14 @@ namespace ClinicManagement.Common.ClinicComponents
                 return String.Format("{0}/{1}/{2}", day, month, year);
             }
 
-            public DTO.BenhNhanEnity ToBenhNhanEntity()
+            public DTO.BenhNhanDTO ToBenhNhanEntity()
             {
                 var list = this.NgaySinh.Split('/');
                 var day = list.First();
                 var year = list.Last();
                 var month = list[1];
 
-                return new DTO.BenhNhanEnity
+                return new DTO.BenhNhanDTO
                 {
                     MaBenhNhan = this.MaBenhNhan,
                     HoTen = this.HoTen,
@@ -96,11 +96,11 @@ namespace ClinicManagement.Common.ClinicComponents
             });
         }
 
-        public void fetchData(List<DTO.BenhNhanEnity> danhSachBenhNhan)
+        public void fetchData(List<DTO.BenhNhanDTO> danhSachBenhNhan)
         {
             if (this.gridControl1.InvokeRequired)
             {
-                this.Invoke(new Action<List<DTO.BenhNhanEnity>>(fetchData), new object[] { danhSachBenhNhan });
+                this.Invoke(new Action<List<DTO.BenhNhanDTO>>(fetchData), new object[] { danhSachBenhNhan });
             } else
             {
                 var listViews = new List<BenhNhanView>();
@@ -199,7 +199,7 @@ namespace ClinicManagement.Common.ClinicComponents
             
         }
 
-        public DTO.BenhNhanEnity PatientSelected
+        public DTO.BenhNhanDTO PatientSelected
         {
             get
             {
@@ -213,7 +213,7 @@ namespace ClinicManagement.Common.ClinicComponents
                 patient.GioiTinh = row[ColumnTypes.GioiTinh.ToString()].ToString();
                 patient.CMND = row[ColumnTypes.CMND.ToString()].ToString();
                 patient.DiaChi = row[ColumnTypes.DiaChi.ToString()].ToString();
-
+                patient.GhiChu = row[ColumnTypes.GhiChu.ToString()].ToString();
                 return patient.ToBenhNhanEntity();
             }
         }
@@ -224,5 +224,11 @@ namespace ClinicManagement.Common.ClinicComponents
         }
 
         public event EventHandler RowClick;
+        public event EventHandler<DTO.BenhNhanDTO> DoubleClick;
+
+        private void gridView1_DoubleClick(object sender, EventArgs e)
+        {
+            this.DoubleClick?.Invoke(sender, PatientSelected);
+        }
     }
 }

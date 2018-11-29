@@ -31,9 +31,15 @@ namespace ClinicManagement.Features.Reception.Main
                 Left = Top = 0,
                 Anchor = AnchorStyles.Left | AnchorStyles.Top
             };
+            tableWithSearch.DoubleClick += (obj, benhNhan) =>
+            {
+                this.receptionControl1.setupView(benhNhan);
+                containerForm.Close();
+            };
 
             containerForm.Controls.Add(tableWithSearch);
             containerForm.ShowDialog();
         }
+
     }
 }

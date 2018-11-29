@@ -26,7 +26,7 @@ namespace ClinicManagement.Features.Reception.SubForms
             });
         }
 
-        public DTO.BenhNhanEnity getData()
+        public DTO.BenhNhanDTO getData()
         {
             DateTime birthDay;
             try
@@ -40,18 +40,17 @@ namespace ClinicManagement.Features.Reception.SubForms
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return new DTO.BenhNhanEnity();
+                return new DTO.BenhNhanDTO();
             }
 
-            var patient = new DTO.BenhNhanEnity();
-            patient.HoTen = this.txtName.Text;
-            patient.GioiTinh = this.cbSex.ComboBox.Text.Equals("Nam") ? true : false;
-            
-            patient.NgaySinh = this.cbBirthDay.DateTimePicker.Text;
-            patient.SoDienThoai = this.txtPhoneNumber.Text;
-            patient.GhiChu = this.txtNote.Text;
-            patient.DiaChi = this.txtAddress.Text;
-            patient.CMND = this.txtCMND.Text;
+            var patient = new DTO.BenhNhanDTO() {
+                HoTen = this.txtName.Text,
+                GioiTinh = this.cbSex.ComboBox.Text.Equals("Nam") ? true : false,
+                NgaySinh = this.cbBirthDay.DateTimePicker.Text,
+                SoDienThoai = this.txtPhoneNumber.Text,
+                GhiChu = this.txtNote.Text,
+                DiaChi = this.txtAddress.Text,
+                CMND = this.txtCMND.Text };
             return patient;
         }
 

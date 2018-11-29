@@ -11,10 +11,6 @@ namespace ClinicManagement.Features.Login.Bus
 {
     class LoginBus
     {
-        public const int ID_SUCCESS = 0;
-        public const int ID_ERROR_BACK_LOGIN = 1;
-        public const int ID_ERROR_CHANGE_PASSWORD = 2;
-
         private static LoginBus instance;
         public static LoginBus Instance
         {
@@ -33,18 +29,10 @@ namespace ClinicManagement.Features.Login.Bus
             this.loginBusClient = new BUS.Mdl.DangNhapModule();
         }
 
-        public void Login(TaiKhoanEnity account, Action<List<MessageError>, int, string> completion)
+        public void Login(TaiKhoanDTO account, Action<List<MessageError>, string> completion)
         {
             var listMessageError = new List<MessageError>();
-            var idScreen = ID_SUCCESS;
-            var result = this.loginBusClient.DangNhapProcess(account, ref listMessageError, out idScreen);
-            completion(listMessageError, idScreen, result);
-        }
-
-        public void ChangePassword(TaiKhoanEnity account, Action<List<MessageError>, string> completion)
-        {
-            var listMessageError = new List<MessageError>();
-            var result = this.loginBusClient.ChangePasswordProcess(account, ref listMessageError);
+            var result = this.loginBusClient.DangNhapProcess(account, ref listMessageError);
             completion(listMessageError, result);
         }
     }

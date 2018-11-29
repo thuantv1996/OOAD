@@ -54,12 +54,12 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.receptionControl1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(50, 67);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(50, 47);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(827, 586);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(827, 626);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // receptionControl1
@@ -67,7 +67,7 @@
             this.receptionControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.receptionControl1.Location = new System.Drawing.Point(3, 56);
             this.receptionControl1.Name = "receptionControl1";
-            this.receptionControl1.Size = new System.Drawing.Size(821, 527);
+            this.receptionControl1.Size = new System.Drawing.Size(821, 567);
             this.receptionControl1.TabIndex = 0;
             // 
             // panel1

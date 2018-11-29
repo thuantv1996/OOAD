@@ -30,7 +30,7 @@ namespace ClinicManagement.Common.ClinicComponents
                 String.IsNullOrEmpty(this.address.Text));
         }
 
-        public void fillData(DTO.BenhNhanEnity patient)
+        public void fillData(DTO.BenhNhanDTO patient)
         {
             
 
@@ -44,9 +44,9 @@ namespace ClinicManagement.Common.ClinicComponents
             this.maBenhNhan = patient.MaBenhNhan;
         }
 
-        public DTO.BenhNhanEnity getData()
+        public DTO.BenhNhanDTO getData()
         {
-            var patient = new DTO.BenhNhanEnity();
+            var patient = new DTO.BenhNhanDTO();
             DateTime birthDay = this.birthDay.DateTime;
             patient.HoTen = this.name.Text;
             patient.GioiTinh = this.gender.Text.Equals("Nam") ? true : false;

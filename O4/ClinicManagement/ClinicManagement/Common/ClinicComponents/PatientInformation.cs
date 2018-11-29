@@ -17,7 +17,7 @@ namespace ClinicManagement.Common.ClinicComponents
             InitializeComponent();
         }
 
-        public void fillData(DTO.BenhNhanEnity patient)
+        public void fillData(DTO.BenhNhanDTO patient)
         {
             this.txtName.Text = patient.HoTen;
             int year = int.Parse(patient.NgaySinh.Substring(0, 4));
@@ -33,14 +33,14 @@ namespace ClinicManagement.Common.ClinicComponents
             this.idNumber = patient.MaBenhNhan;
         }
 
-        public DTO.BenhNhanEnity getData()
+        public DTO.BenhNhanDTO getData()
         {
             var list = this.txtBirthDay.Text.Split('/');
             var year = int.Parse(list.Last());
             var month = int.Parse(list[1]);
             var day = int.Parse(list.First());
 
-            var patient = new DTO.BenhNhanEnity() {
+            var patient = new DTO.BenhNhanDTO() {
                 HoTen = this.txtName.Text,
                 GioiTinh = this.txtSex.Text.Equals("Nam") ? true : false,
                 MaBenhNhan = this.idNumber,

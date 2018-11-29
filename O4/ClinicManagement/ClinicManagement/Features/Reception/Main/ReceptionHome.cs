@@ -54,22 +54,12 @@ namespace ClinicManagement.Features.Reception.Main
 
         private void fetchData(Action<String, bool> completion)
         {
-            this.bus.fetchListBenhNhan((listBenhNhan, listMessageError, result) =>
+            this.bus.fetchListBenhNhan((listBenhNhan, result) =>
             {
                 if (result.Equals(COM.Constant.RES_SUC))
                 {
                     this.tableDataView1.fetchData(listBenhNhan);
                     completion("Load dữ liệu thành công", true);
-                }
-                else
-                {
-                    var msg = "";
-                    listMessageError.ForEach((error) =>
-                    {
-                        msg += error.Message + "\n";
-                    });
-                    completion(msg, false);
-                    return;
                 }
             });
         }
@@ -91,11 +81,11 @@ namespace ClinicManagement.Features.Reception.Main
             formContainer.ShowDialog();
         }
 
-        private void FilterControl_SearchCompleted(object sender, BUS.Entities.BenhNhanSearchEntity e)
+        private void FilterControl_SearchCompleted(object sender, DTO.BenhNhanDTO e)
         {
             var filterControl = (ClinicManagement.Common.ClinicComponents.FilterUserControl)sender;
             var formContainer = (Form)(filterControl.Parent);
-            this.bus.searchBenhNhan(e, (listResult, listMessageError, result) =>
+            this.bus.searchBenhNhan(e, (listResult, result) =>
             {
                 if (result.Equals(COM.Constant.RES_SUC))
                 {
@@ -103,12 +93,7 @@ namespace ClinicManagement.Features.Reception.Main
                     formContainer.Close();
                 } else
                 {
-                    var msg = "";
-                    listMessageError.ForEach((error) =>
-                    {
-                        msg += error.Message + "\n";
-                    });
-                    MessageBox.Show(msg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Không tìm thấy kết quả phù hợp", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             });
@@ -131,7 +116,7 @@ namespace ClinicManagement.Features.Reception.Main
             formContainer.ShowDialog();
         }
 
-        private void DetailControl_CreateClick(object sender, DTO.BenhNhanEnity patient)
+        private void DetailControl_CreateClick(object sender, DTO.BenhNhanDTO patient)
         {
             var formContainer = (sender as UserControl).Parent;
             var receptionControl = new SubForms.ReceptionControl(patient);
@@ -160,7 +145,7 @@ namespace ClinicManagement.Features.Reception.Main
             formContainer.ShowDialog();
         }
 
-        private void AddPatientControl_CreateCompleted(object sender, DTO.BenhNhanEnity e)
+        private void AddPatientControl_CreateCompleted(object sender, DTO.BenhNhanDTO e)
         {
             this.bus.insertBenhNhan(e, (listMessageError, result) =>
             {
@@ -181,6 +166,11 @@ namespace ClinicManagement.Features.Reception.Main
                     return;
                 }
             });
+        }
+
+        private void tableDataView1_DoubleClick(object sender, DTO.BenhNhanDTO e)
+        {
+            btnDetail_Click(null, null);
         }
     }
 }

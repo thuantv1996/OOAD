@@ -24,10 +24,12 @@ namespace ClinicManagement.Common.ClinicComponents
             {
                 if (e.KeyCode != Keys.Enter)
                     return;
-                var entity = new BUS.Entities.BenhNhanSearchEntity();
-                entity.MaBenhNhan = this.txtMaBenh.Text;
-                entity.TenBenhNhan = this.txtHoTen.Text;
-                entity.CMND = this.txtCMND.Text;
+                var entity = new DTO.BenhNhanDTO()
+                {
+                    MaBenhNhan = this.txtMaBenh.Text,
+                    HoTen = this.txtHoTen.Text,
+                    CMND = this.txtCMND.Text
+                };
                 this.SearchCompleted?.Invoke(this, entity);
             });
 
@@ -38,15 +40,17 @@ namespace ClinicManagement.Common.ClinicComponents
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            var entity = new BUS.Entities.BenhNhanSearchEntity();
-            entity.MaBenhNhan = this.txtMaBenh.Text;
-            entity.TenBenhNhan = this.txtHoTen.Text;
-            entity.CMND = this.txtCMND.Text;
+            var entity = new DTO.BenhNhanDTO()
+            {
+                MaBenhNhan = this.txtMaBenh.Text,
+                HoTen = this.txtHoTen.Text,
+                CMND = this.txtCMND.Text
+            };
 
             this.SearchCompleted?.Invoke(this, entity);
         }
 
-        public event EventHandler<BUS.Entities.BenhNhanSearchEntity> SearchCompleted;
+        public event EventHandler<DTO.BenhNhanDTO> SearchCompleted;
 
     }
 }
