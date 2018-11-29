@@ -62,12 +62,9 @@ namespace BUS.Mdl
         }
 
         // xử lý thanh toán
-        public string ThanhToanProcessing(List<KetQuaXetNghiemDTO> ketQuaXetNghiems, ThanhToanDTO thanhToan)
+        public string ThanhToanProcessing(List<KetQuaXetNghiemDTO> ketQuaXetNghiems)
         {
-            if(thanhToan == null)
-            {
-                return Constant.RES_FAI;
-            }
+
             if(ketQuaXetNghiems == null || ketQuaXetNghiems.Count == 0)
             {
                 return Constant.RES_FAI;
@@ -77,11 +74,29 @@ namespace BUS.Mdl
             LuonCongViecBUS luonCongViecBUS = new LuonCongViecBUS();
             using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
+                ThanhToanDTO thanhToan = new ThanhToanDTO();
+                if (thanhToanBUS.GetThanhToan(db, ketQuaXetNghiems.ElementAt(0).MaHoSo, out thanhToan) == Constant.RES_FAI)
+                {
+                    return Constant.RES_FAI;
+                }
+                if (thanhToan == null)
+                {
+                    return Constant.RES_FAI;
+                }
+                decimal tongtien = 0;
+                foreach (var kq in ketQuaXetNghiems)
+                {
+                    tongtien += kq.TongChiPhi;
+                }
+                thanhToan.TongChiPhi += tongtien;
+                thanhToan.ChiPhiXetNghiem = tongtien;
+
                 LuonCongViecDTO luonCongViec = new LuonCongViecDTO();
                 if(luonCongViecBUS.GetInformationLuonCongViec(db, thanhToan.MaHoSo, out luonCongViec) == Constant.RES_FAI)
                 {
                     return Constant.RES_FAI;
                 }
+                
                 luonCongViec.NodeHienTai = BusConstant.NODE_XET_NGHIEM;
                 using (var trans = db.Database.BeginTransaction())
                 {
