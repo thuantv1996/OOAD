@@ -92,11 +92,13 @@ namespace DAO.Implement
         public string FindByParameter(QLPHONGKHAMEntities db, object[] param, out TAIKHOAN taiKhoan)
         {
             taiKhoan = null;
+            string tenDangNhap = param[0].ToString();
+            string matKhau = param[1].ToString();
             try
             {
                 taiKhoan = (from tk in db.TAIKHOANs
-                            where tk.TenDangNhap == param[0].ToString() &&
-                                  tk.MatKhau == param[1].ToString()
+                            where tk.TenDangNhap == tenDangNhap &&
+                                  tk.MatKhau == matKhau
                             select tk).FirstOrDefault();
             }catch(Exception e)
             {

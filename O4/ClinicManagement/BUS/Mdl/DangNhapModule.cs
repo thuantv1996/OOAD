@@ -9,7 +9,7 @@ namespace BUS.Mdl
 {
     public class DangNhapModule
     {
-        public string DangNhapProcess(TaiKhoanDTO taiKhoan, ref List<MessageError> Messages)
+        public string DangNhapProcess(TaiKhoanDTO taiKhoan)
         {
             // khởi tạo BUS
             DangNhapBUS dangNhapBUS = new DangNhapBUS();

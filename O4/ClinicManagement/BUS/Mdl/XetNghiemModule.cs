@@ -99,6 +99,7 @@ namespace BUS.Mdl
                     if(GetNumberXetNghiemActive(db, ketQuaXetNghiem.MaHoSo) == 0)
                     {
                         luonCongViec.NodeHienTai = BusConstant.NODE_KHAM_SAU_XN;
+                        luonCongViec.XetNghiem = true;
                         if (luonCongViecBUS.UpdateLuonCongViec(db, luonCongViec).Equals(Constant.RES_FAI))
                         {
                             trans.Rollback();

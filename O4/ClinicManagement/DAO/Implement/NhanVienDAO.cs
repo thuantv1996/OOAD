@@ -92,10 +92,11 @@ namespace DAO.Implement
         public string GetListNhanVienWithIdRoom(QLPHONGKHAMEntities db, object[] param, out List<NHANVIEN> listEntity)
         {
             listEntity = null;
+            string maPhong = param[0].ToString();
             try
             {
                 listEntity = (from nv in db.NHANVIENs
-                              where nv.MaPhong == param[0].ToString()
+                              where nv.MaPhong == maPhong
                               select nv).ToList();
             }
             catch (Exception e)

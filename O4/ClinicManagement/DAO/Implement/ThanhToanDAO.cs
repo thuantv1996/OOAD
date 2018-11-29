@@ -128,5 +128,24 @@ namespace DAO.Implement
             }
             return DAOCommon.SUCCESS;
         }
+
+        public string GetThanhToan(QLPHONGKHAMEntities db, string MaHoSo, out THANHTOAN thanhToan)
+        {
+            thanhToan = new THANHTOAN();
+            try
+            {
+                thanhToan = (from tt in db.THANHTOANs
+                             where tt.MaHoSo == MaHoSo
+                             select tt).SingleOrDefault();
+            }
+            catch (Exception e)
+            {
+                string log = LogManager.GetErrorFromException(e);
+                LogManager.WriteLog(log);
+                // return fail;
+                return DAOCommon.FAIL;
+            }
+            return DAOCommon.SUCCESS;
+        }
     }
 }

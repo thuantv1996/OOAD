@@ -93,12 +93,15 @@ namespace DAO.Implement
         public string SearchWithParameter(QLPHONGKHAMEntities db, object[] param, out List<BENHNHAN> listBenhNhan)
         {
             listBenhNhan = new List<BENHNHAN>();
+            string maBenhNhan = param[0].ToString();
+            string hoTen = param[1].ToString();
+            string cmnd = param[2].ToString();
             try
             {
                 listBenhNhan = (from bn in db.BENHNHANs
-                                where bn.MaBenhNhan.Contains(param[0].ToString()) &&
-                                      bn.HoTen.Contains(param[1].ToString()) &&
-                                      bn.CMND.Contains(param[2].ToString())
+                                where bn.MaBenhNhan.Contains(maBenhNhan) &&
+                                      bn.HoTen.Contains(hoTen) &&
+                                      bn.CMND.Contains(cmnd)
                                 orderby bn.HoTen ascending
                                 select bn).ToList();
             }

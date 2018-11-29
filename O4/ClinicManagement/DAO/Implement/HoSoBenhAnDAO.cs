@@ -27,9 +27,12 @@ namespace DAO.Implement
         public string Select(DbContext db, out List<HOSOBENHAN> listObject)
         {
             listObject = new List<HOSOBENHAN>();
+            string SystemDate = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString();
             try
             {
-                listObject = (db as QLPHONGKHAMEntities).HOSOBENHANs.ToList();
+                listObject = (from hs in (db as QLPHONGKHAMEntities).HOSOBENHANs
+                              where hs.NgayTiepNhan == SystemDate
+                              select hs).ToList();
             }
             catch (Exception e)
             {
@@ -92,13 +95,16 @@ namespace DAO.Implement
         public string SearchHoSo(QLPHONGKHAMEntities db, object[] param, out List<HOSOBENHAN> listHoSo)
         {
             listHoSo = null;
+            string maHoSo = param[0].ToString();
+            string maBenhNhan = param[1].ToString();
+            string ngayKham = param[2].ToString();
             try
             {
                 listHoSo = (from hs in db.HOSOBENHANs
                             join bn in db.BENHNHANs on hs.MaBenhNhan equals bn.MaBenhNhan
-                            where hs.MaHoSo.Contains(param[0].ToString()) &&
-                                  bn.MaBenhNhan.Contains(param[1].ToString()) &&
-                                  hs.NgayKham.Equals(param[2])
+                            where hs.MaHoSo.Contains(maHoSo) &&
+                                  bn.MaBenhNhan.Contains(maBenhNhan) &&
+                                  hs.NgayKham.Equals(ngayKham)
                             select hs
                             ).ToList();
             }
@@ -114,13 +120,17 @@ namespace DAO.Implement
         public string GetListHoSoWithRoomAndNode(QLPHONGKHAMEntities db, object[] param, out List<HOSOBENHAN> listHoSo)
         {
             listHoSo = null;
+            string SystemDate = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString();
+            string maPhongKham = param[0].ToString();
+            string nodeHienTai = param[1].ToString();
             try
             {
                 listHoSo = (from hs in db.HOSOBENHANs
                             join p in db.PHONGs on hs.MaPhongKham equals p.MaPhong
                             join lcv in db.LUONCONGVIECs on hs.MaHoSo equals lcv.MaHoSo
-                            where hs.MaPhongKham == param[0].ToString() &&
-                                  lcv.NodeHienTai == param[1].ToString()
+                            where hs.MaPhongKham == maPhongKham &&
+                                  lcv.NodeHienTai == nodeHienTai &&
+                                  hs.NgayTiepNhan == SystemDate
                             select hs
                             ).ToList();
             }
