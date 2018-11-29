@@ -32,91 +32,36 @@ namespace ClinicManagement.Features.Login.Main
             this.loginControl.loginCompleted += LoginControl_loginCompleted;
         }
 
-        private void setupChangePassword(string userName, string password)
-        {
-            var account = new DTO.TaiKhoanEnity() {
-                TenDangNhap = userName,
-                MatKhau = password };
-            this.changePasswordControl = new SubForms.ChangePasswordControl(account);
-            var initX = (this.Size.Width - this.changePasswordControl.Size.Width) / 2;
-            var initY = (this.Size.Height - this.changePasswordControl.Size.Height) / 2;
-            this.changePasswordControl.Location = new Point(initX, initY);
-            this.changePasswordControl.Anchor = AnchorStyles.None;
-            this.backgroundImage.Controls.Add(this.changePasswordControl);
-            this.changePasswordControl.changeCompletion += ChangePasswordControl_changeCompletion;
-            this.changePasswordControl.CloseClick += ChangePasswordControl_CloseClick;
-        }
-
         private void ChangePasswordControl_CloseClick(object sender, EventArgs e)
         {
             this.backgroundImage.Controls.Remove(this.changePasswordControl);
             this.setupLogin();
         }
 
-        private void ChangePasswordControl_changeCompletion(object sender, DTO.TaiKhoanEnity e)
-        {
-            this.bus.ChangePassword(e, (listMessageError, result) =>
-            {
-                if (result.Equals(COM.Constant.RES_SUC))
-                {
-                    MessageBox.Show("Cập nhật mật khẩu thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.loginSuccessful(e);
-                } else if (result.Equals(COM.Constant.RES_FAI)) {
-                    var messageError = "";
-                    listMessageError.ForEach((error) =>
-                    {
-                        if (error.IdError.Equals(COM.Constant.MES_PRE))
-                        {
-                            messageError += error.Message + "\n";
-                        }
-                    });
-                    MessageBox.Show(messageError, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            });
-        }
-
         private void LoginControl_loginCompleted(object sender, DTO.TaiKhoanDTO loginInfo)
         {
             DevExpress.Utils.WaitDialogForm f = new DevExpress.Utils.WaitDialogForm();
 
-            this.bus.Login(loginInfo, (listMessageError, idScreen, result) =>
+            this.bus.Login(loginInfo, (listMessageError, result) =>
             {
                 f.Close();
-                if (result.Equals(COM.Constant.RES_SUC))
-                {
-                    this.loginSuccessful(loginInfo);
-                }
-                else if (result.Equals(COM.Constant.RES_FAI))
-                {
-                    var messageError = "";
-                    listMessageError.ForEach((error) =>
-                    {
-                        if (error.IdError.Equals(COM.Constant.MES_PRE))
-                        {
-                            messageError += error.Message + "\n";
-                        }
-                    });
-
-                    switch (idScreen)
-                    {
-                        case Bus.LoginBus.ID_ERROR_BACK_LOGIN:
-                            MessageBox.Show(messageError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        case Bus.LoginBus.ID_ERROR_CHANGE_PASSWORD:
-                            var resultMessageBox = MessageBox.Show(messageError, "Error", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                            if (resultMessageBox == DialogResult.OK)
-                            {
-                                //Show change passwordscreen
-                                this.backgroundImage.Controls.Remove(this.loginControl);
-                                this.setupChangePassword(loginInfo.TenDangNhap, loginInfo.MatKhau);
-                                break;
-                            }
-                            else
-                                return;
-                        default: return;
-                    }
-                }
+                this.loginSuccessful(loginInfo);
+                //if (result.Equals(COM.Constant.RES_SUC))
+                //{
+                //    this.loginSuccessful(loginInfo);
+                //}
+                //else if (result.Equals(COM.Constant.RES_FAI))
+                //{
+                //    var messageError = "";
+                //    listMessageError.ForEach((error) =>
+                //    {
+                //        if (error.IdError.Equals(COM.Constant.MES_PRE))
+                //        {
+                //            messageError += error.Message + "\n";
+                //        }
+                //    });
+                //    MessageBox.Show(messageError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //}
             });
         }
 

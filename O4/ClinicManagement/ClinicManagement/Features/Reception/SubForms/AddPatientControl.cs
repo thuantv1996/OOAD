@@ -19,36 +19,35 @@ namespace ClinicManagement.Features.Reception.SubForms
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            this.patientInformation.BringToFront();
-            this.btnBack.BringToFront();
-            this.btnConfirm.BringToFront();
-            this.btnCreate.Visible = false;
-            this.btnBack.Visible = true;
-            this.btnConfirm.Visible = true;
 
-            this.patientInformation.fillData(this.patientEdit.getData());
+            if (this.checkValid())
+            {
+                this.patientInformation.BringToFront();
+                this.btnBack.BringToFront();
+                this.btnConfirm.BringToFront();
+                this.btnCreate.Visible = false;
+                this.btnBack.Visible = true;
+                this.btnConfirm.Visible = true;
+
+                this.patientInformation.fillData(this.patientEdit.getData());
+            }
+            else
+                MessageBox.Show("Không được bỏ trống các trường dữ liệu quan trọng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private bool checkValid()
+        {
+            var patient = this.patientEdit.getData();
+            return !(String.IsNullOrWhiteSpace(patient.HoTen) || String.IsNullOrEmpty(patient.HoTen)
+                || String.IsNullOrWhiteSpace(patient.SoDienThoai) || String.IsNullOrEmpty(patient.SoDienThoai)
+                || String.IsNullOrWhiteSpace(patient.CMND) || String.IsNullOrEmpty(patient.CMND)
+                || String.IsNullOrWhiteSpace(patient.DiaChi) || String.IsNullOrEmpty(patient.DiaChi)
+                );
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            var patient = this.patientInformation.getData();
-            var msgError = "";
-            if (String.IsNullOrWhiteSpace(patient.HoTen) || String.IsNullOrEmpty(patient.HoTen))
-                msgError += "Họ Tên không được để trống" + "\n";
-            if (String.IsNullOrWhiteSpace(patient.SoDienThoai) || String.IsNullOrEmpty(patient.SoDienThoai))
-                msgError += "Số điện thoại không được để trống" + "\n";
-            if (String.IsNullOrWhiteSpace(patient.DiaChi) || String.IsNullOrEmpty(patient.DiaChi))
-                msgError += "Địa chỉ không được để trống" + "\n";
-            if (String.IsNullOrWhiteSpace(patient.CMND) || String.IsNullOrEmpty(patient.CMND))
-                msgError += "CMND không được để trống" + "\n";
-
-            if (!String.IsNullOrEmpty(msgError))
-            {
-                MessageBox.Show(msgError, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            this.CreateCompleted?.Invoke(this, patient);
+            this.CreateCompleted?.Invoke(this, this.patientInformation.getData());
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -62,6 +61,6 @@ namespace ClinicManagement.Features.Reception.SubForms
             this.patientEdit.fillData(this.patientInformation.getData());
         }
 
-        public event EventHandler<DTO.BenhNhanEnity> CreateCompleted;
+        public event EventHandler<DTO.BenhNhanDTO> CreateCompleted;
     }
 }

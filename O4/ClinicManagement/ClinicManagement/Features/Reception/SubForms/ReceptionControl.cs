@@ -12,33 +12,49 @@ namespace ClinicManagement.Features.Reception.SubForms
 {
     public partial class ReceptionControl : UserControl
     {
-        private DTO.BenhNhanEnity patient;
+        private DTO.BenhNhanDTO patient;
+        private List<DTO.LoaiHoSoDTO> listLoaiHoSo = new List<DTO.LoaiHoSoDTO>();
+        private List<DTO.HoSoBenhAnDTO> listHoSoTruoc = new List<DTO.HoSoBenhAnDTO>();
+        private List<DTO.PhongKhamDTO> listPhongKham = new List<DTO.PhongKhamDTO>();
+        private List<DTO.NhanVienDTO> listNhanVienTiepNhan = new List<DTO.NhanVienDTO>();
+        private Reception.Bus.ReceptionBus bus = Bus.ReceptionBus.SharedInstance;
+
         public ReceptionControl()
         {
             InitializeComponent();
+            this.btnBack.Visible = false;
+            this.fillMainInformation();
         }
 
-        public ReceptionControl(DTO.BenhNhanEnity patient)
+        public ReceptionControl(DTO.BenhNhanDTO patient)
         {
             InitializeComponent();
+            this.setupView(patient);
+            this.fillMainInformation();
+        }
+
+        public void setupView(DTO.BenhNhanDTO patient)
+        {
             this.patient = patient;
             this.fillCoreInformation();
-            this.fillMainInformation();
+            this.btnBack.Visible = false;
         }
 
         private void fillCoreInformation()
         {
-            this.txtMaBenhNhan.Text = patient.MaBenhNhan;
-            this.txtCMND.Text = patient.CMND;
-            var year = patient.NgaySinh.Substring(0, 4);
-            var month = patient.NgaySinh.Substring(4, 2);
-            var day = patient.NgaySinh.Substring(6, 2);
+            this.txtMaBenhNhan.Text = patient?.MaBenhNhan;
+            this.txtCMND.Text = patient?.CMND;
+            var year = patient?.NgaySinh.Substring(0, 4);
+            var month = patient?.NgaySinh.Substring(4, 2);
+            var day = patient?.NgaySinh.Substring(6, 2);
             this.txtNgaySinh.Text = String.Format("{0}/{1}/{2}", day, month, year);
-            this.txtGioiTinh.Text = patient.GioiTinh ? "Nam" : "Nữ";
-            this.txtHoTen.Text = patient.HoTen;
-            this.txtSoDienThoai.Text = patient.SoDienThoai;
-            this.txtDiaChi.Text = patient.DiaChi;
-            this.txtGhiChu.Text = patient.GhiChu.Split('\n').First();
+            if (patient != null)
+                this.txtGioiTinh.Text = patient.GioiTinh ? "Nam" : "Nữ";
+
+            this.txtHoTen.Text = patient?.HoTen;
+            this.txtSoDienThoai.Text = patient?.SoDienThoai;
+            this.txtDiaChi.Text = patient?.DiaChi;
+            this.txtGhiChu.Text = patient?.GhiChu.Split('\n').First();
         }
 
         private void fillMainInformation() {
@@ -48,7 +64,99 @@ namespace ClinicManagement.Features.Reception.SubForms
             var year = toDay.Year;
 
             this.txtNgayTiepNhan.Text = String.Format("{0}/{1}/{2}", day, month, year);
+            this.bus.getListLoaiHoSo((listResult, result) =>
+            {
+                if (result.Equals(COM.Constant.RES_SUC))
+                {
+                    listResult.ForEach((loai) =>
+                    {
+                        this.cbLoaiHoSo.Properties.Items.Add(loai.TenLoaiHoSo);
+                    });
+                    this.listLoaiHoSo.AddRange(listResult);
+                }
+            });
 
+            this.bus.getListMaHoSoTruoc(this.txtMaBenhNhan.Text, (listResult, result) =>
+            {
+                if (result.Equals(COM.Constant.RES_SUC))
+                {
+                    listResult.ForEach((hoSo) =>
+                    {
+                        this.cbMaHoSoTruoc.Properties.Items.Add(hoSo.MaHoSo);
+                    });
+                    this.listHoSoTruoc.AddRange(listResult);
+                }
+            });
+
+            this.bus.getListPhong((listResult, result) =>
+            {
+                if (result.Equals(COM.Constant.RES_SUC))
+                {
+                    listResult.ForEach((phong) =>
+                    {
+                        this.cbPhong.Properties.Items.Add(phong.TenPhong);
+                    });
+
+                    this.listPhongKham.AddRange(listResult);
+                }
+            });
+
+            this.bus.getListNhanVien((listResult, result) =>
+            {
+                if (result.Equals(COM.Constant.RES_SUC))
+                {
+                    listResult.ForEach(nhanVien =>
+                    {
+                        this.cbNguoiTiepNhan.Properties.Items.Add(nhanVien);
+                    });
+
+                    this.listNhanVienTiepNhan.AddRange(listResult);
+                }
+            });
         }
+
+        private void btnConfirm_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.btnCreate.BringToFront();
+            this.btnBack.Visible = false;
+            this.cbLoaiHoSo.Enabled
+                = this.cbMaHoSoTruoc.Enabled
+                = this.cbNguoiTiepNhan.Enabled
+                = this.cbPhong.Enabled
+                = this.txtYeuCauKham.Enabled
+                = true;
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            this.btnConfirm.BringToFront();
+            this.btnBack.Visible = true;
+            this.cbLoaiHoSo.Enabled
+                = this.cbMaHoSoTruoc.Enabled
+                = this.cbNguoiTiepNhan.Enabled
+                = this.cbPhong.Enabled
+                = this.txtYeuCauKham.Enabled
+                = false;
+        }
+
+        private void btnXemThem_Click(object sender, EventArgs e)
+        {
+            var content = new Label() { ForeColor = Color.Black, BackColor = Color.White, Dock = DockStyle.Fill, Font = new Font(Font.FontFamily, 10) };
+            var containerPanel = new Panel() { Left = Top = 0, Size = new Size(200, 200), AutoScroll = true };
+            containerPanel.Controls.Add(content);
+            content.Text = this.patient?.GhiChu;
+
+            var formContainer = new Form() { StartPosition = FormStartPosition.CenterParent, AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
+            formContainer.Controls.Add(containerPanel);
+
+            formContainer.ShowDialog();
+        }
+
+        
     }
 }

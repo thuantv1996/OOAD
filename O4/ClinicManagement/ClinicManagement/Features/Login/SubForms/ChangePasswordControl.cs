@@ -13,7 +13,7 @@ namespace ClinicManagement.Features.Login.SubForms
 {
     public partial class ChangePasswordControl : UserControl
     {
-        public ChangePasswordControl(DTO.TaiKhoanEnity account)
+        public ChangePasswordControl(DTO.TaiKhoanDTO account)
         {
             InitializeComponent();
             this.setupView();
@@ -93,8 +93,8 @@ namespace ClinicManagement.Features.Login.SubForms
 
         private GraphicsPath path = new GraphicsPath();
         private int _radius = 10;
-        public event EventHandler<DTO.TaiKhoanEnity> changeCompletion;
-        private DTO.TaiKhoanEnity account;
+        public event EventHandler<DTO.TaiKhoanDTO> changeCompletion;
+        private DTO.TaiKhoanDTO account;
 
         private void btnClose_Click(object sender, EventArgs e)
         {

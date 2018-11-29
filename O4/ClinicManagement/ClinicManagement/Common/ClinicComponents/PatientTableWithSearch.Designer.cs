@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtHoTen = new Components.NewControl.NewTextField();
             this.txtMaBenhNhan = new Components.NewControl.NewTextField();
             this.txtCMND = new Components.NewControl.NewTextField();
             this.btnSearch = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.table = new ClinicManagement.Common.ClinicComponents.PatientTable();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -150,5 +152,6 @@
         private Components.NewControl.NewTextField txtCMND;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
