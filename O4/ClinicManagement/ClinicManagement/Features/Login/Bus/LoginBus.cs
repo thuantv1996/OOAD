@@ -32,7 +32,7 @@ namespace ClinicManagement.Features.Login.Bus
         public void Login(TaiKhoanDTO account, Action<List<MessageError>, string> completion)
         {
             var listMessageError = new List<MessageError>();
-            var result = this.loginBusClient.DangNhapProcess(account, ref listMessageError);
+            var result = this.loginBusClient.DangNhapProcess(account);
             completion(listMessageError, result);
         }
     }

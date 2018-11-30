@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.txtHoTen = new Components.NewControl.NewTextField();
-            this.txtMaBenhNhan = new Components.NewControl.NewTextField();
-            this.txtCMND = new Components.NewControl.NewTextField();
+            this.txtHoTen = new ClinicManagement.Common.ClinicComponents.NewTextField();
+            this.txtMaBenhNhan = new ClinicManagement.Common.ClinicComponents.NewTextField();
+            this.txtCMND = new ClinicManagement.Common.ClinicComponents.NewTextField();
             this.btnSearch = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.table = new ClinicManagement.Common.ClinicComponents.PatientTable();
@@ -147,9 +147,9 @@
         #endregion
 
         private PatientTable table;
-        private Components.NewControl.NewTextField txtHoTen;
-        private Components.NewControl.NewTextField txtMaBenhNhan;
-        private Components.NewControl.NewTextField txtCMND;
+        private ClinicManagement.Common.ClinicComponents.NewTextField txtHoTen;
+        private ClinicManagement.Common.ClinicComponents.NewTextField txtMaBenhNhan;
+        private ClinicManagement.Common.ClinicComponents.NewTextField txtCMND;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Timer timer1;

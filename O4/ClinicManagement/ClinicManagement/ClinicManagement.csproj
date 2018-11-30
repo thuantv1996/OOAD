@@ -90,6 +90,30 @@
     <Compile Include="Common\ClinicComponents\MenuControl.Designer.cs">
       <DependentUpon>MenuControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\ClinicComponents\NewButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\NewButton.Designer.cs">
+      <DependentUpon>NewButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\NewComboBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\NewComboBox.Designer.cs">
+      <DependentUpon>NewComboBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\NewDateTimePicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\NewDateTimePicker.Designer.cs">
+      <DependentUpon>NewDateTimePicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\NewTextField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\NewTextField.Designer.cs">
+      <DependentUpon>NewTextField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\ClinicComponents\PatientTableWithSearch.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -213,6 +237,15 @@
     <EmbeddedResource Include="Common\ClinicComponents\MenuControl.resx">
       <DependentUpon>MenuControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Common\ClinicComponents\NewComboBox.resx">
+      <DependentUpon>NewComboBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\ClinicComponents\NewDateTimePicker.resx">
+      <DependentUpon>NewDateTimePicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Common\ClinicComponents\NewTextField.resx">
+      <DependentUpon>NewTextField.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Common\ClinicComponents\PatientTableWithSearch.resx">
       <DependentUpon>PatientTableWithSearch.cs</DependentUpon>
     </EmbeddedResource>
@@ -303,10 +336,6 @@
     <ProjectReference Include="..\BUS\BUS.csproj">
       <Project>{3dcb911a-91c7-4974-900a-2440eb9ac89f}</Project>
       <Name>BUS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Components\Components.csproj">
-      <Project>{83a1e407-ad93-47b8-99ac-4af5084f87ec}</Project>
-      <Name>Components</Name>
     </ProjectReference>
     <ProjectReference Include="..\COM\COM.csproj">
       <Project>{cbeaa07f-6059-4736-a9bd-e24500d08946}</Project>

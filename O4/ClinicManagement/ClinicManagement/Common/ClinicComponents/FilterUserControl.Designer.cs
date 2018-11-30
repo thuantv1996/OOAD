@@ -1,5 +1,4 @@
-﻿using Components.NewControl;
-
+﻿
 namespace ClinicManagement.Common.ClinicComponents
 {
     partial class FilterUserControl
@@ -30,10 +29,10 @@ namespace ClinicManagement.Common.ClinicComponents
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtCMND = new Components.NewControl.NewTextField();
+            this.txtCMND = new ClinicManagement.Common.ClinicComponents.NewTextField();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.txtHoTen = new Components.NewControl.NewTextField();
-            this.txtMaBenh = new Components.NewControl.NewTextField();
+            this.txtHoTen = new ClinicManagement.Common.ClinicComponents.NewTextField();
+            this.txtMaBenh = new ClinicManagement.Common.ClinicComponents.NewTextField();
             this.SuspendLayout();
             // 
             // txtCMND
@@ -117,9 +116,9 @@ namespace ClinicManagement.Common.ClinicComponents
         }
 
         #endregion
-        private NewTextField txtMaBenh;
-        private NewTextField txtHoTen;
-        private NewTextField txtCMND;
+        private ClinicManagement.Common.ClinicComponents.NewTextField txtMaBenh;
+        private ClinicManagement.Common.ClinicComponents.NewTextField txtHoTen;
+        private ClinicManagement.Common.ClinicComponents.NewTextField txtCMND;
         private System.Windows.Forms.Button btnSearch;
     }
 }
