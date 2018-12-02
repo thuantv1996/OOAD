@@ -113,7 +113,7 @@ namespace BUS.Mdl
             return Id;
         }
 
-        public string GetListRelativeHoSo(string MaBenhNhan, out List<HoSoBenhAnDTO> ListRelativeHoSo, ref List<MessageError> Messages)
+        public string GetListRelativeHoSo(string MaBenhNhan, out List<HoSoBenhAnDTO> ListRelativeHoSo)
         {
             HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();
             using(var db = new QLPHONGKHAMEntities())
@@ -127,11 +127,13 @@ namespace BUS.Mdl
         }
 
         public string SaveHoSo(HoSoBenhAnDTO hoSoBenhAn,
-                               ThanhToanDTO thanhToan,
-                               TrangThaiPhongDTO trangThaiPhong,
-                               ref List<MessageError> Messages)
+                               ThanhToanDTO thanhToan)
         {
-            // Check input
+            TrangThaiPhongDTO trangThaiPhong = null;
+            // get System date
+            string SystemDate = DateTime.Now.Year.ToString()
+                              + DateTime.Now.Month.ToString()
+                              + DateTime.Now.Day.ToString();
 
             ThanhToanBUS thanhToanBUS = new ThanhToanBUS();
             HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();
@@ -139,6 +141,10 @@ namespace BUS.Mdl
             TrangThaiPhongBUS trangThaiPhongBUS = new TrangThaiPhongBUS();
             using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
+                // lấy trạng thái phòng
+                trangThaiPhongBUS.GetTrangThaiPhong(db, hoSoBenhAn.MaPhongKham, SystemDate, out trangThaiPhong);
+                trangThaiPhong.SttCaoNhat += 1;
+
                 // nếu là hồ sơ tái khám
                 if (hoSoBenhAn.MaLoaiHoSo == BusConstant.HS_TAIKHAM)
                 {
@@ -147,12 +153,10 @@ namespace BUS.Mdl
                     // get MaHoSoGoc
                     hoSoBenhAnBUS.GetRootHoSoBenhAn(db, hoSoBenhAn.MaHoSoTruoc, out root);
                     hoSoBenhAn.MaHoSoGoc = root.MaHoSoGoc;
-
                 }
-
+                hoSoBenhAn.SoThuTu = trangThaiPhong.SttCaoNhat;
 
                 // điền thông tin vào thanh toán
-
                 string MaThanhToan = "";
                 thanhToanBUS.CreateIdThanhToan(db, out MaThanhToan);
                 thanhToan.MaThanhToan = MaThanhToan;

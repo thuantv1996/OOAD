@@ -107,7 +107,7 @@ namespace ClinicManagement.Features.Reception.SubForms
                 {
                     listResult.ForEach(nhanVien =>
                     {
-                        this.cbNguoiTiepNhan.Properties.Items.Add(nhanVien);
+                        this.cbNguoiTiepNhan.Properties.Items.Add(nhanVien.HoTenNV);
                     });
 
                     this.listNhanVienTiepNhan.AddRange(listResult);
@@ -164,6 +164,22 @@ namespace ClinicManagement.Features.Reception.SubForms
             formContainer.ShowDialog();
         }
 
-        
+        private void btnTimHoSoTruoc_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            var formContainer = new Form() {AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, StartPosition = FormStartPosition.CenterParent };
+            var previousControl = new SubForms.PreviousRecordsTable(this.patient.MaBenhNhan) { Size = new Size(811, 562) };
+            previousControl.DoubleToChoose += (ctrl, hoso) =>
+            {
+                this.cbMaHoSoTruoc.Text = hoso;
+                formContainer.Close();
+            };
+            formContainer.Controls.Add(previousControl);
+            formContainer.ShowDialog();
+        }
     }
 }

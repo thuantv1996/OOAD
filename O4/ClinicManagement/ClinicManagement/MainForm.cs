@@ -40,31 +40,28 @@ namespace ClinicManagement
                             new ClinicManagement.Features.Reception.Main.Reception(),
                             new ClinicManagement.Features.Reception.Main.ReceptionCreatePatientRecord()
                         });
-                        this.listContent.ForEach(control =>
+                        break;
+                    }
+                case Model.UserType.examination:
+                    {
+                        this.updateMenuControl(new string[] { "Trang chủ" });
+                        this.listContent.Clear();
+                        this.listContent.AddRange(new UserControl[]
                         {
-                            control.Dock = DockStyle.Fill;
-                            this.panelContent.Controls.Add(control);
+                            new ClinicManagement.Features.Examination.Main.ExaminationHome()
                         });
-                        System.EventHandler[] action =
-                        {
-                            new EventHandler((sender, e) =>
-                            {
-                                this.listContent[0].BringToFront();
-                            }),
-                            new EventHandler((sender, e) =>
-                            {
-                                this.listContent[1].BringToFront();
-                            }),
-                            new EventHandler((sender, e) =>
-                            {
-                                this.listContent[2].BringToFront();
-                            })
-                        };
-                        this.menuControl.listAction.AddRange(action);
                         break;
                     }
                 default: break;
             }
+
+            this.listContent.ForEach(control =>
+            {
+                control.Dock = DockStyle.Fill;
+                this.panelContent.Controls.Add(control);
+                this.menuControl.listAction.Add((sender, e) => { control.BringToFront(); });
+            });
+            
         }
 
         private void updateMenuControl(string[] items)

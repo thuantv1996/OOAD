@@ -20,6 +20,35 @@ namespace ClinicManagement.Features.Reception.Bus
         }
         protected ReceptionBus(){}
 
+        //MARK: -Private function
+        private string getNguoiTiepNhanByMaNV(string MaNhanVien)
+        {
+            var listResult = new List<DTO.NhanVienDTO>();
+            var result = this.clientBus.GetListNhanVienTiepNhan(out listResult);
+            if (result.Equals(COM.Constant.RES_SUC))
+                return listResult.Find(nv => nv.MaNV == MaNhanVien).HoTenNV;
+            return null;
+        }
+
+        private string getLoaiHoSoByMaLoai(string MaLoaiHoSo)
+        {
+            var listResult = new List<DTO.LoaiHoSoDTO>();
+            var result = this.clientBus.GetListLoaiHoSo(out listResult);
+            DTO.LoaiHoSoDTO loaiHoSo = null;
+            if (result.Equals(COM.Constant.RES_SUC))
+                loaiHoSo = listResult.Find(loai => loai.MaLoaiHoSo == MaLoaiHoSo);
+
+            return loaiHoSo != null ? loaiHoSo.TenLoaiHoSo : null;
+        }
+
+        private string convertDateFormat(string date)
+        {
+            var year = date.Substring(0, 4);
+            var month = date.Substring(4, 2);
+            var day = date.Substring(6, 2);
+            return String.Format("{0}/{1}/{2}", day, month, year);
+        }
+        //=============================================
         public void fetchListBenhNhan(Action<List<DTO.BenhNhanDTO>, string> completion)
         {
             Task.Run(() =>
@@ -77,9 +106,50 @@ namespace ClinicManagement.Features.Reception.Bus
         public void getListNhanVien(Action<List<DTO.NhanVienDTO>, string> completion)
         {
             var listResult = new List<DTO.NhanVienDTO>();
-            //var result = this.clientBus(out listResult);
-            completion(listResult, "");
+            var result = this.clientBus.GetListNhanVienTiepNhan(out listResult);
+            completion(listResult, result);
         }
+
+
+        //MARK: - Show Previous Records Table
+        public void getListHoSoByBenhNhan(string MaBenhNhan, Action<List<Model.HoSoTruocView>, string> completion)
+        {
+            var listHoSoView = new List<Model.HoSoTruocView>();
+            this.getListMaHoSoTruoc(MaBenhNhan, (listResult, result) =>
+            {
+                listResult.ForEach(hoso =>
+                {
+                    listHoSoView.Add(new Model.HoSoTruocView()
+                    {
+                        MaHoSo = hoso.MaHoSo,
+                        LoaiHoSo = this.getLoaiHoSoByMaLoai(hoso.MaLoaiHoSo),
+                        NguoiTiepNhan = this.getNguoiTiepNhanByMaNV(hoso.MaNguoiTN),
+                        NgayTiepNhan = this.convertDateFormat(hoso.NgayTiepNhan)
+                    });
+                });
+
+                completion(listHoSoView, result);
+            });
+        }
+
+        public void searchHoSoTruoc(string MaBenhNhan, Model.HoSoTruocView hoso, Action<List<Model.HoSoTruocView>, string> completion)
+        {
+            var listHoSoView = new List<Model.HoSoTruocView>();
+            this.getListHoSoByBenhNhan(MaBenhNhan, (listResult, result) =>
+            {
+                listResult.ForEach(hs =>
+                {
+                    if (hs.MaHoSo.Contains(hoso.MaHoSo)
+                    && hs.LoaiHoSo.Contains(hoso.LoaiHoSo)
+                    && hs.NguoiTiepNhan.Contains(hoso.NguoiTiepNhan)) {
+                        listHoSoView.Add(hs);
+                    }
+                });
+
+                completion(listHoSoView, result);
+            });
+        }
+        //=============================================
 
         static protected ReceptionBus sharedInstance;
 
