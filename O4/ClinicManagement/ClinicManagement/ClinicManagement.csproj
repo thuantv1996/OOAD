@@ -120,12 +120,39 @@
     <Compile Include="Common\ClinicComponents\PatientTableWithSearch.Designer.cs">
       <DependentUpon>PatientTableWithSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\ClinicComponents\RichTextBoxWithLine.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\RichTextBoxWithLine.Designer.cs">
+      <DependentUpon>RichTextBoxWithLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Examination\Bus\ExaminationBus.cs" />
+    <Compile Include="Features\Examination\SubForms\AssignTests.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Examination\SubForms\AssignTests.Designer.cs">
+      <DependentUpon>AssignTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Examination\SubForms\CreatePrescriptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Examination\SubForms\CreatePrescriptions.Designer.cs">
+      <DependentUpon>CreatePrescriptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Examination\SubForms\WaitingPatientTable.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Examination\SubForms\WaitingPatientTable.Designer.cs">
+      <DependentUpon>WaitingPatientTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Features\Reception\Main\Reception.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Features\Reception\Main\Reception.Designer.cs">
       <DependentUpon>Reception.cs</DependentUpon>
     </Compile>
+    <Compile Include="Features\Examination\Model\HoSoBenhAnView.cs" />
+    <Compile Include="Features\Reception\Model\HoSoTruocView.cs" />
     <Compile Include="Features\Reception\SubForms\AddPatientControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -214,6 +241,12 @@
     <Compile Include="Features\Reception\SubForms\CreateFormControl.Designer.cs">
       <DependentUpon>CreateFormControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Features\Reception\SubForms\PreviousRecordsTable.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Reception\SubForms\PreviousRecordsTable.Designer.cs">
+      <DependentUpon>PreviousRecordsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Features\Reception\SubForms\ReceptionControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -248,6 +281,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Common\ClinicComponents\PatientTableWithSearch.resx">
       <DependentUpon>PatientTableWithSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Examination\Main\ExaminationHome.resx">
+      <DependentUpon>ExaminationHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Examination\SubForms\AssignTests.resx">
+      <DependentUpon>AssignTests.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Examination\SubForms\CreatePrescriptions.resx">
+      <DependentUpon>CreatePrescriptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Examination\SubForms\WaitingPatientTable.resx">
+      <DependentUpon>WaitingPatientTable.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Reception\Main\Reception.resx">
       <DependentUpon>Reception.cs</DependentUpon>
@@ -288,6 +333,9 @@
     <EmbeddedResource Include="Features\Reception\SubForms\CreateFormControl.resx">
       <DependentUpon>CreateFormControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\Reception\SubForms\PreviousRecordsTable.resx">
+      <DependentUpon>PreviousRecordsTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\Reception\SubForms\ReceptionControl.resx">
       <DependentUpon>ReceptionControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -323,8 +371,6 @@
     <Folder Include="Features\Analysis\Bus\" />
     <Folder Include="Features\Analysis\SubForms\" />
     <Folder Include="Features\Common\" />
-    <Folder Include="Features\Examination\Bus\" />
-    <Folder Include="Features\Examination\SubForms\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\loginBackground.jpeg" />

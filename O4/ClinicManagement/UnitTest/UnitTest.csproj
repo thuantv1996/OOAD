@@ -59,6 +59,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\TestNhanVienDAO.cs" />
     <Compile Include="BUS\TestBenhNhanBUS.cs" />
     <Compile Include="TestDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,10 +72,6 @@
     <ProjectReference Include="..\BUS\BUS.csproj">
       <Project>{3dcb911a-91c7-4974-900a-2440eb9ac89f}</Project>
       <Name>BUS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\COM\COM.csproj">
-      <Project>{cbeaa07f-6059-4736-a9bd-e24500d08946}</Project>
-      <Name>COM</Name>
     </ProjectReference>
     <ProjectReference Include="..\DAO\DAO.csproj">
       <Project>{4e93204f-40b0-4120-8193-01fb0becad00}</Project>
