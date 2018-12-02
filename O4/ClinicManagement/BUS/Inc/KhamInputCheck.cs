@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BUS.Inc
 {
-    class DangNhapInputCheck
+    partial class KhamInputCheck
     {
 
     }

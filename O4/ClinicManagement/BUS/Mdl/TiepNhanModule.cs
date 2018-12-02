@@ -268,5 +268,10 @@ namespace BUS.Mdl
             return Constant.RES_SUC;
         }
 
+        public string InputCheck()
+        {
+            BUS.Inc.BenhNhanInputCheck benhNhanInputCheck = new Inc.BenhNhanInputCheck();
+            return "0";
+        }
     }
 }
