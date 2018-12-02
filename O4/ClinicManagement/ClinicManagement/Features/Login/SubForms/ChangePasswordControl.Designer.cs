@@ -32,14 +32,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtUsername = new System.Windows.Forms.Label();
-            this.btnSave = new Components.NewControl.NewButton(this.components);
+            this.btnSave = new ClinicManagement.Common.ClinicComponents.NewButton(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
-            this.txtNewPassword = new Components.NewControl.NewTextField();
-            this.txtConfirmPassword = new Components.NewControl.NewTextField();
+            this.txtNewPassword = new ClinicManagement.Common.ClinicComponents.NewTextField();
+            this.txtConfirmPassword = new ClinicManagement.Common.ClinicComponents.NewTextField();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -222,10 +222,10 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private Components.NewControl.NewTextField txtNewPassword;
+        private ClinicManagement.Common.ClinicComponents.NewTextField txtNewPassword;
         private System.Windows.Forms.Label txtUsername;
-        private Components.NewControl.NewTextField txtConfirmPassword;
-        private Components.NewControl.NewButton btnSave;
+        private ClinicManagement.Common.ClinicComponents.NewTextField txtConfirmPassword;
+        private ClinicManagement.Common.ClinicComponents.NewButton btnSave;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

@@ -37,12 +37,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtNote = new System.Windows.Forms.RichTextBox();
             this.btnCreate = new System.Windows.Forms.Button();
-            this.cbBirthDay = new Components.NewControl.NewDateTimePicker();
-            this.txtPhoneNumber = new Components.NewControl.NewTextField();
-            this.txtAddress = new Components.NewControl.NewTextField();
-            this.cbSex = new Components.NewControl.NewComboBox();
-            this.txtCMND = new Components.NewControl.NewTextField();
-            this.txtName = new Components.NewControl.NewTextField();
+            this.cbBirthDay = new ClinicManagement.Common.ClinicComponents.NewDateTimePicker();
+            this.txtPhoneNumber = new ClinicManagement.Common.ClinicComponents.NewTextField();
+            this.txtAddress = new ClinicManagement.Common.ClinicComponents.NewTextField();
+            this.cbSex = new ClinicManagement.Common.ClinicComponents.NewComboBox();
+            this.txtCMND = new ClinicManagement.Common.ClinicComponents.NewTextField();
+            this.txtName = new ClinicManagement.Common.ClinicComponents.NewTextField();
             this.SuspendLayout();
             // 
             // label7
@@ -261,9 +261,9 @@
 
         #endregion
 
-        private Components.NewControl.NewDateTimePicker cbBirthDay;
+        private ClinicManagement.Common.ClinicComponents.NewDateTimePicker cbBirthDay;
         private System.Windows.Forms.Label label7;
-        private Components.NewControl.NewTextField txtPhoneNumber;
+        private ClinicManagement.Common.ClinicComponents.NewTextField txtPhoneNumber;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -271,10 +271,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox txtNote;
-        private Components.NewControl.NewTextField txtAddress;
-        private Components.NewControl.NewComboBox cbSex;
-        private Components.NewControl.NewTextField txtCMND;
-        private Components.NewControl.NewTextField txtName;
+        private ClinicManagement.Common.ClinicComponents.NewTextField txtAddress;
+        private ClinicManagement.Common.ClinicComponents.NewComboBox cbSex;
+        private ClinicManagement.Common.ClinicComponents.NewTextField txtCMND;
+        private ClinicManagement.Common.ClinicComponents.NewTextField txtName;
         private System.Windows.Forms.Button btnCreate;
     }
 }

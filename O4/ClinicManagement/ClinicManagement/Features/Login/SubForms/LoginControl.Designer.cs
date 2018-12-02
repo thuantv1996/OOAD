@@ -31,10 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnLogin = new Components.NewControl.NewButton(this.components);
+            this.btnLogin = new ClinicManagement.Common.ClinicComponents.NewButton(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.userNameTextField = new Components.NewControl.NewTextField();
-            this.passwordTextField = new Components.NewControl.NewTextField();
+            this.userNameTextField = new ClinicManagement.Common.ClinicComponents.NewTextField();
+            this.passwordTextField = new ClinicManagement.Common.ClinicComponents.NewTextField();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -162,9 +162,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private Components.NewControl.NewButton btnLogin;
+        private ClinicManagement.Common.ClinicComponents.NewButton btnLogin;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private Components.NewControl.NewTextField userNameTextField;
-        private Components.NewControl.NewTextField passwordTextField;
+        private ClinicManagement.Common.ClinicComponents.NewTextField userNameTextField;
+        private ClinicManagement.Common.ClinicComponents.NewTextField passwordTextField;
     }
 }

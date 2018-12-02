@@ -146,8 +146,15 @@ namespace ClinicManagement.Features.Reception.SubForms
 
         private void btnXemThem_Click(object sender, EventArgs e)
         {
-            var content = new Label() { ForeColor = Color.Black, BackColor = Color.White, Dock = DockStyle.Fill, Font = new Font(Font.FontFamily, 10) };
-            var containerPanel = new Panel() { Left = Top = 0, Size = new Size(200, 200), AutoScroll = true };
+            var content = new Label() {
+                AutoSize = true,
+                Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right,
+                ForeColor = Color.Black,
+                BackColor = Color.White,
+                Font = new Font(Font.FontFamily, 10),
+                MaximumSize = new Size(450,0)
+            };
+            var containerPanel = new Panel() { Left = Top = 0, Size = new Size(500, 500), AutoScroll = true, BackColor = Color.White };
             containerPanel.Controls.Add(content);
             content.Text = this.patient?.GhiChu;
 
