@@ -6,6 +6,7 @@ using BUS.Entities;
 using DAO;
 using BUS.Com;
 using DTO;
+using BUS.Inc;
 
 namespace BUS.Mdl
 {
@@ -49,23 +50,6 @@ namespace BUS.Mdl
             }
             return Constant.RES_SUC;
         }
-        /* tại mành hình tiếp nhận không thực hiện việc get information bệnh nhân theo mã
-         * thay vào đó ta chọn trên list và gửi data sang màn hình khác
-        public string GetInformationBenhNhan(string MaBenhNhan, out BenhNhanEnity BenhNhan, ref List<MessageError> Messages)
-        {
-            // Tạo đối tượng BenhNhanBUS  
-            BenhNhanBUS benhNhanBUS = new BenhNhanBUS();
-            // nếu get information fail
-            if (benhNhanBUS.GetInformationBenhNhan(MaBenhNhan, out BenhNhan, ref Messages).Equals(Constant.RES_FAI))
-            {
-                MessageError Mes = new MessageError
-                { IdError = Constant.MES_PRE,
-                  Message = "Một lỗi bất ngờ đã xãy ra vui lòng thực hiện lại!" };
-                return Constant.RES_FAI;
-            }
-            return Constant.RES_SUC;
-        }
-        */
 
         public string GetListLoaiHoSo(out List<LoaiHoSoDTO> loaiHoSoDTOs)
         {
@@ -85,7 +69,6 @@ namespace BUS.Mdl
             return Constant.RES_SUC;
         }
         
-
         public string GetListPhongKham(out List<PhongKhamDTO> ListPhongKham)
         {
             PhongKhamBUS phongKhamBUS = new PhongKhamBUS();
@@ -99,15 +82,6 @@ namespace BUS.Mdl
             }
             return Constant.RES_SUC;
         }
-        
-        /*
-        public string GetInformationPhongKham(string MaPhongKham, out PhongKhamEnity informationPhongKham, ref List<MessageError> Messages)
-        {
-            PhongKhamBUS phongKhamBUS = new PhongKhamBUS();
-            phongKhamBUS.GetInformationPhongKham(MaPhongKham, out informationPhongKham, ref Messages);
-            return Constant.RES_SUC;
-        }
-        */
 
         public int GetSoThuTu(string MaPhong, ref List<MessageError> Messages)
         {
@@ -268,10 +242,16 @@ namespace BUS.Mdl
             return Constant.RES_SUC;
         }
 
-        public string InputCheck()
+        public string BenhNhanInputCheck(BenhNhanDTO benhNhan, ref List<string> MessageError)
         {
-            BUS.Inc.BenhNhanInputCheck benhNhanInputCheck = new Inc.BenhNhanInputCheck();
-            return "0";
+            BenhNhanInputCheck benhNhanInputCheck = new BenhNhanInputCheck();
+            return benhNhanInputCheck.CheckInput(benhNhan, ref MessageError);
+        }
+
+        public string TiepNhanInputCheck(TiepNhanInputCheck.TiepNhanEntity entity, ref List<string> MessageError)
+        {
+            TiepNhanInputCheck inputCheck = new TiepNhanInputCheck();
+            return inputCheck.InputCheck(entity, ref MessageError);
         }
     }
 }

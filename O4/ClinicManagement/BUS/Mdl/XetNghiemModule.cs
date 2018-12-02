@@ -3,11 +3,9 @@ using BUS.Imp;
 using COM;
 using DAO;
 using DTO;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BUS.Inc;
 
 namespace BUS.Mdl
 {
@@ -135,6 +133,13 @@ namespace BUS.Mdl
                 }
             }
             return total - number;
+        }
+
+        // check input
+        public string CheckInput(KetQuaXetNghiemDTO ketQuaXetNghiem, ref List<string> MessageError)
+        {
+            XetNghiemInputCheck inputCheck = new XetNghiemInputCheck();
+            return inputCheck.InputCheck(ketQuaXetNghiem, ref MessageError);
         }
     }
 }

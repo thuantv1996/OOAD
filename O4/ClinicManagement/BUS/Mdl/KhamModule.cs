@@ -1,13 +1,10 @@
 ﻿using BUS.Imp;
 using COM;
 using DTO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DAO;
 using BUS.Com;
+using BUS.Inc;
 
 namespace BUS.Mdl
 {
@@ -69,6 +66,11 @@ namespace BUS.Mdl
         }
 
         // check input
+        public string InputCheck(HoSoBenhAnDTO hoSo, ref List<string> MessageError)
+        {
+            KhamInputCheck inputCheck = new KhamInputCheck();
+            return inputCheck.InputCheck(hoSo, ref MessageError);
+        }
 
         // Lưu thông tin Khám
         public string KhamProcessing(HoSoBenhAnDTO hoSoBenhAn)
