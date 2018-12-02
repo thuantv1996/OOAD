@@ -85,10 +85,12 @@
     <Compile Include="Imp\ThanhToanBUS.cs" />
     <Compile Include="Imp\XetNghiemBUS.cs" />
     <Compile Include="Inc\BenhNhanInputCheck.cs" />
-    <Compile Include="Inc\DangNhapInputCheck.cs" />
+    <Compile Include="Inc\KhamInputCheck.cs" />
     <Compile Include="Entities\BenhNhanSearchEntity.cs" />
     <Compile Include="Entities\DangNhapSearchEntity.cs" />
     <Compile Include="Entities\HoSoSearchEntity.cs" />
+    <Compile Include="Inc\TiepNhanInputCheck.cs" />
+    <Compile Include="Inc\XetNghiemInputCheck.cs" />
     <Compile Include="Mdl\DangNhapModule.cs" />
     <Compile Include="Mdl\KhamModule.cs" />
     <Compile Include="Mdl\ThanhToanModule.cs" />

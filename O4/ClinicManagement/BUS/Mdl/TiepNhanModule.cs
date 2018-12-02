@@ -6,6 +6,7 @@ using BUS.Entities;
 using DAO;
 using BUS.Com;
 using DTO;
+using BUS.Inc;
 
 namespace BUS.Mdl
 {
@@ -49,23 +50,6 @@ namespace BUS.Mdl
             }
             return Constant.RES_SUC;
         }
-        /* tại mành hình tiếp nhận không thực hiện việc get information bệnh nhân theo mã
-         * thay vào đó ta chọn trên list và gửi data sang màn hình khác
-        public string GetInformationBenhNhan(string MaBenhNhan, out BenhNhanEnity BenhNhan, ref List<MessageError> Messages)
-        {
-            // Tạo đối tượng BenhNhanBUS  
-            BenhNhanBUS benhNhanBUS = new BenhNhanBUS();
-            // nếu get information fail
-            if (benhNhanBUS.GetInformationBenhNhan(MaBenhNhan, out BenhNhan, ref Messages).Equals(Constant.RES_FAI))
-            {
-                MessageError Mes = new MessageError
-                { IdError = Constant.MES_PRE,
-                  Message = "Một lỗi bất ngờ đã xãy ra vui lòng thực hiện lại!" };
-                return Constant.RES_FAI;
-            }
-            return Constant.RES_SUC;
-        }
-        */
 
         public string GetListLoaiHoSo(out List<LoaiHoSoDTO> loaiHoSoDTOs)
         {
@@ -85,7 +69,6 @@ namespace BUS.Mdl
             return Constant.RES_SUC;
         }
         
-
         public string GetListPhongKham(out List<PhongKhamDTO> ListPhongKham)
         {
             PhongKhamBUS phongKhamBUS = new PhongKhamBUS();
@@ -99,15 +82,6 @@ namespace BUS.Mdl
             }
             return Constant.RES_SUC;
         }
-        
-        /*
-        public string GetInformationPhongKham(string MaPhongKham, out PhongKhamEnity informationPhongKham, ref List<MessageError> Messages)
-        {
-            PhongKhamBUS phongKhamBUS = new PhongKhamBUS();
-            phongKhamBUS.GetInformationPhongKham(MaPhongKham, out informationPhongKham, ref Messages);
-            return Constant.RES_SUC;
-        }
-        */
 
         public int GetSoThuTu(string MaPhong, ref List<MessageError> Messages)
         {
@@ -139,7 +113,7 @@ namespace BUS.Mdl
             return Id;
         }
 
-        public string GetListRelativeHoSo(string MaBenhNhan, out List<HoSoBenhAnDTO> ListRelativeHoSo, ref List<MessageError> Messages)
+        public string GetListRelativeHoSo(string MaBenhNhan, out List<HoSoBenhAnDTO> ListRelativeHoSo)
         {
             HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();
             using(var db = new QLPHONGKHAMEntities())
@@ -153,11 +127,13 @@ namespace BUS.Mdl
         }
 
         public string SaveHoSo(HoSoBenhAnDTO hoSoBenhAn,
-                               ThanhToanDTO thanhToan,
-                               TrangThaiPhongDTO trangThaiPhong,
-                               ref List<MessageError> Messages)
+                               ThanhToanDTO thanhToan)
         {
-            // Check input
+            TrangThaiPhongDTO trangThaiPhong = null;
+            // get System date
+            string SystemDate = DateTime.Now.Year.ToString()
+                              + DateTime.Now.Month.ToString()
+                              + DateTime.Now.Day.ToString();
 
             ThanhToanBUS thanhToanBUS = new ThanhToanBUS();
             HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();
@@ -165,6 +141,10 @@ namespace BUS.Mdl
             TrangThaiPhongBUS trangThaiPhongBUS = new TrangThaiPhongBUS();
             using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
+                // lấy trạng thái phòng
+                trangThaiPhongBUS.GetTrangThaiPhong(db, hoSoBenhAn.MaPhongKham, SystemDate, out trangThaiPhong);
+                trangThaiPhong.SttCaoNhat += 1;
+
                 // nếu là hồ sơ tái khám
                 if (hoSoBenhAn.MaLoaiHoSo == BusConstant.HS_TAIKHAM)
                 {
@@ -173,12 +153,10 @@ namespace BUS.Mdl
                     // get MaHoSoGoc
                     hoSoBenhAnBUS.GetRootHoSoBenhAn(db, hoSoBenhAn.MaHoSoTruoc, out root);
                     hoSoBenhAn.MaHoSoGoc = root.MaHoSoGoc;
-
                 }
-
+                hoSoBenhAn.SoThuTu = trangThaiPhong.SttCaoNhat;
 
                 // điền thông tin vào thanh toán
-
                 string MaThanhToan = "";
                 thanhToanBUS.CreateIdThanhToan(db, out MaThanhToan);
                 thanhToan.MaThanhToan = MaThanhToan;
@@ -268,5 +246,16 @@ namespace BUS.Mdl
             return Constant.RES_SUC;
         }
 
+        public string BenhNhanInputCheck(BenhNhanDTO benhNhan, ref List<string> MessageError)
+        {
+            BenhNhanInputCheck benhNhanInputCheck = new BenhNhanInputCheck();
+            return benhNhanInputCheck.CheckInput(benhNhan, ref MessageError);
+        }
+
+        public string TiepNhanInputCheck(TiepNhanInputCheck.TiepNhanEntity entity, ref List<string> MessageError)
+        {
+            TiepNhanInputCheck inputCheck = new TiepNhanInputCheck();
+            return inputCheck.InputCheck(entity, ref MessageError);
+        }
     }
 }

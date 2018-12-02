@@ -3,103 +3,110 @@ using System.Collections.Generic;
 using BUS.Com;
 using System.Globalization;
 using DTO;
+using COM;
 
 namespace BUS.Inc
 {
-    class BenhNhanInputCheck
+    partial class BenhNhanInputCheck
     {
-        public string CheckInput(BenhNhanDTO BenhNhan, out List<string> MessageError)
+        public string CheckInput(BenhNhanDTO BenhNhan, ref List<string> MessageError)
         {
-            string ProgramName = "BenhNhanInputCheck_CheckInput";
             MessageError = new List<string>();
-            int NumberError = 0;
-            if(BenhNhan == null)
+            if(CheckEmpty(BenhNhan, ref MessageError) == Constant.RES_FAI)
             {
-                MessageError.Add(String.Format("Dữ liệu bệnh nhân là null - [{0}]",ProgramName));
-                return COM.Constant.RES_FAI;
+                return Constant.RES_FAI;
             }
-            // Kiểm tra độ dài tên
-            if(BenhNhan.HoTen.Length > BusConstant.LENGTH_HOTEN_BENHNHAN)
+            if (CheckDataType(BenhNhan, ref MessageError) == Constant.RES_FAI)
             {
-                MessageError.Add(String.Format("Họ tên bệnh nhân tối đa {0} ký tự - [{1}]", BusConstant.LENGTH_HOTEN_BENHNHAN, ProgramName));
-                NumberError++;
+                return Constant.RES_FAI;
             }
-            if (BenhNhan.HoTen.Equals(""))
+            if (CheckMaxLength(BenhNhan, ref MessageError) == Constant.RES_FAI)
             {
-                MessageError.Add(String.Format("Hãy nhập họ tên bệnh nhân {0}", ProgramName));
-                NumberError++;
+                return Constant.RES_FAI;
             }
-
-            // Kiểm tra ngày sinh
-            try
+            return Constant.RES_SUC;
+        }
+        private string CheckEmpty(BenhNhanDTO BenhNhan, ref List<string> MessageError)
+        {
+            if (String.IsNullOrEmpty(BenhNhan.HoTen))
             {
-                DateTime.ParseExact(BenhNhan.NgaySinh, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                MessageError.Add("Vui lòng nhập tên bệnh nhân!");
+                return Constant.RES_FAI;
             }
-            catch
+            return Constant.RES_SUC;
+        }
+        private string CheckDataType(BenhNhanDTO BenhNhan, ref List<string> MessageError)
+        {
+            foreach(char index in BenhNhan.CMND)
             {
-                MessageError.Add(String.Format("Ngày sinh không hợp lệ - Định dạng ngày sinh dd/MM/yyyy - [{0}]", ProgramName));
-                NumberError++;
-            }
-
-            // Kiểm tra độ dài CMND
-            if (BenhNhan.CMND.Length > BusConstant.LENGTH_CMND_BENHNHAN)
-            {
-                MessageError.Add(String.Format("Số CMND tối đa {0} ký tự - [{1}]", BusConstant.LENGTH_CMND_BENHNHAN, ProgramName));
-                NumberError++;
-            }
-            // Kiểm tra CMND là số
-            try
-            {
-                if (!BenhNhan.CMND.Equals(""))
+                if(index < '0' || index > '9')
                 {
-                    Int32.Parse(BenhNhan.CMND);
+                    MessageError.Add("Số CMND phải là số!");
+                    return Constant.RES_FAI;
                 }
             }
-            catch
-            {
-                MessageError.Add(String.Format("Số chứng minh nhân dân không hợp lệ - [{0}]", ProgramName));
-                NumberError++;
-            }
 
-            // Kiểm tra độ dài số điện thoại
-            if (BenhNhan.SoDienThoai.Length > BusConstant.LENGTH_SODIENTHOAI_BENHNHAN)
-            {
-                MessageError.Add(String.Format("Số điện thoại tối đa {0} ký tự - [{1}]", BusConstant.LENGTH_SODIENTHOAI_BENHNHAN, ProgramName));
-                NumberError++;
-            }
-            // Kiểm tra số điện thoại là số
             try
             {
-                if (!BenhNhan.CMND.Equals(""))
+                DateTime ngaySinh = new DateTime(Int32.Parse(BenhNhan.NgaySinh.Substring(0, 4)),
+                                                 Int32.Parse(BenhNhan.NgaySinh.Substring(4, 2)),
+                                                 Int32.Parse(BenhNhan.NgaySinh.Substring(6, 2))
+                                                );
+            }catch(Exception e)
+            {
+                MessageError.Add("Ngày sinh không hợp lệ");
+                return Constant.RES_FAI;
+            }
+
+            foreach (char index in BenhNhan.SoDienThoai)
+            {
+                if (index < '0' || index > '9')
                 {
-                    Int32.Parse(BenhNhan.CMND);
+                    MessageError.Add("Số điện thoại phải là số!");
+                    return Constant.RES_FAI;
                 }
             }
-            catch
+
+            return Constant.RES_SUC;
+        }
+        private string CheckMaxLength(BenhNhanDTO BenhNhan, ref List<string> MessageError)
+        {
+            if(BenhNhan.HoTen.Length > 50)
             {
-                MessageError.Add(String.Format("Số điện thoại không hợp lệ - [{0}]", ProgramName));
-                NumberError++;
-            }
-            // Kiểm tra độ dài địa chỉ
-            if (BenhNhan.DiaChi.Length > BusConstant.LENGTH_DIACHI_BENHNHAN)
-            {
-                MessageError.Add(String.Format("Địa chỉ tối đa {0} ký tự - [{1}]", BusConstant.LENGTH_DIACHI_BENHNHAN, ProgramName));
-                NumberError++;
-            }
-            // Kiểm tra độ dài ghi chú
-            if (BenhNhan.GhiChu.Length > BusConstant.LENGTH_GHICHU_BENHNHAN)
-            {
-                MessageError.Add(String.Format("Ghi chú tối đa {0} ký tự - [{1}]", BusConstant.LENGTH_GHICHU_BENHNHAN, ProgramName));
-                NumberError++;
+                MessageError.Add("Họ tên bệnh nhân không quá 50 ký tự!");
+                return Constant.RES_FAI;
             }
 
-            
-
-            if (NumberError != 0)
+            if (BenhNhan.CMND.Length != 9 && BenhNhan.CMND.Length != 12)
             {
-                return COM.Constant.RES_FAI;
-            } 
-            return COM.Constant.RES_SUC;
+                MessageError.Add("Số CMND không hợp lệ!");
+                return Constant.RES_FAI;
+            }
+
+            if (BenhNhan.NgaySinh.Length != 8)
+            {
+                MessageError.Add("Ngày sinh không hợp lệ!");
+                return Constant.RES_FAI;
+            }
+
+            if (BenhNhan.SoDienThoai.Length > 11)
+            {
+                MessageError.Add("Số điện thoại không hợp lệ!");
+                return Constant.RES_FAI;
+            }
+
+            if (BenhNhan.DiaChi.Length > 250)
+            {
+                MessageError.Add("Địa chỉ dài không quá 250 ký tự!");
+                return Constant.RES_FAI;
+            }
+
+            if (BenhNhan.GhiChu.Length > 250)
+            {
+                MessageError.Add("Ghi chú dài không quá 250 ký tự!");
+                return Constant.RES_FAI;
+            }
+            return Constant.RES_SUC;
         }
     }
 }
