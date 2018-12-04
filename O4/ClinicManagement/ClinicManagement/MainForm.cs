@@ -48,7 +48,7 @@ namespace ClinicManagement
                         this.listContent.Clear();
                         this.listContent.AddRange(new UserControl[]
                         {
-                            new ClinicManagement.Features.Examination.Main.ExaminationHome()
+                            new ClinicManagement.Features.Examination.SubForms.ExaminationHome()
                         });
                         break;
                     }

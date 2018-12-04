@@ -114,6 +114,12 @@
     <Compile Include="Common\ClinicComponents\NewTextField.Designer.cs">
       <DependentUpon>NewTextField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\ClinicComponents\PatientMainInformation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\PatientMainInformation.Designer.cs">
+      <DependentUpon>PatientMainInformation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\ClinicComponents\PatientTableWithSearch.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -127,6 +133,12 @@
       <DependentUpon>RichTextBoxWithLine.cs</DependentUpon>
     </Compile>
     <Compile Include="Features\Examination\Bus\ExaminationBus.cs" />
+    <Compile Include="Features\Examination\Main\ExaminationHome.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Examination\Main\ExaminationHome.Designer.cs">
+      <DependentUpon>ExaminationHome.cs</DependentUpon>
+    </Compile>
     <Compile Include="Features\Examination\SubForms\AssignTests.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -152,6 +164,7 @@
       <DependentUpon>Reception.cs</DependentUpon>
     </Compile>
     <Compile Include="Features\Examination\Model\HoSoBenhAnView.cs" />
+    <Compile Include="Features\Reception\Model\HoSoBenhAnView.cs" />
     <Compile Include="Features\Reception\Model\HoSoTruocView.cs" />
     <Compile Include="Features\Reception\SubForms\AddPatientControl.cs">
       <SubType>UserControl</SubType>
@@ -191,11 +204,12 @@
     <Compile Include="Features\Analysis\Main\AnalysisHome.Designer.cs">
       <DependentUpon>AnalysisHome.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\Examination\Main\ExaminationHome.cs">
+    <Compile Include="Features\Examination\SubForms\MedicalExamination.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Features\Examination\Main\ExaminationHome.Designer.cs">
-      <DependentUpon>ExaminationHome.cs</DependentUpon>
+    <Compile Include="Features\Examination\SubForms\.Designer.cs">
+      <DependentUpon>MedicalExamination.cs</DependentUpon>
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Features\Login\Bus\LoginBus.cs" />
     <Compile Include="Features\Login\Main\LoginForm.cs">
@@ -279,11 +293,17 @@
     <EmbeddedResource Include="Common\ClinicComponents\NewTextField.resx">
       <DependentUpon>NewTextField.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Common\ClinicComponents\PatientMainInformation.resx">
+      <DependentUpon>PatientMainInformation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Common\ClinicComponents\PatientTableWithSearch.resx">
       <DependentUpon>PatientTableWithSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Examination\Main\ExaminationHome.resx">
       <DependentUpon>ExaminationHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Examination\SubForms\MedicalExamination.resx">
+      <DependentUpon>MedicalExamination.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Examination\SubForms\AssignTests.resx">
       <DependentUpon>AssignTests.cs</DependentUpon>

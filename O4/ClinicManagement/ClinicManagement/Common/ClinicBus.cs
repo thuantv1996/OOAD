@@ -41,5 +41,24 @@ namespace ClinicManagement.Common
             }
             return table;
         }
+
+        static public string convertDateToView(string date)
+        {
+            var year = date.Substring(0, 4);
+            var month = date.Substring(4, 2);
+            var day = date.Substring(6, 2);
+            return String.Format("{0}/{1}/{2}", day, month, year);
+        }
+
+        static public string convertViewToDate(string date)
+        {
+            var list = date.Split('/');
+            var year = list.First();
+            var month = list[1];
+            var day = list.Last();
+            return String.Format("{0}{1}{2}", year, month, day);
+        }
     }
+
+   
 }
