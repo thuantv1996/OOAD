@@ -33,6 +33,7 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.txtSoTienKham = new System.Windows.Forms.Label();
             this.cbMaHoSoTruoc = new DevExpress.XtraEditors.ComboBoxEdit();
             this.label9 = new System.Windows.Forms.Label();
@@ -45,13 +46,12 @@
             this.cbPhong = new DevExpress.XtraEditors.ComboBoxEdit();
             this.cbNguoiTiepNhan = new DevExpress.XtraEditors.ComboBoxEdit();
             this.label19 = new System.Windows.Forms.Label();
+            this.txtYeuCauKham = new ClinicManagement.Common.ClinicComponents.RichTextBoxWithLine(this.components);
             this.label15 = new System.Windows.Forms.Label();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.patientMainInformation1 = new ClinicManagement.Common.ClinicComponents.PatientMainInformation();
-            this.txtYeuCauKham = new ClinicManagement.Common.ClinicComponents.RichTextBoxWithLine(this.components);
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbMaHoSoTruoc.Properties)).BeginInit();
@@ -79,7 +79,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.37569F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 19.31385F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.02541F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 98F));
             this.tableLayoutPanel2.Controls.Add(this.label21, 2, 3);
             this.tableLayoutPanel2.Controls.Add(this.label20, 2, 2);
             this.tableLayoutPanel2.Controls.Add(this.btnSearch, 4, 1);
@@ -127,6 +127,18 @@
             this.label20.TabIndex = 13;
             this.label20.Text = "Phòng:";
             // 
+            // btnSearch
+            // 
+            this.btnSearch.BackColor = System.Drawing.Color.White;
+            this.btnSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSearch.Image = global::ClinicManagement.Properties.Resources.ico_search16;
+            this.btnSearch.Location = new System.Drawing.Point(682, 40);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(93, 31);
+            this.btnSearch.TabIndex = 9;
+            this.btnSearch.UseVisualStyleBackColor = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // txtSoTienKham
             // 
             this.txtSoTienKham.AutoSize = true;
@@ -146,7 +158,7 @@
             this.cbMaHoSoTruoc.Properties.Appearance.Options.UseFont = true;
             this.cbMaHoSoTruoc.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbMaHoSoTruoc.Size = new System.Drawing.Size(267, 28);
+            this.cbMaHoSoTruoc.Size = new System.Drawing.Size(266, 28);
             this.cbMaHoSoTruoc.TabIndex = 8;
             // 
             // label9
@@ -191,7 +203,7 @@
             this.cbLoaiHoSo.Properties.Appearance.Options.UseFont = true;
             this.cbLoaiHoSo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbLoaiHoSo.Size = new System.Drawing.Size(267, 28);
+            this.cbLoaiHoSo.Size = new System.Drawing.Size(266, 28);
             this.cbLoaiHoSo.TabIndex = 4;
             // 
             // txtMaHoSo
@@ -234,7 +246,7 @@
             this.cbPhong.Properties.Appearance.Options.UseFont = true;
             this.cbPhong.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbPhong.Size = new System.Drawing.Size(267, 28);
+            this.cbPhong.Size = new System.Drawing.Size(266, 28);
             this.cbPhong.TabIndex = 14;
             // 
             // cbNguoiTiepNhan
@@ -246,7 +258,7 @@
             this.cbNguoiTiepNhan.Properties.Appearance.Options.UseFont = true;
             this.cbNguoiTiepNhan.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbNguoiTiepNhan.Size = new System.Drawing.Size(267, 28);
+            this.cbNguoiTiepNhan.Size = new System.Drawing.Size(266, 28);
             this.cbNguoiTiepNhan.TabIndex = 15;
             // 
             // label19
@@ -259,6 +271,15 @@
             this.label19.Size = new System.Drawing.Size(125, 37);
             this.label19.TabIndex = 13;
             this.label19.Text = "Loại hồ sơ:";
+            // 
+            // txtYeuCauKham
+            // 
+            this.txtYeuCauKham.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtYeuCauKham.Location = new System.Drawing.Point(6, 214);
+            this.txtYeuCauKham.Name = "txtYeuCauKham";
+            this.txtYeuCauKham.Size = new System.Drawing.Size(778, 145);
+            this.txtYeuCauKham.TabIndex = 11;
+            this.txtYeuCauKham.Text = "-  ";
             // 
             // label15
             // 
@@ -300,18 +321,6 @@
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
-            // btnSearch
-            // 
-            this.btnSearch.BackColor = System.Drawing.Color.White;
-            this.btnSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSearch.Image = global::ClinicManagement.Properties.Resources.ico_search16;
-            this.btnSearch.Location = new System.Drawing.Point(683, 40);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(92, 31);
-            this.btnSearch.TabIndex = 9;
-            this.btnSearch.UseVisualStyleBackColor = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
             // patientMainInformation1
             // 
             this.patientMainInformation1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -320,15 +329,6 @@
             this.patientMainInformation1.Name = "patientMainInformation1";
             this.patientMainInformation1.Size = new System.Drawing.Size(790, 140);
             this.patientMainInformation1.TabIndex = 5;
-            // 
-            // txtYeuCauKham
-            // 
-            this.txtYeuCauKham.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtYeuCauKham.Location = new System.Drawing.Point(6, 214);
-            this.txtYeuCauKham.Name = "txtYeuCauKham";
-            this.txtYeuCauKham.Size = new System.Drawing.Size(778, 145);
-            this.txtYeuCauKham.TabIndex = 11;
-            this.txtYeuCauKham.Text = "-  ";
             // 
             // ReceptionControl
             // 

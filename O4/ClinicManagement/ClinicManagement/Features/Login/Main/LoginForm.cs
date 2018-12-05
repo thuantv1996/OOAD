@@ -68,7 +68,7 @@ namespace ClinicManagement.Features.Login.Main
 
         private void loginSuccessful(DTO.TaiKhoanDTO account)
         {
-            var mainForm = new ClinicManagement.MainForm(new Model.User(Model.UserType.reception));
+            var mainForm = new ClinicManagement.MainForm(new Model.User(Model.UserType.examination));
             this.Hide();
             mainForm.ShowDialog();
         }

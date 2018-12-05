@@ -19,8 +19,9 @@ namespace ClinicManagement.Features.Examination.Bus
                 return sharedInstance;
             }
         }
-        //MARK: - Private function
-        private DTO.BenhNhanDTO getBenhNhan(string MaBenhNhan)
+        //MARK: - Public function
+
+        public DTO.BenhNhanDTO getBenhNhan(string MaBenhNhan)
         {
             var patient = new DTO.BenhNhanDTO();
             var result = this.clientBus.GetInformationBenhNhan(MaBenhNhan, out patient);
@@ -30,7 +31,6 @@ namespace ClinicManagement.Features.Examination.Bus
                 return null;
         }
 
-        //MARK: - Public function
         public void getListHoSo(string MaPhong, Action<List<Model.HoSoBenhAnView>, string> completion)
         {
             Task.Run(() =>

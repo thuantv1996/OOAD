@@ -32,6 +32,7 @@
             this.txtChiPhi = new System.Windows.Forms.Label();
             this.btnXacNhan = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.patientMainInformation = new ClinicManagement.Common.ClinicComponents.PatientMainInformation();
             this.radioLayout = new System.Windows.Forms.TableLayoutPanel();
             this.radXetNghiem = new System.Windows.Forms.RadioButton();
             this.radKeThuoc = new System.Windows.Forms.RadioButton();
@@ -71,6 +72,7 @@
             this.btnXacNhan.TabIndex = 4;
             this.btnXacNhan.Text = "Xác nhận";
             this.btnXacNhan.UseVisualStyleBackColor = false;
+            this.btnXacNhan.Click += new System.EventHandler(this.btnXacNhan_Click);
             // 
             // mainPanel
             // 
@@ -80,11 +82,21 @@
             this.mainPanel.AutoScroll = true;
             this.mainPanel.BackColor = System.Drawing.Color.White;
             this.mainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mainPanel.Controls.Add(this.patientMainInformation);
             this.mainPanel.Controls.Add(this.radioLayout);
             this.mainPanel.Location = new System.Drawing.Point(12, 17);
             this.mainPanel.Name = "mainPanel";
             this.mainPanel.Size = new System.Drawing.Size(802, 522);
             this.mainPanel.TabIndex = 5;
+            // 
+            // patientMainInformation
+            // 
+            this.patientMainInformation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.patientMainInformation.Location = new System.Drawing.Point(5, 3);
+            this.patientMainInformation.Name = "patientMainInformation";
+            this.patientMainInformation.Size = new System.Drawing.Size(790, 140);
+            this.patientMainInformation.TabIndex = 6;
             // 
             // radioLayout
             // 
@@ -95,11 +107,11 @@
             this.radioLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.radioLayout.Controls.Add(this.radXetNghiem, 0, 0);
             this.radioLayout.Controls.Add(this.radKeThuoc, 1, 0);
-            this.radioLayout.Location = new System.Drawing.Point(3, 177);
+            this.radioLayout.Location = new System.Drawing.Point(5, 149);
             this.radioLayout.Name = "radioLayout";
             this.radioLayout.RowCount = 1;
             this.radioLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.radioLayout.Size = new System.Drawing.Size(794, 36);
+            this.radioLayout.Size = new System.Drawing.Size(790, 36);
             this.radioLayout.TabIndex = 5;
             // 
             // radXetNghiem
@@ -109,7 +121,7 @@
             this.radXetNghiem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.radXetNghiem.Location = new System.Drawing.Point(3, 3);
             this.radXetNghiem.Name = "radXetNghiem";
-            this.radXetNghiem.Size = new System.Drawing.Size(391, 30);
+            this.radXetNghiem.Size = new System.Drawing.Size(389, 30);
             this.radXetNghiem.TabIndex = 3;
             this.radXetNghiem.TabStop = true;
             this.radXetNghiem.Text = "Xét nghiệm";
@@ -120,9 +132,9 @@
             // 
             this.radKeThuoc.AutoSize = true;
             this.radKeThuoc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radKeThuoc.Location = new System.Drawing.Point(400, 3);
+            this.radKeThuoc.Location = new System.Drawing.Point(398, 3);
             this.radKeThuoc.Name = "radKeThuoc";
-            this.radKeThuoc.Size = new System.Drawing.Size(391, 30);
+            this.radKeThuoc.Size = new System.Drawing.Size(389, 30);
             this.radKeThuoc.TabIndex = 4;
             this.radKeThuoc.Text = "Kê thuốc";
             this.radKeThuoc.UseVisualStyleBackColor = true;
@@ -155,5 +167,6 @@
         private System.Windows.Forms.TableLayoutPanel radioLayout;
         private System.Windows.Forms.RadioButton radXetNghiem;
         private System.Windows.Forms.RadioButton radKeThuoc;
+        private Common.ClinicComponents.PatientMainInformation patientMainInformation;
     }
 }

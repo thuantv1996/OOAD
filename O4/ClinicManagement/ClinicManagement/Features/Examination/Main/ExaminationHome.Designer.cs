@@ -28,31 +28,87 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.waitingPatientTable1 = new ClinicManagement.Features.Examination.SubForms.WaitingPatientTable();
+            this.danhSachChoKham = new ClinicManagement.Features.Examination.SubForms.WaitingPatientTable();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.danhSachChoBocThuoc = new ClinicManagement.Features.Examination.SubForms.WaitingPatientTable();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // waitingPatientTable1
+            // danhSachChoKham
             // 
-            this.waitingPatientTable1.BackColor = System.Drawing.Color.White;
-            this.waitingPatientTable1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.waitingPatientTable1.Location = new System.Drawing.Point(0, 0);
-            this.waitingPatientTable1.Name = "waitingPatientTable1";
-            this.waitingPatientTable1.Size = new System.Drawing.Size(704, 524);
-            this.waitingPatientTable1.TabIndex = 0;
+            this.danhSachChoKham.BackColor = System.Drawing.Color.White;
+            this.danhSachChoKham.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.danhSachChoKham.Location = new System.Drawing.Point(3, 3);
+            this.danhSachChoKham.Name = "danhSachChoKham";
+            this.danhSachChoKham.Size = new System.Drawing.Size(690, 489);
+            this.danhSachChoKham.TabIndex = 0;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(704, 524);
+            this.tabControl1.TabIndex = 1;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.danhSachChoKham);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(696, 495);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Bệnh nhân chờ khám";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.danhSachChoBocThuoc);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(696, 495);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Bệnh nhân chờ bốc thuốc";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // danhSachChoBocThuoc
+            // 
+            this.danhSachChoBocThuoc.BackColor = System.Drawing.Color.White;
+            this.danhSachChoBocThuoc.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.danhSachChoBocThuoc.Location = new System.Drawing.Point(3, 3);
+            this.danhSachChoBocThuoc.Name = "danhSachChoBocThuoc";
+            this.danhSachChoBocThuoc.Size = new System.Drawing.Size(690, 489);
+            this.danhSachChoBocThuoc.TabIndex = 0;
             // 
             // ExaminationHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.waitingPatientTable1);
+            this.Controls.Add(this.tabControl1);
             this.Name = "ExaminationHome";
             this.Size = new System.Drawing.Size(704, 524);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private SubForms.WaitingPatientTable waitingPatientTable1;
+        private SubForms.WaitingPatientTable danhSachChoKham;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private SubForms.WaitingPatientTable danhSachChoBocThuoc;
     }
 }

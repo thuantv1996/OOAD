@@ -18,13 +18,15 @@ namespace ClinicManagement.Features.Examination.SubForms
         private AssignTests assignTest;
         private CreatePrescriptions createPrescription;
         private Bus.ExaminationBus bus = Bus.ExaminationBus.SharedInstance;
-
+        private DTO.BenhNhanDTO benhNhan;
         private const string MaPhong = "P000000001";
 
-        public ExaminationHome()
+        public ExaminationHome(DTO.BenhNhanDTO benhNhan)
         {
             InitializeComponent();
             this.setupView();
+            this.benhNhan = benhNhan;
+            this.patientMainInformation.setup(benhNhan);
         }
 
         private void setupView()
@@ -35,10 +37,14 @@ namespace ClinicManagement.Features.Examination.SubForms
             this.createPrescription.Visible = false;
 
             Application.AddMessageFilter(this);
-            //this.bus.getListHoSo(MaPhong, (listResult, result) =>
-            //{
-            //    this.danhSachHoSoCho.binding(listResult);
-            //});
+
+            this.bus.getListXetNghiem((result, listResult) =>
+            {
+                if (result.Equals(COM.Constant.RES_SUC))
+                {
+                    
+                }
+            });
         }
 
         
@@ -110,6 +116,14 @@ namespace ClinicManagement.Features.Examination.SubForms
         private void ExaminationHome_ControlRemoved(object sender, ControlEventArgs e)
         {
             Application.RemoveMessageFilter(this);
+        }
+
+        private void btnXacNhan_Click(object sender, EventArgs e)
+        {
+            if (radXetNghiem.Checked)
+            {
+                var listXetNghiem = this.assignTest.getListXetNghiem();
+            }
         }
     }
 }
