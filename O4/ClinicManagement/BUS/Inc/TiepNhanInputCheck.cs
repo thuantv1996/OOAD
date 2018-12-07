@@ -2,11 +2,7 @@
 using COM;
 using DAO;
 using DTO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BUS.Inc
 {
@@ -14,10 +10,8 @@ namespace BUS.Inc
     {
         public class TiepNhanEntity
         {
-            public string MaHoSo { get; set; }
             public string MaHoSoTruoc { get; set; }
             public string MaLoaiHoSo { get; set; }
-            public int SoThuTu { get; set; }
             public string NgayTiepNhan { get; set; }
             public string MaNguoiTN { get; set; }
             public string MaPhongKham { get; set; }
@@ -44,11 +38,6 @@ namespace BUS.Inc
 
         private string CheckEmpty(TiepNhanEntity entity, ref List<string> Messages)
         {
-            if (string.IsNullOrEmpty(entity.MaHoSo))
-            {
-                Messages.Add("Mã hồ sơ rỗng!");
-                return Constant.RES_FAI;
-            }
             if (string.IsNullOrEmpty(entity.MaLoaiHoSo))
             {
                 Messages.Add("Xin chọn loại hồ sơ!");

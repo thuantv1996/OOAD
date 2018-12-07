@@ -9,9 +9,19 @@ namespace ClinicManagement.Features.Examination.Bus
     class ExaminationBus
     {
         private BUS.Mdl.KhamModule clientBus = new BUS.Mdl.KhamModule();
+        static private ExaminationBus sharedInstance;
+        static public ExaminationBus SharedInstance
+        {
+            get
+            {
+                if (sharedInstance == null)
+                    sharedInstance = new ExaminationBus();
+                return sharedInstance;
+            }
+        }
+        //MARK: - Public function
 
-        //MARK: - Private function
-        private DTO.BenhNhanDTO getBenhNhan(string MaBenhNhan)
+        public DTO.BenhNhanDTO getBenhNhan(string MaBenhNhan)
         {
             var patient = new DTO.BenhNhanDTO();
             var result = this.clientBus.GetInformationBenhNhan(MaBenhNhan, out patient);
@@ -21,7 +31,6 @@ namespace ClinicManagement.Features.Examination.Bus
                 return null;
         }
 
-        //MARK: - Public function
         public void getListHoSo(string MaPhong, Action<List<Model.HoSoBenhAnView>, string> completion)
         {
             Task.Run(() =>
@@ -71,5 +80,15 @@ namespace ClinicManagement.Features.Examination.Bus
                 completion(listHoSo, result);
             });
         }
+
+        //MARK: - Xét nghiệm
+        public void getListXetNghiem(Action<string, List<DTO.XetNghiemDTO>> completion)
+        {
+            var listResult = new List<DTO.XetNghiemDTO>();
+            var result = this.clientBus.GetListXetNghiem(out listResult);
+            completion(result, listResult);
+        }
+
+
     }
 }

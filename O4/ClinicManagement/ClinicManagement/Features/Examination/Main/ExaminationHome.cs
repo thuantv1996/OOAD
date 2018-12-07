@@ -7,17 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
 
 namespace ClinicManagement.Features.Examination.Main
 {
-    public partial class ExaminationHome : UserControl, IMessageFilter
+    public partial class ExaminationHome : UserControl
     {
-
-        private const int topPadding = 20;
-        private SubForms.AssignTests assignTest;
-        private SubForms.CreatePrescriptions createPrescription;
-
+        private const string maPhongDummyData = "P000000001";
+        private Bus.ExaminationBus bus = Bus.ExaminationBus.SharedInstance;
         public ExaminationHome()
         {
             InitializeComponent();
@@ -26,81 +22,72 @@ namespace ClinicManagement.Features.Examination.Main
 
         private void setupView()
         {
-            this.setupAssignTests();
-            this.setupCreatePrescriptions();
+            //MARK: - Danh sách chờ khám
+            this.danhSachChoKham.RefreshClick += WaitingPatientTable1_RefreshClick;
+            this.danhSachChoKham.AccessClick += DanhSachChoKham_AccessClick;
 
-            this.createPrescription.Visible = false;
+            this.fillWaitingExaminationTable(null);
+            //MARK: - Danh sách đã xét nghiệm chờ bốc thuốc
 
-            Application.AddMessageFilter(this);
         }
 
-        //==================================================================
-        private bool mFiltering;
-        public bool PreFilterMessage(ref Message m)
+        private void DanhSachChoKham_AccessClick(object sender, Model.HoSoBenhAnView e)
         {
-            // Force WM_MOUSEWHEEL message to be processed by the panel 
-            if (m.Msg == 0x020a && !mFiltering)
+            var benhNhan = this.bus.getBenhNhan(e.MaBenhNhan);
+            if (benhNhan == null) return;
+            var formContainer = new Form()
             {
-                mFiltering = true;
-                SendMessage(mainPanel.Handle, m.Msg, m.WParam, m.LParam);
-                m.Result = IntPtr.Zero;  // Don't pass it to the parent window 
-                mFiltering = false;
-                return true;  // Don't let the focused control see it 
-            }
-            return false;
-        }
-        // P/Invoke declarations 
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
-        //==================================================================
-
-        private void setupAssignTests()
-        {
-            var location = new Point(this.radioLayout.Location.X, this.radioLayout.Location.Y + this.radioLayout.Height + topPadding);
-            this.assignTest = new SubForms.AssignTests()
-            {
-                Location = location,
-                Width = this.radioLayout.Width,
-                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                StartPosition = FormStartPosition.CenterParent
             };
-            this.mainPanel.Controls.Add(assignTest);
-        }
 
-        private void setupCreatePrescriptions()
-        {
-            var location = new Point(this.radioLayout.Location.X, this.radioLayout.Location.Y + this.radioLayout.Height + topPadding);
-            this.createPrescription = new SubForms.CreatePrescriptions()
+
+            var control = new SubForms.ExaminationHome(benhNhan)
             {
-                Location = location,
-                Width = this.radioLayout.Width,
-                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+                Left = Top = 0,
+                Anchor = AnchorStyles.Left | AnchorStyles.Top
             };
-            this.mainPanel.Controls.Add(createPrescription);
+
+            formContainer.Controls.Add(control);
+            formContainer.ShowDialog();
         }
 
-        private void radKeThuoc_CheckedChanged(object sender, EventArgs e)
+        private void WaitingPatientTable1_RefreshClick(object sender, EventArgs e)
         {
-            this.radXetNghiem.Checked = !this.radKeThuoc.Checked;
-            if (this.radKeThuoc.Checked)
+            this.fillWaitingExaminationTable(status =>
             {
-                this.createPrescription.Visible = true;
-                this.assignTest.Visible = false;
-            }
+                if (status)
+                    MessageBox.Show("Dữ liệu đã được làm mới!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("Không thể làm mới dữ liệu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            });
+
         }
 
-        private void radXetNghiem_CheckedChanged(object sender, EventArgs e)
+        private void fillWaitingExaminationTable(Action<bool> completion)
         {
-            this.radKeThuoc.Checked = !this.radXetNghiem.Checked;
-            if (this.radXetNghiem.Checked)
+            this.bus.getListHoSo(maPhongDummyData, (listHoSo, result) =>
             {
-                this.createPrescription.Visible = false;
-                this.assignTest.Visible = true;
-            }
-        }
+                if (result.Equals(COM.Constant.RES_SUC))
+                {
+                    //dummy data
+                    listHoSo.Add(new Model.HoSoBenhAnView()
+                    {
+                        MaBenhNhan = "BN00000001",
+                        HoTen = "Nguyễn Văn A",
+                        CMND = "184313135",
+                        MaHoSo = "HS00000001",
+                        SoDienThoai = "0968329208",
+                        SoThuTu = 1
 
-        private void ExaminationHome_ControlRemoved(object sender, ControlEventArgs e)
-        {
-            Application.RemoveMessageFilter(this);
+                    });
+                    this.danhSachChoKham.binding(listHoSo);
+                    completion?.Invoke(true);
+                }
+                else
+                    completion?.Invoke(false);
+            });
         }
     }
 }
