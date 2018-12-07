@@ -55,33 +55,9 @@ namespace UnitTest.DAO
             Assert.Equals(expected, actual);
         }
 
-        // Test full - length string
+        // Test insert max - length string
         [TestMethod]
         public void Insert_TestCase3()
-        {
-            NHANVIEN nhanVien = new NHANVIEN
-            {
-                MaNV = TestCommon.LEN_10,
-                HoTenNV = TestCommon.LEN_50,
-                NgaySinh = TestCommon.LEN_8,
-                CMND = TestCommon.LEN_10 + "12",
-                DiaChi = TestCommon.LEN_250,
-                SoDienThoai = TestCommon.LEN_10 + "1",
-                Email = TestCommon.LEN_250,
-                MaSoThue = TestCommon.LEN_10 + "123",
-                SoTaiKhoan = TestCommon.LEN_10 + "12345",
-                MaLoaiNV = TestCommon.LEN_10,
-                MaPhong = TestCommon.LEN_10
-            };
-            NhanVienDAO dao = new NhanVienDAO();
-            string actual = dao.Save(db, nhanVien);
-            string expected = "1111";
-            Assert.Equals(expected, actual);
-        }
-
-        // Test max - length string
-        [TestMethod]
-        public void Insert_TestCase4()
         {
             NHANVIEN nhanVien = new NHANVIEN
             {
@@ -105,7 +81,7 @@ namespace UnitTest.DAO
 
         // Test insert MaLoaiNV, MaPhong not found in table MALOAINHANVIEN, MAPHONG
         [TestMethod]
-        public void Insert_TestCase5()
+        public void Insert_TestCase4()
         {
             NHANVIEN nhanVien = new NHANVIEN
             {   MaNV = TestCommon.LEN_10,
@@ -119,9 +95,10 @@ namespace UnitTest.DAO
             // Test
             Assert.Equals(expected, actual);
         }
-        // Test update data 
+
+        // Test update data sucesses
         [TestMethod]
-        public void Update_TestCase6()
+        public void Update_TestCase5()
         {
             // Khởi tạo dao
             NhanVienDAO dao = new NhanVienDAO();
@@ -146,9 +123,60 @@ namespace UnitTest.DAO
             Assert.Equals(expected, actual);
         }
 
-        // Test update data with MaloaiNV or MaPhong doesn't exist in table
+        // Test update without TenNhanVien
+        [TestMethod]
+        public void Update_TestCase6()
+        {
+            NhanVienDAO dao = new NhanVienDAO();
+            NHANVIEN nhanVien = new NHANVIEN
+            {
+                MaNV = TestCommon.LEN_10,
+                HoTenNV = "TEST UT"
+            };
+            dao.Save(db, nhanVien);
+            NHANVIEN nhanVienUpdate = new NHANVIEN
+            {
+                MaNV = TestCommon.LEN_10,
+            };
+            string actual = dao.Save(db, nhanVienUpdate);
+            string expected = "1111";
+            Assert.Equals(expected, actual);
+        }
+
+        // Test update max length
         [TestMethod]
         public void Update_TestCase7()
+        {
+            NhanVienDAO dao = new NhanVienDAO();
+            NHANVIEN nhanVien = new NHANVIEN
+            {
+                MaNV = TestCommon.LEN_10,
+                HoTenNV = "TEST UT"
+            };
+            dao.Save(db, nhanVien);
+            NHANVIEN nhanVienUpdate = new NHANVIEN
+            {
+                MaNV = TestCommon.LEN_10,
+                HoTenNV = TestCommon.LEN_50 + "1",
+                NgaySinh = TestCommon.LEN_8 + "1",
+                CMND = TestCommon.LEN_10 + "123",
+                DiaChi = TestCommon.LEN_250 + "1",
+                SoDienThoai = TestCommon.LEN_10 + "12",
+                Email = TestCommon.LEN_250 + "1",
+                MaSoThue = TestCommon.LEN_10 + "1234",
+                SoTaiKhoan = TestCommon.LEN_10 + "123455",
+                MaLoaiNV = TestCommon.LEN_10 + "1",
+                MaPhong = TestCommon.LEN_10 + "1"
+
+            };
+            string actual = dao.Save(db, nhanVienUpdate);
+            string expected = "1111";
+            Assert.Equals(expected, actual);
+        }
+
+        // Test update data with MaloaiNV or MaPhong doesn't exist in table
+        [TestMethod]
+        public void Update_TestCase8()
         {
             // Khởi tạo dao
             NhanVienDAO dao = new NhanVienDAO();
@@ -180,7 +208,7 @@ namespace UnitTest.DAO
 
         // Test delete sucesses
         [TestMethod]
-        public void Delete_TestCase8()
+        public void Delete_TestCase9()
         {
             NHANVIEN nhanVien = new NHANVIEN
             {

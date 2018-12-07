@@ -5,7 +5,8 @@ using System.Data.Entity;
 
 namespace UnitTest.DAO
 {
-    public class TestLoaiNhanVien
+    [TestClass]
+    public class TestLoaiNhanVienDAO
     {
         private static QLPHONGKHAMEntities db;
         private static DbContextTransaction trans;
@@ -32,9 +33,9 @@ namespace UnitTest.DAO
             string expected = "0000";
             Assert.Equals(expected, actual);
         }
-
-        [TestMethod]
+       
         // Test insert without MaLoaiNV or TenLoaiNV
+        [TestMethod]
         public void Insert_TestCase2()
         {
             LOAINHANVIEN loaiNhanVien = new LOAINHANVIEN {  };
@@ -44,24 +45,9 @@ namespace UnitTest.DAO
             Assert.Equals(expected, actual);
         }
 
-        // Test full - length string
+        // Test insert max - length string
         [TestMethod]
         public void Insert_TestCase3()
-        {
-            LOAINHANVIEN loaiNhanVien = new LOAINHANVIEN
-            {
-                MaLoaiNV = TestCommon.LEN_10,
-                TenLoaiNV = TestCommon.LEN_50
-            };
-            LoaiNhanVienDAO dao = new LoaiNhanVienDAO();
-            string actual = dao.Save(db, loaiNhanVien);
-            string expected = "1111";
-            Assert.Equals(expected, actual);
-        }
-
-        // Test max - length string
-        [TestMethod]
-        public void Insert_TestCase4()
         {
             LOAINHANVIEN loaiNhanVien = new LOAINHANVIEN
             {
@@ -75,8 +61,8 @@ namespace UnitTest.DAO
         }
 
         [TestMethod]
-        // Test update
-        public void Update_TestCase5()
+        // Test update sucesses
+        public void Update_TestCase4()
         {
             // Khởi tạo dao
             LoaiNhanVienDAO dao = new LoaiNhanVienDAO();
@@ -101,9 +87,49 @@ namespace UnitTest.DAO
             Assert.Equals(expected, actual);
         }
 
+        // Test update without TenLoaiNhanVien
         [TestMethod]
-        // Test Delete
-        public void Delete_TestCase6()
+        public void Update_TestCase5()
+        {
+            LoaiNhanVienDAO dao = new LoaiNhanVienDAO();
+            LOAINHANVIEN loaiNhanVien = new LOAINHANVIEN
+            {
+                MaLoaiNV = TestCommon.LEN_10,
+                TenLoaiNV = TestCommon.LEN_50
+            };
+            dao.Save(db, loaiNhanVien);
+            LOAINHANVIEN loaiNhanVienUpdate = new LOAINHANVIEN
+            {
+                MaLoaiNV = TestCommon.LEN_10,
+            };
+            string actual = dao.Save(db, loaiNhanVienUpdate);
+            string expected = "1111";
+            Assert.Equals(expected, actual);
+        }
+
+        // Test update max length
+        [TestMethod]
+        public void Update_TestCase6()
+        {
+            LoaiNhanVienDAO dao = new LoaiNhanVienDAO();
+            LOAINHANVIEN loaiNhanVien = new LOAINHANVIEN
+            {
+                MaLoaiNV = TestCommon.LEN_10,
+                TenLoaiNV = TestCommon.LEN_50 + "12"
+            };
+            dao.Save(db, loaiNhanVien);
+            LOAINHANVIEN loaiNhanVienUpdate = new LOAINHANVIEN
+            {
+                MaLoaiNV = TestCommon.LEN_10,
+            };
+            string actual = dao.Save(db, loaiNhanVienUpdate);
+            string expected = "1111";
+            Assert.Equals(expected, actual);
+        }
+
+        [TestMethod]
+        // Test Delete sucesses
+        public void Delete_TestCase7()
         {
             LOAINHANVIEN loaiNhanVien = new LOAINHANVIEN
             {

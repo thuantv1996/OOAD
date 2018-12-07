@@ -5,6 +5,7 @@ using System.Data.Entity;
 
 namespace UnitTest.DAO
 {
+    [TestClass]
     public class TestLoaiHoSoDAO
     {
         private static QLPHONGKHAMEntities db;
@@ -20,7 +21,7 @@ namespace UnitTest.DAO
         /*Begin test method*/
         [TestMethod]
         // Test insert data sucesses
-        public void Save_TestCase1()
+        public void Insert_TestCase1()
         {
             LOAIHOSO loaiHoSo = new LOAIHOSO
             {
@@ -35,7 +36,7 @@ namespace UnitTest.DAO
 
         [TestMethod]
         // Test insert without MaLoaiHoSo or TenLoaiHoSo
-        public void Save_TestCase2()
+        public void Insert_TestCase2()
         {
             LOAIHOSO loaiHoSo = new LOAIHOSO { };
             LoaiHoSoDAO dao = new LoaiHoSoDAO();
@@ -44,24 +45,9 @@ namespace UnitTest.DAO
             Assert.Equals(expected, actual);
         }
 
-        // Test full - length string
-        [TestMethod]
-        public void Insert_TestCase3()
-        {
-            LOAIHOSO loaiHoSo = new LOAIHOSO
-            {
-                MaLoaiHoSo = TestCommon.LEN_10,
-                TenLoaiHoSo = TestCommon.LEN_50
-            };
-            LoaiHoSoDAO dao = new LoaiHoSoDAO();
-            string actual = dao.Save(db, loaiHoSo);
-            string expected = "1111";
-            Assert.Equals(expected, actual);
-        }
-
         // Test max - length string
         [TestMethod]
-        public void Insert_TestCase4()
+        public void Insert_TestCase3()
         {
             LOAIHOSO loaiHoSo = new LOAIHOSO
             {
@@ -74,9 +60,10 @@ namespace UnitTest.DAO
             Assert.Equals(expected, actual);
         }
 
+
+        // Test update sucesses
         [TestMethod]
-        // Test update
-        public void Save_TestCase5()
+        public void Update_TestCase4()
         {
             // Khởi tạo dao
             LoaiHoSoDAO dao = new LoaiHoSoDAO();
@@ -101,9 +88,49 @@ namespace UnitTest.DAO
             Assert.Equals(expected, actual);
         }
 
+        // Test update without TenLoaiHoSo
         [TestMethod]
-        // Test Delete
-        public void Save_TestCase6()
+        public void Update_TestCase5()
+        {
+            LoaiHoSoDAO dao = new LoaiHoSoDAO();
+            LOAIHOSO loaiHoSo = new LOAIHOSO
+            {
+                MaLoaiHoSo = TestCommon.LEN_10,
+                TenLoaiHoSo = TestCommon.LEN_50
+            };
+            dao.Save(db, loaiHoSo);
+            LOAIHOSO loaiHoSoUpdate = new LOAIHOSO
+            {
+                MaLoaiHoSo = TestCommon.LEN_10
+            };
+            string actual = dao.Save(db, loaiHoSoUpdate);
+            string expected = "1111";
+            Assert.Equals(expected, actual);
+        }
+
+        // Test update max-length
+        public void Update_TestCase6()
+        {
+            LoaiHoSoDAO dao = new LoaiHoSoDAO();
+            LOAIHOSO loaiHoSo = new LOAIHOSO
+            {
+                MaLoaiHoSo = TestCommon.LEN_10,
+                TenLoaiHoSo = TestCommon.LEN_50
+            };
+            dao.Save(db, loaiHoSo);
+            LOAIHOSO loaiHoSoUpdate = new LOAIHOSO
+            {
+                MaLoaiHoSo = TestCommon.LEN_10,
+                TenLoaiHoSo = TestCommon.LEN_50 + "12"
+            };
+            string actual = dao.Save(db, loaiHoSoUpdate);
+            string expected = "1111";
+            Assert.Equals(expected, actual);
+        }
+
+        // Test Delete sucesses
+        [TestMethod]
+        public void Save_TestCase7()
         {
             LOAIHOSO loaiHoSo = new LOAIHOSO
             {
