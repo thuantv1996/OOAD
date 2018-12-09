@@ -59,6 +59,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BUS\TestChiTietDonThuocBUS.cs" />
     <Compile Include="BUS\TestBenhNhanBUS.cs" />
     <Compile Include="TestDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
