@@ -32,5 +32,16 @@ namespace BUS.Mdl
             // return success
             return Constant.RES_SUC;
         }
+
+
+        // lay thong tin nhan vien theo ma
+        public string GetInformationNhanVien(string MaNV, out NhanVienDTO nhanVien)
+        {
+            NhanVienBUS nhanVienBUS = new NhanVienBUS();
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                return nhanVienBUS.GetInfomationNhanVien(db, MaNV, out nhanVien);
+            }
+        }
     }
 }

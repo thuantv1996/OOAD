@@ -172,5 +172,33 @@ namespace BUS.Mdl
             }
             return Constant.RES_SUC;
         }
+
+        // lay danh sach thuoc
+        public string GetListThuoc(out List<ThuocDTO> thuocs)
+        {
+            ThuocBUS thuocBUS = new ThuocBUS();
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                if (thuocBUS.GetListThuoc(db, out thuocs) == Constant.RES_FAI) 
+                {
+                    return Constant.RES_FAI;
+                }
+            }
+            if(thuocs == null)
+            {
+                return Constant.RES_FAI;
+            }
+            return Constant.RES_SUC;
+        }
+
+        // lay thong tin phong
+        public string GetInformationPhong(string MaPhong, out PhongKhamDTO phong)
+        {
+            PhongKhamBUS phongKhamBUS = new PhongKhamBUS();
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                return phongKhamBUS.GetInformationPhongKham(db, MaPhong, out phong);
+            }
+        }   
     }
 }
