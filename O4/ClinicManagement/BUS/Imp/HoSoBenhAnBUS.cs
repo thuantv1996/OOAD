@@ -7,7 +7,7 @@ using DAO.Implement;
 
 namespace BUS.Imp
 {
-    class HoSoBenhAnBUS
+    public class HoSoBenhAnBUS
     {
 
         private HoSoBenhAnDAO hoSoBenhAnService = null;
@@ -24,17 +24,17 @@ namespace BUS.Imp
             return hoSoBenhAnService.Save(db, hoSoBenhAnDAO);
         }
 
-        public string CreateIdHoSoBenhAn(QLPHONGKHAMEntities db,out string Id)
+        public string CreateIdHoSoBenhAn(QLPHONGKHAMEntities db, out string Id)
         {
             Id = null;
-            return hoSoBenhAnService.CreateId(db,out Id);
+            return hoSoBenhAnService.CreateId(db, out Id);
         }
 
         public string GetRootHoSoBenhAn(QLPHONGKHAMEntities db, string MaHoSoTruoc, out HoSoBenhAnDTO hoSoBenhAnRoot)
         {
             hoSoBenhAnRoot = new HoSoBenhAnDTO();
             HOSOBENHAN rootDAO = null;
-            if(hoSoBenhAnService.GetRootHoSo(db,MaHoSoTruoc,out rootDAO) == COM.Constant.RES_FAI)
+            if (hoSoBenhAnService.GetRootHoSo(db, MaHoSoTruoc, out rootDAO) == COM.Constant.RES_FAI)
             {
                 return COM.Constant.RES_FAI;
             }
@@ -46,11 +46,11 @@ namespace BUS.Imp
         {
             ListHoSo = new List<HoSoBenhAnDTO>();
             List<HOSOBENHAN> hoSoDAO = null;
-            if(hoSoBenhAnService.GetListHoSoWithIdBenhNhan(db, MaBenhNhan, out hoSoDAO) == Constant.RES_FAI)
+            if (hoSoBenhAnService.GetListHoSoWithIdBenhNhan(db, MaBenhNhan, out hoSoDAO) == Constant.RES_FAI)
             {
                 return Constant.RES_FAI;
             }
-            foreach(var hs in hoSoDAO)
+            foreach (var hs in hoSoDAO)
             {
                 HoSoBenhAnDTO entity = new HoSoBenhAnDTO();
                 BUS.Com.Utils.CopyPropertiesFrom(hs, entity);
@@ -63,11 +63,11 @@ namespace BUS.Imp
         {
             object[] id = { HoSoEntity.MaHoSo };
             HOSOBENHAN hoSoBenhAnDAO = null;
-            if(hoSoBenhAnService.FindById(db, id, out hoSoBenhAnDAO) == COM.Constant.RES_FAI)
+            if (hoSoBenhAnService.FindById(db, id, out hoSoBenhAnDAO) == COM.Constant.RES_FAI)
             {
                 return COM.Constant.RES_FAI;
             }
-            if(hoSoBenhAnDAO == null)
+            if (hoSoBenhAnDAO == null)
             {
                 return COM.Constant.RES_FAI;
             }
@@ -95,15 +95,15 @@ namespace BUS.Imp
         {
             ListHoSoEntity = new List<HoSoBenhAnDTO>();
             List<HOSOBENHAN> listHoSoDAO = null;
-            if(hoSoBenhAnService.Select(db, out listHoSoDAO) == COM.Constant.RES_FAI)
+            if (hoSoBenhAnService.Select(db, out listHoSoDAO) == COM.Constant.RES_FAI)
             {
                 return COM.Constant.RES_FAI;
             }
-            if(listHoSoDAO == null)
+            if (listHoSoDAO == null)
             {
                 return COM.Constant.RES_FAI;
             }
-            foreach(var hs in listHoSoDAO)
+            foreach (var hs in listHoSoDAO)
             {
                 HoSoBenhAnDTO entity = new HoSoBenhAnDTO();
                 BUS.Com.Utils.CopyPropertiesFrom(hs, entity);
@@ -118,7 +118,7 @@ namespace BUS.Imp
             ListHoSoEntity = new List<HoSoBenhAnDTO>();
             List<HOSOBENHAN> listHoSoDAO = null;
             object[] param = { HoSoSearch.MaHoSo, HoSoSearch.TenBenhNhan, HoSoSearch.NgayKham };
-            if (hoSoBenhAnService.SearchHoSo(db,param, out listHoSoDAO) == COM.Constant.RES_FAI)
+            if (hoSoBenhAnService.SearchHoSo(db, param, out listHoSoDAO) == COM.Constant.RES_FAI)
             {
                 return COM.Constant.RES_FAI;
             }
@@ -147,11 +147,11 @@ namespace BUS.Imp
             List<HOSOBENHAN> listHoSoDAO = null;
             ListHoSo = new List<HoSoBenhAnDTO>();
             object[] param = { MaPhong, NodeKham };
-            if (hoSoBenhAnService.GetListHoSoWithRoomAndNode(db,param,out listHoSoDAO) == COM.Constant.RES_FAI)
+            if (hoSoBenhAnService.GetListHoSoWithRoomAndNode(db, param, out listHoSoDAO) == COM.Constant.RES_FAI)
             {
                 return COM.Constant.RES_FAI;
             }
-            if(listHoSoDAO == null)
+            if (listHoSoDAO == null)
             {
                 return COM.Constant.RES_FAI;
             }
@@ -163,6 +163,6 @@ namespace BUS.Imp
             }
             return COM.Constant.RES_SUC;
         }
-    
+
     }
 }

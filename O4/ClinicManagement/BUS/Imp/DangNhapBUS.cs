@@ -6,7 +6,7 @@ using DTO;
 
 namespace BUS.Imp
 {
-    class DangNhapBUS
+    public class DangNhapBUS
     {
         private TaiKhoanDAO taiKhoanServices = null;
 
