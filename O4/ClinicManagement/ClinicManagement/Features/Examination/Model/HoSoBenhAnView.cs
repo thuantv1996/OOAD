@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClinicManagement.Features.Examination.Model
 {
-    class HoSoBenhAnView
+    public class HoSoBenhAnView
     {
         public int SoThuTu { get; set; }
         public string MaHoSo { get; set; }

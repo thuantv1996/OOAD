@@ -23,38 +23,21 @@ namespace ClinicManagement.Features.Reception.SubForms
         {
             InitializeComponent();
             this.btnBack.Visible = false;
-            this.fillMainInformation();
         }
 
         public ReceptionControl(DTO.BenhNhanDTO patient)
         {
             InitializeComponent();
+            this.patient = patient;
             this.setupView(patient);
             this.fillMainInformation();
+            this.patientMainInformation1.setup(patient);
         }
 
         public void setupView(DTO.BenhNhanDTO patient)
         {
             this.patient = patient;
-            this.fillCoreInformation();
             this.btnBack.Visible = false;
-        }
-
-        private void fillCoreInformation()
-        {
-            this.txtMaBenhNhan.Text = patient?.MaBenhNhan;
-            this.txtCMND.Text = patient?.CMND;
-            var year = patient?.NgaySinh.Substring(0, 4);
-            var month = patient?.NgaySinh.Substring(4, 2);
-            var day = patient?.NgaySinh.Substring(6, 2);
-            this.txtNgaySinh.Text = String.Format("{0}/{1}/{2}", day, month, year);
-            if (patient != null)
-                this.txtGioiTinh.Text = patient.GioiTinh ? "Nam" : "Nữ";
-
-            this.txtHoTen.Text = patient?.HoTen;
-            this.txtSoDienThoai.Text = patient?.SoDienThoai;
-            this.txtDiaChi.Text = patient?.DiaChi;
-            this.txtGhiChu.Text = patient?.GhiChu.Split('\n').First();
         }
 
         private void fillMainInformation() {
@@ -76,7 +59,7 @@ namespace ClinicManagement.Features.Reception.SubForms
                 }
             });
 
-            this.bus.getListMaHoSoTruoc(this.txtMaBenhNhan.Text, (listResult, result) =>
+            this.bus.getListMaHoSoTruoc(this.patient.MaBenhNhan, (listResult, result) =>
             {
                 if (result.Equals(COM.Constant.RES_SUC))
                 {
@@ -117,7 +100,35 @@ namespace ClinicManagement.Features.Reception.SubForms
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            
+            var loaiHoSo = this.listLoaiHoSo.Find(loai => loai.TenLoaiHoSo.Equals(this.cbLoaiHoSo.Text));
+            var nguoiTiepNhan = this.listNhanVienTiepNhan.Find(nv => nv.HoTenNV.Equals(this.cbNguoiTiepNhan.Text));
+            var phongKham = this.listPhongKham.Find(phong => phong.TenPhong.Equals(this.cbPhong.Text));
+            var hoso = new DTO.HoSoBenhAnDTO()
+            {
+                MaBenhNhan = this.patient.MaBenhNhan,
+                MaHoSoTruoc = this.cbMaHoSoTruoc.Text,
+                MaLoaiHoSo = loaiHoSo != null ? loaiHoSo.MaLoaiHoSo : "",
+                MaNguoiTN = nguoiTiepNhan != null ? nguoiTiepNhan.MaLoaiNV : "",
+                NgayTiepNhan = ClinicManagement.Common.ClinicBus.convertViewToDate(this.txtNgayTiepNhan.Text),
+                YeuCauKham = this.txtYeuCauKham.Text,
+                MaPhongKham = phongKham != null ? phongKham.MaPhong : ""
+            };
+            var thanhToan = new DTO.ThanhToanDTO() { ChiPhiKham = ClinicManagement.Common.SourceLibrary.PhiKhamTiepNhan };
+
+            this.bus.confirmReception(hoso, thanhToan,(stt, result, listMessageError) =>
+            {
+                if (result.Equals(COM.Constant.RES_SUC))
+                    MessageBox.Show(String.Format("Tiếp nhận thành công!\nSố thứ tự là: {0}", stt), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                {
+                    var msg = "";
+                    listMessageError.ForEach(error =>
+                    {
+                        msg += error + "\n";
+                    });
+                    MessageBox.Show(msg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            });
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -162,11 +173,6 @@ namespace ClinicManagement.Features.Reception.SubForms
             formContainer.Controls.Add(containerPanel);
 
             formContainer.ShowDialog();
-        }
-
-        private void btnTimHoSoTruoc_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

@@ -41,13 +41,7 @@ namespace ClinicManagement.Features.Reception.Bus
             return loaiHoSo != null ? loaiHoSo.TenLoaiHoSo : null;
         }
 
-        private string convertDateFormat(string date)
-        {
-            var year = date.Substring(0, 4);
-            var month = date.Substring(4, 2);
-            var day = date.Substring(6, 2);
-            return String.Format("{0}/{1}/{2}", day, month, year);
-        }
+        
         //=============================================
         public void fetchListBenhNhan(Action<List<DTO.BenhNhanDTO>, string> completion)
         {
@@ -66,21 +60,34 @@ namespace ClinicManagement.Features.Reception.Bus
             completion(listResult, result);
         }
 
-        public void saveBenhNhan(DTO.BenhNhanDTO patient, Action<string> completion)
+        public void saveBenhNhan(DTO.BenhNhanDTO patient, Action<string, List<string>> completion)
         {
-            completion(COM.Constant.RES_FAI);
-        }
+            var listMessageError = new List<string>();
+            var checkInputResult = this.clientBus.BenhNhanInputCheck(patient, ref listMessageError);
 
-        public void insertBenhNhan(DTO.BenhNhanDTO patient, Action<List<COM.MessageError>, string> completion)
-        {
-            Task.Run(() =>
+            if (checkInputResult.Equals(COM.Constant.RES_SUC))
             {
-                var listMessageError = new List<COM.MessageError>();
-                //var result = this.benhNhanBus.InsertBenhNhan()
-                //completion(listMessageError, result);
-            });
+                completion(this.clientBus.UpdateBenhNhan(patient), null);
+            }
+
+            completion(checkInputResult, listMessageError);
         }
 
+        public void insertBenhNhan(DTO.BenhNhanDTO patient, Action<string, List<string>> completion)
+        {
+            var listMessageError = new List<string>();
+            var checkInputResult = this.clientBus.BenhNhanInputCheck(patient, ref listMessageError);
+
+            if (checkInputResult.Equals(COM.Constant.RES_SUC))
+            {
+                var result = this.clientBus.InsertBenhNhan(patient);
+                completion(result, null);
+            }
+
+            completion(checkInputResult, listMessageError);
+        }
+
+        //MARK: - Reception
         public void getListLoaiHoSo(Action<List<DTO.LoaiHoSoDTO>, string> completion)
         {
             var listResult = new List<DTO.LoaiHoSoDTO>();
@@ -92,7 +99,7 @@ namespace ClinicManagement.Features.Reception.Bus
         {
             var listResult = new List<DTO.HoSoBenhAnDTO>();
             var listMessageError = new List<COM.MessageError>();
-            var result = this.clientBus.GetListRelativeHoSo(MaBenhNhan, out listResult, ref listMessageError);
+            var result = this.clientBus.GetListRelativeHoSo(MaBenhNhan, out listResult);
             completion(listResult, result);
         }
 
@@ -110,7 +117,6 @@ namespace ClinicManagement.Features.Reception.Bus
             completion(listResult, result);
         }
 
-
         //MARK: - Show Previous Records Table
         public void getListHoSoByBenhNhan(string MaBenhNhan, Action<List<Model.HoSoTruocView>, string> completion)
         {
@@ -124,7 +130,7 @@ namespace ClinicManagement.Features.Reception.Bus
                         MaHoSo = hoso.MaHoSo,
                         LoaiHoSo = this.getLoaiHoSoByMaLoai(hoso.MaLoaiHoSo),
                         NguoiTiepNhan = this.getNguoiTiepNhanByMaNV(hoso.MaNguoiTN),
-                        NgayTiepNhan = this.convertDateFormat(hoso.NgayTiepNhan)
+                        NgayTiepNhan = ClinicManagement.Common.ClinicBus.convertDateToView(hoso.NgayTiepNhan)
                     });
                 });
 
@@ -148,6 +154,31 @@ namespace ClinicManagement.Features.Reception.Bus
 
                 completion(listHoSoView, result);
             });
+        }
+
+
+        public void confirmReception(DTO.HoSoBenhAnDTO hoso, DTO.ThanhToanDTO thanhToan, Action<int, string, List<string>> completion)
+        {
+            var listMessageError = new List<string>();
+            var tiepNhanEntity = new BUS.Inc.TiepNhanInputCheck.TiepNhanEntity()
+            {
+                MaHoSoTruoc = hoso.MaHoSoTruoc,
+                MaLoaiHoSo = hoso.MaLoaiHoSo,
+                NgayTiepNhan = hoso.NgayTiepNhan,
+                MaNguoiTN = hoso.MaNguoiTN,
+                MaPhongKham = hoso.MaPhongKham,
+                ChiPhiKham = thanhToan.ChiPhiKham,
+                YeuCauKham = hoso.YeuCauKham
+            };
+            var checkInputResult = this.clientBus.TiepNhanInputCheck(tiepNhanEntity, ref listMessageError);
+
+            if (checkInputResult.Equals(COM.Constant.RES_SUC))
+            {
+                var result = this.clientBus.SaveHoSo(hoso, thanhToan);
+                completion(hoso.SoThuTu, result, null);
+            }
+            completion(0, checkInputResult, listMessageError);
+           
         }
         //=============================================
 

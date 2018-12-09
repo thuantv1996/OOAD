@@ -49,12 +49,26 @@ namespace ClinicManagement.Features.Reception.SubForms
             //update database
             var patient = this.patientEdit.getData();
 
-            this.bus.saveBenhNhan(patient, (result) =>
+            this.bus.saveBenhNhan(patient, (result, listMessageError) =>
             {
                 if (result.Equals(COM.Constant.RES_SUC))
+                {
                     this.patientInformation.fillData(patient);
+                    this.SaveSuccessful?.Invoke(this, e);
+                }
                 else
-                    MessageBox.Show("Lưu thông tin không thành công", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                {
+                    var msg = "";
+                    listMessageError.ForEach(error =>
+                    {
+                        msg += error + "\n";
+                    });
+                    msg += "Không sửa nữa?";
+                    var msgResult = MessageBox.Show(msg, "Lỗi", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                    if (msgResult == DialogResult.No)
+                        return;
+                }
+
                 this.patientInformation.BringToFront();
                 this.btnEdit.BringToFront();
                 this.btnCreate.Enabled = true;
@@ -62,6 +76,7 @@ namespace ClinicManagement.Features.Reception.SubForms
         }
 
         public event EventHandler<DTO.BenhNhanDTO> CreateClick;
+        public event EventHandler SaveSuccessful;
         private Bus.ReceptionBus bus = Bus.ReceptionBus.SharedInstance;
     }
 }

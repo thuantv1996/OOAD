@@ -57,7 +57,9 @@ namespace BUS.Mdl
                         trans.Rollback();
                         return Constant.RES_FAI;
                     }
+                    trans.Commit();
                 }
+                db.SaveChanges();
             }
             return Constant.RES_SUC;
         }
@@ -104,7 +106,9 @@ namespace BUS.Mdl
                             return Constant.RES_FAI;
                         }
                     }
+                    trans.Commit();
                 }
+                db.SaveChanges();
             }
             return Constant.RES_SUC;
         }

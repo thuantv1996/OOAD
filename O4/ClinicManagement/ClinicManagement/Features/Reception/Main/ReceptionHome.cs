@@ -111,9 +111,15 @@ namespace ClinicManagement.Features.Reception.Main
             detailControl.Left = detailControl.Top = 0;
             detailControl.Anchor = AnchorStyles.Left | AnchorStyles.Top;
             detailControl.CreateClick += DetailControl_CreateClick;
+            detailControl.SaveSuccessful += DetailControl_SaveSuccessful;
 
             formContainer.Controls.Add(detailControl);
             formContainer.ShowDialog();
+        }
+
+        private void DetailControl_SaveSuccessful(object sender, EventArgs e)
+        {
+            this.fetchData((msg, rslt) => { });
         }
 
         private void DetailControl_CreateClick(object sender, DTO.BenhNhanDTO patient)
@@ -147,20 +153,21 @@ namespace ClinicManagement.Features.Reception.Main
 
         private void AddPatientControl_CreateCompleted(object sender, DTO.BenhNhanDTO e)
         {
-            this.bus.insertBenhNhan(e, (listMessageError, result) =>
+            this.bus.insertBenhNhan(e, (result, listMessageError) =>
             {
                 if (result.Equals(COM.Constant.RES_SUC))
                 {
                     MessageBox.Show("Thêm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.fetchData((msg, rslt) =>
-                    {
-                    });
-                } else
+                    var parentForm = (Form)((Control)sender).Parent;
+                    parentForm.Close();
+                    this.fetchData((msg, rslt) => { });
+                }
+                else
                 {
                     var msg = "";
-                    listMessageError.ForEach((error) =>
+                    listMessageError.ForEach(error =>
                     {
-                        msg += error.Message + "\n";
+                        msg += error + "\n";
                     });
                     MessageBox.Show(msg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;

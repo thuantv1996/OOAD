@@ -83,36 +83,6 @@ namespace BUS.Mdl
             return Constant.RES_SUC;
         }
 
-        public int GetSoThuTu(string MaPhong, ref List<MessageError> Messages)
-        {
-            // Tạo đối tượng bus
-            TrangThaiPhongBUS trangThaiPhongBUS = new TrangThaiPhongBUS();
-            // Tạo đối tượng DTO
-            TrangThaiPhongDTO trangThaiPhong = null;
-            // get System date
-            string SystemDate = DateTime.Now.Year.ToString()
-                              + DateTime.Now.Month.ToString()
-                              + DateTime.Now.Day.ToString();
-            using(QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
-            {
-                // gọi hàm lấy trạng thái phòng
-                trangThaiPhongBUS.GetTrangThaiPhong(db, MaPhong, SystemDate, out trangThaiPhong);
-            }
-            // Trả về STT
-            return trangThaiPhong.SttCaoNhat + 1;
-        }
-
-        public string GetMaHoSo(ref List<MessageError> Messages)
-        {
-            HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();
-            string Id = "";
-            using(QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
-            {
-                hoSoBenhAnBUS.CreateIdHoSoBenhAn(db, out Id);
-            }
-            return Id;
-        }
-
         public string GetListRelativeHoSo(string MaBenhNhan, out List<HoSoBenhAnDTO> ListRelativeHoSo)
         {
             HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();
@@ -145,6 +115,10 @@ namespace BUS.Mdl
                 trangThaiPhongBUS.GetTrangThaiPhong(db, hoSoBenhAn.MaPhongKham, SystemDate, out trangThaiPhong);
                 trangThaiPhong.SttCaoNhat += 1;
 
+                // setting ho so
+                string maHoSo;
+                hoSoBenhAnBUS.CreateIdHoSoBenhAn(db, out maHoSo);
+                hoSoBenhAn.MaHoSo = maHoSo;
                 // nếu là hồ sơ tái khám
                 if (hoSoBenhAn.MaLoaiHoSo == BusConstant.HS_TAIKHAM)
                 {
@@ -215,6 +189,7 @@ namespace BUS.Mdl
                 {
                     return Constant.RES_FAI;
                 }
+                db.SaveChanges();
             }
             return Constant.RES_SUC;
         }
@@ -228,6 +203,7 @@ namespace BUS.Mdl
                 {
                     return Constant.RES_FAI;
                 }
+                db.SaveChanges();
             }
             return Constant.RES_SUC;
         }
