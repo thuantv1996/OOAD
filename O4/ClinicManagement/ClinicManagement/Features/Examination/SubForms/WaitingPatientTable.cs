@@ -23,7 +23,6 @@ namespace ClinicManagement.Features.Examination.SubForms
                 this.Invoke(new Action<List<Model.HoSoBenhAnView>>(binding), new object[] { list });
             else
                 this.gridControl1.DataSource = Common.ClinicBus.ConvertToDatatable(list);
-            
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -67,5 +66,10 @@ namespace ClinicManagement.Features.Examination.SubForms
 
         public event EventHandler RefreshClick;
         public event EventHandler<Model.HoSoBenhAnView> AccessClick;
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

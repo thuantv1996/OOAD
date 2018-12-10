@@ -1,6 +1,6 @@
 ﻿namespace ClinicManagement.Features.Examination.Main
 {
-    partial class ExaminationHome
+    partial class ExaminationAfterTests
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,31 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.danhSachChoKham = new ClinicManagement.Features.Examination.SubForms.WaitingPatientTable();
+            this.danhSachChoKeDon = new ClinicManagement.Features.Examination.SubForms.WaitingPatientTable();
             this.SuspendLayout();
             // 
-            // danhSachChoKham
+            // danhSachChoKeDon
             // 
-            this.danhSachChoKham.BackColor = System.Drawing.Color.White;
-            this.danhSachChoKham.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.danhSachChoKham.Location = new System.Drawing.Point(0, 0);
-            this.danhSachChoKham.Name = "danhSachChoKham";
-            this.danhSachChoKham.Size = new System.Drawing.Size(704, 524);
-            this.danhSachChoKham.TabIndex = 1;
+            this.danhSachChoKeDon.BackColor = System.Drawing.Color.White;
+            this.danhSachChoKeDon.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.danhSachChoKeDon.Location = new System.Drawing.Point(0, 0);
+            this.danhSachChoKeDon.Name = "danhSachChoKeDon";
+            this.danhSachChoKeDon.Size = new System.Drawing.Size(791, 525);
+            this.danhSachChoKeDon.TabIndex = 0;
             // 
-            // ExaminationHome
+            // ExaminationAfterTests
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.danhSachChoKham);
-            this.Name = "ExaminationHome";
-            this.Size = new System.Drawing.Size(704, 524);
+            this.Controls.Add(this.danhSachChoKeDon);
+            this.Name = "ExaminationAfterTests";
+            this.Size = new System.Drawing.Size(791, 525);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private SubForms.WaitingPatientTable danhSachChoKham;
+        private SubForms.WaitingPatientTable danhSachChoKeDon;
     }
 }

@@ -80,6 +80,7 @@
             this.checkListXetNghiem.Name = "checkListXetNghiem";
             this.checkListXetNghiem.Size = new System.Drawing.Size(659, 423);
             this.checkListXetNghiem.TabIndex = 3;
+            this.checkListXetNghiem.ItemCheck += new DevExpress.XtraEditors.Controls.ItemCheckEventHandler(this.checkListXetNghiem_ItemCheck);
             // 
             // AssignTests
             // 
