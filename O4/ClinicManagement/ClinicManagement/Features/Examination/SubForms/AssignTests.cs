@@ -12,6 +12,8 @@ namespace ClinicManagement.Features.Examination.SubForms
 {
     public partial class AssignTests : UserControl
     {
+        public event EventHandler<decimal> AddAssign;
+
         public AssignTests()
         {
             InitializeComponent();
@@ -34,7 +36,8 @@ namespace ClinicManagement.Features.Examination.SubForms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
+            if (this.cbLoaiXetNghiem.SelectedItem == null)
+                return;
             DevExpress.XtraEditors.Controls.CheckedListBoxItem newItem = new DevExpress.XtraEditors.Controls.CheckedListBoxItem(this.cbLoaiXetNghiem.SelectedItem, true);
             var foundItem = this.checkListXetNghiem.Items.ToList().Find(item =>
             {
@@ -46,6 +49,8 @@ namespace ClinicManagement.Features.Examination.SubForms
             if (foundItem == null)
             {
                 this.checkListXetNghiem.Items.Add(newItem);
+                var newXetNghiem = (DTO.XetNghiemDTO)newItem.Value;
+                this.AddAssign?.Invoke(this, newXetNghiem.ChiPhi);
             }
         }
 
@@ -64,5 +69,18 @@ namespace ClinicManagement.Features.Examination.SubForms
         }
 
         private Bus.ExaminationBus bus = Bus.ExaminationBus.SharedInstance;
+
+        private void checkListXetNghiem_ItemCheck(object sender, DevExpress.XtraEditors.Controls.ItemCheckEventArgs e)
+        {
+            var item = this.checkListXetNghiem.Items[e.Index];
+            var xetNghiem = (DTO.XetNghiemDTO)item.Value;
+            var chiphi = e.State == CheckState.Unchecked ? -xetNghiem.ChiPhi : xetNghiem.ChiPhi;
+            this.AddAssign?.Invoke(this, chiphi);
+        }
+
+        public void refresh()
+        {
+            this.checkListXetNghiem.Items.Clear();
+        }
     }
 }

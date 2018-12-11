@@ -25,7 +25,7 @@ namespace ClinicManagement.Common.ClinicComponents
             this.fillCoreInformation(patient);
         }
 
-        public void setup(DTO.BenhNhanDTO patient)
+        public void binding(DTO.BenhNhanDTO patient)
         {
             this.patient = patient;
             this.fillCoreInformation(patient);

@@ -132,24 +132,53 @@
     <Compile Include="Common\ClinicComponents\RichTextBoxWithLine.Designer.cs">
       <DependentUpon>RichTextBoxWithLine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\User.cs" />
     <Compile Include="Features\Examination\Bus\ExaminationBus.cs" />
+    <Compile Include="Features\Examination\Main\ExaminationAfterTests.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Examination\Main\ExaminationAfterTests.Designer.cs">
+      <DependentUpon>ExaminationAfterTests.cs</DependentUpon>
+    </Compile>
     <Compile Include="Features\Examination\Main\ExaminationHome.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Features\Examination\Main\ExaminationHome.Designer.cs">
       <DependentUpon>ExaminationHome.cs</DependentUpon>
     </Compile>
+    <Compile Include="Features\Examination\Model\ConfirmUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Examination\Model\ThuocView.cs" />
     <Compile Include="Features\Examination\SubForms\AssignTests.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Features\Examination\SubForms\AssignTests.Designer.cs">
       <DependentUpon>AssignTests.cs</DependentUpon>
     </Compile>
+    <Compile Include="Features\Examination\SubForms\AssignTestsConfirm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Examination\SubForms\AssignTestsConfirm.Designer.cs">
+      <DependentUpon>AssignTestsConfirm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Features\Examination\SubForms\CreatePrescriptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Features\Examination\SubForms\CreatePrescriptions.Designer.cs">
       <DependentUpon>CreatePrescriptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Examination\SubForms\CreatePrescriptionsConfirm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Examination\SubForms\CreatePrescriptionsConfirm.Designer.cs">
+      <DependentUpon>CreatePrescriptionsConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Examination\SubForms\MedicalExaminationAfterTests.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Examination\SubForms\MedicalExaminationAfterTests.Designer.cs">
+      <DependentUpon>MedicalExaminationAfterTests.cs</DependentUpon>
     </Compile>
     <Compile Include="Features\Examination\SubForms\WaitingPatientTable.cs">
       <SubType>UserControl</SubType>
@@ -299,8 +328,17 @@
     <EmbeddedResource Include="Common\ClinicComponents\PatientTableWithSearch.resx">
       <DependentUpon>PatientTableWithSearch.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\Examination\Main\ExaminationAfterTests.resx">
+      <DependentUpon>ExaminationAfterTests.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\Examination\Main\ExaminationHome.resx">
       <DependentUpon>ExaminationHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Examination\SubForms\AssignTestsConfirm.resx">
+      <DependentUpon>AssignTestsConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Examination\SubForms\CreatePrescriptionsConfirm.resx">
+      <DependentUpon>CreatePrescriptionsConfirm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Examination\SubForms\MedicalExamination.resx">
       <DependentUpon>MedicalExamination.cs</DependentUpon>
@@ -310,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Examination\SubForms\CreatePrescriptions.resx">
       <DependentUpon>CreatePrescriptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Examination\SubForms\MedicalExaminationAfterTests.resx">
+      <DependentUpon>MedicalExaminationAfterTests.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Examination\SubForms\WaitingPatientTable.resx">
       <DependentUpon>WaitingPatientTable.cs</DependentUpon>
@@ -410,10 +451,6 @@
     <ProjectReference Include="..\DTO\DTO.csproj">
       <Project>{8173ea14-8393-4540-b2df-1ad6f7a9967e}</Project>
       <Name>DTO</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{6c22cc07-0313-4730-8c9e-7745d710d68d}</Project>
-      <Name>Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

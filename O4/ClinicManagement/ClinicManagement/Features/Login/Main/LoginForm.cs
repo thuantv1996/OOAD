@@ -45,11 +45,13 @@ namespace ClinicManagement.Features.Login.Main
             this.bus.Login(loginInfo, (listMessageError, result) =>
             {
                 f.Close();
-                this.loginSuccessful(loginInfo);
-                //if (result.Equals(COM.Constant.RES_SUC))
-                //{
-                //    this.loginSuccessful(loginInfo);
-                //}
+                if (result.Equals(COM.Constant.RES_SUC))
+                {
+                    this.loginSuccessful(loginInfo);
+                } else
+                {
+                    MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 //else if (result.Equals(COM.Constant.RES_FAI))
                 //{
                 //    var messageError = "";
@@ -68,7 +70,13 @@ namespace ClinicManagement.Features.Login.Main
 
         private void loginSuccessful(DTO.TaiKhoanDTO account)
         {
-            var mainForm = new ClinicManagement.MainForm(new Model.User(Model.UserType.examination));
+            var user = Common.User.SharedInstance;
+            user.UserId = account.MaNhanVien;
+            user.UserType = Common.UserType.examination;
+            user.RoomId = "P000000001";
+
+
+            var mainForm = new ClinicManagement.MainForm(user);
             this.Hide();
             mainForm.ShowDialog();
         }

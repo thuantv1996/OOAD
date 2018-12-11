@@ -13,7 +13,7 @@ namespace ClinicManagement
 {
     public partial class MainForm : Form
     {
-        public MainForm(Model.User user)
+        public MainForm(ClinicManagement.Common.User user)
         {
             InitializeComponent();
             this.user = user;
@@ -30,7 +30,7 @@ namespace ClinicManagement
             this.listContent = new List<UserControl>();
             switch (this.user.UserType)
             {
-                case Model.UserType.reception:
+                case ClinicManagement.Common.UserType.reception:
                     {
                         this.updateMenuControl(new string[] { "Trang chủ", "Tiếp nhận bệnh nhân", "Hồ sơ mới"});
                         this.listContent.Clear();
@@ -42,13 +42,14 @@ namespace ClinicManagement
                         });
                         break;
                     }
-                case Model.UserType.examination:
+                case ClinicManagement.Common.UserType.examination:
                     {
-                        this.updateMenuControl(new string[] { "Trang chủ" });
+                        this.updateMenuControl(new string[] { "Trang chủ", "Kết quả xét nghiệm" });
                         this.listContent.Clear();
                         this.listContent.AddRange(new UserControl[]
                         {
-                            new ClinicManagement.Features.Examination.Main.ExaminationHome()
+                            new ClinicManagement.Features.Examination.Main.ExaminationHome(),
+                            new ClinicManagement.Features.Examination.Main.ExaminationAfterTests()
                         });
                         break;
                     }
@@ -92,7 +93,7 @@ namespace ClinicManagement
             }
         }
 
-        private Model.User user;
+        private ClinicManagement.Common.User user;
         private Common.ClinicComponents.MenuControl menuControl;
         private List<UserControl> listContent;
     }

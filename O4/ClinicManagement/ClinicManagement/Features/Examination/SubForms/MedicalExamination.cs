@@ -11,22 +11,20 @@ using System.Runtime.InteropServices;
 
 namespace ClinicManagement.Features.Examination.SubForms
 {
-    public partial class ExaminationHome : UserControl, IMessageFilter
+    public partial class MedicalExamination : UserControl, IMessageFilter
     {
-
         private const int topPadding = 20;
         private AssignTests assignTest;
         private CreatePrescriptions createPrescription;
         private Bus.ExaminationBus bus = Bus.ExaminationBus.SharedInstance;
-        private DTO.BenhNhanDTO benhNhan;
-        private const string MaPhong = "P000000001";
+        private DTO.HoSoBenhAnDTO hoSoBenhAn;
+        private decimal tongChiPhi = 0;
 
-        public ExaminationHome(DTO.BenhNhanDTO benhNhan)
+        public MedicalExamination(DTO.HoSoBenhAnDTO hoso)
         {
             InitializeComponent();
+            this.hoSoBenhAn = hoso;
             this.setupView();
-            this.benhNhan = benhNhan;
-            this.patientMainInformation.setup(benhNhan);
         }
 
         private void setupView()
@@ -38,16 +36,11 @@ namespace ClinicManagement.Features.Examination.SubForms
 
             Application.AddMessageFilter(this);
 
-            this.bus.getListXetNghiem((result, listResult) =>
-            {
-                if (result.Equals(COM.Constant.RES_SUC))
-                {
-                    
-                }
-            });
-        }
+            this.txtChiPhi.Text = tongChiPhi.ToString();
 
-        
+            var benhNhan = this.bus.getBenhNhan(this.hoSoBenhAn.MaBenhNhan);
+            this.patientMainInformation.binding(benhNhan);
+        }
 
         //==================================================================
         private bool mFiltering;
@@ -78,7 +71,14 @@ namespace ClinicManagement.Features.Examination.SubForms
                 Width = this.radioLayout.Width,
                 Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
             };
+            this.assignTest.AddAssign += AssignTest_AddAssign;
             this.mainPanel.Controls.Add(assignTest);
+        }
+
+        private void AssignTest_AddAssign(object sender, decimal e)
+        {
+            this.tongChiPhi += e;
+            this.txtChiPhi.Text = this.tongChiPhi.ToString();
         }
 
         private void setupCreatePrescriptions()
@@ -100,6 +100,9 @@ namespace ClinicManagement.Features.Examination.SubForms
             {
                 this.createPrescription.Visible = true;
                 this.assignTest.Visible = false;
+                this.assignTest.refresh();
+                this.tongChiPhi = 0;
+                this.txtChiPhi.Text = this.tongChiPhi.ToString();
             }
         }
 
@@ -120,10 +123,42 @@ namespace ClinicManagement.Features.Examination.SubForms
 
         private void btnXacNhan_Click(object sender, EventArgs e)
         {
+            this.hoSoBenhAn.ChuanDoan = this.txtChuanDoanBenh.Text;
+            Model.ConfirmUserControl control = null;
+            var formContainer = new Form()
+            {
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                StartPosition = FormStartPosition.CenterParent
+            };
+
+
             if (radXetNghiem.Checked)
             {
                 var listXetNghiem = this.assignTest.getListXetNghiem();
+                control = new SubForms.AssignTestsConfirm(this.hoSoBenhAn, listXetNghiem, this.tongChiPhi)
+                {
+                    Left = Top = 0,
+                    Anchor = AnchorStyles.Left | AnchorStyles.Top
+                };
             }
+            else
+            {
+                var listOfMedicine = this.createPrescription.getListOfMedicine();
+                control = new SubForms.CreatePrescriptionsConfirm(this.hoSoBenhAn, listOfMedicine, this.tongChiPhi)
+                {
+                    Left = Top = 0,
+                    Anchor = AnchorStyles.Left | AnchorStyles.Top
+                };
+            }
+            control.DidConfirm += (obj, eag) =>
+            {
+                formContainer.Close();
+                var parent = (Form)this.Parent;
+                parent.Close();
+            };
+            formContainer.Controls.Add(control);
+            formContainer.ShowDialog();
         }
     }
 }

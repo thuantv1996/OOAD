@@ -31,7 +31,7 @@ namespace ClinicManagement.Features.Reception.SubForms
             this.patient = patient;
             this.setupView(patient);
             this.fillMainInformation();
-            this.patientMainInformation1.setup(patient);
+            this.patientMainInformation1.binding(patient);
         }
 
         public void setupView(DTO.BenhNhanDTO patient)
