@@ -6,7 +6,7 @@ using DAO.Implement;
 
 namespace BUS.Imp
 {
-    class XetNghiemBUS
+    public class XetNghiemBUS
     {
         private XetNghiemDAO xetNghiemServices = null;
         public XetNghiemBUS()
