@@ -60,6 +60,27 @@ namespace BUS.Imp
             return Constant.RES_SUC;
         }
 
+        public string GetListHasResWithIdHoSo(QLPHONGKHAMEntities db, string MaHoSo, out List<KetQuaXetNghiemDTO> ListKetQuaXetNghiem)
+        {
+            ListKetQuaXetNghiem = new List<KetQuaXetNghiemDTO>();
+            List<KETQUAXETNGHIEM> listDAO = null;
+            if (ketQuaXetNghiemServices.GetListHasResWithIdHoSo(db, MaHoSo, out listDAO) == Constant.RES_FAI)
+            {
+                return Constant.RES_FAI;
+            }
+            if (listDAO == null)
+            {
+                return Constant.RES_FAI;
+            }
+            foreach (var kq in listDAO)
+            {
+                KetQuaXetNghiemDTO entity = new KetQuaXetNghiemDTO();
+                BUS.Com.Utils.CopyPropertiesFrom(kq, entity);
+                ListKetQuaXetNghiem.Add(entity);
+            }
+            return Constant.RES_SUC;
+        }
+
         public string UpdateKetQuaXetNghiem(QLPHONGKHAMEntities db, KetQuaXetNghiemDTO KetQuaXetNghiem)
         {
             KETQUAXETNGHIEM ketQuaXetNghiemDAO = new KETQUAXETNGHIEM();

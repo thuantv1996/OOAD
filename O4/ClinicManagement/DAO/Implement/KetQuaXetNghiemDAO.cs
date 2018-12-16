@@ -106,5 +106,23 @@ namespace DAO.Implement
             }
             return DAOCommon.SUCCESS;
         }
+
+        public string GetListHasResWithIdHoSo(QLPHONGKHAMEntities db, string MaHoSo, out List<KETQUAXETNGHIEM> ListKetQuaXetNghiem)
+        {
+            ListKetQuaXetNghiem = new List<KETQUAXETNGHIEM>();
+            try
+            {
+                ListKetQuaXetNghiem = (from kq in db.KETQUAXETNGHIEMs
+                                       where kq.MaHoSo == MaHoSo && kq.ThanhToan.Value == true
+                                       select kq).ToList();
+            }
+            catch (Exception e)
+            {
+                string log = LogManager.GetErrorFromException(e);
+                LogManager.WriteLog(log);
+                return DAOCommon.FAIL;
+            }
+            return DAOCommon.SUCCESS;
+        }
     }
 }

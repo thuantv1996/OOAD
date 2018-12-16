@@ -23,7 +23,11 @@ namespace COM
         public static string MES_DB = "MES_DB";
         // Is Erorr Present
         public static string MES_PRE = "MES_PRE";
-        // id room tiep nhan
+        // id tiep nhan
         public static string ID_LNV_TN = "LNV0000001";
+        // id bac si
+        public static string ID_LNV_BS = "LNV0000002";
+        // id xet nghiem
+        public static string ID_LNV_XN = "LNV0000003";
     }
 }
