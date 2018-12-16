@@ -60,6 +60,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BUS\TestChiTietDonThuocBUS.cs" />
+    <Compile Include="BUS\TestCommon.cs" />
+    <Compile Include="BUS\TestDonThuocBUS.cs" />
+    <Compile Include="BUS\TestHoSoBenhAnBUS.cs" />
+    <Compile Include="BUS\TestKetQuaXetNghiemBUS.cs" />
+    <Compile Include="BUS\TestLoaiHoSoBUS.cs" />
+    <Compile Include="BUS\TestLuonCongViecBUS.cs" />
+    <Compile Include="BUS\TestNhanVienBUS.cs" />
+    <Compile Include="BUS\TestPhongKhamBUS.cs" />
+    <Compile Include="BUS\TestDangNhapBUS.cs" />
+    <Compile Include="BUS\TestThanhToanBUS.cs" />
+    <Compile Include="BUS\TestThuocBUS.cs" />
+    <Compile Include="BUS\TestTrangThaiPhongBUS.cs" />
+    <Compile Include="BUS\TestXetNghiemBUS.cs" />
     <Compile Include="DAO\TestBenhNhanDAO.cs" />
     <Compile Include="DAO\TestChiTietDonThuocDAO.cs" />
     <Compile Include="DAO\TestCommon.cs" />

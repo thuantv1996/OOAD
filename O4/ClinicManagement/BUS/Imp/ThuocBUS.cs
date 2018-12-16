@@ -6,7 +6,7 @@ using DAO.Implement;
 
 namespace BUS.Imp
 {
-    class ThuocBUS
+    public class ThuocBUS
     {
         private ThuocDAO donThuocService = null;
 
