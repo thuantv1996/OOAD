@@ -104,7 +104,7 @@ namespace BUS.Inc
                 NhanVienDTO nhanVien = new NhanVienDTO();
                 if (nhanVienBUS.GetInfomationNhanVien(db, entity.MaNguoiTN, out nhanVien) == Constant.RES_FAI)
                 {
-                    Messages.Add("Nhân viên tiếp nhận tồn tại!");
+                    Messages.Add("Nhân viên tiếp nhận không tồn tại!");
                     return Constant.RES_FAI;
                 }
             }
