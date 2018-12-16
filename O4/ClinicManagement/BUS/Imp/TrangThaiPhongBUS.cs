@@ -25,6 +25,7 @@ namespace BUS.Imp
 
             if(entity == null)
             {
+                entity = new TRANGTHAIPHONG();
                 entity.MaPhong = MaPhongKham;
                 entity.NgayKham = NgayThang;
                 entity.SttCaoNhat = 0;
