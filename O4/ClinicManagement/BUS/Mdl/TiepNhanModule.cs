@@ -135,6 +135,7 @@ namespace BUS.Mdl
                 thanhToanBUS.CreateIdThanhToan(db, out MaThanhToan);
                 thanhToan.MaThanhToan = MaThanhToan;
                 thanhToan.TongChiPhi = thanhToan.ChiPhiKham;
+                thanhToan.MaHoSo = hoSoBenhAn.MaHoSo;
                 // điền thông tin Workflow
                 LuonCongViecDTO luonCongViec = new LuonCongViecDTO();
                 luonCongViec.MaHoSo = hoSoBenhAn.MaHoSo;
