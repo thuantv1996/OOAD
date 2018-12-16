@@ -12,5 +12,10 @@ namespace DTO
         public string TenThuoc { get; set; }
         public string ChiDinh { get; set; }
         public string ChongChiDinh { get; set; }
+
+        public override string ToString()
+        {
+            return this.TenThuoc;
+        }
     }
 }

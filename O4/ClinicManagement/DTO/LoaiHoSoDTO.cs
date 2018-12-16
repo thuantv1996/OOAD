@@ -10,5 +10,10 @@ namespace DTO
     {
         public string MaLoaiHoSo { get; set; }
         public string TenLoaiHoSo { get; set; }
+
+        public override string ToString()
+        {
+            return TenLoaiHoSo;
+        }
     }
 }
