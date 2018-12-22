@@ -215,6 +215,7 @@ namespace DAO.Implement
             {
                 ListHoSo = (from hs in db.HOSOBENHANs
                             where hs.MaBenhNhan == MaBenhNhan
+                            orderby hs.NgayKham descending
                             select hs).ToList();
             }
             catch (Exception e)
