@@ -28,11 +28,13 @@ namespace ClinicManagement.Features.Examination.Main
 
         private void DanhSachChoKham_AccessClick(object sender, Model.HoSoBenhAnView e)
         {
-            var hoso = new DTO.HoSoBenhAnDTO()
+
+            var hoso = this.bus.getHoSoKham(e.MaHoSo);
+            if (hoso == null)
             {
-                MaHoSo = e.MaHoSo,
-                MaBenhNhan = e.MaBenhNhan
-            };
+                MessageBox.Show("Hồ sơ không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             var formContainer = new Form()
             {
@@ -70,17 +72,6 @@ namespace ClinicManagement.Features.Examination.Main
             {
                 if (result.Equals(COM.Constant.RES_SUC))
                 {
-                    //dummy data
-                    listHoSo.Add(new Model.HoSoBenhAnView()
-                    {
-                        MaBenhNhan = "BN00000001",
-                        HoTen = "Nguyễn Văn A",
-                        CMND = "184313135",
-                        MaHoSo = "HS00000001",
-                        SoDienThoai = "0968329208",
-                        SoThuTu = 1
-
-                    });
                     this.danhSachChoKham.binding(listHoSo);
                     completion?.Invoke(true);
                 }

@@ -32,55 +32,59 @@ namespace ClinicManagement.Features.Login.Main
             this.loginControl.loginCompleted += LoginControl_loginCompleted;
         }
 
-        private void ChangePasswordControl_CloseClick(object sender, EventArgs e)
-        {
-            this.backgroundImage.Controls.Remove(this.changePasswordControl);
-            this.setupLogin();
-        }
-
         private void LoginControl_loginCompleted(object sender, DTO.TaiKhoanDTO loginInfo)
         {
             DevExpress.Utils.WaitDialogForm f = new DevExpress.Utils.WaitDialogForm();
 
-            this.bus.Login(loginInfo, (listMessageError, result) =>
+            this.bus.Login(loginInfo, (listMessageError, result, MaNV) =>
             {
                 f.Close();
                 if (result.Equals(COM.Constant.RES_SUC))
                 {
-                    this.loginSuccessful(loginInfo);
+                    this.loginSuccessful(MaNV);
                 } else
                 {
                     MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                //else if (result.Equals(COM.Constant.RES_FAI))
-                //{
-                //    var messageError = "";
-                //    listMessageError.ForEach((error) =>
-                //    {
-                //        if (error.IdError.Equals(COM.Constant.MES_PRE))
-                //        {
-                //            messageError += error.Message + "\n";
-                //        }
-                //    });
-                //    MessageBox.Show(messageError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //}
             });
         }
 
 
-        private void loginSuccessful(DTO.TaiKhoanDTO account)
+        private void loginSuccessful(string MaNV)
         {
             var user = Common.User.SharedInstance;
-            user.UserId = account.MaNhanVien;
-            user.UserType = Common.UserType.examination;
-            user.RoomId = "P000000001";
+            user.UserId = MaNV;
 
+            var nhanVienDTO = this.bus.getNhanVienInformation(MaNV);
+            if (nhanVienDTO == null)
+            {
+                MessageBox.Show("Nhân viên không tồn tại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                var maLoaiNV = nhanVienDTO.MaLoaiNV;
+                user.RoomId = nhanVienDTO.MaPhong;
+                if (maLoaiNV.Equals(COM.Constant.ID_LNV_TN))
+                    user.UserType = Common.UserType.reception;
+                else if (maLoaiNV.Equals(COM.Constant.ID_LNV_BS))
+                    user.UserType = Common.UserType.examination;
+                else if (maLoaiNV.Equals(COM.Constant.ID_LNV_XN))
+                    user.UserType = Common.UserType.analysis;
+            }
+            user.UserName = nhanVienDTO.HoTenNV;
 
             var mainForm = new ClinicManagement.MainForm(user);
             this.Hide();
+
+            mainForm.FormClosed += MainForm_FormClosed;
             mainForm.ShowDialog();
         }
-        
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();
+        }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
@@ -107,6 +111,5 @@ namespace ClinicManagement.Features.Login.Main
 
         private Bus.LoginBus bus = Bus.LoginBus.Instance;
         private SubForms.LoginControl loginControl;
-        private SubForms.ChangePasswordControl changePasswordControl;
     }
 }

@@ -33,7 +33,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.txtSex = new System.Windows.Forms.Label();
+            this.txtGender = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.txtCMND = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -55,7 +55,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label13, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.txtAddress, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label11, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.txtSex, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.txtGender, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.label9, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.txtCMND, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.label7, 0, 3);
@@ -126,14 +126,14 @@
             // 
             // txtSex
             // 
-            this.txtSex.AutoSize = true;
-            this.txtSex.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSex.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSex.Location = new System.Drawing.Point(149, 160);
-            this.txtSex.Name = "txtSex";
-            this.txtSex.Size = new System.Drawing.Size(327, 40);
-            this.txtSex.TabIndex = 9;
-            this.txtSex.Text = "Nam";
+            this.txtGender.AutoSize = true;
+            this.txtGender.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtGender.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtGender.Location = new System.Drawing.Point(149, 160);
+            this.txtGender.Name = "txtSex";
+            this.txtGender.Size = new System.Drawing.Size(327, 40);
+            this.txtGender.TabIndex = 9;
+            this.txtGender.Text = "Nam";
             // 
             // label9
             // 
@@ -255,7 +255,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label txtAddress;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label txtSex;
+        private System.Windows.Forms.Label txtGender;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label txtCMND;
         private System.Windows.Forms.Label label7;

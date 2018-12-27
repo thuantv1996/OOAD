@@ -27,7 +27,7 @@ namespace ClinicManagement.Common.ClinicComponents
             this.txtBirthDay.Text = string.Format("{0}/{1}/{2}", day, month, year);
             this.txtPhoneNumber.Text = patient.SoDienThoai;
             this.txtCMND.Text = patient.CMND;
-            this.txtSex.Text = patient.GioiTinh == true ? "Nam" : "Nữ";
+            this.txtGender.Text = patient.GioiTinh == true ? "Nam" : "Nữ";
             this.txtAddress.Text = patient.DiaChi;
             this.txtNote.Text = patient.GhiChu;
             this.idNumber = patient.MaBenhNhan;
@@ -42,7 +42,7 @@ namespace ClinicManagement.Common.ClinicComponents
 
             var patient = new DTO.BenhNhanDTO() {
                 HoTen = this.txtName.Text,
-                GioiTinh = this.txtSex.Text.Equals("Nam") ? true : false,
+                GioiTinh = this.txtGender.Text.Equals("Nam") ? true : false,
                 MaBenhNhan = this.idNumber,
                 NgaySinh = string.Format("{0}{1}{2}", year, month > 10 ? month.ToString(): "0" + month, day > 10 ? day.ToString() : "0" + day),
                 SoDienThoai = this.txtPhoneNumber.Text,
@@ -50,6 +50,17 @@ namespace ClinicManagement.Common.ClinicComponents
                 DiaChi = this.txtAddress.Text,
                 CMND = this.txtCMND.Text };
             return patient;
+        }
+
+        public void clearData()
+        {
+            this.txtName.Text = "";
+            this.txtGender.Text = "";
+            this.txtNote.Text = "";
+            this.txtAddress.Text = "";
+            this.txtCMND.Text = "";
+            this.txtPhoneNumber.Text = "";
+            this.txtBirthDay.Text = "";
         }
 
         private string idNumber = "";

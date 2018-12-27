@@ -30,7 +30,7 @@
         {
             this.btnSearch = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.receptionControl1 = new ClinicManagement.Features.Reception.SubForms.ReceptionControl();
+            this.receptionControl = new ClinicManagement.Features.Reception.SubForms.ReceptionControl();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -52,7 +52,7 @@
             this.tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.receptionControl1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.receptionControl, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(50, 47);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -62,13 +62,14 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(827, 626);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // receptionControl1
+            // receptionControl
             // 
-            this.receptionControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.receptionControl1.Location = new System.Drawing.Point(3, 56);
-            this.receptionControl1.Name = "receptionControl1";
-            this.receptionControl1.Size = new System.Drawing.Size(821, 567);
-            this.receptionControl1.TabIndex = 0;
+            this.receptionControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.receptionControl.Enabled = false;
+            this.receptionControl.Location = new System.Drawing.Point(3, 56);
+            this.receptionControl.Name = "receptionControl";
+            this.receptionControl.Size = new System.Drawing.Size(821, 567);
+            this.receptionControl.TabIndex = 0;
             // 
             // panel1
             // 
@@ -93,7 +94,7 @@
 
         #endregion
 
-        private SubForms.ReceptionControl receptionControl1;
+        private SubForms.ReceptionControl receptionControl;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;

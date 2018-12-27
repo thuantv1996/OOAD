@@ -40,6 +40,7 @@ namespace ClinicManagement.Features.Examination.SubForms
 
             var benhNhan = this.bus.getBenhNhan(this.hoSoBenhAn.MaBenhNhan);
             this.patientMainInformation.binding(benhNhan);
+            this.txtYeuCauKham.Text = this.hoSoBenhAn.YeuCauKham;
         }
 
         //==================================================================
@@ -158,6 +159,36 @@ namespace ClinicManagement.Features.Examination.SubForms
                 parent.Close();
             };
             formContainer.Controls.Add(control);
+            formContainer.ShowDialog();
+        }
+
+        private void lnkDonThuocGanNhat_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var formContainer = new Form()
+            {
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink
+            };
+
+            var hoso = this.bus.getLatestHoSo(this.hoSoBenhAn.MaBenhNhan);
+            if (hoso.Equals(COM.Constant.RES_FAI) || hoso.NgayKham == null)
+            {
+                MessageBox.Show("Không tồn tại hồ sơ trước!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            var ctrl = new SubForms.LatestPrescription(hoso)
+            {
+                Anchor = AnchorStyles.Left | AnchorStyles.Top,
+                Left = Top = 0
+            };
+
+            formContainer.Load += (obj, er) =>
+            {
+                ctrl.loadData();
+            };
+
+            formContainer.Controls.Add(ctrl);
             formContainer.ShowDialog();
         }
     }
