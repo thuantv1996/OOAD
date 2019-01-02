@@ -9,6 +9,8 @@ namespace ClinicManagement.Features.Examination.Bus
     class ExaminationBus
     {
         private BUS.Mdl.KhamModule clientBus = new BUS.Mdl.KhamModule();
+        private BUS.Mdl.XetNghiemModule xetNghiemBus = new BUS.Mdl.XetNghiemModule();
+
         private Common.User user = Common.User.SharedInstance;
 
         static private ExaminationBus sharedInstance;
@@ -114,6 +116,24 @@ namespace ClinicManagement.Features.Examination.Bus
             });
         }
 
+        public void getListKetQuaXetNghiem(string MaHoSo, Action<List<Model.KetQuaXetNghiemView>, string> completion)
+        {
+            var listResult = new List<Model.KetQuaXetNghiemView>();
+
+            listResult.Add(new Model.KetQuaXetNghiemView()
+            {
+                MaXetNghiem = "XN00000001",
+                MaBacSi = "BS00000001",
+                TenXetNghiem = "Xet nghiem mau",
+                TenBacSi = "Nguyen Van A",
+                NgayXetNghiem = Common.ClinicBus.convertDateToView("20181203"),
+                KetQua = "Het mau Het mau Het mau Het mau Het mau \nHet mau Het mau Het mau Het mau Het mau Het mau Het mau Het \nmau Het mau Het mau Het mau Het mau Het mau Het mau Het mau Het mau Het mau Het mau"
+            });
+
+            var result = COM.Constant.RES_SUC;
+            completion(listResult, result);
+        }
+
         //MARK: - Xét nghiệm
         public void getListXetNghiem(Action<string, List<DTO.XetNghiemDTO>> completion)
         {
@@ -136,23 +156,7 @@ namespace ClinicManagement.Features.Examination.Bus
         public void getListThuoc(Action<string, List<DTO.ThuocDTO>> completion)
         {
             var listResult = new List<DTO.ThuocDTO>();
-            listResult.Add(new DTO.ThuocDTO()
-            {
-                MaThuoc = "T000000001",
-                TenThuoc = "Paradol",
-                ChiDinh = "Uống khi bệnh",
-                ChongChiDinh = "Không dùng cho phụ nữ có thai"
-            });
-
-            listResult.Add(new DTO.ThuocDTO()
-            {
-                MaThuoc = "T000000002",
-                TenThuoc = "Tiphi",
-                ChiDinh = "Uống khi bệnh",
-                ChongChiDinh = "Không dùng cho phụ nữ có thai"
-            });
-
-            var result = COM.Constant.RES_SUC;
+            var result = this.clientBus.GetListThuoc(out listResult);
             completion(result, listResult);
         }
 
@@ -174,22 +178,92 @@ namespace ClinicManagement.Features.Examination.Bus
 
         public DTO.PhongKhamDTO getPhong(string maPhong)
         {
-            return new DTO.PhongKhamDTO() {
-                MaPhong = maPhong,
-                TenPhong = "Phong 1"
-            };
+            var phong = new DTO.PhongKhamDTO();
+            this.clientBus.GetInformationPhong(maPhong, out phong);
+            return phong;
         }
 
-        public void confirmExaminationWithAssignTests(DTO.HoSoBenhAnDTO hoso, List<DTO.XetNghiemDTO> danhSachXetNghiem, Action<string> completion)
+        public DTO.HoSoBenhAnDTO getHoSoKham(string MaHS)
         {
-            var result = COM.Constant.RES_SUC;
-            completion(result);
+            DTO.HoSoBenhAnDTO hoso = null;
+            this.clientBus.GetInformationHoSo(MaHS, out hoso);
+            return hoso;
         }
 
         public void confirmExaminationWithoutAssignTests(DTO.HoSoBenhAnDTO hoso, List<DTO.ChiTietDonThuocDTO> danhSachThuoc, Action<string> completion)
         {
             var result = COM.Constant.RES_SUC;
             completion(result);
+        }
+
+        public DTO.HoSoBenhAnDTO getLatestHoSo(string MaBN)
+        {
+            var listHoSo = new List<DTO.HoSoBenhAnDTO>();
+            var result = this.clientBus.GetListHoSoByBenhNhan(MaBN, out listHoSo);
+            return listHoSo.First();
+        }
+
+        public void getInformationToShowLatestRecord(DTO.HoSoBenhAnDTO hoso, Action<string, string, string, List<Model.ThuocView>, string> completion)
+        {
+            var ngayTiepNhan = Common.ClinicBus.convertDateToView(hoso.NgayKham);
+            var listNhanVien = new List<DTO.NhanVienDTO>();
+            this.clientBus.GetListNhanVien(Common.User.SharedInstance.RoomId, out listNhanVien);
+
+            var bacSi = listNhanVien.Find(nv => nv.MaNV.Equals(hoso.MaBacSi));
+            if (bacSi == null)
+            {
+                completion("", "", "", null, COM.Constant.RES_FAI);
+                return;
+            }
+
+            var chuanDoan = hoso.ChuanDoan;
+
+            var donThuoc = new DTO.DonThuocDTO();
+            var chiTietDonThuoc = new List<DTO.ChiTietDonThuocDTO>();
+            var rs = this.clientBus.GetDonThuoc(hoso.MaHoSo, out donThuoc, out chiTietDonThuoc);
+
+            if (rs.Equals(COM.Constant.RES_FAI))
+            {
+                completion("", "", "", null, COM.Constant.RES_FAI);
+                return;
+            }
+
+            var listThuoc = new List<Model.ThuocView>();
+            chiTietDonThuoc.ForEach(ctThuoc =>
+            {
+                var thuoc = this.getThuoc(ctThuoc.MaThuoc);
+
+                if (thuoc != null)
+                {
+                    listThuoc.Add(new Model.ThuocView()
+                    {
+                        MaThuoc = ctThuoc.MaThuoc,
+                        TenThuoc = thuoc.TenThuoc,
+                        GhiChu = donThuoc.GhiChu,
+                        SoLuong = ctThuoc.SoLuong
+                    });
+                }
+            });
+
+            completion(ngayTiepNhan, bacSi.HoTenNV, chuanDoan, listThuoc, COM.Constant.RES_SUC);
+        }
+
+        public void assignTests(List<DTO.KetQuaXetNghiemDTO> danhSachXN, Action<string> completion)
+        {
+            var result = this.xetNghiemBus.AssignXetNghiem(danhSachXN);
+            completion(result);
+        }
+
+        public void khamProcessing(DTO.HoSoBenhAnDTO hoso, DTO.DonThuocDTO donThuoc, List<DTO.ChiTietDonThuocDTO> danhSachChiTietThuoc, Action<string> completion)
+        {
+            var processingResult = this.clientBus.KhamProcessing(hoso);
+            if (processingResult.Equals(COM.Constant.RES_FAI))
+            {
+                completion(processingResult);
+                return;
+            }
+            var resultSaveThuoc = this.clientBus.SaveDonthuoc(donThuoc, danhSachChiTietThuoc);
+            completion(resultSaveThuoc);
         }
     }
 }

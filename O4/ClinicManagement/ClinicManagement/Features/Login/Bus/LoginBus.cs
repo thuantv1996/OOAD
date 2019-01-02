@@ -29,11 +29,19 @@ namespace ClinicManagement.Features.Login.Bus
             this.loginBusClient = new BUS.Mdl.DangNhapModule();
         }
 
-        public void Login(TaiKhoanDTO account, Action<List<MessageError>, string> completion)
+        public void Login(TaiKhoanDTO account, Action<List<MessageError>, string, string> completion)
         {
             var listMessageError = new List<MessageError>();
-            var result = this.loginBusClient.DangNhapProcess(account);
-            completion(listMessageError, result);
+            string MaNV = null;
+            var result = this.loginBusClient.DangNhapProcess(account, out MaNV);
+            completion(listMessageError, result, MaNV);
+        }
+
+        public DTO.NhanVienDTO getNhanVienInformation(string MaNhanVien)
+        {
+            DTO.NhanVienDTO nhanVien = null;
+            this.loginBusClient.GetInformationNhanVien(MaNhanVien, out nhanVien);
+            return nhanVien;
         }
     }
 }

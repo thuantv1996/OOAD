@@ -54,7 +54,11 @@ namespace ClinicManagement.Features.Examination.SubForms
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            this.bus.confirmExaminationWithoutAssignTests(this.hoso, danhSachThuoc, result =>
+            var donThuoc = new DTO.DonThuocDTO()
+            {
+                MaHoSo = hoso.MaHoSo
+            };
+            this.bus.khamProcessing(hoso, donThuoc, danhSachThuoc, result =>
             {
                 if (result.Equals(COM.Constant.RES_SUC))
                     this.InvokeConfirm(this, e);

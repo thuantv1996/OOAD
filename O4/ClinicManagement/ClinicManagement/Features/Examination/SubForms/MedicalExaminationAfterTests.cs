@@ -47,14 +47,19 @@ namespace ClinicManagement.Features.Examination.SubForms
             var benhNhan = this.bus.getBenhNhan(this.hoSoBenhAn.MaBenhNhan);
             this.patientMainInformation.binding(benhNhan);
 
-            var location = new Point(this.txtChuanDoanBenh.Location.X, this.txtChuanDoanBenh.Location.Y + this.txtChuanDoanBenh.Height + 20);
+            var location = new Point(this.testsResult.Location.X, this.testsResult.Location.Y + this.testsResult.Height + 20);
             this.createPrescription = new SubForms.CreatePrescriptions()
             {
                 Location = location,
-                Width = this.txtChuanDoanBenh.Width,
+                Width = this.testsResult.Width,
                 Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
             };
             this.mainPanel.Controls.Add(createPrescription);
+
+            this.bus.getListKetQuaXetNghiem(this.hoSoBenhAn.MaHoSo, (listResult, result) =>
+            {
+                this.testsResult.DataSource = ClinicManagement.Common.ClinicBus.ConvertToDatatable(listResult);
+            });
         }
 
         private void btnXacNhan_Click(object sender, EventArgs e)

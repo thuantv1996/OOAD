@@ -53,9 +53,9 @@ namespace ClinicManagement.Common
         static public string convertViewToDate(string date)
         {
             var list = date.Split('/');
-            var year = list.First();
+            var day = list.First();
             var month = list[1];
-            var day = list.Last();
+            var year = list.Last();
             return String.Format("{0}{1}{2}", year, month, day);
         }
     }

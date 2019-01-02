@@ -63,10 +63,23 @@ namespace ClinicManagement.Features.Examination.SubForms
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            this.bus.confirmExaminationWithAssignTests(this.hoso, danhSachXetNghiem, result =>
+            var listKQXN = new List<DTO.KetQuaXetNghiemDTO>();
+            danhSachXetNghiem.ForEach(xn =>
+            {
+                listKQXN.Add(new DTO.KetQuaXetNghiemDTO()
+                {
+                    MaHoSo = hoso.MaHoSo,
+                    MaXetNghiem = xn.MaXetNghiem,
+                    ThanhToan = false,
+                    TongChiPhi = chiPhi
+                });
+            });
+            this.bus.assignTests(listKQXN, result =>
             {
                 if (result.Equals(COM.Constant.RES_SUC))
+                {
                     this.InvokeConfirm(this, e);
+                }
             });
         }
     }
