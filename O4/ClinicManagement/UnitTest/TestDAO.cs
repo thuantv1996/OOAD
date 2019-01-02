@@ -37,7 +37,7 @@ namespace UnitTest
             // Chuẩn bị các thành phần 
             List<LOAINHANVIEN> ListLoaiNhanVien = null;
             List<string> MessageError = null;
-            DAO.Imp.BaseDAO dao = new DAO.Imp.BaseDAO();
+            DAO..BaseDAO dao = new DAO.Imp.BaseDAO();
             LOAINHANVIEN lnv = new LOAINHANVIEN { MaLoaiNV = "LNV0000004", TenLoaiNV = "TEST UT" };
 
             //
