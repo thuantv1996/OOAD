@@ -71,7 +71,8 @@ namespace ClinicManagement.Features.Examination.SubForms
                     MaHoSo = hoso.MaHoSo,
                     MaXetNghiem = xn.MaXetNghiem,
                     ThanhToan = false,
-                    TongChiPhi = chiPhi
+                    TongChiPhi = chiPhi,
+                    MaBacSi = Common.User.SharedInstance.UserId
                 });
             });
             this.bus.assignTests(listKQXN, result =>

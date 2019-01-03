@@ -1,6 +1,6 @@
-﻿namespace ClinicManagement.Features.Examination.SubForms
+﻿namespace ClinicManagement.Features.Payment.Main
 {
-    partial class WaitingPatientTable
+    partial class PaymentHome
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnAccess = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.col_STT = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -39,21 +38,13 @@
             this.col_HoTen = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col_CMND = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col_Sdt = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.btnAccess = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.BackColor = System.Drawing.Color.White;
-            this.btnRefresh.Image = global::ClinicManagement.Properties.Resources.ico_refresh;
-            this.btnRefresh.Location = new System.Drawing.Point(54, 23);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(45, 45);
-            this.btnRefresh.TabIndex = 2;
-            this.btnRefresh.UseVisualStyleBackColor = false;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // panel1
             // 
@@ -62,28 +53,26 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(963, 74);
-            this.panel1.TabIndex = 3;
+            this.panel1.Size = new System.Drawing.Size(837, 68);
+            this.panel1.TabIndex = 0;
             // 
-            // btnAccess
+            // panel2
             // 
-            this.btnAccess.BackColor = System.Drawing.Color.White;
-            this.btnAccess.Image = global::ClinicManagement.Properties.Resources.ico_edit;
-            this.btnAccess.Location = new System.Drawing.Point(3, 23);
-            this.btnAccess.Name = "btnAccess";
-            this.btnAccess.Size = new System.Drawing.Size(45, 45);
-            this.btnAccess.TabIndex = 3;
-            this.btnAccess.UseVisualStyleBackColor = false;
-            this.btnAccess.Click += new System.EventHandler(this.btnAccess_Click);
+            this.panel2.Controls.Add(this.gridControl1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 68);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(837, 543);
+            this.panel2.TabIndex = 1;
             // 
             // gridControl1
             // 
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(0, 74);
+            this.gridControl1.Location = new System.Drawing.Point(0, 0);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(963, 379);
-            this.gridControl1.TabIndex = 4;
+            this.gridControl1.Size = new System.Drawing.Size(837, 543);
+            this.gridControl1.TabIndex = 5;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
@@ -161,16 +150,38 @@
             this.col_Sdt.VisibleIndex = 4;
             this.col_Sdt.Width = 196;
             // 
-            // WaitingPatientTable
+            // btnAccess
+            // 
+            this.btnAccess.BackColor = System.Drawing.Color.White;
+            this.btnAccess.Image = global::ClinicManagement.Properties.Resources.ico_edit;
+            this.btnAccess.Location = new System.Drawing.Point(3, 17);
+            this.btnAccess.Name = "btnAccess";
+            this.btnAccess.Size = new System.Drawing.Size(45, 45);
+            this.btnAccess.TabIndex = 5;
+            this.btnAccess.UseVisualStyleBackColor = false;
+            this.btnAccess.Click += new System.EventHandler(this.btnAccess_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.White;
+            this.btnRefresh.Image = global::ClinicManagement.Properties.Resources.ico_refresh;
+            this.btnRefresh.Location = new System.Drawing.Point(54, 17);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(45, 45);
+            this.btnRefresh.TabIndex = 4;
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // PaymentHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.gridControl1);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Name = "WaitingPatientTable";
-            this.Size = new System.Drawing.Size(963, 453);
+            this.Name = "PaymentHome";
+            this.Size = new System.Drawing.Size(837, 611);
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
@@ -178,8 +189,9 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btnRefresh;
+
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn col_STT;
@@ -189,5 +201,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn col_CMND;
         private DevExpress.XtraGrid.Columns.GridColumn col_Sdt;
         private System.Windows.Forms.Button btnAccess;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

@@ -17,12 +17,6 @@ namespace ClinicManagement.Features.Reception.SubForms
             InitializeComponent();
         }
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            base.OnPaint(e);
-            this.refreshControl();
-        }
-
         public void refreshControl()
         {
             this.patientEdit.BringToFront();

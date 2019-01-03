@@ -206,7 +206,26 @@
       <DependentUpon>WaitingPatientTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Features\Payment\Bus\PaymentBus.cs" />
+    <Compile Include="Features\Payment\Main\PaymentHome.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Payment\Main\PaymentHome.Designer.cs">
+      <DependentUpon>PaymentHome.cs</DependentUpon>
+    </Compile>
     <Compile Include="Features\Payment\Model\HoSoBenhAnView.cs" />
+    <Compile Include="Features\Payment\Model\ThanhToanView.cs" />
+    <Compile Include="Features\Payment\Subforms\PaymentConfirm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Payment\Subforms\PaymentConfirm.Designer.cs">
+      <DependentUpon>PaymentConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Payment\Subforms\PaymentDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Payment\Subforms\PaymentDetail.Designer.cs">
+      <DependentUpon>PaymentDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Features\Reception\Main\Reception.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -388,6 +407,15 @@
     <EmbeddedResource Include="Features\Examination\SubForms\WaitingPatientTable.resx">
       <DependentUpon>WaitingPatientTable.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\Payment\Main\PaymentHome.resx">
+      <DependentUpon>PaymentHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Payment\Subforms\PaymentConfirm.resx">
+      <DependentUpon>PaymentConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Payment\Subforms\PaymentDetail.resx">
+      <DependentUpon>PaymentDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\Reception\Main\Reception.resx">
       <DependentUpon>Reception.cs</DependentUpon>
     </EmbeddedResource>
@@ -465,8 +493,6 @@
     <Folder Include="Features\Analysis\Bus\" />
     <Folder Include="Features\Analysis\SubForms\" />
     <Folder Include="Features\Common\" />
-    <Folder Include="Features\Payment\Main\" />
-    <Folder Include="Features\Payment\Subforms\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\loginBackground.jpeg" />
