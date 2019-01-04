@@ -32,13 +32,14 @@ namespace ClinicManagement
             {
                 case ClinicManagement.Common.UserType.reception:
                     {
-                        this.updateMenuControl(new string[] { "Trang chủ", "Tiếp nhận bệnh nhân", "Hồ sơ mới"});
+                        this.updateMenuControl(new string[] { "Trang chủ", "Tiếp nhận bệnh nhân", "Hồ sơ mới", "Thanh toán"});
                         this.listContent.Clear();
                         this.listContent.AddRange(new UserControl[]
                         {
                             new ClinicManagement.Features.Reception.Main.ReceptionHome(),
                             new ClinicManagement.Features.Reception.Main.Reception(),
-                            new ClinicManagement.Features.Reception.Main.ReceptionCreatePatientRecord()
+                            new ClinicManagement.Features.Reception.Main.ReceptionCreatePatientRecord(),
+                            new ClinicManagement.Features.Payment.Main.PaymentHome()
                         });
                         break;
                     }
