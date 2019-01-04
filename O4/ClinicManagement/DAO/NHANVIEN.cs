@@ -42,5 +42,50 @@ namespace DAO
         public virtual PHONG PHONG { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TAIKHOAN> TAIKHOANs { get; set; }
+
+        public bool Validate()
+        {
+            if (MaNV == null || MaNV.Length != 10)
+            {
+                return false;
+            }
+            if (HoTenNV == null || HoTenNV.Length > 50)
+            {
+                return false;
+            }
+            if (NgaySinh != null && NgaySinh.Length > 8)
+            {
+                return false;
+            }
+            if (CMND != null && CMND.Length > 8)
+            {
+                return false;
+            }
+            if (SoDienThoai != null && SoDienThoai.Length > 11)
+            {
+                return false;
+            }
+            if (Email != null && Email.Length > 250)
+            {
+                return false;
+            }
+            if (MaSoThue != null && MaSoThue.Length > 13)
+            {
+                return false;
+            }
+            if (SoTaiKhoan != null && SoTaiKhoan.Length > 15)
+            {
+                return false;
+            }
+            if (MaLoaiNV.Length > 10)
+            {
+                return false;
+            }
+            if (MaPhong.Length > 10)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

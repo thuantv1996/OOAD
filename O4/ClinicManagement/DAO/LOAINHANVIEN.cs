@@ -25,5 +25,19 @@ namespace DAO
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NHANVIEN> NHANVIENs { get; set; }
+
+        public bool Validate()
+        {
+            if (MaLoaiNV == null || MaLoaiNV.Length != 10)
+            {
+                return false;
+            }
+            if (TenLoaiNV != null || TenLoaiNV.Length > 250)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

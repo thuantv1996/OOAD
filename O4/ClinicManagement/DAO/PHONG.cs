@@ -33,5 +33,27 @@ namespace DAO
         public virtual ICollection<TRANGTHAIPHONG> TRANGTHAIPHONGs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<XETNGHIEM> XETNGHIEMs { get; set; }
+
+        public bool Validate()
+        {
+            if (MaPhong == null || MaPhong.Length != 10)
+            {
+                return false;
+            }
+            if (TenPhong == null || TenPhong.Length > 250)
+            {
+                return false;
+            }
+            if (ChuyenKhoa != null && ChuyenKhoa.Length > 250)
+            {
+                return false;
+            }
+            if (GhiChu != null && GhiChu.Length > 250)
+            {
+                return false;
+            }
+            
+            return true;
+        }
     }
 }

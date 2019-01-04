@@ -28,5 +28,27 @@ namespace DAO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CHITIETDONTHUOC> CHITIETDONTHUOCs { get; set; }
         public virtual HOSOBENHAN HOSOBENHAN { get; set; }
+
+        public bool Validate()
+        {
+            if (MaDonThuoc == null || MaDonThuoc.Length != 10)
+            {
+                return false;
+            }
+            if (MaHoSo == null || MaHoSo.Length != 10)
+            {
+                return false;
+            }
+            if (NgayLap != null && NgayLap.Length > 8)
+            {
+                return false;
+            }
+            if (GhiChu != null && GhiChu.Length > 250)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

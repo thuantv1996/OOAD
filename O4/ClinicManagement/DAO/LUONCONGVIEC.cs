@@ -21,5 +21,31 @@ namespace DAO
         public Nullable<bool> XetNghiem { get; set; }
     
         public virtual HOSOBENHAN HOSOBENHAN { get; set; }
+
+        public bool Validate()
+        {
+            if (MaHoSo == null || MaHoSo.Length != 10)
+            {
+                return false;
+            }
+            if (NodeHienTai != null || NodeHienTai.Length > 5)
+            {
+                return false;
+            }
+            if (TiepNhan != null)
+            {
+                return false;
+            }
+            if (KhamBenh != null)
+            {
+                return false;
+            }
+            if (XetNghiem != null)
+            {
+                return false;
+            }
+           
+            return true;
+        }
     }
 }

@@ -25,5 +25,34 @@ namespace DAO
         public virtual HOSOBENHAN HOSOBENHAN { get; set; }
         public virtual NHANVIEN NHANVIEN { get; set; }
         public virtual XETNGHIEM XETNGHIEM { get; set; }
+
+        public bool Validate()
+        {
+            if (MaHoSo == null || MaHoSo.Length != 10)
+            {
+                return false;
+            }
+            if (MaXetNghiem == null || MaXetNghiem.Length > 10)
+            {
+                return false;
+            }
+            if (MaBacSi.Length > 8)
+            {
+                return false;
+            }
+            if (KetQua != null)
+            {
+                return false;
+            }
+            if (ThanhToan != null)
+            {
+                return false;
+            }
+            if (TongChiPhi != null)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

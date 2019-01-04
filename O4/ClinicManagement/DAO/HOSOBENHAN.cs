@@ -48,5 +48,71 @@ namespace DAO
         public virtual LUONCONGVIEC LUONCONGVIEC { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<THANHTOAN> THANHTOANs { get; set; }
+
+        public bool Validate()
+        {
+            if (MaHoSo == null || MaHoSo.Length != 10)
+            {
+                return false;
+            }
+            if (MaHoSoTruoc != null || MaHoSoTruoc.Length != 10)
+            {
+                return false;
+            }
+            if (MaHoSoGoc != null && MaHoSoGoc.Length > 10)
+            {
+                return false;
+            }
+            if (MaLoaiHoSo.Length > 10)
+            {
+                return false;
+            }
+            if (MaBenhNhan.Length > 10)
+            {
+                return false;
+            }
+            if (MaNguoiTN.Length > 10)
+            {
+                return false;
+            }
+            if (NgayTiepNhan != null && NgayTiepNhan.Length > 8)
+            {
+                return false;
+            }
+            if (YeuCauKham != null && YeuCauKham.Length > 250)
+            {
+                return false;
+            }
+            if (TrieuChung != null && TrieuChung.Length > 250)
+            {
+                return false;
+            }
+            if (NgayKham != null && NgayKham.Length > 8)
+            {
+                return false;
+            }
+            if (SoThuTu != null)
+            {
+                return false;
+            }
+            if (MaPhongKham.Length > 8)
+            {
+                return false;
+            }
+            if (MaBacSi.Length > 8)
+            {
+                return false;
+            }
+            if (ChuanDoan != null)
+            {
+                return false;
+            }
+            if (CoKeDon != null)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }

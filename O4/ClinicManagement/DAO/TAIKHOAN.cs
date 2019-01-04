@@ -21,5 +21,31 @@ namespace DAO
         public string MaNhanVien { get; set; }
     
         public virtual NHANVIEN NHANVIEN { get; set; }
+
+        public bool Validate()
+        {
+            if (MaTaiKhoan == null || MaTaiKhoan.Length != 10)
+            {
+                return false;
+            }
+            if (TenDangNhap != null || TenDangNhap.Length > 20)
+            {
+                return false;
+            }
+            if (MatKhau != null && MatKhau.Length > 32)
+            {
+                return false;
+            }
+            if (NgayThayDoi != null && NgayThayDoi.Length > 8)
+            {
+                return false;
+            }
+            if (MaNhanVien.Length > 10)
+            {
+                return false;
+            }
+            
+            return true;
+        }
     }
 }
