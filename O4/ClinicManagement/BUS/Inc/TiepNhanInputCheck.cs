@@ -83,14 +83,14 @@ namespace BUS.Inc
             NhanVienBUS nhanVienBUS = new NhanVienBUS();
             using(QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
-                if (entity.MaLoaiHoSo != "LHS0000001" && entity.MaLoaiHoSo != "LHS0000002")
+                if (entity.MaLoaiHoSo != Com.BusConstant.HS_KHAMMOI && entity.MaLoaiHoSo != BUS.Com.BusConstant.HS_TAIKHAM)
                 {
                     Messages.Add("Loại hồ sơ không tồn tại!");
                     return Constant.RES_FAI;
                 }
 
                 HoSoBenhAnDTO hoSoBenhAn = new HoSoBenhAnDTO();
-                if (hoSoBenhAnBUS.GetInfomationHoSo(db, entity.MaHoSoTruoc, out hoSoBenhAn) == Constant.RES_FAI)
+                if (hoSoBenhAnBUS.GetInfomationHoSo(db, entity.MaHoSoTruoc, out hoSoBenhAn) == Constant.RES_FAI && entity.MaLoaiHoSo == Com.BusConstant.HS_TAIKHAM)
                 {
                     Messages.Add("Hồ sơ bệnh án trước không tồn tại!");
                     return Constant.RES_FAI;
@@ -104,7 +104,7 @@ namespace BUS.Inc
                 NhanVienDTO nhanVien = new NhanVienDTO();
                 if (nhanVienBUS.GetInfomationNhanVien(db, entity.MaNguoiTN, out nhanVien) == Constant.RES_FAI)
                 {
-                    Messages.Add("Nhân viên tiếp nhận tồn tại!");
+                    Messages.Add("Nhân viên tiếp nhận không tồn tại!");
                     return Constant.RES_FAI;
                 }
             }

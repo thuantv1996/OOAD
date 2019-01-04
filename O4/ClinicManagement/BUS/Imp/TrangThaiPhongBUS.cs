@@ -25,7 +25,11 @@ namespace BUS.Imp
 
             if(entity == null)
             {
-                return Constant.RES_FAI;
+                entity = new TRANGTHAIPHONG();
+                entity.MaPhong = MaPhongKham;
+                entity.NgayKham = NgayThang;
+                entity.SttCaoNhat = 0;
+                trangThaiPhongServices.Save(db, entity);
             }
             BUS.Com.Utils.CopyPropertiesFrom(entity, TrangThaiPhong);
             return Constant.RES_SUC;

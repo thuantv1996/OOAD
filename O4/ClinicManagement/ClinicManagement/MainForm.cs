@@ -32,13 +32,14 @@ namespace ClinicManagement
             {
                 case ClinicManagement.Common.UserType.reception:
                     {
-                        this.updateMenuControl(new string[] { "Trang chủ", "Tiếp nhận bệnh nhân", "Hồ sơ mới"});
+                        this.updateMenuControl(new string[] { "Trang chủ", "Tiếp nhận bệnh nhân", "Hồ sơ mới", "Thanh toán"});
                         this.listContent.Clear();
                         this.listContent.AddRange(new UserControl[]
                         {
                             new ClinicManagement.Features.Reception.Main.ReceptionHome(),
                             new ClinicManagement.Features.Reception.Main.Reception(),
-                            new ClinicManagement.Features.Reception.Main.ReceptionCreatePatientRecord()
+                            new ClinicManagement.Features.Reception.Main.ReceptionCreatePatientRecord(),
+                            new ClinicManagement.Features.Payment.Main.PaymentHome()
                         });
                         break;
                     }
@@ -56,13 +57,21 @@ namespace ClinicManagement
                 default: break;
             }
 
+            var vitri = user.RoomId.Equals(COM.Constant.ID_LNV_BS) ? "Bác sĩ khám" : user.RoomId.Equals(COM.Constant.ID_LNV_TN) ? "Nhân viên tiếp nhận" : "Bác sĩ xét nghiệm";
+            this.menuControl.updateUserInformation(user.UserName, vitri);
             this.listContent.ForEach(control =>
             {
                 control.Dock = DockStyle.Fill;
                 this.panelContent.Controls.Add(control);
                 this.menuControl.listAction.Add((sender, e) => { control.BringToFront(); });
             });
-            
+
+            this.menuControl.LogOut += MenuControl_LogOut;
+        }
+
+        private void MenuControl_LogOut(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void updateMenuControl(string[] items)

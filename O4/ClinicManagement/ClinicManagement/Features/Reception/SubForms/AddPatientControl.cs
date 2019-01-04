@@ -17,9 +17,18 @@ namespace ClinicManagement.Features.Reception.SubForms
             InitializeComponent();
         }
 
+        public void refreshControl()
+        {
+            this.patientEdit.BringToFront();
+            this.btnCreate.BringToFront();
+            this.btnCreate.Visible = true;
+            this.btnBack.Visible = false;
+            this.btnConfirm.Visible = false;
+            this.clearData();
+        }
+
         private void btnCreate_Click(object sender, EventArgs e)
         {
-
             if (this.checkValid())
             {
                 this.patientInformation.BringToFront();
@@ -59,6 +68,12 @@ namespace ClinicManagement.Features.Reception.SubForms
             this.btnBack.Visible = false;
 
             this.patientEdit.fillData(this.patientInformation.getData());
+        }
+
+        public void clearData()
+        {
+            this.patientInformation.clearData();
+            this.patientEdit.clearData();
         }
 
         public event EventHandler<DTO.BenhNhanDTO> CreateCompleted;

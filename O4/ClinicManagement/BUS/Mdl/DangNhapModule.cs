@@ -9,7 +9,7 @@ namespace BUS.Mdl
 {
     public class DangNhapModule
     {
-        public string DangNhapProcess(TaiKhoanDTO taiKhoan)
+        public string DangNhapProcess(TaiKhoanDTO taiKhoan, out string MaNV)
         {
             // khởi tạo BUS
             DangNhapBUS dangNhapBUS = new DangNhapBUS();
@@ -22,10 +22,12 @@ namespace BUS.Mdl
                 dangNhapBUS.EncodePassword(ref taiKhoan);
                 // thực hiện check tài khoản
                 result = dangNhapBUS.CheckTaiKhoan(db, taiKhoan,out ObjectCommon.UserLogin);
+                MaNV = ObjectCommon.UserLogin.MaNhanVien;
             }
             // nếu kết quả check là fail
             if (result == Constant.RES_FAI)
             {
+                MaNV = "";
                 // return fail
                 return Constant.RES_FAI;
             }

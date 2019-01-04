@@ -82,6 +82,7 @@ namespace ClinicManagement.Features.Reception.Bus
             {
                 var result = this.clientBus.InsertBenhNhan(patient);
                 completion(result, null);
+                return;
             }
 
             completion(checkInputResult, listMessageError);
@@ -176,6 +177,7 @@ namespace ClinicManagement.Features.Reception.Bus
             {
                 var result = this.clientBus.SaveHoSo(hoso, thanhToan);
                 completion(hoso.SoThuTu, result, null);
+                return;
             }
             completion(0, checkInputResult, listMessageError);
            

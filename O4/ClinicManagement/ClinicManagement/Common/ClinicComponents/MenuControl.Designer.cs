@@ -34,7 +34,7 @@
             // layout
             // 
             this.layout.ColumnCount = 1;
-            this.layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 341F));
             this.layout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layout.Location = new System.Drawing.Point(0, 0);
             this.layout.Name = "layout";

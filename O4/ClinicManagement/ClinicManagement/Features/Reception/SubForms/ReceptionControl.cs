@@ -13,31 +13,42 @@ namespace ClinicManagement.Features.Reception.SubForms
     public partial class ReceptionControl : UserControl
     {
         private DTO.BenhNhanDTO patient;
-        private List<DTO.LoaiHoSoDTO> listLoaiHoSo = new List<DTO.LoaiHoSoDTO>();
         private List<DTO.HoSoBenhAnDTO> listHoSoTruoc = new List<DTO.HoSoBenhAnDTO>();
-        private List<DTO.PhongKhamDTO> listPhongKham = new List<DTO.PhongKhamDTO>();
-        private List<DTO.NhanVienDTO> listNhanVienTiepNhan = new List<DTO.NhanVienDTO>();
         private Reception.Bus.ReceptionBus bus = Bus.ReceptionBus.SharedInstance;
+        public event EventHandler Recepted;
 
         public ReceptionControl()
         {
             InitializeComponent();
-            this.btnBack.Visible = false;
+            this.setupView();
         }
 
         public ReceptionControl(DTO.BenhNhanDTO patient)
         {
             InitializeComponent();
+            this.setupView();
             this.patient = patient;
-            this.setupView(patient);
+            this.setupData(patient);
             this.fillMainInformation();
-            this.patientMainInformation1.binding(patient);
         }
 
-        public void setupView(DTO.BenhNhanDTO patient)
+        private void setupView()
         {
-            this.patient = patient;
             this.btnBack.Visible = false;
+            var size = groupBox1.Size;
+            this.patientMainInformation1 = new Common.ClinicComponents.PatientMainInformation()
+            {
+                Location = new Point(13, 6),
+                Size = new Size(size.Width, this.groupBox1.Location.Y - 6),
+                Anchor = AnchorStyles.Left | AnchorStyles.Top
+            };
+
+            this.Controls.Add(this.patientMainInformation1);
+        }
+
+        public void setupData(DTO.BenhNhanDTO patient)
+        {
+            this.patientMainInformation1.binding(patient);
         }
 
         private void fillMainInformation() {
@@ -53,9 +64,8 @@ namespace ClinicManagement.Features.Reception.SubForms
                 {
                     listResult.ForEach((loai) =>
                     {
-                        this.cbLoaiHoSo.Properties.Items.Add(loai.TenLoaiHoSo);
+                        this.cbLoaiHoSo.Properties.Items.Add(loai);
                     });
-                    this.listLoaiHoSo.AddRange(listResult);
                 }
             });
 
@@ -77,10 +87,9 @@ namespace ClinicManagement.Features.Reception.SubForms
                 {
                     listResult.ForEach((phong) =>
                     {
-                        this.cbPhong.Properties.Items.Add(phong.TenPhong);
+                        this.cbPhong.Properties.Items.Add(phong);
                     });
 
-                    this.listPhongKham.AddRange(listResult);
                 }
             });
 
@@ -90,25 +99,27 @@ namespace ClinicManagement.Features.Reception.SubForms
                 {
                     listResult.ForEach(nhanVien =>
                     {
-                        this.cbNguoiTiepNhan.Properties.Items.Add(nhanVien.HoTenNV);
+                        this.cbNguoiTiepNhan.Properties.Items.Add(nhanVien);
                     });
 
-                    this.listNhanVienTiepNhan.AddRange(listResult);
                 }
             });
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            var loaiHoSo = this.listLoaiHoSo.Find(loai => loai.TenLoaiHoSo.Equals(this.cbLoaiHoSo.Text));
-            var nguoiTiepNhan = this.listNhanVienTiepNhan.Find(nv => nv.HoTenNV.Equals(this.cbNguoiTiepNhan.Text));
-            var phongKham = this.listPhongKham.Find(phong => phong.TenPhong.Equals(this.cbPhong.Text));
+            var loaiHoSo = (DTO.LoaiHoSoDTO)this.cbLoaiHoSo.SelectedItem;
+            var nguoiTiepNhan = (DTO.NhanVienDTO)this.cbNguoiTiepNhan.SelectedItem;
+            var phongKham = (DTO.PhongKhamDTO)this.cbPhong.SelectedItem;
+
+            if (this.patient == null) return;
+
             var hoso = new DTO.HoSoBenhAnDTO()
             {
                 MaBenhNhan = this.patient.MaBenhNhan,
                 MaHoSoTruoc = this.cbMaHoSoTruoc.Text,
                 MaLoaiHoSo = loaiHoSo != null ? loaiHoSo.MaLoaiHoSo : "",
-                MaNguoiTN = nguoiTiepNhan != null ? nguoiTiepNhan.MaLoaiNV : "",
+                MaNguoiTN = nguoiTiepNhan != null ? nguoiTiepNhan.MaNV : "",
                 NgayTiepNhan = ClinicManagement.Common.ClinicBus.convertViewToDate(this.txtNgayTiepNhan.Text),
                 YeuCauKham = this.txtYeuCauKham.Text,
                 MaPhongKham = phongKham != null ? phongKham.MaPhong : ""
@@ -118,7 +129,14 @@ namespace ClinicManagement.Features.Reception.SubForms
             this.bus.confirmReception(hoso, thanhToan,(stt, result, listMessageError) =>
             {
                 if (result.Equals(COM.Constant.RES_SUC))
+                {
                     MessageBox.Show(String.Format("Tiếp nhận thành công!\nSố thứ tự là: {0}", stt), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Recepted?.Invoke(this, e);
+                    if (this.Parent is Form) {
+                        var formParent = (Form)this.Parent;
+                        formParent.Close();
+                    }
+                }
                 else
                 {
                     var msg = "";
@@ -186,6 +204,21 @@ namespace ClinicManagement.Features.Reception.SubForms
             };
             formContainer.Controls.Add(previousControl);
             formContainer.ShowDialog();
+        }
+
+        private Common.ClinicComponents.PatientMainInformation patientMainInformation1;
+
+        private void cbLoaiHoSo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var loaiHoSo = (DTO.LoaiHoSoDTO)this.cbLoaiHoSo.SelectedItem;
+            if (loaiHoSo.MaLoaiHoSo.Equals(BUS.Com.BusConstant.HS_KHAMMOI))
+            {
+                this.cbMaHoSoTruoc.Text = "";
+                this.cbMaHoSoTruoc.Enabled = false;
+            } else
+            {
+                this.cbMaHoSoTruoc.Enabled = true;
+            }
         }
     }
 }

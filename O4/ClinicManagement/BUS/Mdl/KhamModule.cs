@@ -200,5 +200,15 @@ namespace BUS.Mdl
                 return phongKhamBUS.GetInformationPhongKham(db, MaPhong, out phong);
             }
         }   
+
+        // lay danh sach ket qua xet nghiem da xet nghiem
+        public string GetListKetQuaXetNghiem(string MaHoSo, out List<KetQuaXetNghiemDTO> ketQuaXetNghiems)
+        {
+            KetQuaXetNghiemBUS bus = new KetQuaXetNghiemBUS();
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                return bus.GetListHasResWithIdHoSo(db, MaHoSo, out ketQuaXetNghiems);
+            }
+        }
     }
 }

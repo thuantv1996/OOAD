@@ -48,7 +48,7 @@
             // 
             this.btnRefresh.BackColor = System.Drawing.Color.White;
             this.btnRefresh.Image = global::ClinicManagement.Properties.Resources.ico_refresh;
-            this.btnRefresh.Location = new System.Drawing.Point(3, 23);
+            this.btnRefresh.Location = new System.Drawing.Point(54, 23);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(45, 45);
             this.btnRefresh.TabIndex = 2;
@@ -69,7 +69,7 @@
             // 
             this.btnAccess.BackColor = System.Drawing.Color.White;
             this.btnAccess.Image = global::ClinicManagement.Properties.Resources.ico_edit;
-            this.btnAccess.Location = new System.Drawing.Point(54, 23);
+            this.btnAccess.Location = new System.Drawing.Point(3, 23);
             this.btnAccess.Name = "btnAccess";
             this.btnAccess.Size = new System.Drawing.Size(45, 45);
             this.btnAccess.TabIndex = 3;

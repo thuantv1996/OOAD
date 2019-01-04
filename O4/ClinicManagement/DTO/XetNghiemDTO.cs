@@ -12,5 +12,10 @@ namespace DTO
         public string TenXetNghiem { get; set; }
         public string MaPhong { get; set; }
         public decimal ChiPhi { get; set; }
+
+        public override string ToString()
+        {
+            return TenXetNghiem;
+        }
     }
 }

@@ -70,7 +70,7 @@ namespace UnitTest.BUS
             db.PHONGs.Add(new PHONG { MaPhong = "1234567891" });
             db.PHONGs.Add(new PHONG { MaPhong = "1234567892" });
 
-            List<PHONG> listPhongKham = null;
+            List<PhongKhamDTO> listPhongKham = null;
 
             PhongKhamBUS phongKhamBUS = new PhongKhamBUS();
 
@@ -85,7 +85,7 @@ namespace UnitTest.BUS
         public void GetList_TestCase2()
         {
 
-            List<PHONG> listPhongKham = null;
+            List<PhongKhamDTO> listPhongKham = null;
 
             PhongKhamBUS phongKhamBUS = new PhongKhamBUS();
 

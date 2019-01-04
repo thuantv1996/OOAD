@@ -19,5 +19,10 @@ namespace DTO
         public string SoTaiKhoan { get; set; }
         public string MaLoaiNV { get; set; }
         public string MaPhong { get; set; }
+
+        public override string ToString()
+        {
+            return HoTenNV;
+        }
     }
 }

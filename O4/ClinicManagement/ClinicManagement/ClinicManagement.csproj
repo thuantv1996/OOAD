@@ -132,6 +132,12 @@
     <Compile Include="Common\ClinicComponents\RichTextBoxWithLine.Designer.cs">
       <DependentUpon>RichTextBoxWithLine.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\ClinicComponents\UserInformation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Common\ClinicComponents\UserInformation.Designer.cs">
+      <DependentUpon>UserInformation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Common\User.cs" />
     <Compile Include="Features\Examination\Bus\ExaminationBus.cs" />
     <Compile Include="Features\Examination\Main\ExaminationAfterTests.cs">
@@ -150,6 +156,7 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Features\Examination\Model\ThuocView.cs" />
+    <Compile Include="Features\Examination\Model\KetQuaXetNghiemView.cs" />
     <Compile Include="Features\Examination\SubForms\AssignTests.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -180,11 +187,44 @@
     <Compile Include="Features\Examination\SubForms\MedicalExaminationAfterTests.Designer.cs">
       <DependentUpon>MedicalExaminationAfterTests.cs</DependentUpon>
     </Compile>
+    <Compile Include="Features\Examination\SubForms\LatestPrescription.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Examination\SubForms\LatestPrescription.Designer.cs">
+      <DependentUpon>LatestPrescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Examination\SubForms\TestsResult.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Examination\SubForms\TestsResult.Designer.cs">
+      <DependentUpon>TestsResult.cs</DependentUpon>
+    </Compile>
     <Compile Include="Features\Examination\SubForms\WaitingPatientTable.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Features\Examination\SubForms\WaitingPatientTable.Designer.cs">
       <DependentUpon>WaitingPatientTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Payment\Bus\PaymentBus.cs" />
+    <Compile Include="Features\Payment\Main\PaymentHome.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Payment\Main\PaymentHome.Designer.cs">
+      <DependentUpon>PaymentHome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Payment\Model\HoSoBenhAnView.cs" />
+    <Compile Include="Features\Payment\Model\ThanhToanView.cs" />
+    <Compile Include="Features\Payment\Subforms\PaymentConfirm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Payment\Subforms\PaymentConfirm.Designer.cs">
+      <DependentUpon>PaymentConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Payment\Subforms\PaymentDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Payment\Subforms\PaymentDetail.Designer.cs">
+      <DependentUpon>PaymentDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Features\Reception\Main\Reception.cs">
       <SubType>UserControl</SubType>
@@ -328,6 +368,12 @@
     <EmbeddedResource Include="Common\ClinicComponents\PatientTableWithSearch.resx">
       <DependentUpon>PatientTableWithSearch.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Common\ClinicComponents\UserInformation.resx">
+      <DependentUpon>UserInformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Analysis\Main\AnalysisHome.resx">
+      <DependentUpon>AnalysisHome.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\Examination\Main\ExaminationAfterTests.resx">
       <DependentUpon>ExaminationAfterTests.cs</DependentUpon>
     </EmbeddedResource>
@@ -352,8 +398,23 @@
     <EmbeddedResource Include="Features\Examination\SubForms\MedicalExaminationAfterTests.resx">
       <DependentUpon>MedicalExaminationAfterTests.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\Examination\SubForms\LatestPrescription.resx">
+      <DependentUpon>LatestPrescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Examination\SubForms\TestsResult.resx">
+      <DependentUpon>TestsResult.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\Examination\SubForms\WaitingPatientTable.resx">
       <DependentUpon>WaitingPatientTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Payment\Main\PaymentHome.resx">
+      <DependentUpon>PaymentHome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Payment\Subforms\PaymentConfirm.resx">
+      <DependentUpon>PaymentConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Payment\Subforms\PaymentDetail.resx">
+      <DependentUpon>PaymentDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Reception\Main\Reception.resx">
       <DependentUpon>Reception.cs</DependentUpon>

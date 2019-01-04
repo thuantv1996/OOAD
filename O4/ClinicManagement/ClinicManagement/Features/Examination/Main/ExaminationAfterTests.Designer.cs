@@ -53,6 +53,6 @@
 
         #endregion
 
-        private SubForms.WaitingPatientTable danhSachChoKeDon;
+        private ClinicManagement.Features.Examination.SubForms.WaitingPatientTable danhSachChoKeDon;
     }
 }

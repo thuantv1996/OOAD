@@ -63,6 +63,15 @@ namespace ClinicManagement.Common.ClinicComponents
             return patient;
         }
 
+        public void clearData()
+        {
+            this.name.Text = "";
+            this.gender.SelectedIndex = 0;
+            this.phoneNumber.Text = "";
+            this.note.Text = "";
+            this.address.Text = "";
+        }
+
         private string maBenhNhan;
     }
 }

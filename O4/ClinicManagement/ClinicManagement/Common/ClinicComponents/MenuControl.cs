@@ -13,6 +13,8 @@ namespace ClinicManagement.Common.ClinicComponents
 {
     public partial class MenuControl : UserControl
     {
+        private Common.ClinicComponents.UserInformation userControl = new UserInformation("", "");
+        public event EventHandler LogOut;
         public MenuControl()
         {
             InitializeComponent();
@@ -55,7 +57,17 @@ namespace ClinicManagement.Common.ClinicComponents
 
             });
 
+            userControl.Dock = DockStyle.Fill;
+            
+            this.layout.Controls.Add(userControl, 0, index++);
+            this.layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100));
+
             this.chooseItemObserver.onNext(this.layout.Controls[1] as Button);
+
+            this.userControl.LogOut += (obj, er) =>
+            {
+                this.LogOut?.Invoke(obj, er);
+            };
         }
 
         private void refresheData()
@@ -63,6 +75,11 @@ namespace ClinicManagement.Common.ClinicComponents
             this.chooseItemObserver.clear();
             this.layout.Controls.Clear();
             this.layout.RowStyles.Clear();
+        }
+
+        public void updateUserInformation(string HoTen, string ViTri)
+        {
+            this.userControl.updateData(HoTen, ViTri);
         }
 
         private Button createButton(string title, int index)

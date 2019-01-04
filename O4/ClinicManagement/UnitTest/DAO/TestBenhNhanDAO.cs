@@ -86,7 +86,6 @@ namespace UnitTest.DAO
                 MaBenhNhan = TestCommon.LEN_10,
                 HoTen = TestCommon.LEN_50,
                 CMND = "123456789012",
-
             };
             dao.Save(db, benhNhan);
             BENHNHAN benhNhanUpdate = new BENHNHAN
@@ -112,7 +111,6 @@ namespace UnitTest.DAO
                 MaBenhNhan = TestCommon.LEN_10,
                 HoTen = TestCommon.LEN_50,
                 CMND = "123456789012",
-
             };
             dao.Save(db, benhNhan);
             BENHNHAN benhNhanUpdate = new BENHNHAN

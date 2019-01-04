@@ -90,7 +90,6 @@
     <Compile Include="DAO\TestThuocDAO.cs" />
     <Compile Include="DAO\TestTrangThaiPhongDAO.cs" />
     <Compile Include="DAO\TestXetNghiemDAO.cs" />
-    <Compile Include="TestDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
