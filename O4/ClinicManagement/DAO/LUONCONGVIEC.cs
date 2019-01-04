@@ -28,23 +28,10 @@ namespace DAO
             {
                 return false;
             }
-            if (NodeHienTai != null || NodeHienTai.Length > 5)
+            if (NodeHienTai != null && NodeHienTai.Length != 5)
             {
                 return false;
             }
-            if (TiepNhan != null)
-            {
-                return false;
-            }
-            if (KhamBenh != null)
-            {
-                return false;
-            }
-            if (XetNghiem != null)
-            {
-                return false;
-            }
-           
             return true;
         }
     }

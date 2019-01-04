@@ -58,6 +58,12 @@ namespace DAO.Implement
 
         public string Save(DbContext db, THUOC entity)
         {
+            if (!entity.Validate())
+            {
+                string log = "Error validate in THUOC object";
+                LogManager.WriteLog(log);
+                return DAOCommon.FAIL;
+            }
             object[] id = { entity.MaThuoc };
             THUOC obj = (db as QLPHONGKHAMEntities).THUOCs.Find(id);
             if (obj == null)

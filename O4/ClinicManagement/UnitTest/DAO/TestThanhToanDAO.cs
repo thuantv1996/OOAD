@@ -38,7 +38,7 @@ namespace UnitTest.DAO
             ThanhToanDAO dao = new ThanhToanDAO();
             string actual = dao.Save(db, thanhToan);
             string expected = "0000";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         // Test insert MaHoSo is null
@@ -52,25 +52,9 @@ namespace UnitTest.DAO
             ThanhToanDAO dao = new ThanhToanDAO();
             string actual = dao.Save(db, thanhToan);
             string expected = "1111";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
-        // Test insert ChiPhi is negative
-        [TestMethod]
-        public void Insert_TestCase3()
-        {
-            THANHTOAN thanhToan = new THANHTOAN
-            {
-                MaThanhToan = TestCommon.LEN_10,
-                MaHoSo = TestCommon.LEN_10,
-                ChiPhiKham = -100000000000,
-                ChiPhiXetNghiem = -100000000000,
-                TongChiPhi = -200000000000,
-            };
-            ThanhToanDAO dao = new ThanhToanDAO();
-            string actual = dao.Save(db, thanhToan);
-            string expected = "1111";
-            Assert.Equals(expected, actual);
-        }
+ 
         // Test insert max length
         [TestMethod]
         public void Insert_TestCase4()
@@ -88,7 +72,7 @@ namespace UnitTest.DAO
             ThanhToanDAO dao = new ThanhToanDAO();
             string actual = dao.Save(db, thanhToan);
             string expected = "1111";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
         // Test insert with MaHoSo doesn't exist in table HOSOBENHAN
         [TestMethod]
@@ -102,7 +86,7 @@ namespace UnitTest.DAO
             ThanhToanDAO dao = new ThanhToanDAO();
             string actual = dao.Save(db, thanhToan);
             string expected = "1111";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         // Test update success
@@ -129,14 +113,14 @@ namespace UnitTest.DAO
                 ChiPhiKham = 1,
                 ChiPhiXetNghiem = 1,
                 TongChiPhi = 2,
-                NhanVienThu = "1234",
+                NhanVienThu = "1234554321",
                 NgayThu = TestCommon.LEN_8
             };
             string actual = dao.Save(db, thanhToanUpdate);
             // Biến kết quả
             string expected = "0000";
             // Test 
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         // Test update MaHoSo is null
@@ -159,40 +143,8 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
-
-
-        // Test update ChiPhi is negative
-        [TestMethod]
-        public void Update_TestCase8()
-        {
-            ThanhToanDAO dao = new ThanhToanDAO();
-            THANHTOAN thanhToan = new THANHTOAN
-            {
-                MaThanhToan = TestCommon.LEN_10,
-                MaHoSo = TestCommon.LEN_10,
-                ChiPhiKham = 1,
-                ChiPhiXetNghiem = 1,
-                TongChiPhi = 2,
-
-            };
-            dao.Save(db, thanhToan);
-            THANHTOAN thanhToanUpdate = new THANHTOAN
-            {
-                MaThanhToan = TestCommon.LEN_10,
-                MaHoSo = TestCommon.LEN_10,
-                ChiPhiKham = -1,
-                ChiPhiXetNghiem = -1,
-                TongChiPhi = -2,
-            };
-            string actual = dao.Save(db, thanhToanUpdate);
-            // Biến kết quả
-            string expected = "1111";
-            // Test 
-            Assert.Equals(expected, actual);
-        }
-
 
         // Test update max lenght
         [TestMethod]
@@ -225,7 +177,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
 
@@ -250,7 +202,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         // Test delete sucesses
@@ -263,8 +215,10 @@ namespace UnitTest.DAO
                 MaHoSo = TestCommon.LEN_10
             };
             ThanhToanDAO dao = new ThanhToanDAO();
-            string actual = dao.Save(db, thanhToan);
-            Assert.Equals(null, actual);
+            dao.Save(db, thanhToan);
+            string actual = dao.Delete(db, thanhToan);
+            string expected = "0000";
+            Assert.AreEqual(expected, actual);
         }
         /* END TEST METHOD */
 

@@ -26,11 +26,7 @@ namespace DAO
             {
                 return false;
             }
-            if (NgayKham != null && NgayKham.Length > 8)
-            {
-                return false;
-            }
-            if (SttCaoNhat != null)
+            if (NgayKham != null && NgayKham.Length != 8)
             {
                 return false;
             }

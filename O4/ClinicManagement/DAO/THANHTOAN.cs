@@ -30,27 +30,15 @@ namespace DAO
             {
                 return false;
             }
-            if (MaHoSo.Length > 10)
+            if (MaHoSo == null || MaHoSo.Length != 10)
             {
                 return false;
             }
-            if (ChiPhiKham != null)
+            if (NhanVienThu != null && NhanVienThu.Length != 10)
             {
                 return false;
             }
-            if (ChiPhiXetNghiem != null)
-            {
-                return false;
-            }
-            if (TongChiPhi != null)
-            {
-                return false;
-            }
-            if (NhanVienThu != null && NhanVienThu.Length > 10)
-            {
-                return false;
-            }
-            if (NgayThu != null && NgayThu.Length > 8)
+            if (NgayThu != null && NgayThu.Length != 8)
             {
                 return false;
             }

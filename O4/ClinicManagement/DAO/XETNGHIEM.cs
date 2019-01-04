@@ -39,11 +39,7 @@ namespace DAO
             {
                 return false;
             }
-            if (MaPhong.Length > 10)
-            {
-                return false;
-            }
-            if (ChiPhi != null)
+            if (MaPhong != null && MaPhong.Length != 10)
             {
                 return false;
             }

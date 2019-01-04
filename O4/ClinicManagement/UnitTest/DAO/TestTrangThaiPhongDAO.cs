@@ -34,7 +34,7 @@ namespace UnitTest.DAO
             TrangThaiPhongDAO dao = new TrangThaiPhongDAO();
             string actual = dao.Save(db, trangThaiPhong);
             string expected = "0000";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
         // Test insert NgayKham or MaPhong is null
         [TestMethod]
@@ -47,7 +47,7 @@ namespace UnitTest.DAO
             TrangThaiPhongDAO dao = new TrangThaiPhongDAO();
             string actual = dao.Save(db, trangThaiPhong);
             string expected = "1111";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         // Test insert max lenght string
@@ -63,7 +63,7 @@ namespace UnitTest.DAO
             TrangThaiPhongDAO dao = new TrangThaiPhongDAO();
             string actual = dao.Save(db, trangThaiPhong);
             string expected = "1111";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         // Test insert MaPhong doesn't exist in table PHONG
@@ -79,7 +79,7 @@ namespace UnitTest.DAO
             TrangThaiPhongDAO dao = new TrangThaiPhongDAO();
             string actual = dao.Save(db, trangThaiPhong);
             string expected = "1111";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
 
@@ -106,7 +106,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "0000";
             // Test 
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         // Test update NgayKham or MaPhong is null
@@ -130,7 +130,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
         // Test update max lenght string
         [TestMethod]
@@ -155,7 +155,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
         // Test update MaPhong doesn't exist in table PHONG
         [TestMethod]
@@ -180,7 +180,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
 
@@ -195,8 +195,10 @@ namespace UnitTest.DAO
                 SttCaoNhat = 1,
             };
             TrangThaiPhongDAO dao = new TrangThaiPhongDAO();
-            string actual = dao.Save(db, trangThaiPhong);
-            Assert.Equals(null, actual);
+            dao.Save(db, trangThaiPhong);
+            string actual = dao.Delete(db, trangThaiPhong);
+            string expected = "0000";
+            Assert.AreEqual(expected, actual);
         }
         /* END TEST METHOD */
 

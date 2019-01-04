@@ -53,11 +53,11 @@ namespace DAO
             {
                 return false;
             }
-            if (NgaySinh != null && NgaySinh.Length > 8)
+            if (NgaySinh != null && NgaySinh.Length != 8)
             {
                 return false;
             }
-            if (CMND != null && CMND.Length > 8)
+            if (CMND != null && CMND.Length > 12)
             {
                 return false;
             }
@@ -77,11 +77,11 @@ namespace DAO
             {
                 return false;
             }
-            if (MaLoaiNV.Length > 10)
+            if (MaLoaiNV != null &&  MaLoaiNV.Length != 10)
             {
                 return false;
             }
-            if (MaPhong.Length > 10)
+            if (MaPhong != null &&  MaPhong.Length != 10)
             {
                 return false;
             }

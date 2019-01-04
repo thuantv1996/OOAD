@@ -28,19 +28,19 @@ namespace DAO
             {
                 return false;
             }
-            if (TenDangNhap != null || TenDangNhap.Length > 20)
+            if (TenDangNhap != null && TenDangNhap.Length > 20)
             {
                 return false;
             }
-            if (MatKhau != null && MatKhau.Length > 32)
+            if (MatKhau != null && MatKhau.Length != 32)
             {
                 return false;
             }
-            if (NgayThayDoi != null && NgayThayDoi.Length > 8)
+            if (NgayThayDoi != null && NgayThayDoi.Length != 8)
             {
                 return false;
             }
-            if (MaNhanVien.Length > 10)
+            if (MaNhanVien != null && MaNhanVien.Length != 10)
             {
                 return false;
             }

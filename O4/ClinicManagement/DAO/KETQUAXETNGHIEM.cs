@@ -32,23 +32,11 @@ namespace DAO
             {
                 return false;
             }
-            if (MaXetNghiem == null || MaXetNghiem.Length > 10)
+            if (MaXetNghiem == null || MaXetNghiem.Length != 10)
             {
                 return false;
             }
-            if (MaBacSi.Length > 8)
-            {
-                return false;
-            }
-            if (KetQua != null)
-            {
-                return false;
-            }
-            if (ThanhToan != null)
-            {
-                return false;
-            }
-            if (TongChiPhi != null)
+            if (MaBacSi == null && MaBacSi.Length != 10)
             {
                 return false;
             }

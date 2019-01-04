@@ -29,14 +29,14 @@ namespace UnitTest.DAO
             {
                 MaTaiKhoan = TestCommon.LEN_10,
                 TenDangNhap = TestCommon.LEN_10 + "1234567890",
-                MatKhau = TestCommon.LEN_10 + "1234567890",
+                MatKhau = TestCommon.LEN_10 + TestCommon.LEN_10 + TestCommon.LEN_10 + "12",
                 NgayThayDoi = TestCommon.LEN_8,
                 MaNhanVien = TestCommon.LEN_10
             };
             TaiKhoanDAO dao = new TaiKhoanDAO();
             string actual = dao.Save(db, taiKhoan);
             string expected = "0000";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
 
@@ -55,7 +55,7 @@ namespace UnitTest.DAO
             TaiKhoanDAO dao = new TaiKhoanDAO();
             string actual = dao.Save(db, taiKhoan);
             string expected = "1111";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
 
@@ -74,22 +74,7 @@ namespace UnitTest.DAO
             TaiKhoanDAO dao = new TaiKhoanDAO();
             string actual = dao.Save(db, taiKhoan);
             string expected = "1111";
-            Assert.Equals(expected, actual);
-        }
-
-        // Test insert TenDangNhap & MatKhau is null
-        [TestMethod]
-        public void Insert_TestCase4()
-        {
-            TAIKHOAN taiKhoan = new TAIKHOAN
-            {
-                MaTaiKhoan = TestCommon.LEN_10,
-                MaNhanVien = TestCommon.LEN_10
-            };
-            TaiKhoanDAO dao = new TaiKhoanDAO();
-            string actual = dao.Save(db, taiKhoan);
-            string expected = "1111";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         // Test update success
@@ -101,7 +86,7 @@ namespace UnitTest.DAO
             {
                 MaTaiKhoan = TestCommon.LEN_10,
                 TenDangNhap = TestCommon.LEN_10,
-                MatKhau = TestCommon.LEN_10,
+                MatKhau = TestCommon.LEN_10 + TestCommon.LEN_10 + TestCommon.LEN_10 + "12",
                 NgayThayDoi = TestCommon.LEN_8,
                 MaNhanVien = TestCommon.LEN_10
             };
@@ -110,7 +95,7 @@ namespace UnitTest.DAO
             {
                 MaTaiKhoan = TestCommon.LEN_10,
                 TenDangNhap = "TESTUPDATE",
-                MatKhau = "123",
+                MatKhau = TestCommon.LEN_10 + TestCommon.LEN_10 + TestCommon.LEN_10 + "12",
                 NgayThayDoi = TestCommon.LEN_8,
                 MaNhanVien = TestCommon.LEN_10
             };
@@ -118,7 +103,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "0000";
             // Test 
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         // Test update max length
@@ -147,7 +132,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
 
@@ -174,34 +159,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.Equals(expected, actual);
-        }
-
-        // Test update TenDangNhap & MatKhau is null
-        [TestMethod]
-        public void Update_TestCase8()
-        {
-            TaiKhoanDAO dao = new TaiKhoanDAO();
-            TAIKHOAN taiKhoan = new TAIKHOAN
-            {
-                MaTaiKhoan = TestCommon.LEN_10,
-                TenDangNhap = TestCommon.LEN_10,
-                MatKhau = TestCommon.LEN_10,
-                NgayThayDoi = TestCommon.LEN_8,
-                MaNhanVien = TestCommon.LEN_10
-            };
-            dao.Save(db, taiKhoan);
-            TAIKHOAN taiKhoanUpdate = new TAIKHOAN
-            {
-                MaTaiKhoan = TestCommon.LEN_10,
-                NgayThayDoi = TestCommon.LEN_8,
-                MaNhanVien = TestCommon.LEN_10
-            };
-            string actual = dao.Save(db, taiKhoanUpdate);
-            // Biến kết quả
-            string expected = "1111";
-            // Test 
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         // Test delete sucesses
@@ -212,12 +170,14 @@ namespace UnitTest.DAO
             {
                 MaTaiKhoan = TestCommon.LEN_10,
                 TenDangNhap = "abc",
-                MatKhau = "abc",
+                MatKhau = TestCommon.LEN_10 + TestCommon.LEN_10 + TestCommon.LEN_10 + "12",
                 MaNhanVien = TestCommon.LEN_10
             };
             TaiKhoanDAO dao = new TaiKhoanDAO();
-            string actual = dao.Save(db, taiKhoan);
-            Assert.Equals(null, actual);
+            dao.Save(db, taiKhoan);
+            string actual = dao.Delete(db, taiKhoan);
+            string expected = "0000";
+            Assert.AreEqual(expected, actual);
         }
         /* END TEST METHOD */
 

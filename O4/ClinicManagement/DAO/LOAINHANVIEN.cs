@@ -32,7 +32,7 @@ namespace DAO
             {
                 return false;
             }
-            if (TenLoaiNV != null || TenLoaiNV.Length > 250)
+            if (TenLoaiNV == null || TenLoaiNV.Length > 250)
             {
                 return false;
             }

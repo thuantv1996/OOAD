@@ -55,27 +55,27 @@ namespace DAO
             {
                 return false;
             }
-            if (MaHoSoTruoc != null || MaHoSoTruoc.Length != 10)
+            if (MaHoSoTruoc != null && MaHoSoTruoc.Length != 10)
             {
                 return false;
             }
-            if (MaHoSoGoc != null && MaHoSoGoc.Length > 10)
+            if (MaHoSoGoc != null && MaHoSoGoc.Length != 10)
             {
                 return false;
             }
-            if (MaLoaiHoSo.Length > 10)
+            if (MaLoaiHoSo != null && MaLoaiHoSo.Length != 10)
             {
                 return false;
             }
-            if (MaBenhNhan.Length > 10)
+            if (MaBenhNhan == null || MaBenhNhan.Length != 10)
             {
                 return false;
             }
-            if (MaNguoiTN.Length > 10)
+            if (MaNguoiTN == null || MaNguoiTN.Length != 10)
             {
                 return false;
             }
-            if (NgayTiepNhan != null && NgayTiepNhan.Length > 8)
+            if (NgayTiepNhan != null && NgayTiepNhan.Length != 8)
             {
                 return false;
             }
@@ -87,31 +87,22 @@ namespace DAO
             {
                 return false;
             }
-            if (NgayKham != null && NgayKham.Length > 8)
+            if (NgayKham != null && NgayKham.Length != 8)
             {
                 return false;
             }
-            if (SoThuTu != null)
+            if (MaPhongKham != null && MaPhongKham.Length != 10)
             {
                 return false;
             }
-            if (MaPhongKham.Length > 8)
+            if (MaBacSi != null && MaBacSi.Length != 10)
             {
                 return false;
             }
-            if (MaBacSi.Length > 8)
+            if (ChuanDoan != null && ChuanDoan.Length > 250)
             {
                 return false;
             }
-            if (ChuanDoan != null)
-            {
-                return false;
-            }
-            if (CoKeDon != null)
-            {
-                return false;
-            }
-
             return true;
         }
     }

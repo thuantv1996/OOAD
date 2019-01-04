@@ -39,7 +39,7 @@ namespace UnitTest.DAO
             KetQuaXetNghiemDAO dao = new KetQuaXetNghiemDAO();
             string actual = dao.Save(db, ketQuaXetNghiem);
             string expected = "0000";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
 
@@ -60,7 +60,7 @@ namespace UnitTest.DAO
             KetQuaXetNghiemDAO dao = new KetQuaXetNghiemDAO();
             string actual = dao.Save(db, ketQuaXetNghiem);
             string expected = "1111";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
 
@@ -79,7 +79,7 @@ namespace UnitTest.DAO
             KetQuaXetNghiemDAO dao = new KetQuaXetNghiemDAO();
             string actual = dao.Save(db, ketQuaXetNghiem);
             string expected = "1111";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
 
@@ -100,7 +100,7 @@ namespace UnitTest.DAO
             KetQuaXetNghiemDAO dao = new KetQuaXetNghiemDAO();
             string actual = dao.Save(db, ketQuaXetNghiem);
             string expected = "1111";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
 
@@ -134,7 +134,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "0000";
             // Test 
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         // Test update max length
@@ -167,7 +167,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
 
@@ -191,7 +191,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         // Test update with MaHoSo or MaXetNghiem doesn't exist in table HOSOBENHAN, XETNGHIEM
@@ -224,7 +224,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
 
@@ -242,7 +242,7 @@ namespace UnitTest.DAO
             dao.Save(db, ketQuaXetNghiem);
             string actual = dao.Delete(db, ketQuaXetNghiem);
             string expected = "0000";
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
         /* END TEST METHOD */
 
