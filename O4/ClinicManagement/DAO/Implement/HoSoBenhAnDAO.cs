@@ -65,8 +65,8 @@ namespace DAO.Implement
             try
             {
                 hoSoDAO = (from hs in db.HOSOBENHANs
-                            join kqxn in db.KETQUAXETNGHIEMs on hs.MaHoSo equals kqxn.MaHoSo
-                            where kqxn.MaXetNghiem == maXetNghiem
+                           join kqxn in db.KETQUAXETNGHIEMs on hs.MaHoSo equals kqxn.MaHoSo
+                           where kqxn.MaXetNghiem == maXetNghiem && kqxn.ThanhToan == true
                             select hs
                             ).ToList();
             }
