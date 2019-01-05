@@ -211,5 +211,20 @@ namespace BUS.Mdl
             }
             return Constant.RES_SUC;
         }
+
+        // LẤY THÔNG TIN XÉT NGHIỆM
+        public string GetInforPhong(string MaPhong, out PhongKhamDTO phong)
+        {
+            phong = new PhongKhamDTO();
+            PhongKhamBUS bus = new PhongKhamBUS();
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                if (bus.GetInformationPhongKham(db, MaPhong, out phong) == Constant.RES_FAI)
+                {
+                    return Constant.RES_FAI;
+                }
+            }
+            return Constant.RES_SUC;
+        }
     }
 }
