@@ -139,6 +139,20 @@
       <DependentUpon>UserInformation.cs</DependentUpon>
     </Compile>
     <Compile Include="Common\User.cs" />
+    <Compile Include="Features\Analysis\Bus\AnalysisBus.cs" />
+    <Compile Include="Features\Analysis\Model\HoSoBenhAnView.cs" />
+    <Compile Include="Features\Analysis\SubForms\AnalysisConfirm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Analysis\SubForms\AnalysisConfirm.Designer.cs">
+      <DependentUpon>AnalysisConfirm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Features\Analysis\SubForms\AnalysisDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Analysis\SubForms\AnalysisDetail.Designer.cs">
+      <DependentUpon>AnalysisDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Features\Examination\Bus\ExaminationBus.cs" />
     <Compile Include="Features\Examination\Main\ExaminationAfterTests.cs">
       <SubType>UserControl</SubType>
@@ -374,6 +388,12 @@
     <EmbeddedResource Include="Features\Analysis\Main\AnalysisHome.resx">
       <DependentUpon>AnalysisHome.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\Analysis\SubForms\AnalysisConfirm.resx">
+      <DependentUpon>AnalysisConfirm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Features\Analysis\SubForms\AnalysisDetail.resx">
+      <DependentUpon>AnalysisDetail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\Examination\Main\ExaminationAfterTests.resx">
       <DependentUpon>ExaminationAfterTests.cs</DependentUpon>
     </EmbeddedResource>
@@ -489,11 +509,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Features\Analysis\Bus\" />
-    <Folder Include="Features\Analysis\SubForms\" />
-    <Folder Include="Features\Common\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\loginBackground.jpeg" />
   </ItemGroup>
