@@ -197,5 +197,19 @@ namespace BUS.Mdl
             return Constant.RES_SUC;
         }
 
+        // LẤY THÔNG TIN XÉT NGHIỆM
+        public string GetInforXetNghiem(string MaXN, out XetNghiemDTO xetNghiem)
+        {
+            xetNghiem = new XetNghiemDTO();
+            XetNghiemBUS bus = new XetNghiemBUS();
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                if(bus.GetInfomationXetNghiem(db, MaXN, out xetNghiem) == Constant.RES_FAI)
+                {
+                    return Constant.RES_FAI;
+                }
+            }
+            return Constant.RES_SUC;
+        }
     }
 }
