@@ -50,7 +50,7 @@ namespace UnitTest.DAO
             HoSoBenhAnDAO dao = new HoSoBenhAnDAO();
             string actual = dao.Save(db, hoSoBenhAn);
             string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test insert max length
@@ -78,7 +78,7 @@ namespace UnitTest.DAO
             HoSoBenhAnDAO dao = new HoSoBenhAnDAO();
             string actual = dao.Save(db, hoSoBenhAn);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -93,7 +93,7 @@ namespace UnitTest.DAO
             HoSoBenhAnDAO dao = new HoSoBenhAnDAO();
             string actual = dao.Save(db, hoSoBenhAn);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -113,7 +113,7 @@ namespace UnitTest.DAO
             HoSoBenhAnDAO dao = new HoSoBenhAnDAO();
             string actual = dao.Save(db, hoSoBenhAn);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test insert with SoThuTu is negative
@@ -141,7 +141,7 @@ namespace UnitTest.DAO
             HoSoBenhAnDAO dao = new HoSoBenhAnDAO();
             string actual = dao.Save(db, hoSoBenhAn);
             string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update success
@@ -190,7 +190,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "0000";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update max length
@@ -239,7 +239,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -263,7 +263,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -305,7 +305,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update with SoThuTu is negative
@@ -348,7 +348,7 @@ namespace UnitTest.DAO
         [TestMethod]
         public void Delete_TestCase11()
         {
-            HOSOBENHAN hoSoBenhAnDelete = new HOSOBENHAN
+            HOSOBENHAN hoSoBenhAnUpdate = new HOSOBENHAN
             {
                 MaHoSo = TestCommon.LEN_10,
                 MaHoSoTruoc = TestCommon.LEN_10,
@@ -358,10 +358,8 @@ namespace UnitTest.DAO
                 MaNguoiTN = TestCommon.LEN_10,
             };
             HoSoBenhAnDAO dao = new HoSoBenhAnDAO();
-            dao.Save(db, hoSoBenhAnDelete);
-            string actual = dao.Delete(db, hoSoBenhAnDelete);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            string actual = dao.Save(db, hoSoBenhAnUpdate);
+            Assert.Equals(null, actual);
         }
         /* END TEST METHOD */
 

@@ -1,11 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DAO;
 using DAO.Implement;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using DAO;
+using DAO.Implement;
 using System.Data.Entity;
 
 namespace UnitTest.DAO
 {
-    [TestClass]
     public class TestDonThuocDAO
     {
         private static QLPHONGKHAMEntities db;
@@ -35,7 +37,7 @@ namespace UnitTest.DAO
             DonThuocDAO dao = new DonThuocDAO();
             string actual = dao.Save(db, donThuoc);
             string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         [TestMethod]
@@ -50,7 +52,7 @@ namespace UnitTest.DAO
             DonThuocDAO dao = new DonThuocDAO();
             string actual = dao.Save(db, donThuoc);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test insert MaHoSo not found in table HOSOBENHAN
@@ -66,7 +68,7 @@ namespace UnitTest.DAO
             string actual = dao.Save(db, donThuoc);
             string expected = "1111";
             // Test
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -84,7 +86,7 @@ namespace UnitTest.DAO
             DonThuocDAO dao = new DonThuocDAO();
             string actual = dao.Save(db, donThuoc);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -97,22 +99,20 @@ namespace UnitTest.DAO
             DONTHUOC donThuoc = new DONTHUOC
             {
                 MaDonThuoc = TestCommon.LEN_10,
-                MaHoSo = TestCommon.LEN_10,
-                GhiChu = "abc"
+                MaHoSo = "123",
             };
             dao.Save(db, donThuoc);
             DONTHUOC donThuocUpdate = new DONTHUOC
             {
                 MaDonThuoc = TestCommon.LEN_10,
-                MaHoSo = TestCommon.LEN_10,
-                GhiChu = "TEST UPDATE",
+                MaHoSo = "TEST UPDATE",
             };
             // Tạo biến lưu thông tin nhân viên update
             string actual = dao.Save(db, donThuocUpdate);
             // Biến kết quả
             string expected = "0000";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update with MaHoSo is null
@@ -133,7 +133,7 @@ namespace UnitTest.DAO
             // Tạo biến lưu thông tin nhân viên update
             string actual = dao.Save(db, donThuocUpdate);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update with MaHoSo doesn't exist in table HOSOBENHAN
@@ -155,7 +155,7 @@ namespace UnitTest.DAO
             // Tạo biến lưu thông tin nhân viên update
             string actual = dao.Save(db, donThuocUpdate);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update max length
@@ -180,7 +180,7 @@ namespace UnitTest.DAO
             };
             string actual = dao.Save(db, donThuocUpdate);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -194,10 +194,8 @@ namespace UnitTest.DAO
                 MaHoSo = TestCommon.LEN_10,
             };
             DonThuocDAO dao = new DonThuocDAO();
-            dao.Save(db, donThuoc);
-            string actual = dao.Delete(db, donThuoc);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            string actual = dao.Save(db, donThuoc);
+            Assert.Equals(null, actual);
         }
 
         /* END TEST METHOD */

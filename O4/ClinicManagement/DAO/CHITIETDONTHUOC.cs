@@ -21,26 +21,5 @@ namespace DAO
     
         public virtual DONTHUOC DONTHUOC { get; set; }
         public virtual THUOC THUOC { get; set; }
-
-        public bool Validate()
-        {
-            if (MaDonThuoc == null || MaDonThuoc.Length != 10)
-            {
-                return false;
-            }
-            if (MaThuoc == null || MaThuoc.Length != 10)
-            {
-                return false;
-            }
-            if (SoLuong < 0)
-            {
-                return false;
-            }
-            if (GhiChu != null && GhiChu.Length > 250)
-            {
-                return false;
-            }
-            return true;
-        }
     }
 }

@@ -25,19 +25,5 @@ namespace DAO
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOSOBENHAN> HOSOBENHANs { get; set; }
-
-        public bool Validate()
-        {
-            if (MaLoaiHoSo == null || MaLoaiHoSo.Length != 10)
-            {
-                return false;
-            }
-            if (TenLoaiHoSo != null && TenLoaiHoSo.Length > 250)
-            {
-                return false;
-            }
-            
-            return true;
-        }
     }
 }

@@ -15,9 +15,7 @@ namespace DAO.Implement
         {
             try
             {
-                (db as QLPHONGKHAMEntities).CHITIETDONTHUOCs.Remove(
-                    (db as QLPHONGKHAMEntities).CHITIETDONTHUOCs.Find(new object[]{ entity.MaDonThuoc, entity.MaThuoc })
-                    );
+                (db as QLPHONGKHAMEntities).CHITIETDONTHUOCs.Remove(entity);
             }
             catch (Exception e)
             {
@@ -62,12 +60,6 @@ namespace DAO.Implement
 
         public string Save(DbContext db, CHITIETDONTHUOC entity)
         {
-            if (!entity.Validate())
-            {
-                string log = "Error validate in CHITIETDONTHUOC object";
-                LogManager.WriteLog(log);
-                return DAOCommon.FAIL;
-            }
             object[] id = { entity.MaDonThuoc, entity.MaThuoc };
             CHITIETDONTHUOC obj = (db as QLPHONGKHAMEntities).CHITIETDONTHUOCs.Find(id);
             if (obj == null)

@@ -35,8 +35,24 @@ namespace UnitTest.DAO
             XetNghiemDAO dao = new XetNghiemDAO();
             string actual = dao.Save(db, xetNghiem);
             string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
+
+        // Test insert TenXetNghiem null
+        [TestMethod]
+        public void Insert_TestCase2()
+        {
+            XETNGHIEM xetNghiem = new XETNGHIEM
+            {
+                MaXetNghiem = TestCommon.LEN_10,
+                MaPhong = TestCommon.LEN_10,
+            };
+            XetNghiemDAO dao = new XetNghiemDAO();
+            string actual = dao.Save(db, xetNghiem);
+            string expected = "1111";
+            Assert.Equals(expected, actual);
+        }
+
 
         // Test insert max - length string
         [TestMethod]
@@ -52,7 +68,7 @@ namespace UnitTest.DAO
             XetNghiemDAO dao = new XetNghiemDAO();
             string actual = dao.Save(db, xetNghiem);
             string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -70,7 +86,7 @@ namespace UnitTest.DAO
             XetNghiemDAO dao = new XetNghiemDAO();
             string actual = dao.Save(db, xetNghiem);
             string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update success
@@ -96,8 +112,34 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "0000";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
+
+
+        // Test update with TenXetNghiem, MaPhong is null
+        [TestMethod]
+        public void Update_TestCase6()
+        {
+            XetNghiemDAO dao = new XetNghiemDAO();
+            XETNGHIEM xetNghiem = new XETNGHIEM
+            {
+                MaXetNghiem = TestCommon.LEN_10,
+                TenXetNghiem = "TEST UT",
+                MaPhong = TestCommon.LEN_10
+
+            };
+            dao.Save(db, xetNghiem);
+            XETNGHIEM xetNghiemUpdate = new XETNGHIEM
+            {
+                MaXetNghiem = TestCommon.LEN_10
+            };
+            string actual = dao.Save(db, xetNghiemUpdate);
+            // Biến kết quả
+            string expected = "1111";
+            // Test 
+            Assert.Equals(expected, actual);
+        }
+
 
         // Test update with MaPhong doesn't exist in table PHONG
         [TestMethod]
@@ -122,7 +164,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -142,7 +184,7 @@ namespace UnitTest.DAO
             XETNGHIEM xetNghiemUpdate = new XETNGHIEM
             {
                 MaXetNghiem = TestCommon.LEN_10,
-                TenXetNghiem = TestCommon.LEN_250 + "1",
+                TenXetNghiem = TestCommon.LEN_50 + "1",
                 MaPhong = TestCommon.LEN_10,
                 ChiPhi = 1000000000000
             };
@@ -150,7 +192,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -165,10 +207,8 @@ namespace UnitTest.DAO
                 MaPhong = TestCommon.LEN_10
             };
             XetNghiemDAO dao = new XetNghiemDAO();
-            dao.Save(db, xetNghiem);
-            string actual = dao.Delete(db, xetNghiem);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            string actual = dao.Save(db, xetNghiem);
+            Assert.Equals(null, actual);
         }
         /* END TEST METHOD */
 

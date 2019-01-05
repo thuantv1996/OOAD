@@ -31,7 +31,7 @@ namespace UnitTest.DAO
             LoaiNhanVienDAO dao = new LoaiNhanVienDAO();
             string actual = dao.Save(db, loaiNhanVien);
             string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
        
         // Test insert without MaLoaiNV or TenLoaiNV
@@ -42,7 +42,7 @@ namespace UnitTest.DAO
             LoaiNhanVienDAO dao = new LoaiNhanVienDAO();
             string actual = dao.Save(db, loaiNhanVien);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test insert max - length string
@@ -57,7 +57,7 @@ namespace UnitTest.DAO
             LoaiNhanVienDAO dao = new LoaiNhanVienDAO();
             string actual = dao.Save(db, loaiNhanVien);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         [TestMethod]
@@ -84,7 +84,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "0000";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update without TenLoaiNhanVien
@@ -101,11 +101,10 @@ namespace UnitTest.DAO
             LOAINHANVIEN loaiNhanVienUpdate = new LOAINHANVIEN
             {
                 MaLoaiNV = TestCommon.LEN_10,
-                TenLoaiNV = TestCommon.LEN_250
             };
             string actual = dao.Save(db, loaiNhanVienUpdate);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            string expected = "1111";
+            Assert.Equals(expected, actual);
         }
 
         // Test update max length
@@ -116,17 +115,16 @@ namespace UnitTest.DAO
             LOAINHANVIEN loaiNhanVien = new LOAINHANVIEN
             {
                 MaLoaiNV = TestCommon.LEN_10,
-                TenLoaiNV = TestCommon.LEN_50
+                TenLoaiNV = TestCommon.LEN_50 + "12"
             };
             dao.Save(db, loaiNhanVien);
             LOAINHANVIEN loaiNhanVienUpdate = new LOAINHANVIEN
             {
                 MaLoaiNV = TestCommon.LEN_10,
-                TenLoaiNV = TestCommon.LEN_250 + "12"
             };
             string actual = dao.Save(db, loaiNhanVienUpdate);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         [TestMethod]
@@ -139,10 +137,8 @@ namespace UnitTest.DAO
                 TenLoaiNV = TestCommon.LEN_50
             };
             LoaiNhanVienDAO dao = new LoaiNhanVienDAO();
-            dao.Save(db, loaiNhanVien);
-            string actual = dao.Delete(db, loaiNhanVien);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            string actual = dao.Save(db, loaiNhanVien);
+            Assert.Equals(null, actual);
         }
         /*End test method*/
 

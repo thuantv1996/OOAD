@@ -54,7 +54,16 @@ namespace ClinicManagement
                         });
                         break;
                     }
-                default: break;
+                case Common.UserType.analysis:
+                    {
+                        this.updateMenuControl(new string[] { "Trang chủ"});
+                        this.listContent.Clear();
+                        this.listContent.AddRange(new UserControl[]
+                        {
+                            new ClinicManagement.Features.Analysis.Main.AnalysisHome()
+                        });
+                        break;
+                    }
             }
 
             var vitri = user.RoomId.Equals(COM.Constant.ID_LNV_BS) ? "Bác sĩ khám" : user.RoomId.Equals(COM.Constant.ID_LNV_TN) ? "Nhân viên tiếp nhận" : "Bác sĩ xét nghiệm";

@@ -13,8 +13,7 @@ namespace DAO.Implement
         {
             try
             {
-                (db as QLPHONGKHAMEntities).LUONCONGVIECs.Remove(
-                    (db as QLPHONGKHAMEntities).LUONCONGVIECs.Find(entity.MaHoSo));
+                (db as QLPHONGKHAMEntities).LUONCONGVIECs.Remove(entity);
             }
             catch (Exception e)
             {
@@ -59,12 +58,6 @@ namespace DAO.Implement
 
         public string Save(DbContext db, LUONCONGVIEC entity)
         {
-            if (!entity.Validate())
-            {
-                string log = "Error validate in LUONCONGVIEC object";
-                LogManager.WriteLog(log);
-                return DAOCommon.FAIL;
-            }
             object[] id = { entity.MaHoSo };
             LUONCONGVIEC obj = (db as QLPHONGKHAMEntities).LUONCONGVIECs.Find(id);
             if (obj == null)

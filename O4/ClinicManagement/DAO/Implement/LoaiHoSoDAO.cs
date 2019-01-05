@@ -58,12 +58,6 @@ namespace DAO.Implement
 
         public string Save(DbContext db, LOAIHOSO entity)
         {
-            if (!entity.Validate())
-            {
-                string log = "Error validate in LOAIHOSO object";
-                LogManager.WriteLog(log);
-                return DAOCommon.FAIL;
-            }
             object[] id = { entity.MaLoaiHoSo };
             LOAIHOSO obj = (db as QLPHONGKHAMEntities).LOAIHOSOes.Find(id);
             if (obj == null)

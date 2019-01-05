@@ -28,10 +28,10 @@ namespace UnitTest.DAO
             NHANVIEN nhanVien = new NHANVIEN
             {   MaNV = TestCommon.LEN_10,
                 HoTenNV = "abc",
-                NgaySinh = TestCommon.LEN_8,
-                CMND = TestCommon.LEN_8,
+                NgaySinh = "1996",
+                CMND = "123",
                 DiaChi = "123",
-                SoDienThoai = TestCommon.LEN_8,
+                SoDienThoai = "123",
                 Email = "123",
                 MaSoThue = "123",
                 SoTaiKhoan = "123",
@@ -41,7 +41,7 @@ namespace UnitTest.DAO
             NhanVienDAO dao = new NhanVienDAO();
             string actual = dao.Save(db, nhanVien);
             string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test insert null
@@ -52,7 +52,7 @@ namespace UnitTest.DAO
             NhanVienDAO dao = new NhanVienDAO();
             string actual = dao.Save(db, nhanVien);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test insert max - length string
@@ -76,7 +76,24 @@ namespace UnitTest.DAO
             NhanVienDAO dao = new NhanVienDAO();
             string actual = dao.Save(db, nhanVien);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
+        }
+
+        // Test insert MaLoaiNV, MaPhong not found in table MALOAINHANVIEN, MAPHONG
+        [TestMethod]
+        public void Insert_TestCase4()
+        {
+            NHANVIEN nhanVien = new NHANVIEN
+            {   MaNV = TestCommon.LEN_10,
+                HoTenNV = TestCommon.LEN_50,
+                MaLoaiNV = "0987654321",
+                MaPhong = "0987654321"
+            };
+            NhanVienDAO dao = new NhanVienDAO();
+            string actual = dao.Save(db, nhanVien);
+            string expected = "1111";
+            // Test
+            Assert.Equals(expected, actual);
         }
 
         // Test update data sucesses
@@ -103,7 +120,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "0000";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update without TenNhanVien
@@ -123,7 +140,7 @@ namespace UnitTest.DAO
             };
             string actual = dao.Save(db, nhanVienUpdate);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update max length
@@ -154,7 +171,39 @@ namespace UnitTest.DAO
             };
             string actual = dao.Save(db, nhanVienUpdate);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
+        }
+
+        // Test update data with MaloaiNV or MaPhong doesn't exist in table
+        [TestMethod]
+        public void Update_TestCase8()
+        {
+            // Khởi tạo dao
+            NhanVienDAO dao = new NhanVienDAO();
+            // Insert một nhân viên mới
+            NHANVIEN nhanVien = new NHANVIEN
+            {
+                MaNV = TestCommon.LEN_10,
+                HoTenNV = TestCommon.LEN_50,
+                MaLoaiNV = TestCommon.LEN_10,
+                MaPhong = TestCommon.LEN_10
+
+            };
+            dao.Save(db, nhanVien);
+            // Update nhân viên 
+            NHANVIEN nhanVienUpdate = new NHANVIEN
+            {
+                MaNV = TestCommon.LEN_10,
+                HoTenNV = TestCommon.LEN_50,
+                MaLoaiNV = "TESTUP0001",
+                MaPhong = "TESTUP0001"
+            };
+            // Tạo biến lưu thông tin nhân viên update
+            string actual = dao.Save(db, nhanVienUpdate);
+            // Biến kết quả
+            string expected = "1111";
+            // Test 
+            Assert.Equals(expected, actual);
         }
 
         // Test delete sucesses
@@ -169,10 +218,8 @@ namespace UnitTest.DAO
                 MaPhong = TestCommon.LEN_10
             };
             NhanVienDAO dao = new NhanVienDAO();
-            dao.Save(db, nhanVien);
-            string actual = dao.Delete(db, nhanVien);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            string actual = dao.Save(db, nhanVien);
+            Assert.Equals(null, actual);
         }
         /* END TEST METHOD */
 

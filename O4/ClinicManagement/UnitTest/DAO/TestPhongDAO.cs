@@ -33,7 +33,7 @@ namespace UnitTest.DAO
             PhongDAO dao = new PhongDAO();
             string actual = dao.Save(db, phong);
             string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test insert with TenPhong is null
@@ -44,7 +44,7 @@ namespace UnitTest.DAO
             PhongDAO dao = new PhongDAO();
             string actual = dao.Save(db, phong);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test insert max - length string
@@ -61,7 +61,7 @@ namespace UnitTest.DAO
             PhongDAO dao = new PhongDAO();
             string actual = dao.Save(db, phong);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update data sucesses
@@ -85,7 +85,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "0000";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update without TenPhong
@@ -105,7 +105,7 @@ namespace UnitTest.DAO
             };
             string actual = dao.Save(db, phongUpdate);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update max length
@@ -128,7 +128,7 @@ namespace UnitTest.DAO
             };
             string actual = dao.Save(db, phongUpdate);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test delete sucesses
@@ -141,10 +141,8 @@ namespace UnitTest.DAO
                 TenPhong = "abc",
             };
             PhongDAO dao = new PhongDAO();
-            dao.Save(db, phong);
-            string actual = dao.Delete(db, phong);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            string actual = dao.Save(db, phong);
+            Assert.Equals(null, actual);
         }
         /* END TEST METHOD */
 

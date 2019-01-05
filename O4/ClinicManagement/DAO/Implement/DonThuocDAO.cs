@@ -60,12 +60,6 @@ namespace DAO.Implement
 
         public string Save(DbContext db, DONTHUOC entity)
         {
-            if (!entity.Validate())
-            {
-                string log = "Error validate in LOAIHOSO object";
-                LogManager.WriteLog(log);
-                return DAOCommon.FAIL;
-            }
             object[] id = { entity.MaDonThuoc };
             DONTHUOC obj = (db as QLPHONGKHAMEntities).DONTHUOCs.Find(id);
             if (obj == null)

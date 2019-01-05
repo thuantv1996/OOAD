@@ -6,7 +6,7 @@ using System.Data.Entity;
 namespace UnitTest.DAO
 {
     [TestClass]
-    public class TestBenhNhanDAO
+    class TestBenhNhanDAO
     {
         private static QLPHONGKHAMEntities db;
         private static DbContextTransaction trans;
@@ -38,7 +38,7 @@ namespace UnitTest.DAO
             BenhNhanDAO dao = new BenhNhanDAO();
             string actual = dao.Save(db, benhNhan);
             string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test insert max length
@@ -59,7 +59,7 @@ namespace UnitTest.DAO
             BenhNhanDAO dao = new BenhNhanDAO();
             string actual = dao.Save(db, benhNhan);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test insert HoTen is null
@@ -73,7 +73,7 @@ namespace UnitTest.DAO
             BenhNhanDAO dao = new BenhNhanDAO();
             string actual = dao.Save(db, benhNhan);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update success
@@ -86,6 +86,7 @@ namespace UnitTest.DAO
                 MaBenhNhan = TestCommon.LEN_10,
                 HoTen = TestCommon.LEN_50,
                 CMND = "123456789012",
+
             };
             dao.Save(db, benhNhan);
             BENHNHAN benhNhanUpdate = new BENHNHAN
@@ -98,7 +99,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "0000";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update max length
@@ -111,6 +112,7 @@ namespace UnitTest.DAO
                 MaBenhNhan = TestCommon.LEN_10,
                 HoTen = TestCommon.LEN_50,
                 CMND = "123456789012",
+
             };
             dao.Save(db, benhNhan);
             BENHNHAN benhNhanUpdate = new BENHNHAN
@@ -123,7 +125,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
         // Test update with HoTen is null
         [TestMethod]
@@ -145,7 +147,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test delete sucesses
@@ -158,11 +160,9 @@ namespace UnitTest.DAO
                 HoTen = TestCommon.LEN_50,
                 CMND = "123456789012",
             };
-            BenhNhanDAO dao = new BenhNhanDAO();
-            dao.Save(db, benhNhan);
-            string actual = dao.Delete(db, benhNhan);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            BenhNhanDAO dao = new BenhNhanDAO(); 
+            string actual = dao.Save(db, benhNhan);
+            Assert.Equals(null, actual);
         }
         /* END TEST METHOD */
 

@@ -33,7 +33,19 @@ namespace UnitTest.DAO
             ThuocDAO dao = new ThuocDAO();
             string actual = dao.Save(db, thuoc);
             string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
+        }
+
+
+        // Test insert TenThuoc is null
+        [TestMethod]
+        public void Insert_TestCase2()
+        {
+            THUOC thuoc = new THUOC { MaThuoc = TestCommon.LEN_10 };
+            ThuocDAO dao = new ThuocDAO();
+            string actual = dao.Save(db, thuoc);
+            string expected = "1111";
+            Assert.Equals(expected, actual);
         }
 
         // Test insert max - length string
@@ -50,7 +62,7 @@ namespace UnitTest.DAO
             ThuocDAO dao = new ThuocDAO();
             string actual = dao.Save(db, thuoc);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update data sucesses
@@ -77,7 +89,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "0000";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update without TenThuoc
@@ -100,8 +112,8 @@ namespace UnitTest.DAO
             };
             // Tạo biến lưu thông tin thuốc update
             string actual = dao.Save(db, thuocUpdate);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            string expected = "1111";
+            Assert.Equals(expected, actual);
         }
 
         // Test update max length
@@ -125,7 +137,7 @@ namespace UnitTest.DAO
             };
             string actual = dao.Save(db, thuocUpdate);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
         
 
@@ -139,10 +151,8 @@ namespace UnitTest.DAO
                 MaThuoc = TestCommon.LEN_10,
                 TenThuoc = TestCommon.LEN_50
             };
-            dao.Save(db, thuoc);
-            string actual = dao.Delete(db, thuoc);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            string actual = dao.Save(db, thuoc);
+            Assert.Equals(null, actual);
         }
 
         /* END TEST METHOD */

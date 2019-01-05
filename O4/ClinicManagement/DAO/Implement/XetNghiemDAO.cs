@@ -58,12 +58,6 @@ namespace DAO.Implement
 
         public string Save(DbContext db, XETNGHIEM entity)
         {
-            if (!entity.Validate())
-            {
-                string log = "Error validate in XETNGHIEM object";
-                LogManager.WriteLog(log);
-                return DAOCommon.FAIL;
-            }
             object[] id = { entity.MaXetNghiem };
             XETNGHIEM obj = (db as QLPHONGKHAMEntities).XETNGHIEMs.Find(id);
             if (obj == null)

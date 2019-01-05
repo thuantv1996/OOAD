@@ -31,7 +31,7 @@ namespace UnitTest.DAO
             LoaiHoSoDAO dao = new LoaiHoSoDAO();
             string actual = dao.Save(db, loaiHoSo);
             string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         [TestMethod]
@@ -42,7 +42,7 @@ namespace UnitTest.DAO
             LoaiHoSoDAO dao = new LoaiHoSoDAO();
             string actual = dao.Save(db, loaiHoSo);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test max - length string
@@ -57,7 +57,7 @@ namespace UnitTest.DAO
             LoaiHoSoDAO dao = new LoaiHoSoDAO();
             string actual = dao.Save(db, loaiHoSo);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -85,7 +85,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "0000";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update without TenLoaiHoSo
@@ -104,8 +104,8 @@ namespace UnitTest.DAO
                 MaLoaiHoSo = TestCommon.LEN_10
             };
             string actual = dao.Save(db, loaiHoSoUpdate);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            string expected = "1111";
+            Assert.Equals(expected, actual);
         }
 
         // Test update max-length
@@ -125,7 +125,7 @@ namespace UnitTest.DAO
             };
             string actual = dao.Save(db, loaiHoSoUpdate);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test Delete sucesses
@@ -138,10 +138,8 @@ namespace UnitTest.DAO
                 TenLoaiHoSo = TestCommon.LEN_50
             };
             LoaiHoSoDAO dao = new LoaiHoSoDAO();
-            dao.Save(db, loaiHoSo);
-            string actual = dao.Delete(db, loaiHoSo);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            string actual = dao.Save(db, loaiHoSo);
+            Assert.Equals(null, actual);
         }
         /*End test method*/
 

@@ -37,7 +37,7 @@ namespace UnitTest.DAO
             LuonCongViecDAO dao = new LuonCongViecDAO();
             string actual = dao.Save(db, luonCongViec);
             string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test insert MaHoSo is null
@@ -54,7 +54,7 @@ namespace UnitTest.DAO
             LuonCongViecDAO dao = new LuonCongViecDAO();
             string actual = dao.Save(db, luonCongViec);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -73,7 +73,7 @@ namespace UnitTest.DAO
             LuonCongViecDAO dao = new LuonCongViecDAO();
             string actual = dao.Save(db, luonCongViec);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -92,7 +92,7 @@ namespace UnitTest.DAO
             LuonCongViecDAO dao = new LuonCongViecDAO();
             string actual = dao.Save(db, luonCongViec);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -110,8 +110,8 @@ namespace UnitTest.DAO
             };
             LuonCongViecDAO dao = new LuonCongViecDAO();
             string actual = dao.Save(db, luonCongViec);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            string expected = "1111";
+            Assert.Equals(expected, actual);
         }
 
         // Test update successes
@@ -140,7 +140,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "0000";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -170,7 +170,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -194,7 +194,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -224,7 +224,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
 
@@ -241,10 +241,8 @@ namespace UnitTest.DAO
                 XetNghiem = true
             };
             LuonCongViecDAO dao = new LuonCongViecDAO();
-            dao.Save(db, luonCongViec);
-            string actual = dao.Delete(db, luonCongViec);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            string actual = dao.Save(db, luonCongViec);
+            Assert.Equals(null, actual);
         }
         /* END TEST METHOD */
 

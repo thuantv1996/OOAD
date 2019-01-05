@@ -23,26 +23,5 @@ namespace DAO
         public string NgayThu { get; set; }
     
         public virtual HOSOBENHAN HOSOBENHAN { get; set; }
-
-        public bool Validate()
-        {
-            if (MaThanhToan == null || MaThanhToan.Length != 10)
-            {
-                return false;
-            }
-            if (MaHoSo == null || MaHoSo.Length != 10)
-            {
-                return false;
-            }
-            if (NhanVienThu != null && NhanVienThu.Length != 10)
-            {
-                return false;
-            }
-            if (NgayThu != null && NgayThu.Length != 8)
-            {
-                return false;
-            }
-            return true;
-        }
     }
 }
