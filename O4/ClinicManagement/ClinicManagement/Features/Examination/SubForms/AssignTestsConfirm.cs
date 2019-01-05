@@ -79,14 +79,7 @@ namespace ClinicManagement.Features.Examination.SubForms
             {
                 if (result.Equals(COM.Constant.RES_SUC))
                 {
-                    if (MessageBox.Show("Lưu thông tin khám thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
-                    {
-                        this.InvokeConfirm(this, e);
-                    } 
-                    else
-                    {
-                        MessageBox.Show("Lưu thông tin thất bại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    this.InvokeConfirm(this, e);
                 }
             });
         }

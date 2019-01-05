@@ -16,8 +16,6 @@ namespace ClinicManagement.Features.Examination.SubForms
         private List<Model.ThuocView> listOfMedicineAdded = new List<Model.ThuocView>();
         private List<DTO.ThuocDTO> listOfMedicine = new List<DTO.ThuocDTO>();
 
-        public event EventHandler<bool> ActiveConfirm;
-
         public CreatePrescriptions()
         {
             InitializeComponent();
@@ -64,12 +62,6 @@ namespace ClinicManagement.Features.Examination.SubForms
 
             this.listOfMedicineAdded.Add(thuoc);
             this.reloadData();
-            this.activeConfirmChanged();
-        }
-
-        private void activeConfirmChanged()
-        {
-            this.ActiveConfirm?.Invoke(this, this.gridView1.RowCount > 0);
         }
 
         private void txtSoLuong_TextChanged(object sender, EventArgs e)
@@ -142,8 +134,6 @@ namespace ClinicManagement.Features.Examination.SubForms
             {
                 this.btnDelete.Enabled = this.btnSaveChanged.Enabled = false;
             }
-
-            this.activeConfirmChanged();
         }
     }
 }

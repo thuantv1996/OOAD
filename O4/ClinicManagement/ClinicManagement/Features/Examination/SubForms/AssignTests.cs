@@ -12,8 +12,7 @@ namespace ClinicManagement.Features.Examination.SubForms
 {
     public partial class AssignTests : UserControl
     {
-        public event EventHandler<decimal> ChiPhiChanged;
-        public event EventHandler<bool> ActiveConfirm;
+        public event EventHandler<decimal> AddAssign;
 
         public AssignTests()
         {
@@ -51,8 +50,7 @@ namespace ClinicManagement.Features.Examination.SubForms
             {
                 this.checkListXetNghiem.Items.Add(newItem);
                 var newXetNghiem = (DTO.XetNghiemDTO)newItem.Value;
-                this.ChiPhiChanged?.Invoke(this, newXetNghiem.ChiPhi);
-                this.ActiveConfirm?.Invoke(this, true);
+                this.AddAssign?.Invoke(this, newXetNghiem.ChiPhi);
             }
         }
 
@@ -77,10 +75,7 @@ namespace ClinicManagement.Features.Examination.SubForms
             var item = this.checkListXetNghiem.Items[e.Index];
             var xetNghiem = (DTO.XetNghiemDTO)item.Value;
             var chiphi = e.State == CheckState.Unchecked ? -xetNghiem.ChiPhi : xetNghiem.ChiPhi;
-            this.ChiPhiChanged?.Invoke(this, chiphi);
-
-            var existsCheckedItem = this.checkListXetNghiem.Items.ToList().FindAll(i => i.CheckState == CheckState.Checked).Count > 0;
-            this.ActiveConfirm?.Invoke(this, existsCheckedItem);
+            this.AddAssign?.Invoke(this, chiphi);
         }
 
         public void refresh()

@@ -23,7 +23,7 @@ namespace ClinicManagement.Features.Examination.Main
         {
             this.danhSachChoKham.RefreshClick += WaitingPatientTable1_RefreshClick;
             this.danhSachChoKham.AccessClick += DanhSachChoKham_AccessClick;
-            this.fetchData(null);
+            this.fillWaitingExaminationTable(null);
         }
 
         private void DanhSachChoKham_AccessClick(object sender, Model.HoSoBenhAnView e)
@@ -50,20 +50,13 @@ namespace ClinicManagement.Features.Examination.Main
                 Anchor = AnchorStyles.Left | AnchorStyles.Top
             };
 
-            control.reloadRequest += Control_reloadRequest;
-
             formContainer.Controls.Add(control);
             formContainer.ShowDialog();
         }
 
-        private void Control_reloadRequest(object sender, EventArgs e)
-        {
-            this.fetchData(null);
-        }
-
         private void WaitingPatientTable1_RefreshClick(object sender, EventArgs e)
         {
-            this.fetchData(status =>
+            this.fillWaitingExaminationTable(status =>
             {
                 if (status)
                     MessageBox.Show("Dữ liệu đã được làm mới!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -73,7 +66,7 @@ namespace ClinicManagement.Features.Examination.Main
 
         }
 
-        private void fetchData(Action<bool> completion)
+        private void fillWaitingExaminationTable(Action<bool> completion)
         {
             this.bus.getListHoSo((listHoSo, result) =>
             {

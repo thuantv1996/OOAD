@@ -28,24 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label2 = new System.Windows.Forms.Label();
             this.txtChiPhi = new System.Windows.Forms.Label();
             this.btnXacNhan = new System.Windows.Forms.Button();
             this.mainPanel = new System.Windows.Forms.Panel();
-            this.lnkDonThuocGanNhat = new System.Windows.Forms.LinkLabel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.txtYeuCauKham = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtChuanDoanBenh = new ClinicManagement.Common.ClinicComponents.RichTextBoxWithLine(this.components);
             this.label3 = new System.Windows.Forms.Label();
-            this.patientMainInformation = new ClinicManagement.Common.ClinicComponents.PatientMainInformation();
             this.radioLayout = new System.Windows.Forms.TableLayoutPanel();
             this.radXetNghiem = new System.Windows.Forms.RadioButton();
             this.radKeThuoc = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.txtYeuCauKham = new System.Windows.Forms.Label();
+            this.txtChuanDoanBenh = new ClinicManagement.Common.ClinicComponents.RichTextBoxWithLine();
+            this.patientMainInformation = new ClinicManagement.Common.ClinicComponents.PatientMainInformation();
+            this.lnkDonThuocGanNhat = new System.Windows.Forms.LinkLabel();
             this.mainPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.radioLayout.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
@@ -74,7 +73,6 @@
             // 
             this.btnXacNhan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnXacNhan.BackColor = System.Drawing.Color.White;
-            this.btnXacNhan.Enabled = false;
             this.btnXacNhan.Location = new System.Drawing.Point(657, 558);
             this.btnXacNhan.Name = "btnXacNhan";
             this.btnXacNhan.Size = new System.Drawing.Size(157, 40);
@@ -103,59 +101,6 @@
             this.mainPanel.Size = new System.Drawing.Size(802, 522);
             this.mainPanel.TabIndex = 5;
             // 
-            // lnkDonThuocGanNhat
-            // 
-            this.lnkDonThuocGanNhat.AutoSize = true;
-            this.lnkDonThuocGanNhat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lnkDonThuocGanNhat.Location = new System.Drawing.Point(4, 146);
-            this.lnkDonThuocGanNhat.Name = "lnkDonThuocGanNhat";
-            this.lnkDonThuocGanNhat.Size = new System.Drawing.Size(154, 20);
-            this.lnkDonThuocGanNhat.TabIndex = 13;
-            this.lnkDonThuocGanNhat.TabStop = true;
-            this.lnkDonThuocGanNhat.Text = "Đơn thuốc gần nhất";
-            this.lnkDonThuocGanNhat.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDonThuocGanNhat_LinkClicked);
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.AutoScroll = true;
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.txtYeuCauKham);
-            this.panel1.Location = new System.Drawing.Point(7, 215);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(788, 98);
-            this.panel1.TabIndex = 11;
-            // 
-            // txtYeuCauKham
-            // 
-            this.txtYeuCauKham.AutoSize = true;
-            this.txtYeuCauKham.Location = new System.Drawing.Point(3, 0);
-            this.txtYeuCauKham.MaximumSize = new System.Drawing.Size(780, 0);
-            this.txtYeuCauKham.Name = "txtYeuCauKham";
-            this.txtYeuCauKham.Size = new System.Drawing.Size(0, 17);
-            this.txtYeuCauKham.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 191);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 17);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Yêu cầu khám:";
-            // 
-            // txtChuanDoanBenh
-            // 
-            this.txtChuanDoanBenh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtChuanDoanBenh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtChuanDoanBenh.Location = new System.Drawing.Point(4, 333);
-            this.txtChuanDoanBenh.Name = "txtChuanDoanBenh";
-            this.txtChuanDoanBenh.Size = new System.Drawing.Size(792, 96);
-            this.txtChuanDoanBenh.TabIndex = 9;
-            this.txtChuanDoanBenh.Text = "-  ";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -164,15 +109,6 @@
             this.label3.Size = new System.Drawing.Size(89, 17);
             this.label3.TabIndex = 8;
             this.label3.Text = "Chuẩn đoán:";
-            // 
-            // patientMainInformation
-            // 
-            this.patientMainInformation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.patientMainInformation.Location = new System.Drawing.Point(5, 3);
-            this.patientMainInformation.Name = "patientMainInformation";
-            this.patientMainInformation.Size = new System.Drawing.Size(790, 140);
-            this.patientMainInformation.TabIndex = 6;
             // 
             // radioLayout
             // 
@@ -216,6 +152,68 @@
             this.radKeThuoc.UseVisualStyleBackColor = true;
             this.radKeThuoc.CheckedChanged += new System.EventHandler(this.radKeThuoc_CheckedChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 191);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(102, 17);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Yêu cầu khám:";
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.AutoScroll = true;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.txtYeuCauKham);
+            this.panel1.Location = new System.Drawing.Point(7, 215);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(788, 98);
+            this.panel1.TabIndex = 11;
+            // 
+            // txtYeuCauKham
+            // 
+            this.txtYeuCauKham.AutoSize = true;
+            this.txtYeuCauKham.Location = new System.Drawing.Point(3, 0);
+            this.txtYeuCauKham.MaximumSize = new System.Drawing.Size(780, 0);
+            this.txtYeuCauKham.Name = "txtYeuCauKham";
+            this.txtYeuCauKham.Size = new System.Drawing.Size(0, 17);
+            this.txtYeuCauKham.TabIndex = 0;
+            // 
+            // txtChuanDoanBenh
+            // 
+            this.txtChuanDoanBenh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtChuanDoanBenh.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtChuanDoanBenh.Location = new System.Drawing.Point(4, 333);
+            this.txtChuanDoanBenh.Name = "txtChuanDoanBenh";
+            this.txtChuanDoanBenh.Size = new System.Drawing.Size(792, 96);
+            this.txtChuanDoanBenh.TabIndex = 9;
+            this.txtChuanDoanBenh.Text = "-  ";
+            // 
+            // patientMainInformation
+            // 
+            this.patientMainInformation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.patientMainInformation.Location = new System.Drawing.Point(5, 3);
+            this.patientMainInformation.Name = "patientMainInformation";
+            this.patientMainInformation.Size = new System.Drawing.Size(790, 140);
+            this.patientMainInformation.TabIndex = 6;
+            // 
+            // lnkDonThuocGanNhat
+            // 
+            this.lnkDonThuocGanNhat.AutoSize = true;
+            this.lnkDonThuocGanNhat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lnkDonThuocGanNhat.Location = new System.Drawing.Point(4, 146);
+            this.lnkDonThuocGanNhat.Name = "lnkDonThuocGanNhat";
+            this.lnkDonThuocGanNhat.Size = new System.Drawing.Size(154, 20);
+            this.lnkDonThuocGanNhat.TabIndex = 13;
+            this.lnkDonThuocGanNhat.TabStop = true;
+            this.lnkDonThuocGanNhat.Text = "Đơn thuốc gần nhất";
+            this.lnkDonThuocGanNhat.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDonThuocGanNhat_LinkClicked);
+            // 
             // MedicalExamination
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -229,10 +227,10 @@
             this.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.ExaminationHome_ControlRemoved);
             this.mainPanel.ResumeLayout(false);
             this.mainPanel.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.radioLayout.ResumeLayout(false);
             this.radioLayout.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
