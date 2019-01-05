@@ -20,6 +20,8 @@ namespace ClinicManagement.Features.Examination.SubForms
         private DTO.HoSoBenhAnDTO hoSoBenhAn;
         private decimal tongChiPhi = 0;
 
+        public event EventHandler reloadRequest;
+
         public MedicalExamination(DTO.HoSoBenhAnDTO hoso)
         {
             InitializeComponent();
@@ -72,8 +74,14 @@ namespace ClinicManagement.Features.Examination.SubForms
                 Width = this.radioLayout.Width,
                 Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
             };
-            this.assignTest.AddAssign += AssignTest_AddAssign;
+            this.assignTest.ChiPhiChanged += AssignTest_AddAssign;
+            this.assignTest.ActiveConfirm += AssignTest_CheckedListControlChanged;
             this.mainPanel.Controls.Add(assignTest);
+        }
+
+        private void AssignTest_CheckedListControlChanged(object sender, bool e)
+        {
+            this.btnXacNhan.Enabled = e;
         }
 
         private void AssignTest_AddAssign(object sender, decimal e)
@@ -91,6 +99,12 @@ namespace ClinicManagement.Features.Examination.SubForms
                 Width = this.radioLayout.Width,
                 Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
             };
+
+            this.createPrescription.ActiveConfirm += (obj, isActive) =>
+            {
+                this.btnXacNhan.Enabled = isActive;
+            };
+
             this.mainPanel.Controls.Add(createPrescription);
         }
 
@@ -104,6 +118,7 @@ namespace ClinicManagement.Features.Examination.SubForms
                 this.assignTest.refresh();
                 this.tongChiPhi = 0;
                 this.txtChiPhi.Text = this.tongChiPhi.ToString();
+                this.btnXacNhan.Enabled = false;
             }
         }
 
@@ -114,6 +129,7 @@ namespace ClinicManagement.Features.Examination.SubForms
             {
                 this.createPrescription.Visible = false;
                 this.assignTest.Visible = true;
+                this.btnXacNhan.Enabled = false;
             }
         }
 
@@ -157,6 +173,7 @@ namespace ClinicManagement.Features.Examination.SubForms
                 formContainer.Close();
                 var parent = (Form)this.Parent;
                 parent.Close();
+                this.reloadRequest?.Invoke(this, e);
             };
             formContainer.Controls.Add(control);
             formContainer.ShowDialog();
