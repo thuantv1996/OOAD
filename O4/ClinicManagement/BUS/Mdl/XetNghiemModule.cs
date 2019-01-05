@@ -181,5 +181,21 @@ namespace BUS.Mdl
             }
             return Constant.RES_SUC;
         }
+
+        // LẤY THÔNG TIN BỆNH NHÂN
+        public string GetInforBenhNhan(string MaBenhNhan, out BenhNhanDTO benhNhan)
+        {
+            benhNhan = new BenhNhanDTO();
+            BenhNhanBUS bus = new BenhNhanBUS();
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                if(bus.GetInformationBenhNhan(db, MaBenhNhan, out benhNhan) == Constant.RES_FAI)
+                {
+                    return Constant.RES_FAI;
+                }
+            }
+            return Constant.RES_SUC;
+        }
+
     }
 }
