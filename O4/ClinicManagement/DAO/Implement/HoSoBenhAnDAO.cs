@@ -67,7 +67,8 @@ namespace DAO.Implement
                 hoSoDAO = (from hs in db.HOSOBENHANs
                            join kqxn in db.KETQUAXETNGHIEMs on hs.MaHoSo equals kqxn.MaHoSo
                            join lcv in db.LUONCONGVIECs on hs.MaHoSo equals lcv.MaHoSo
-                           where kqxn.MaXetNghiem == maXetNghiem && kqxn.ThanhToan == true && lcv.NodeHienTai == node
+                           where kqxn.MaXetNghiem == maXetNghiem && kqxn.ThanhToan == true
+                                 && lcv.NodeHienTai == node && kqxn.KetQua == null
                             select hs
                             ).ToList();
             }
