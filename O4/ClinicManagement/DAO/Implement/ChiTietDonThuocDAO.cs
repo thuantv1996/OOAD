@@ -91,6 +91,28 @@ namespace DAO.Implement
             return DAOCommon.SUCCESS;
         }
 
+        public string DeleteAllWithId(QLPHONGKHAMEntities db, string maDonThuoc)
+        {
+            List<CHITIETDONTHUOC> listChiTiet = new List<CHITIETDONTHUOC>();
+            try
+            {
+                listChiTiet = (from ct in db.CHITIETDONTHUOCs
+                               where ct.MaDonThuoc == maDonThuoc
+                               select ct).ToList();
+                foreach(CHITIETDONTHUOC index in listChiTiet)
+                {
+                    db.CHITIETDONTHUOCs.Remove(index);
+                }
+            }
+            catch (Exception e)
+            {
+                string log = LogManager.GetErrorFromException(e);
+                LogManager.WriteLog(log);
+                return DAOCommon.FAIL;
+            }
+            return DAOCommon.SUCCESS;
+        }
+
         public string GetListWithIdDonThuoc(QLPHONGKHAMEntities db, string MaDonthuoc, out List<CHITIETDONTHUOC> listChiTiet)
         {
             listChiTiet = new List<CHITIETDONTHUOC>();

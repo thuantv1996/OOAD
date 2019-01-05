@@ -55,5 +55,10 @@ namespace BUS.Imp
             }
             return Constant.RES_SUC;
         }
+
+        internal string DeleteAllWithId(QLPHONGKHAMEntities db, string maDonThuoc)
+        {
+            return chiTietDonThuocDAO.DeleteAllWithId(db, maDonThuoc);
+        }
     }
 }

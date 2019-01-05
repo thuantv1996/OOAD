@@ -145,7 +145,13 @@ namespace BUS.Mdl
                         trans.Rollback();
                         return Constant.RES_FAI;
                     }
-                    foreach(var ct in chiTietDonThuocs)
+                    // xoá tất cả ctdt
+                    if (chiTietDonThuocBUS.DeleteAllWithId(db, donThuoc.MaDonThuoc) == Constant.RES_FAI)
+                    {
+                        trans.Rollback();
+                        return Constant.RES_FAI;
+                    }
+                    foreach (var ct in chiTietDonThuocs)
                     {
                         if (chiTietDonThuocBUS.SaveChiTietDonThuoc(db, ct).Equals(Constant.RES_FAI))
                         {
@@ -163,12 +169,20 @@ namespace BUS.Mdl
         // Lay thong tin don thuoc
         public string GetDonThuoc(string MaHoSo,out DonThuocDTO donThuoc, out List<ChiTietDonThuocDTO> chiTietDonThuocs)
         {
+            donThuoc = new DonThuocDTO();
+            chiTietDonThuocs = new List<ChiTietDonThuocDTO>();
             DonThuocBUS donThuocBUS = new DonThuocBUS();
             ChiTietDonThuocBUS chiTietDonThuocBUS = new ChiTietDonThuocBUS();
             using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
-                donThuocBUS.GetInformationDonThuocWithId(db, MaHoSo, out donThuoc);
-                chiTietDonThuocBUS.GetListWithIdDonThuoc(db, donThuoc.MaDonThuoc, out chiTietDonThuocs);
+                if (donThuocBUS.GetInformationDonThuocWithId(db, MaHoSo, out donThuoc) == Constant.RES_FAI)
+                {
+                    return Constant.RES_FAI;
+                }
+                if (chiTietDonThuocBUS.GetListWithIdDonThuoc(db, donThuoc.MaDonThuoc, out chiTietDonThuocs) == Constant.RES_FAI)
+                {
+                    return Constant.RES_FAI;
+                }
             }
             return Constant.RES_SUC;
         }
