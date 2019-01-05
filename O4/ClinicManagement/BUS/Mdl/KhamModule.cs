@@ -136,6 +136,7 @@ namespace BUS.Mdl
         {
             DonThuocBUS donThuocBUS = new DonThuocBUS();
             ChiTietDonThuocBUS chiTietDonThuocBUS = new ChiTietDonThuocBUS();
+            HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();
             using(QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
                 using(var trans = db.Database.BeginTransaction())
@@ -158,6 +159,59 @@ namespace BUS.Mdl
                             trans.Rollback();
                             return Constant.RES_FAI;
                         }
+                    }
+                    HoSoBenhAnDTO hoSo = new HoSoBenhAnDTO();
+                    if(hoSoBenhAnBUS.GetInfomationHoSo(db, donThuoc.MaHoSo, out hoSo) == Constant.RES_FAI)
+                    {
+                        trans.Rollback();
+                        return Constant.RES_FAI;
+                    }
+                    hoSo.CoKeDon = true;
+                    if (hoSoBenhAnBUS.UpdateHoSoBenhAn(db, hoSo) == Constant.RES_FAI)
+                    {
+                        trans.Rollback();
+                        return Constant.RES_FAI;
+                    }
+                    trans.Commit();
+                }
+                db.SaveChanges();
+            }
+            return Constant.RES_SUC;
+        }
+
+        // XÓA ĐƠN THUỐC
+        public string DeleteDonThuoc(DonThuocDTO donThuoc)
+        {
+            DonThuocBUS donThuocBUS = new DonThuocBUS();
+            ChiTietDonThuocBUS chiTietDonThuocBUS = new ChiTietDonThuocBUS();
+            HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                using (var trans = db.Database.BeginTransaction())
+                {
+                    // xoá tất cả ctdt
+                    if (chiTietDonThuocBUS.DeleteAllWithId(db, donThuoc.MaDonThuoc) == Constant.RES_FAI)
+                    {
+                        trans.Rollback();
+                        return Constant.RES_FAI;
+                    }
+                    // Xóa đơn thuốc
+                    if (donThuocBUS.Delete(db, donThuoc.MaDonThuoc) == Constant.RES_FAI)
+                    {
+                        trans.Rollback();
+                        return Constant.RES_FAI;
+                    }
+                    HoSoBenhAnDTO hoSo = new HoSoBenhAnDTO();
+                    if (hoSoBenhAnBUS.GetInfomationHoSo(db, donThuoc.MaHoSo, out hoSo) == Constant.RES_FAI)
+                    {
+                        trans.Rollback();
+                        return Constant.RES_FAI;
+                    }
+                    hoSo.CoKeDon = false;
+                    if (hoSoBenhAnBUS.UpdateHoSoBenhAn(db, hoSo) == Constant.RES_FAI)
+                    {
+                        trans.Rollback();
+                        return Constant.RES_FAI;
                     }
                     trans.Commit();
                 }
