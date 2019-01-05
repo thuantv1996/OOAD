@@ -14,10 +14,18 @@ namespace BUS.Mdl
         // lấy danh sách chờ xét nghiệm
         public string GetListHoSoKhamByPhong(string MaPhong, out List<HoSoBenhAnDTO> listHoSoBenhAn)
         {
+            // lấy xét nghiệm dựa vào phòng
+            XetNghiemBUS xetNghiemBUS = new XetNghiemBUS();
             HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();
+            XetNghiemDTO xetNghiemDTO = new XetNghiemDTO();
             using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
-                hoSoBenhAnBUS.GetListHoSo(db, MaPhong, BusConstant.NODE_XET_NGHIEM, out listHoSoBenhAn);
+                if (xetNghiemBUS.GetXetNghiemByPhong(db, MaPhong, ref xetNghiemDTO) == Constant.RES_FAI)
+                {
+                    listHoSoBenhAn = new List<HoSoBenhAnDTO>();
+                    return Constant.RES_FAI;
+                }
+                hoSoBenhAnBUS.GetListHoSoXN(db, xetNghiemDTO.MaXetNghiem, out listHoSoBenhAn);
             }
             return Constant.RES_SUC;
         }
@@ -144,6 +152,30 @@ namespace BUS.Mdl
         {
             XetNghiemInputCheck inputCheck = new XetNghiemInputCheck();
             return inputCheck.InputCheck(ketQuaXetNghiem, ref MessageError);
+        }
+
+        // LẤY KẾT QUẢ XÉT XÉT NGHIỆM CỦA HỒ SƠ THEO PHÒNG
+        public string GetKetQuaXetNghiem(string MaHoSo, string MaPhong ,out KetQuaXetNghiemDTO ketQuaXetNghiem)
+        {
+            // lấy xét nghiệm dựa vào phòng
+            XetNghiemBUS xetNghiemBUS = new XetNghiemBUS();
+            // kết quả xét nghiệm trả về
+            XetNghiemDTO xetNghiemDTO = new XetNghiemDTO();
+            using(QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                if(xetNghiemBUS.GetXetNghiemByPhong(db, MaPhong, ref xetNghiemDTO) == Constant.RES_FAI)
+                {
+                    ketQuaXetNghiem = new KetQuaXetNghiemDTO();
+                    return Constant.RES_FAI;
+                }
+                KetQuaXetNghiemBUS ketQuaXetNghiemBUS = new KetQuaXetNghiemBUS();
+                if(ketQuaXetNghiemBUS.GetInformationWithId(db, MaHoSo, xetNghiemDTO.MaXetNghiem, out ketQuaXetNghiem) == Constant.RES_FAI)
+                {
+                    ketQuaXetNghiem = new KetQuaXetNghiemDTO();
+                    return Constant.RES_FAI;
+                }
+            }
+            return Constant.RES_SUC;
         }
     }
 }

@@ -4,6 +4,7 @@ using DTO;
 using DAO;
 using COM;
 using DAO.Implement;
+using System;
 
 namespace BUS.Imp
 {
@@ -40,6 +41,23 @@ namespace BUS.Imp
             }
             BUS.Com.Utils.CopyPropertiesFrom(rootDAO, hoSoBenhAnRoot);
             return COM.Constant.RES_SUC;
+        }
+
+        public string GetListHoSoXN(QLPHONGKHAMEntities db, string maXetNghiem, out List<HoSoBenhAnDTO> listHoSoBenhAn)
+        {
+            listHoSoBenhAn = new List<HoSoBenhAnDTO>();
+            List<HOSOBENHAN> hoSoDAO = null;
+            if (hoSoBenhAnService.GetListHoSoXN(db, maXetNghiem, out hoSoDAO) == Constant.RES_FAI)
+            {
+                return Constant.RES_FAI;
+            }
+            foreach (var hs in hoSoDAO)
+            {
+                HoSoBenhAnDTO entity = new HoSoBenhAnDTO();
+                BUS.Com.Utils.CopyPropertiesFrom(hs, entity);
+                listHoSoBenhAn.Add(entity);
+            }
+            return Constant.RES_SUC;
         }
 
         public string GetListHoSoWithIdBenhNhan(QLPHONGKHAMEntities db, string MaBenhNhan, out List<HoSoBenhAnDTO> ListHoSo)

@@ -59,6 +59,26 @@ namespace DAO.Implement
             return DAOCommon.SUCCESS;
         }
 
+        public string GetListHoSoXN(QLPHONGKHAMEntities db, string maXetNghiem, out List<HOSOBENHAN> hoSoDAO)
+        {
+            hoSoDAO = new List<HOSOBENHAN>();
+            try
+            {
+                hoSoDAO = (from hs in db.HOSOBENHANs
+                            join kqxn in db.KETQUAXETNGHIEMs on hs.MaHoSo equals kqxn.MaHoSo
+                            where kqxn.MaXetNghiem == maXetNghiem
+                            select hs
+                            ).ToList();
+            }
+            catch (Exception e)
+            {
+                string log = LogManager.GetErrorFromException(e);
+                LogManager.WriteLog(log);
+                return DAOCommon.FAIL;
+            }
+            return DAOCommon.SUCCESS;
+        }
+
         public string Save(DbContext db, HOSOBENHAN entity)
         {
             object[] id = { entity.MaHoSo };
