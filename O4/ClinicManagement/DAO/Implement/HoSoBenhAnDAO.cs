@@ -59,14 +59,15 @@ namespace DAO.Implement
             return DAOCommon.SUCCESS;
         }
 
-        public string GetListHoSoXN(QLPHONGKHAMEntities db, string maXetNghiem, out List<HOSOBENHAN> hoSoDAO)
+        public string GetListHoSoXN(QLPHONGKHAMEntities db, string maXetNghiem,string node, out List<HOSOBENHAN> hoSoDAO)
         {
             hoSoDAO = new List<HOSOBENHAN>();
             try
             {
                 hoSoDAO = (from hs in db.HOSOBENHANs
                            join kqxn in db.KETQUAXETNGHIEMs on hs.MaHoSo equals kqxn.MaHoSo
-                           where kqxn.MaXetNghiem == maXetNghiem && kqxn.ThanhToan == true
+                           join lcv in db.LUONCONGVIECs on hs.MaHoSo equals lcv.MaHoSo
+                           where kqxn.MaXetNghiem == maXetNghiem && kqxn.ThanhToan == true && lcv.NodeHienTai == node
                             select hs
                             ).ToList();
             }

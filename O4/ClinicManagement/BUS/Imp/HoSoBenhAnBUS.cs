@@ -47,7 +47,7 @@ namespace BUS.Imp
         {
             listHoSoBenhAn = new List<HoSoBenhAnDTO>();
             List<HOSOBENHAN> hoSoDAO = null;
-            if (hoSoBenhAnService.GetListHoSoXN(db, maXetNghiem, out hoSoDAO) == Constant.RES_FAI)
+            if (hoSoBenhAnService.GetListHoSoXN(db, maXetNghiem, Com.BusConstant.NODE_XET_NGHIEM, out hoSoDAO) == Constant.RES_FAI)
             {
                 return Constant.RES_FAI;
             }
