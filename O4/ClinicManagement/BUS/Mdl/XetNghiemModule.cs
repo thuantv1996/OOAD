@@ -25,7 +25,11 @@ namespace BUS.Mdl
                     listHoSoBenhAn = new List<HoSoBenhAnDTO>();
                     return Constant.RES_FAI;
                 }
-                hoSoBenhAnBUS.GetListHoSoXN(db, xetNghiemDTO.MaXetNghiem, out listHoSoBenhAn);
+                if(hoSoBenhAnBUS.GetListHoSoXN(db, xetNghiemDTO.MaXetNghiem, out listHoSoBenhAn) == Constant.RES_FAI)
+                {
+                    listHoSoBenhAn = new List<HoSoBenhAnDTO>();
+                    return Constant.RES_FAI;
+                }
             }
             return Constant.RES_SUC;
         }
