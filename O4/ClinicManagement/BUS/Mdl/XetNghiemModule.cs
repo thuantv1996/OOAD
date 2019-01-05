@@ -142,7 +142,7 @@ namespace BUS.Mdl
                 if(kq.ThanhToan)
                 {
                     total++;
-                    if (!kq.KetQua.Equals(""))
+                    if (kq.KetQua != null)
                     {
                         number++;
                     }
