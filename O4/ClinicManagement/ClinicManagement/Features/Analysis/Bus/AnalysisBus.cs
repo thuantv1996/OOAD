@@ -37,7 +37,7 @@ namespace ClinicManagement.Features.Analysis.Bus
                     var hosoView = new Model.HoSoBenhAnView()
                     {
                         MaHoSo = hoso.MaHoSo,
-                        MaBenhNhan = patient.MaBenhNhan,
+                        MaBenhNhan = hoso.MaBenhNhan,
                         SoThuTu = hoso.SoThuTu,
                         HoTen = patient.HoTen,
                         CMND = patient.CMND,
@@ -75,8 +75,7 @@ namespace ClinicManagement.Features.Analysis.Bus
         public DTO.BenhNhanDTO getBenhNhan(string maBenhNhan)
         {
             var patient = new DTO.BenhNhanDTO();
-            //var result = this.clientBus.GetInformationBenhNhan(MaBenhNhan, out patient);
-            var result = COM.Constant.RES_SUC;
+            var result = this.clientBus.GetInforBenhNhan(maBenhNhan, out patient);
             if (result.Equals(COM.Constant.RES_SUC))
                 return patient;
             else
@@ -88,6 +87,32 @@ namespace ClinicManagement.Features.Analysis.Bus
             var result = this.clientBus.XetNghiemProcessing(kqxn);
             completion(result);
         }
+
+        public DTO.KetQuaXetNghiemDTO getKetQuaXetNghiem(string maHoSo)
+        {
+            var ketquaxetnghiem = new DTO.KetQuaXetNghiemDTO();
+            var maPhong = this.sharedUser.RoomId;
+            var result = this.clientBus.GetKetQuaXetNghiem(maHoSo, maPhong, out ketquaxetnghiem);
+            ketquaxetnghiem.MaBacSi = this.sharedUser.UserId;
+
+            return ketquaxetnghiem;
+        }
+
+        public DTO.XetNghiemDTO getXetNghiemInformation(string MaXetNghiem)
+        {
+            var xetNghiem = new DTO.XetNghiemDTO();
+            this.clientBus.GetInforXetNghiem(MaXetNghiem, out xetNghiem);
+            return xetNghiem;
+        }
+
+        public DTO.PhongKhamDTO getPhongInformation()
+        {
+            var phong = new DTO.PhongKhamDTO();
+            var maPhong = this.sharedUser.RoomId;
+            this.clientBus.GetInforPhong(maPhong, out phong);
+            return phong;
+        }
+
     }
 
 }

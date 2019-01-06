@@ -14,13 +14,15 @@ namespace ClinicManagement.Features.Analysis.SubForms
     {
         private DTO.HoSoBenhAnDTO hoso;
         private Bus.AnalysisBus bus = Bus.AnalysisBus.SharedInstance;
+        private DTO.KetQuaXetNghiemDTO ketQuaXetNghiem;
 
         public event EventHandler<DTO.KetQuaXetNghiemDTO> WillConfirm;
 
-        public AnalysisDetail(DTO.HoSoBenhAnDTO hoso)
+        public AnalysisDetail(DTO.HoSoBenhAnDTO hoso, DTO.KetQuaXetNghiemDTO ketQuaXetNghiem)
         {
             InitializeComponent();
             this.hoso = hoso;
+            this.ketQuaXetNghiem = ketQuaXetNghiem;
         }
 
         protected override void OnLoad(EventArgs e)
@@ -34,13 +36,39 @@ namespace ClinicManagement.Features.Analysis.SubForms
             var benhNhan = this.bus.getBenhNhan(this.hoso.MaBenhNhan);
             this.txtHoTen.Text = benhNhan.HoTen;
             this.txtSTT.Text = this.hoso.SoThuTu.ToString();
+
+            var xetNghiemInfor = this.bus.getXetNghiemInformation(this.ketQuaXetNghiem.MaXetNghiem);
+            var phong = this.bus.getPhongInformation();
+
+            if (xetNghiemInfor != null)
+            {
+                this.txtTenXetNghiem.Text = xetNghiemInfor.TenXetNghiem;
+            }
+
+            if (phong != null)
+            {
+                this.txtTenPhong.Text = phong.TenPhong;
+            }
+
+            this.bus.getListNhanVien((listNhanVien, result) =>
+            {
+                if (result.Equals(COM.Constant.RES_SUC))
+                {
+                    listNhanVien.ForEach(nv =>
+                    {
+                        this.cbChonBacSy.Properties.Items.Add(nv);
+                    });
+                }
+            });
+
+            this.cbChonBacSy.SelectedIndex = 0;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            DTO.KetQuaXetNghiemDTO ketquaxetnghiem = new DTO.KetQuaXetNghiemDTO();
+            this.ketQuaXetNghiem.KetQua = this.txtKetQua.getText;
 
-            this.bus.checkInput(ketquaxetnghiem, (listMessageError, result) =>
+            this.bus.checkInput(this.ketQuaXetNghiem, (listMessageError, result) =>
             {
                 if (result.Equals(COM.Constant.RES_SUC))
                 {
@@ -53,8 +81,7 @@ namespace ClinicManagement.Features.Analysis.SubForms
 
                     confirmControl.WillConfirm += (obj, ea) =>
                     {
-                        var kqxn = new DTO.KetQuaXetNghiemDTO();
-                        this.WillConfirm?.Invoke(this, kqxn);
+                        this.WillConfirm?.Invoke(this, this.ketQuaXetNghiem);
                     };
 
                     confirmControl.WillBack += (obj, ea) =>

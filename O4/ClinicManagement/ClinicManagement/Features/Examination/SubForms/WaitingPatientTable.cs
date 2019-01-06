@@ -19,10 +19,7 @@ namespace ClinicManagement.Features.Examination.SubForms
 
         public void binding(List<Model.HoSoBenhAnView> list)
         {
-            if (this.gridControl1.InvokeRequired)
-                this.Invoke(new Action<List<Model.HoSoBenhAnView>>(binding), new object[] { list });
-            else
-                this.gridControl1.DataSource = Common.ClinicBus.ConvertToDatatable(list);
+            this.gridControl1.DataSource = Common.ClinicBus.ConvertToDatatable(list);
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

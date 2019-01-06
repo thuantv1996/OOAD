@@ -48,5 +48,10 @@ namespace BUS.Imp
             }
             return donThuocService.Delete(db, donThuocDAO);
         }
+
+        internal string getMaDonThuoc(QLPHONGKHAMEntities db)
+        {
+            return donThuocService.getMaDonThuoc(db);
+        }
     }
 }

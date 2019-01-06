@@ -49,7 +49,6 @@ namespace ClinicManagement.Features.Login.Main
             });
         }
 
-
         private void loginSuccessful(string MaNV)
         {
             var user = Common.User.SharedInstance;
@@ -74,7 +73,10 @@ namespace ClinicManagement.Features.Login.Main
             }
             user.UserName = nhanVienDTO.HoTenNV;
 
-            var mainForm = new ClinicManagement.MainForm(user);
+            var mainForm = new ClinicManagement.MainForm(user)
+            {
+                StartPosition = FormStartPosition.CenterScreen
+            };
             this.Hide();
 
             mainForm.FormClosed += MainForm_FormClosed;

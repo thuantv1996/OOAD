@@ -22,16 +22,23 @@ namespace ClinicManagement.Features.Examination.SubForms
 
         private Bus.ExaminationBus bus = Bus.ExaminationBus.SharedInstance;
         private List<DTO.XetNghiemDTO> danhSachXetNghiem;
-        private DTO.HoSoBenhAnDTO hoso;
-        private decimal chiPhi;
 
-        public AssignTestsConfirm(DTO.HoSoBenhAnDTO hoso, List<DTO.XetNghiemDTO> danhSachXetNghiem, decimal chiPhi)
+        public List<DTO.XetNghiemDTO> DanhSachXetNghiem
+        {
+            get
+            {
+                return this.danhSachXetNghiem;
+            }
+        }
+
+        public event EventHandler ClearEvent;
+
+        public AssignTestsConfirm(List<DTO.XetNghiemDTO> danhSachXetNghiem, bool isConfirm = false)
         {
             InitializeComponent();
             this.danhSachXetNghiem = danhSachXetNghiem;
-            this.hoso = hoso;
-            this.chiPhi = chiPhi;
             this.setup();
+            this.btnClear.Visible = !isConfirm;
         }
 
         private void setup()
@@ -52,43 +59,41 @@ namespace ClinicManagement.Features.Examination.SubForms
 
             var data = Common.ClinicBus.ConvertToDatatable(list);
             this.gridControl1.DataSource = data;
-
-            var benhNhan = this.bus.getBenhNhan(hoso.MaBenhNhan);
-            this.patientMainInformation1.binding(benhNhan);
-
-            this.txtChuanDoan.Text = this.hoso.ChuanDoan;
-
-            this.txtChiPhi.Text = String.Format("{0} VND", this.chiPhi);
         }
 
-        private void btnConfirm_Click(object sender, EventArgs e)
+        private void btnClear_Click(object sender, EventArgs e)
         {
-            var listKQXN = new List<DTO.KetQuaXetNghiemDTO>();
-            danhSachXetNghiem.ForEach(xn =>
-            {
-                listKQXN.Add(new DTO.KetQuaXetNghiemDTO()
-                {
-                    MaHoSo = hoso.MaHoSo,
-                    MaXetNghiem = xn.MaXetNghiem,
-                    ThanhToan = false,
-                    TongChiPhi = chiPhi,
-                    MaBacSi = Common.User.SharedInstance.UserId
-                });
-            });
-            this.bus.assignTests(listKQXN, result =>
-            {
-                if (result.Equals(COM.Constant.RES_SUC))
-                {
-                    if (MessageBox.Show("Lưu thông tin khám thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
-                    {
-                        this.InvokeConfirm(this, e);
-                    } 
-                    else
-                    {
-                        MessageBox.Show("Lưu thông tin thất bại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            });
+            this.ClearEvent?.Invoke(this, e);
         }
+
+        //private void btnConfirm_Click(object sender, EventArgs e)
+        //{
+        //    var listKQXN = new List<DTO.KetQuaXetNghiemDTO>();
+        //    danhSachXetNghiem.ForEach(xn =>
+        //    {
+        //        listKQXN.Add(new DTO.KetQuaXetNghiemDTO()
+        //        {
+        //            MaHoSo = hoso.MaHoSo,
+        //            MaXetNghiem = xn.MaXetNghiem,
+        //            ThanhToan = false,
+        //            TongChiPhi = chiPhi,
+        //            MaBacSi = Common.User.SharedInstance.UserId
+        //        });
+        //    });
+        //    this.bus.assignTests(listKQXN, result =>
+        //    {
+        //        if (result.Equals(COM.Constant.RES_SUC))
+        //        {
+        //            if (MessageBox.Show("Lưu thông tin khám thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
+        //            {
+        //                this.InvokeConfirm(this, e);
+        //            } 
+        //            else
+        //            {
+        //                MessageBox.Show("Lưu thông tin thất bại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //            }
+        //        }
+        //    });
+        //}
     }
 }

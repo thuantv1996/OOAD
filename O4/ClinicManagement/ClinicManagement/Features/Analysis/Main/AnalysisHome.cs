@@ -75,6 +75,13 @@ namespace ClinicManagement.Features.Analysis.Main
 
         private void accessCell(DTO.HoSoBenhAnDTO hoso)
         {
+            var ketquaxetnghiem = this.bus.getKetQuaXetNghiem(hoso.MaHoSo);
+            if (ketquaxetnghiem == null)
+            {
+                MessageBox.Show("Không thể lấy kết quả xét nghiệm!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var formContainer = new Form()
             {
                 AutoSize = true,
@@ -82,7 +89,7 @@ namespace ClinicManagement.Features.Analysis.Main
                 StartPosition = FormStartPosition.CenterParent
             };
 
-            var detailControl = new SubForms.AnalysisDetail(hoso)
+            var detailControl = new SubForms.AnalysisDetail(hoso, ketquaxetnghiem)
             {
                 Left = Top = 0,
                 Anchor = AnchorStyles.Left | AnchorStyles.Top
@@ -90,14 +97,29 @@ namespace ClinicManagement.Features.Analysis.Main
 
             detailControl.WillConfirm += (childForm, ketQuaXetNghiem) =>
             {
+                var toDay = DateTime.Now;
+
+                ketQuaXetNghiem.NgayXetNghiem = toDay.ToString("yyyyMMdd");
                 this.bus.xetNghiemProcessing(ketQuaXetNghiem, result =>
                 {
                     if (result.Equals(COM.Constant.RES_SUC))
                     {
                         MessageBox.Show("Ghi kết quả xét nghiệm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        formContainer.Close();
-
                         //Show final result screen.
+                        var finalControl = new SubForms.AnalysisConfirm(hoso, ketQuaXetNghiem.KetQua, false)
+                        {
+                            Left = Top = 0,
+                            Anchor = AnchorStyles.Left | AnchorStyles.Top
+                        };
+
+                        finalControl.WillConfirm += (obj, er) =>
+                        {
+                            formContainer.Close();
+                            this.fetchData(null);
+                        };
+
+                        formContainer.Controls.Clear();
+                        formContainer.Controls.Add(finalControl);
                     }
                     else
                     {

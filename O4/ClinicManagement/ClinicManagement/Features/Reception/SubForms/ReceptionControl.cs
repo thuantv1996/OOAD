@@ -53,11 +53,8 @@ namespace ClinicManagement.Features.Reception.SubForms
 
         private void fillMainInformation() {
             var toDay = DateTime.Today;
-            var day = toDay.Day;
-            var month = toDay.Month;
-            var year = toDay.Year;
 
-            this.txtNgayTiepNhan.Text = String.Format("{0}/{1}/{2}", day, month, year);
+            this.txtNgayTiepNhan.Text = toDay.ToString("dd/MM/yyyy");
             this.bus.getListLoaiHoSo((listResult, result) =>
             {
                 if (result.Equals(COM.Constant.RES_SUC))
