@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COM", "COM\COM.csproj", "{CBEAA07F-6059-4736-A9BD-E24500D08946}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Report", "LaySoThuTu\Report.csproj", "{C538A96D-F0C3-4FC5-B64A-ED0B42332285}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Report", "Report\Report.csproj", "{C538A96D-F0C3-4FC5-B64A-ED0B42332285}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

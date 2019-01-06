@@ -1,6 +1,6 @@
-﻿namespace LaySoThuTu
+﻿namespace Report
 {
-    partial class Form1
+    partial class FormSoThuTu
     {
         /// <summary>
         /// Required designer variable.
@@ -34,21 +34,22 @@
             // reportViewer1
             // 
             this.reportViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.reportViewer1.LocalReport.ReportEmbeddedResource = "Report.ReportSTT.rdlc";
             this.reportViewer1.Location = new System.Drawing.Point(0, 0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(329, 306);
+            this.reportViewer1.Size = new System.Drawing.Size(380, 248);
             this.reportViewer1.TabIndex = 0;
             // 
-            // Form1
+            // FormSoThuTu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 306);
+            this.ClientSize = new System.Drawing.Size(380, 248);
             this.Controls.Add(this.reportViewer1);
-            this.Name = "Form1";
-            this.Text = "Lấy số thứ tự";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Name = "FormSoThuTu";
+            this.Text = "FormSoThuTu";
+            this.Load += new System.EventHandler(this.FormSoThuTu_Load);
             this.ResumeLayout(false);
 
         }
@@ -58,4 +59,3 @@
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
     }
 }
-
