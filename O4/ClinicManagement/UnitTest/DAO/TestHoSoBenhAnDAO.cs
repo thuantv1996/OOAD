@@ -348,7 +348,7 @@ namespace UnitTest.DAO
         [TestMethod]
         public void Delete_TestCase11()
         {
-            HOSOBENHAN hoSoBenhAnDelete = new HOSOBENHAN
+            HOSOBENHAN hoSoBenhAnUpdate = new HOSOBENHAN
             {
                 MaHoSo = TestCommon.LEN_10,
                 MaHoSoTruoc = TestCommon.LEN_10,
@@ -358,10 +358,8 @@ namespace UnitTest.DAO
                 MaNguoiTN = TestCommon.LEN_10,
             };
             HoSoBenhAnDAO dao = new HoSoBenhAnDAO();
-            dao.Save(db, hoSoBenhAnDelete);
-            string actual = dao.Delete(db, hoSoBenhAnDelete);
-            string expected = "0000";
-            Assert.Equals(expected, actual);
+            string actual = dao.Save(db, hoSoBenhAnUpdate);
+            Assert.Equals(null, actual);
         }
         /* END TEST METHOD */
 

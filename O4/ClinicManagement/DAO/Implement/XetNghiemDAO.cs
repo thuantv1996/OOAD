@@ -88,5 +88,20 @@ namespace DAO.Implement
             }
             return DAOCommon.SUCCESS;
         }
+
+        public string GetXetNghiemByPhong(QLPHONGKHAMEntities db, string maPhong, out XETNGHIEM entity)
+        {
+            entity = new XETNGHIEM();
+            try
+            {
+                entity = db.XETNGHIEMs.Where(xn => xn.MaPhong == maPhong).FirstOrDefault();
+            }catch(Exception e)
+            {
+                string log = LogManager.GetErrorFromException(e);
+                LogManager.WriteLog(log);
+                return DAOCommon.FAIL;
+            }
+            return DAOCommon.SUCCESS;
+        }
     }
 }

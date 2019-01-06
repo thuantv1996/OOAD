@@ -239,10 +239,8 @@ namespace UnitTest.DAO
                 MaBacSi = TestCommon.LEN_10,
             };
             KetQuaXetNghiemDAO dao = new KetQuaXetNghiemDAO();
-            dao.Save(db, ketQuaXetNghiem);
-            string actual = dao.Delete(db, ketQuaXetNghiem);
-            string expected = "0000";
-            Assert.Equals(expected, actual);
+            string actual = dao.Save(db, ketQuaXetNghiem);
+            Assert.Equals(null, actual);
         }
         /* END TEST METHOD */
 

@@ -61,7 +61,7 @@ namespace BUS.Inc
                     return Constant.RES_FAI;
                 }
 
-                if (bacSi.MaLoaiNV != "LNV0000002")
+                if (bacSi.MaLoaiNV != COM.Constant.ID_LNV_XN)
                 {
                     MessageError.Add("Bác sĩ xét nghiệm không tồn tại!");
                     return Constant.RES_FAI;
@@ -69,6 +69,5 @@ namespace BUS.Inc
             }
             return Constant.RES_SUC;
         }
-    
     }
 }

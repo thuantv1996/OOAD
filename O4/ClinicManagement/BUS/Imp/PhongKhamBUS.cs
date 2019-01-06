@@ -47,8 +47,11 @@ namespace BUS.Imp
             foreach (PHONG pk in listObjectDAO)
             {
                 PhongKhamDTO PhongKhamDTO = new PhongKhamDTO();
-                BUS.Com.Utils.CopyPropertiesFrom(pk, PhongKhamDTO);
-                ListPhongKham.Add(PhongKhamDTO);
+                if(pk.GhiChu == Com.BusConstant.KHAM)
+                {
+                    BUS.Com.Utils.CopyPropertiesFrom(pk, PhongKhamDTO);
+                    ListPhongKham.Add(PhongKhamDTO);
+                }
             }
             return Constant.RES_SUC;
         }

@@ -14,10 +14,22 @@ namespace BUS.Mdl
         // lấy danh sách chờ xét nghiệm
         public string GetListHoSoKhamByPhong(string MaPhong, out List<HoSoBenhAnDTO> listHoSoBenhAn)
         {
+            // lấy xét nghiệm dựa vào phòng
+            XetNghiemBUS xetNghiemBUS = new XetNghiemBUS();
             HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();
+            XetNghiemDTO xetNghiemDTO = new XetNghiemDTO();
             using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
-                hoSoBenhAnBUS.GetListHoSo(db, MaPhong, BusConstant.NODE_XET_NGHIEM, out listHoSoBenhAn);
+                if (xetNghiemBUS.GetXetNghiemByPhong(db, MaPhong, ref xetNghiemDTO) == Constant.RES_FAI)
+                {
+                    listHoSoBenhAn = new List<HoSoBenhAnDTO>();
+                    return Constant.RES_FAI;
+                }
+                if(hoSoBenhAnBUS.GetListHoSoXN(db, xetNghiemDTO.MaXetNghiem, out listHoSoBenhAn) == Constant.RES_FAI)
+                {
+                    listHoSoBenhAn = new List<HoSoBenhAnDTO>();
+                    return Constant.RES_FAI;
+                }
             }
             return Constant.RES_SUC;
         }
@@ -130,7 +142,7 @@ namespace BUS.Mdl
                 if(kq.ThanhToan)
                 {
                     total++;
-                    if (!kq.KetQua.Equals(""))
+                    if (kq.KetQua != null)
                     {
                         number++;
                     }
@@ -144,6 +156,75 @@ namespace BUS.Mdl
         {
             XetNghiemInputCheck inputCheck = new XetNghiemInputCheck();
             return inputCheck.InputCheck(ketQuaXetNghiem, ref MessageError);
+        }
+
+        // LẤY KẾT QUẢ XÉT XÉT NGHIỆM CỦA HỒ SƠ THEO PHÒNG
+        public string GetKetQuaXetNghiem(string MaHoSo, string MaPhong ,out KetQuaXetNghiemDTO ketQuaXetNghiem)
+        {
+            // lấy xét nghiệm dựa vào phòng
+            XetNghiemBUS xetNghiemBUS = new XetNghiemBUS();
+            // kết quả xét nghiệm trả về
+            XetNghiemDTO xetNghiemDTO = new XetNghiemDTO();
+            using(QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                if(xetNghiemBUS.GetXetNghiemByPhong(db, MaPhong, ref xetNghiemDTO) == Constant.RES_FAI)
+                {
+                    ketQuaXetNghiem = new KetQuaXetNghiemDTO();
+                    return Constant.RES_FAI;
+                }
+                KetQuaXetNghiemBUS ketQuaXetNghiemBUS = new KetQuaXetNghiemBUS();
+                if(ketQuaXetNghiemBUS.GetInformationWithId(db, MaHoSo, xetNghiemDTO.MaXetNghiem, out ketQuaXetNghiem) == Constant.RES_FAI)
+                {
+                    ketQuaXetNghiem = new KetQuaXetNghiemDTO();
+                    return Constant.RES_FAI;
+                }
+            }
+            return Constant.RES_SUC;
+        }
+
+        // LẤY THÔNG TIN BỆNH NHÂN
+        public string GetInforBenhNhan(string MaBenhNhan, out BenhNhanDTO benhNhan)
+        {
+            benhNhan = new BenhNhanDTO();
+            BenhNhanBUS bus = new BenhNhanBUS();
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                if(bus.GetInformationBenhNhan(db, MaBenhNhan, out benhNhan) == Constant.RES_FAI)
+                {
+                    return Constant.RES_FAI;
+                }
+            }
+            return Constant.RES_SUC;
+        }
+
+        // LẤY THÔNG TIN XÉT NGHIỆM
+        public string GetInforXetNghiem(string MaXN, out XetNghiemDTO xetNghiem)
+        {
+            xetNghiem = new XetNghiemDTO();
+            XetNghiemBUS bus = new XetNghiemBUS();
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                if(bus.GetInfomationXetNghiem(db, MaXN, out xetNghiem) == Constant.RES_FAI)
+                {
+                    return Constant.RES_FAI;
+                }
+            }
+            return Constant.RES_SUC;
+        }
+
+        // LẤY THÔNG TIN XÉT NGHIỆM
+        public string GetInforPhong(string MaPhong, out PhongKhamDTO phong)
+        {
+            phong = new PhongKhamDTO();
+            PhongKhamBUS bus = new PhongKhamBUS();
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                if (bus.GetInformationPhongKham(db, MaPhong, out phong) == Constant.RES_FAI)
+                {
+                    return Constant.RES_FAI;
+                }
+            }
+            return Constant.RES_SUC;
         }
     }
 }

@@ -33,5 +33,10 @@ namespace BUS.Com
         public static string NODE_XET_NGHIEM = "00003";
         public static string NODE_KHAM_SAU_XN = "00004";
         public static string NODE_HOAN_TAT = "00005";
+
+        // PhongKham
+        public static string TIEP_NHAN = "TIEPNHAN";
+        public static string KHAM = "KHAM";
+        public static string XET_NGHIEM = "XETNGHIEM";
     }
 }

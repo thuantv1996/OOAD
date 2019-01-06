@@ -14,8 +14,7 @@ namespace DAO.Implement
         {
             try
             {
-                (db as QLPHONGKHAMEntities).LOAINHANVIENs.Remove(
-                    (db as QLPHONGKHAMEntities).LOAINHANVIENs.Find(entity.MaLoaiNV));
+                (db as QLPHONGKHAMEntities).LOAINHANVIENs.Remove(entity);
             }
             catch (Exception e)
             {
@@ -60,12 +59,6 @@ namespace DAO.Implement
 
         public string Save(DbContext db, LOAINHANVIEN entity)
         {
-            if (!entity.Validate())
-            {
-                string log = "Error validate in LOAINHANVIEN object";
-                LogManager.WriteLog(log);
-                return DAOCommon.FAIL;
-            }
             object[] id = { entity.MaLoaiNV };
             LOAINHANVIEN obj = (db as QLPHONGKHAMEntities).LOAINHANVIENs.Find(id);
             if (obj == null)

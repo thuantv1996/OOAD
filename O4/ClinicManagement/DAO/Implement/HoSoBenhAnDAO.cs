@@ -13,8 +13,7 @@ namespace DAO.Implement
         {
             try
             {
-                (db as QLPHONGKHAMEntities).HOSOBENHANs.Remove(
-                    (db as QLPHONGKHAMEntities).HOSOBENHANs.Find(entity.MaHoSo));
+                (db as QLPHONGKHAMEntities).HOSOBENHANs.Remove(entity);
             }
             catch (Exception e)
             {
@@ -60,14 +59,30 @@ namespace DAO.Implement
             return DAOCommon.SUCCESS;
         }
 
-        public string Save(DbContext db, HOSOBENHAN entity)
+        public string GetListHoSoXN(QLPHONGKHAMEntities db, string maXetNghiem,string node, out List<HOSOBENHAN> hoSoDAO)
         {
-            if (!entity.Validate())
+            hoSoDAO = new List<HOSOBENHAN>();
+            try
             {
-                string log = "Error validate in HOSOBENHAN object";
+                hoSoDAO = (from hs in db.HOSOBENHANs
+                           join kqxn in db.KETQUAXETNGHIEMs on hs.MaHoSo equals kqxn.MaHoSo
+                           join lcv in db.LUONCONGVIECs on hs.MaHoSo equals lcv.MaHoSo
+                           where kqxn.MaXetNghiem == maXetNghiem && kqxn.ThanhToan == true
+                                 && lcv.NodeHienTai == node && kqxn.KetQua == null
+                            select hs
+                            ).ToList();
+            }
+            catch (Exception e)
+            {
+                string log = LogManager.GetErrorFromException(e);
                 LogManager.WriteLog(log);
                 return DAOCommon.FAIL;
             }
+            return DAOCommon.SUCCESS;
+        }
+
+        public string Save(DbContext db, HOSOBENHAN entity)
+        {
             object[] id = { entity.MaHoSo };
             HOSOBENHAN obj = (db as QLPHONGKHAMEntities).HOSOBENHANs.Find(id);
             if (obj == null)

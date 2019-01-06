@@ -137,10 +137,8 @@ namespace UnitTest.DAO
                 TenLoaiNV = TestCommon.LEN_50
             };
             LoaiNhanVienDAO dao = new LoaiNhanVienDAO();
-            dao.Save(db, loaiNhanVien);
             string actual = dao.Save(db, loaiNhanVien);
-            string expected = "0000";
-            Assert.Equals(expected, actual);
+            Assert.Equals(null, actual);
         }
         /*End test method*/
 

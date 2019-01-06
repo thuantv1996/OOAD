@@ -1,11 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using DAO;
 using DAO.Implement;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using DAO;
+using DAO.Implement;
 using System.Data.Entity;
 
 namespace UnitTest.DAO
 {
-    [TestClass]
     public class TestDonThuocDAO
     {
         private static QLPHONGKHAMEntities db;
@@ -192,10 +194,8 @@ namespace UnitTest.DAO
                 MaHoSo = TestCommon.LEN_10,
             };
             DonThuocDAO dao = new DonThuocDAO();
-            dao.Save(db, donThuoc);
-            string actual = dao.Delete(db, donThuoc);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            string actual = dao.Save(db, donThuoc);
+            Assert.Equals(null, actual);
         }
 
         /* END TEST METHOD */

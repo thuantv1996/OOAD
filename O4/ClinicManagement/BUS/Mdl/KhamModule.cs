@@ -136,6 +136,7 @@ namespace BUS.Mdl
         {
             DonThuocBUS donThuocBUS = new DonThuocBUS();
             ChiTietDonThuocBUS chiTietDonThuocBUS = new ChiTietDonThuocBUS();
+            HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();
             using(QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
                 using(var trans = db.Database.BeginTransaction())
@@ -145,13 +146,72 @@ namespace BUS.Mdl
                         trans.Rollback();
                         return Constant.RES_FAI;
                     }
-                    foreach(var ct in chiTietDonThuocs)
+                    // xoá tất cả ctdt
+                    if (chiTietDonThuocBUS.DeleteAllWithId(db, donThuoc.MaDonThuoc) == Constant.RES_FAI)
+                    {
+                        trans.Rollback();
+                        return Constant.RES_FAI;
+                    }
+                    foreach (var ct in chiTietDonThuocs)
                     {
                         if (chiTietDonThuocBUS.SaveChiTietDonThuoc(db, ct).Equals(Constant.RES_FAI))
                         {
                             trans.Rollback();
                             return Constant.RES_FAI;
                         }
+                    }
+                    HoSoBenhAnDTO hoSo = new HoSoBenhAnDTO();
+                    if(hoSoBenhAnBUS.GetInfomationHoSo(db, donThuoc.MaHoSo, out hoSo) == Constant.RES_FAI)
+                    {
+                        trans.Rollback();
+                        return Constant.RES_FAI;
+                    }
+                    hoSo.CoKeDon = true;
+                    if (hoSoBenhAnBUS.UpdateHoSoBenhAn(db, hoSo) == Constant.RES_FAI)
+                    {
+                        trans.Rollback();
+                        return Constant.RES_FAI;
+                    }
+                    trans.Commit();
+                }
+                db.SaveChanges();
+            }
+            return Constant.RES_SUC;
+        }
+
+        // XÓA ĐƠN THUỐC
+        public string DeleteDonThuoc(DonThuocDTO donThuoc)
+        {
+            DonThuocBUS donThuocBUS = new DonThuocBUS();
+            ChiTietDonThuocBUS chiTietDonThuocBUS = new ChiTietDonThuocBUS();
+            HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                using (var trans = db.Database.BeginTransaction())
+                {
+                    // xoá tất cả ctdt
+                    if (chiTietDonThuocBUS.DeleteAllWithId(db, donThuoc.MaDonThuoc) == Constant.RES_FAI)
+                    {
+                        trans.Rollback();
+                        return Constant.RES_FAI;
+                    }
+                    // Xóa đơn thuốc
+                    if (donThuocBUS.Delete(db, donThuoc.MaDonThuoc) == Constant.RES_FAI)
+                    {
+                        trans.Rollback();
+                        return Constant.RES_FAI;
+                    }
+                    HoSoBenhAnDTO hoSo = new HoSoBenhAnDTO();
+                    if (hoSoBenhAnBUS.GetInfomationHoSo(db, donThuoc.MaHoSo, out hoSo) == Constant.RES_FAI)
+                    {
+                        trans.Rollback();
+                        return Constant.RES_FAI;
+                    }
+                    hoSo.CoKeDon = false;
+                    if (hoSoBenhAnBUS.UpdateHoSoBenhAn(db, hoSo) == Constant.RES_FAI)
+                    {
+                        trans.Rollback();
+                        return Constant.RES_FAI;
                     }
                     trans.Commit();
                 }
@@ -163,12 +223,20 @@ namespace BUS.Mdl
         // Lay thong tin don thuoc
         public string GetDonThuoc(string MaHoSo,out DonThuocDTO donThuoc, out List<ChiTietDonThuocDTO> chiTietDonThuocs)
         {
+            donThuoc = new DonThuocDTO();
+            chiTietDonThuocs = new List<ChiTietDonThuocDTO>();
             DonThuocBUS donThuocBUS = new DonThuocBUS();
             ChiTietDonThuocBUS chiTietDonThuocBUS = new ChiTietDonThuocBUS();
             using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
-                donThuocBUS.GetInformationDonThuocWithId(db, MaHoSo, out donThuoc);
-                chiTietDonThuocBUS.GetListWithIdDonThuoc(db, donThuoc.MaDonThuoc, out chiTietDonThuocs);
+                if (donThuocBUS.GetInformationDonThuocWithId(db, MaHoSo, out donThuoc) == Constant.RES_FAI)
+                {
+                    return Constant.RES_FAI;
+                }
+                if (chiTietDonThuocBUS.GetListWithIdDonThuoc(db, donThuoc.MaDonThuoc, out chiTietDonThuocs) == Constant.RES_FAI)
+                {
+                    return Constant.RES_FAI;
+                }
             }
             return Constant.RES_SUC;
         }

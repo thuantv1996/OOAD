@@ -67,6 +67,7 @@ namespace ClinicManagement.Features.Payment.Subforms
                                 this.danhSachChonThanhToan.Add(kqxn);
                                 this.chkLstChuaThanhToan.Items.Add(newItem);
                                 this.tongChiPhi += xetNghiem.ChiPhi;
+                                this.btnSave.Enabled = true;
                             }
                         }
                     });

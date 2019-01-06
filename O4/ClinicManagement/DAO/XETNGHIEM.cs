@@ -28,26 +28,5 @@ namespace DAO
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KETQUAXETNGHIEM> KETQUAXETNGHIEMs { get; set; }
         public virtual PHONG PHONG { get; set; }
-
-        public bool Validate()
-        {
-            if (MaXetNghiem == null || MaXetNghiem.Length != 10)
-            {
-                return false;
-            }
-            if (TenXetNghiem != null && TenXetNghiem.Length > 250)
-            {
-                return false;
-            }
-            if (MaPhong.Length > 10)
-            {
-                return false;
-            }
-            if (ChiPhi != null)
-            {
-                return false;
-            }
-            return true;
-        }
     }
 }

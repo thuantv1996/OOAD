@@ -19,22 +19,5 @@ namespace DAO
         public Nullable<int> SttCaoNhat { get; set; }
     
         public virtual PHONG PHONG { get; set; }
-
-        public bool Validate()
-        {
-            if (MaPhong == null || MaPhong.Length != 10)
-            {
-                return false;
-            }
-            if (NgayKham != null && NgayKham.Length > 8)
-            {
-                return false;
-            }
-            if (SttCaoNhat != null)
-            {
-                return false;
-            }
-            return true;
-        }
     }
 }

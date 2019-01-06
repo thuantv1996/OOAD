@@ -3,6 +3,7 @@ using DTO;
 using DAO;
 using COM;
 using DAO.Implement;
+using System;
 
 namespace BUS.Imp
 {
@@ -57,6 +58,21 @@ namespace BUS.Imp
                 return Constant.RES_FAI;
             }
             BUS.Com.Utils.CopyPropertiesFrom(entity, XetNghiemEntity);
+            return Constant.RES_SUC;
+        }
+
+        public string GetXetNghiemByPhong(QLPHONGKHAMEntities db, string MaPhong, ref XetNghiemDTO xetNghiemDTO)
+        {
+            XETNGHIEM entity = null;
+            if (xetNghiemServices.GetXetNghiemByPhong(db, MaPhong, out entity) == Constant.RES_FAI)
+            {
+                return Constant.RES_FAI;
+            }
+            if (entity == null)
+            {
+                return Constant.RES_FAI;
+            }
+            BUS.Com.Utils.CopyPropertiesFrom(entity, xetNghiemDTO);
             return Constant.RES_SUC;
         }
     }

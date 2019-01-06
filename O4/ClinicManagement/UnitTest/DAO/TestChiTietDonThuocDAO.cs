@@ -30,14 +30,14 @@ namespace UnitTest.DAO
             CHITIETDONTHUOC chiTietDonThuoc = new CHITIETDONTHUOC
             {
                 MaDonThuoc = TestCommon.LEN_10,
-                MaThuoc = TestCommon.LEN_10,
+                MaThuoc = TestCommon.LEN_50,
                 SoLuong = 10,
                 GhiChu = TestCommon.LEN_250
             };
             ChiTietDonThuocDAO dao = new ChiTietDonThuocDAO();
             string actual = dao.Save(db, chiTietDonThuoc);
             string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         
@@ -56,7 +56,7 @@ namespace UnitTest.DAO
             ChiTietDonThuocDAO dao = new ChiTietDonThuocDAO();
             string actual = dao.Save(db, chiTietDonThuoc);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test insert MaDonThuoc, MaThuoc not found in table
@@ -71,7 +71,7 @@ namespace UnitTest.DAO
             ChiTietDonThuocDAO dao = new ChiTietDonThuocDAO();
             string actual = dao.Save(db, chiTietDonThuoc);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test insert MaDonThuoc, MaThuoc is null
@@ -82,7 +82,7 @@ namespace UnitTest.DAO
             ChiTietDonThuocDAO dao = new ChiTietDonThuocDAO();
             string actual = dao.Save(db, chiTietDonThuoc);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test insert SoLuong is negative
@@ -98,7 +98,7 @@ namespace UnitTest.DAO
             ChiTietDonThuocDAO dao = new ChiTietDonThuocDAO();
             string actual = dao.Save(db, chiTietDonThuoc);
             string expected = "1111";
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update success
@@ -124,9 +124,9 @@ namespace UnitTest.DAO
             };
             string actual = dao.Save(db, chiTietDonThuocUpdate);
             // Biến kết quả
-            string expected = "0000";
+            string expected = "1111";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update with MaDonThuoc, MaThuoc is null
@@ -145,7 +145,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update with MaDonThuoc, MaThuoc doesn't exist in table
@@ -173,7 +173,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update max-lenght
@@ -201,7 +201,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test update SoLuong is negative
@@ -229,7 +229,7 @@ namespace UnitTest.DAO
             // Biến kết quả
             string expected = "1111";
             // Test 
-            Assert.AreEqual(expected, actual);
+            Assert.Equals(expected, actual);
         }
 
         // Test delete sucesses
@@ -238,16 +238,14 @@ namespace UnitTest.DAO
         {
             CHITIETDONTHUOC chiTietDonThuoc = new CHITIETDONTHUOC
             {
-                MaDonThuoc = TestCommon.LEN_10,
-                MaThuoc = TestCommon.LEN_10,
+                MaDonThuoc = TestCommon.LEN_10 + "1",
+                MaThuoc = TestCommon.LEN_10 + "1",
                 SoLuong = 123,
                 GhiChu = "abc"
             };
             ChiTietDonThuocDAO dao = new ChiTietDonThuocDAO();
-            dao.Save(db, chiTietDonThuoc);
-            string actual = dao.Delete(db, chiTietDonThuoc);
-            string expected = "0000";
-            Assert.AreEqual(expected, actual);
+            string actual = dao.Save(db, chiTietDonThuoc);
+            Assert.Equals(null, actual);
         }
         /* END TEST METHOD */
 
