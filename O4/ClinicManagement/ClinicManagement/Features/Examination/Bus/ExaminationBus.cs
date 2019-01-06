@@ -301,7 +301,8 @@ namespace ClinicManagement.Features.Examination.Bus
         {
             var donThuoc = new DTO.DonThuocDTO()
             {
-                MaHoSo = hoso.MaHoSo
+                MaHoSo = hoso.MaHoSo,
+                NgayLap = DateTime.Now.ToString("yyyyMMdd")
             };
 
             this.saveDonThuoc(donThuoc, danhSachThuoc, result =>

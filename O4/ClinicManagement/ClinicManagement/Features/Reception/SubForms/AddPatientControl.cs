@@ -12,6 +12,8 @@ namespace ClinicManagement.Features.Reception.SubForms
 {
     public partial class AddPatientControl : UserControl
     {
+        private Bus.ReceptionBus bus = Bus.ReceptionBus.SharedInstance;
+
         public AddPatientControl()
         {
             InitializeComponent();
@@ -31,14 +33,26 @@ namespace ClinicManagement.Features.Reception.SubForms
         {
             if (this.checkValid())
             {
-                this.patientInformation.BringToFront();
-                this.btnBack.BringToFront();
-                this.btnConfirm.BringToFront();
-                this.btnCreate.Visible = false;
-                this.btnBack.Visible = true;
-                this.btnConfirm.Visible = true;
+                var benhNhan = this.patientEdit.getData();
+                this.bus.BenhNhanInputCheck(benhNhan, (result, listMessageError) =>
+                {
+                    if (result.Equals(COM.Constant.RES_FAI))
+                    {
+                        var msg = "";
+                        listMessageError.ForEach(m => msg += String.Format("{0}\n", m));
+                        MessageBox.Show(msg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
 
-                this.patientInformation.fillData(this.patientEdit.getData());
+                    this.patientInformation.BringToFront();
+                    this.btnBack.BringToFront();
+                    this.btnConfirm.BringToFront();
+                    this.btnCreate.Visible = false;
+                    this.btnBack.Visible = true;
+                    this.btnConfirm.Visible = true;
+
+                    this.patientInformation.fillData(this.patientEdit.getData());
+                });
             }
             else
                 MessageBox.Show("Không được bỏ trống các trường dữ liệu quan trọng!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);

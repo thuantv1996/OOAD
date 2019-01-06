@@ -26,22 +26,12 @@ namespace ClinicManagement.Features.Reception.Main
 
         private void AddPatientControl1_CreateCompleted(object sender, DTO.BenhNhanDTO e)
         {
-            this.bus.insertBenhNhan(e, (result, listMessageError) =>
+            this.bus.insertBenhNhan(e, result =>
             {
                 if (result.Equals(COM.Constant.RES_SUC))
                 {
                     MessageBox.Show("Thêm thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.addPatientControl1.refreshControl();
-                }
-                else
-                {
-                    var msg = "";
-                    listMessageError.ForEach(error =>
-                    {
-                        msg += error + "\n";
-                    });
-                    MessageBox.Show(msg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
                 }
             });
         }

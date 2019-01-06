@@ -177,7 +177,18 @@ namespace ClinicManagement.Features.Examination.SubForms
             if (this.listThuoc != null)
             {
                 this.assignMedical();
+            } else
+            {
+                this.finishHoSo();
             }
+        }
+
+        private void finishHoSo()
+        {
+            this.bus.finishKham(this.hoSoBenhAn, result =>
+            {
+                this.checkResult(result);
+            });
         }
 
         private void assignMedical()

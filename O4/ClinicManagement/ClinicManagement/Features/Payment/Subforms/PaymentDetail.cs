@@ -33,6 +33,9 @@ namespace ClinicManagement.Features.Payment.Subforms
         {
             this.chkLstChuaThanhToan.Items.Clear();
             this.danhSachChonThanhToan.Clear();
+            this.btnSave.Enabled = false;
+            this.tongChiPhi = 0;
+            this.txtTongSoTien.Text = String.Format("{0} VNĐ", this.tongChiPhi);
 
             var benhNhan = this.bus.getBenhNhan(this.hoso.MaBenhNhan);
             this.txtHoTen.Text = benhNhan.HoTen;

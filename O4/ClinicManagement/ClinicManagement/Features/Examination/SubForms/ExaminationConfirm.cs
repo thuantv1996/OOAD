@@ -99,6 +99,7 @@ namespace ClinicManagement.Features.Examination.SubForms
 
                 this.groupResult.Controls.Clear();
                 this.groupResult.Controls.Add(thuocConfirm);
+                this.groupResult.Text = "Đơn thuốc";
             }
             else if (danhSachXetNghiem != null)
             {
@@ -111,6 +112,7 @@ namespace ClinicManagement.Features.Examination.SubForms
 
                 this.groupResult.Controls.Clear();
                 this.groupResult.Controls.Add(xetNghiemConfirm);
+                this.groupResult.Text = "Danh sách xét nghiệm";
             }
             else
             {
