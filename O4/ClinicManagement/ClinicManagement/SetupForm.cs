@@ -20,6 +20,7 @@ namespace ClinicManagement
         public SetupForm()
         {
             InitializeComponent();
+            comboBox1.SelectedIndex = 0;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -36,7 +37,7 @@ namespace ClinicManagement
             }
             // connection string
             string connection = "Data Source=" + DataSource + ";Initial Catalog=QLPHONGKHAM;Integrated Security=True";
-            if (radioButton1.Checked)
+            if (comboBox1.SelectedIndex == 1)
             {
                 connection += "; User ID =" + Id + ";";
                 connection += " Password =" + Password + ";";
@@ -51,7 +52,7 @@ namespace ClinicManagement
             {
                 string con = "metadata=res://*/QLPK.csdl|res://*/QLPK.ssdl|res://*/QLPK.msl;provider=System.Data.SqlClient;provider connection string=\" data source=" + DataSource
                 + ";initial catalog=QLPHONGKHAM;integrated security=True;";
-                if (radioButton1.Checked)
+                if (comboBox1.SelectedIndex == 1)
                 {
                     con += "user id =" + Id + ";";
                     con += "password =" + Password + ";";
@@ -75,14 +76,16 @@ namespace ClinicManagement
             }
             catch (Exception ex)
             {
-                System.Console.Write(ex);
+                MessageBox.Show(ex.Message);
                 this.DialogResult = DialogResult.Cancel;
+                this.Close();
+                Application.Exit();
             }
         }
            
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButton1.Checked)
+            if (comboBox1.SelectedIndex == 1)
             {
                 groupBox1.Enabled = true;
             }

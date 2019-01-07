@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{4E93204F-40B0-4120-8193-01FB0BECAD00}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DAO</RootNamespace>
     <AssemblyName>DAO</AssemblyName>
@@ -95,7 +95,6 @@
     <Compile Include="LUONCONGVIEC.cs">
       <DependentUpon>QLPK.tt</DependentUpon>
     </Compile>
-    <Compile Include="MainTest.cs" />
     <Compile Include="NHANVIEN.cs">
       <DependentUpon>QLPK.tt</DependentUpon>
     </Compile>
