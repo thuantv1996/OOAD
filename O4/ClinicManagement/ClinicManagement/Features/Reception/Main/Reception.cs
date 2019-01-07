@@ -43,6 +43,7 @@ namespace ClinicManagement.Features.Reception.Main
                 this.receptionControl.setupData(benhNhan);
                 containerForm.Close();
                 this.receptionControl.Enabled = true;
+                this.receptionControl.enableControl();
             };
 
 

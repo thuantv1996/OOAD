@@ -22,6 +22,11 @@ namespace ClinicManagement.Features.Reception.SubForms
             this.setupView();
         }
 
+        public void enableControl()
+        {
+            this.cbLoaiHoSo.Enabled = this.cbMaHoSoTruoc.Enabled = this.cbNguoiTiepNhan.Enabled = this.cbPhong.Enabled = true;
+        }
+
         public ReceptionControl(DTO.BenhNhanDTO patient)
         {
             InitializeComponent();
