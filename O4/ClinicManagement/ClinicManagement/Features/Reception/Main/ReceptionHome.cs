@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ClinicManagement.Features.Reception.Main
 {
-    public partial class ReceptionHome : UserControl
+    public partial class ReceptionHome : Common.ClinicComponents.MainUserControl
     {
         private Bus.ReceptionBus bus = Bus.ReceptionBus.SharedInstance;
 
@@ -18,6 +18,12 @@ namespace ClinicManagement.Features.Reception.Main
         {
             InitializeComponent();
             this.setupView();
+        }
+
+        public override void refreshControlData()
+        {
+            base.refreshControlData();
+            this.fetchData((msg, result) => { });
         }
 
         private void setupView()

@@ -84,6 +84,9 @@
     <Compile Include="Common\ClinicComponents\FilterUserControl.Designer.cs">
       <DependentUpon>FilterUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\ClinicComponents\MainUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Common\ClinicComponents\MenuControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -301,12 +304,6 @@
     <Compile Include="Features\Login\Main\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\Login\SubForms\ChangePasswordControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Features\Login\SubForms\ChangePasswordControl.Designer.cs">
-      <DependentUpon>ChangePasswordControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Features\Login\SubForms\LoginControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -358,6 +355,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SetupForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetupForm.Designer.cs">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Common\ClinicComponents\ClinicForm.resx">
       <DependentUpon>ClinicForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -457,9 +460,6 @@
     <EmbeddedResource Include="Features\Login\Main\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Features\Login\SubForms\ChangePasswordControl.resx">
-      <DependentUpon>ChangePasswordControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Features\Login\SubForms\LoginControl.resx">
       <DependentUpon>LoginControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -495,6 +495,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SetupForm.resx">
+      <DependentUpon>SetupForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

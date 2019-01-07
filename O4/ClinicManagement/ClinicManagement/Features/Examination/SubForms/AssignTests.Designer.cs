@@ -69,13 +69,13 @@
             // 
             this.cbLoaiXetNghiem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cbLoaiXetNghiem.Location = new System.Drawing.Point(141, 6);
+            this.cbLoaiXetNghiem.Location = new System.Drawing.Point(156, 6);
             this.cbLoaiXetNghiem.Name = "cbLoaiXetNghiem";
             this.cbLoaiXetNghiem.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
             this.cbLoaiXetNghiem.Properties.Appearance.Options.UseFont = true;
             this.cbLoaiXetNghiem.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.cbLoaiXetNghiem.Size = new System.Drawing.Size(641, 28);
+            this.cbLoaiXetNghiem.Size = new System.Drawing.Size(626, 28);
             this.cbLoaiXetNghiem.TabIndex = 2;
             // 
             // checkListXetNghiem

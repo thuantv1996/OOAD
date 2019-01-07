@@ -22,6 +22,11 @@ namespace ClinicManagement.Features.Reception.SubForms
             this.setupView();
         }
 
+        public void enableControl()
+        {
+            this.cbLoaiHoSo.Enabled = this.cbMaHoSoTruoc.Enabled = this.cbNguoiTiepNhan.Enabled = this.cbPhong.Enabled = true;
+        }
+
         public ReceptionControl(DTO.BenhNhanDTO patient)
         {
             InitializeComponent();
@@ -52,8 +57,8 @@ namespace ClinicManagement.Features.Reception.SubForms
         }
 
         private void fillMainInformation() {
+            this.txtSoTienKham.Text = String.Format("{0} VNĐ", Common.SourceLibrary.PhiKhamTiepNhan);
             var toDay = DateTime.Today;
-
             this.txtNgayTiepNhan.Text = toDay.ToString("dd/MM/yyyy");
             this.bus.getListLoaiHoSo((listResult, result) =>
             {
@@ -147,6 +152,7 @@ namespace ClinicManagement.Features.Reception.SubForms
 
                     soThuTuForm.FormClosed += (obj, er) =>
                     {
+                        this.refreshEvent?.Invoke(this, null);
                         if (this.Parent is Form)
                         {
                             var formParent = (Form)this.Parent;
@@ -229,6 +235,7 @@ namespace ClinicManagement.Features.Reception.SubForms
         }
 
         private Common.ClinicComponents.PatientMainInformation patientMainInformation1;
+        public event EventHandler refreshEvent;
 
         private void cbLoaiHoSo_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -243,6 +250,11 @@ namespace ClinicManagement.Features.Reception.SubForms
                 this.cbMaHoSoTruoc.Enabled = true;
                 this.btnSearch.Enabled = true;
             }
+        }
+
+        public void refreshData()
+        {
+            this.patientMainInformation1.refreshData();
         }
     }
 }
