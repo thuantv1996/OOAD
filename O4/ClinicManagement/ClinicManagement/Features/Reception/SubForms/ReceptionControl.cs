@@ -134,7 +134,7 @@ namespace ClinicManagement.Features.Reception.SubForms
                 {
                     DevExpress.Utils.WaitDialogForm f = new DevExpress.Utils.WaitDialogForm();
                     f.Show();
-
+                    
                     Report.FormSoThuTu soThuTuForm = new Report.FormSoThuTu()
                     {
                         AutoSize = true,
