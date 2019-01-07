@@ -17,8 +17,9 @@ namespace ClinicManagement.Features.Payment.Subforms
         private Bus.PaymentBus bus = Bus.PaymentBus.SharedInstance;
         private DTO.HoSoBenhAnDTO hoso;
         private List<DTO.KetQuaXetNghiemDTO> danhSachChonThanhToan = new List<DTO.KetQuaXetNghiemDTO>();
-        private decimal tongChiPhi = 0;
+        private decimal tongChiPhiChuaThanhToan = 0;
         private BenhNhanDTO benhNhan;
+        private List<Model.ThanhToanView> danhSachDaThanhToan = new List<Model.ThanhToanView>();
 
         public PaymentDetail(DTO.HoSoBenhAnDTO hoso)
         {
@@ -37,8 +38,8 @@ namespace ClinicManagement.Features.Payment.Subforms
             this.chkLstChuaThanhToan.Items.Clear();
             this.danhSachChonThanhToan.Clear();
             this.btnSave.Enabled = false;
-            this.tongChiPhi = 0;
-            this.txtTongSoTien.Text = String.Format("{0} VNĐ", this.tongChiPhi);
+            this.tongChiPhiChuaThanhToan = 0;
+            this.txtTongSoTien.Text = String.Format("{0} VNĐ", this.tongChiPhiChuaThanhToan);
 
             this.benhNhan = this.bus.getBenhNhan(this.hoso.MaBenhNhan);
             this.txtHoTen.Text = benhNhan.HoTen;
@@ -48,7 +49,7 @@ namespace ClinicManagement.Features.Payment.Subforms
             {
                 if (result.Equals(COM.Constant.RES_SUC))
                 {
-                    var danhSachDaThanhToan = new List<Model.ThanhToanView>();
+                    this.danhSachDaThanhToan.Clear();
                     danhSachDaThanhToan.Add(new Model.ThanhToanView()
                     {
                         TenThanhToan = "Chi phí khám",
@@ -72,13 +73,13 @@ namespace ClinicManagement.Features.Payment.Subforms
                                 DevExpress.XtraEditors.Controls.CheckedListBoxItem newItem = new DevExpress.XtraEditors.Controls.CheckedListBoxItem(xetNghiem, true) { Description = xetNghiem.TenXetNghiem };
                                 this.danhSachChonThanhToan.Add(kqxn);
                                 this.chkLstChuaThanhToan.Items.Add(newItem);
-                                this.tongChiPhi += xetNghiem.ChiPhi;
+                                this.tongChiPhiChuaThanhToan += xetNghiem.ChiPhi;
                                 this.btnSave.Enabled = true;
                             }
                         }
                     });
 
-                    this.txtTongSoTien.Text = this.tongChiPhi.ToString();
+                    this.txtTongSoTien.Text = this.tongChiPhiChuaThanhToan.ToString();
                     this.grdDaThanhToanControl.DataSource = Common.ClinicBus.ConvertToDatatable(danhSachDaThanhToan);
                 }
             });
@@ -89,8 +90,8 @@ namespace ClinicManagement.Features.Payment.Subforms
         {
             var item = this.chkLstChuaThanhToan.Items[e.Index];
             var xetNghiem = (DTO.XetNghiemDTO)item.Value;
-            this.tongChiPhi += e.State == CheckState.Unchecked ? -xetNghiem.ChiPhi : xetNghiem.ChiPhi;
-            this.txtTongSoTien.Text = this.tongChiPhi.ToString();
+            this.tongChiPhiChuaThanhToan += e.State == CheckState.Unchecked ? -xetNghiem.ChiPhi : xetNghiem.ChiPhi;
+            this.txtTongSoTien.Text = this.tongChiPhiChuaThanhToan.ToString();
 
             var maHoSo = this.hoso.MaHoSo;
             var maXetNghiem = xetNghiem.MaXetNghiem;
@@ -147,8 +148,8 @@ namespace ClinicManagement.Features.Payment.Subforms
                                     NgaySinh = Common.ClinicBus.convertDateToView(this.benhNhan.NgaySinh),
                                     DiaChi = this.benhNhan.DiaChi,
                                     MaHoSo = hoso.MaHoSo,
-                                    ChiPhiKham = String.Format("{0} VNĐ", Common.SourceLibrary.PhiKhamTiepNhan),
-                                    TongChiPhi = String.Format("{0} VNĐ", this.tongChiPhi)
+                                    ChiPhiKham = String.Format("{0}", Common.SourceLibrary.PhiKhamTiepNhan),
+                                    TongChiPhi = String.Format("{0} VNĐ", this.tinhTongChiPhi())
                                 }
                             };
 
@@ -169,6 +170,13 @@ namespace ClinicManagement.Features.Payment.Subforms
 
             formContainer.Controls.Add(confirmControl);
             formContainer.ShowDialog();
+        }
+
+        private decimal tinhTongChiPhi()
+        {
+            decimal tongChiPhi = this.tongChiPhiChuaThanhToan;
+            this.danhSachDaThanhToan.ForEach(thanhToan => tongChiPhi += thanhToan.ChiPhi);
+            return tongChiPhi;
         }
     }
 }

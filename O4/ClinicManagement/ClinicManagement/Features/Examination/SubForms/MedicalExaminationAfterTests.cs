@@ -233,13 +233,46 @@ namespace ClinicManagement.Features.Examination.SubForms
 
             finalScreen.DidConfirm += (control) =>
             {
-                reloadRequest?.Invoke(this, null);
-                parentForm.Close();
+                this.showReport(parentForm);
             };
 
 
             parentForm.Controls.Clear();
             parentForm.Controls.Add(finalScreen);
+        }
+
+        private void showReport(Form parentForm)
+        {
+            string tenBacSi = "";
+            if (this.cbBacSi.SelectedIndex >= 0)
+            {
+                var bacsi = (DTO.NhanVienDTO)this.cbBacSi.SelectedItem;
+                tenBacSi = bacsi.HoTenNV;
+            }
+            Report.FormHoSo hosoForm = new Report.FormHoSo()
+            {
+                StartPosition = FormStartPosition.CenterParent,
+                DataReport = new Report.DataReportPhieuKhamBenh()
+                {
+                    TenBenhNhan = this.benhNhan.HoTen,
+                    DiaChi = this.benhNhan.DiaChi,
+                    TenBacSi = tenBacSi,
+                    ChieuChung = this.txtTrieuChung.getText,
+                    NgayKham = DateTime.Now.ToString("dd/MM/yyyy"),
+                    SDTBenhNhan = this.benhNhan.SoDienThoai,
+                    NgaySinh = Common.ClinicBus.convertDateToView(this.benhNhan.NgaySinh),
+                    ChuanDoan = this.txtChuanDoanBenh.getText,
+                    MaHoSo = this.hoSoBenhAn.MaHoSo
+                }
+            };
+
+            hosoForm.FormClosed += (obj, er) =>
+            {
+                reloadRequest?.Invoke(this, null);
+                parentForm.Close();
+            };
+
+            hosoForm.ShowDialog();
         }
 
         private void ConfirmControl_DidBack(UserControl control)

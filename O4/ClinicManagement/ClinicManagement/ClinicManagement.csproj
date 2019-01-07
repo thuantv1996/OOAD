@@ -301,12 +301,6 @@
     <Compile Include="Features\Login\Main\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Features\Login\SubForms\ChangePasswordControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Features\Login\SubForms\ChangePasswordControl.Designer.cs">
-      <DependentUpon>ChangePasswordControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Features\Login\SubForms\LoginControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -462,9 +456,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Login\Main\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\Login\SubForms\ChangePasswordControl.resx">
-      <DependentUpon>ChangePasswordControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Login\SubForms\LoginControl.resx">
       <DependentUpon>LoginControl.cs</DependentUpon>

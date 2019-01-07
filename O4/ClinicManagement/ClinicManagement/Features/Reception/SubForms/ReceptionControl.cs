@@ -52,8 +52,8 @@ namespace ClinicManagement.Features.Reception.SubForms
         }
 
         private void fillMainInformation() {
+            this.txtSoTienKham.Text = String.Format("{0} VNĐ", Common.SourceLibrary.PhiKhamTiepNhan);
             var toDay = DateTime.Today;
-
             this.txtNgayTiepNhan.Text = toDay.ToString("dd/MM/yyyy");
             this.bus.getListLoaiHoSo((listResult, result) =>
             {
