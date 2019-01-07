@@ -76,7 +76,7 @@ namespace DAO.Implement
             }
             if (listDonThuoc.Count > 0)
             {
-                string curId = listDonThuoc.ElementAt(0).MaHoSo;
+                string curId = listDonThuoc.ElementAt(0).MaDonThuoc;
                 try
                 {
                     int curNumId = Int32.Parse(curId.Substring(2, 8));

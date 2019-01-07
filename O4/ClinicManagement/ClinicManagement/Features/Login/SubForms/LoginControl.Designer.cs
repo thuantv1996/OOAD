@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnLogin = new ClinicManagement.Common.ClinicComponents.NewButton(this.components);
+            this.btnLogin = new ClinicManagement.Common.ClinicComponents.NewButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.userNameTextField = new ClinicManagement.Common.ClinicComponents.NewTextField();
             this.passwordTextField = new ClinicManagement.Common.ClinicComponents.NewTextField();
@@ -103,7 +102,7 @@
             this.userNameTextField.IsShowPassword = false;
             this.userNameTextField.Location = new System.Drawing.Point(3, 3);
             this.userNameTextField.Name = "userNameTextField";
-            this.userNameTextField.PlaceHolder = "Place Holder";
+            this.userNameTextField.PlaceHolder = "Tên đăng nhập";
             this.userNameTextField.PlaceHolderColor = System.Drawing.Color.LightGray;
             this.userNameTextField.Radius = 5;
             this.userNameTextField.Size = new System.Drawing.Size(495, 30);

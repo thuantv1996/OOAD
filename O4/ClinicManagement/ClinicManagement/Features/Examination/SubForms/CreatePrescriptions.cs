@@ -16,7 +16,6 @@ namespace ClinicManagement.Features.Examination.SubForms
         private List<Model.ThuocView> listOfMedicineAdded = new List<Model.ThuocView>();
         private List<DTO.ThuocDTO> listOfMedicine = new List<DTO.ThuocDTO>();
 
-
         public event Action<List<DTO.ChiTietDonThuocDTO>> DidCreate;
 
         public event EventHandler<bool> ActiveConfirm;
@@ -36,7 +35,7 @@ namespace ClinicManagement.Features.Examination.SubForms
                 listResult.ForEach(thuoc =>
                 {
                     this.cbTenThuoc.Properties.Items.Add(thuoc);
-                    //this.listOfMedicine.Add(thuoc);
+                    this.listOfMedicine.Add(thuoc);
                 });
             });
         }
@@ -49,8 +48,7 @@ namespace ClinicManagement.Features.Examination.SubForms
         private bool checkValidToAdd()
         {
             return !(String.IsNullOrEmpty(this.txtSoLuong.Text) ||
-                this.cbTenThuoc.SelectedItem == null ||
-                String.IsNullOrEmpty(this.txtGhiChu.Text));
+                this.cbTenThuoc.SelectedItem == null);
         }
 
         private void btnThem_Click(object sender, EventArgs e)
@@ -63,7 +61,7 @@ namespace ClinicManagement.Features.Examination.SubForms
             {
                 MaThuoc = selectedItem.MaThuoc,
                 TenThuoc = selectedItem.TenThuoc,
-                GhiChu = this.txtGhiChu.Text,
+                GhiChu = this.txtGhiChu.getText,
                 SoLuong = int.Parse(this.txtSoLuong.Text)
             };
 
@@ -151,7 +149,7 @@ namespace ClinicManagement.Features.Examination.SubForms
             var thuoc = this.listOfMedicineAdded[index];
             this.txtSoLuong.Text = thuoc.SoLuong.ToString();
             this.txtGhiChu.Text = thuoc.GhiChu;
-            this.cbTenThuoc.SelectedItem = this.listOfMedicine.Find(t => t.MaThuoc == thuoc.MaThuoc);
+            this.cbTenThuoc.SelectedIndex = this.listOfMedicine.FindIndex(t => t.MaThuoc == thuoc.MaThuoc);
             this.btnSaveChanged.Enabled = true;
             this.btnDelete.Enabled = true;
         }
