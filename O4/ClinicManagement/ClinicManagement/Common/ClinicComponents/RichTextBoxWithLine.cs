@@ -38,5 +38,16 @@ namespace ClinicManagement.Common.ClinicComponents
                 this.Select(this.Text.Length, 0);
             }
         }
+
+        public string getText
+        {
+            get
+            {
+                var temp = Text.Replace(" ", "");
+                if (temp.Equals("-"))
+                    return String.Empty;
+                return this.Text;
+            }
+        }
     }
 }

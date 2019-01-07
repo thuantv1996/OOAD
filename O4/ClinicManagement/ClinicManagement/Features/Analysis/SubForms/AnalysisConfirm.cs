@@ -19,11 +19,13 @@ namespace ClinicManagement.Features.Analysis.SubForms
         public event EventHandler WillConfirm;
         public event EventHandler WillBack;
 
-        public AnalysisConfirm(DTO.HoSoBenhAnDTO hoso, string ketQuaXetNghiem)
+        public AnalysisConfirm(DTO.HoSoBenhAnDTO hoso, string ketQuaXetNghiem, bool isConfirm = true)
         {
             InitializeComponent();
             this.hoso = hoso;
             this.ketQuaXetNghiem = ketQuaXetNghiem;
+            this.btnConfirm.Text = isConfirm ? "Xác nhận" : "OK";
+            this.btnBack.Visible = isConfirm;
         }
 
         protected override void OnLoad(EventArgs e)

@@ -27,7 +27,7 @@ namespace DAO.Implement
         public string Select(DbContext db, out List<HOSOBENHAN> listObject)
         {
             listObject = new List<HOSOBENHAN>();
-            string SystemDate = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString();
+            string SystemDate = DateTime.Now.ToString("yyyyMMdd");
             try
             {
                 listObject = (from hs in (db as QLPHONGKHAMEntities).HOSOBENHANs
@@ -142,7 +142,7 @@ namespace DAO.Implement
         public string GetListHoSoWithRoomAndNode(QLPHONGKHAMEntities db, object[] param, out List<HOSOBENHAN> listHoSo)
         {
             listHoSo = null;
-            string SystemDate = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString();
+            string SystemDate = DateTime.Now.ToString("yyyyMMdd");
             string maPhongKham = param[0].ToString();
             string nodeHienTai = param[1].ToString();
             try

@@ -73,19 +73,10 @@ namespace ClinicManagement.Features.Reception.Bus
             completion(checkInputResult, listMessageError);
         }
 
-        public void insertBenhNhan(DTO.BenhNhanDTO patient, Action<string, List<string>> completion)
+        public void insertBenhNhan(DTO.BenhNhanDTO patient, Action<string> completion)
         {
-            var listMessageError = new List<string>();
-            var checkInputResult = this.clientBus.BenhNhanInputCheck(patient, ref listMessageError);
-
-            if (checkInputResult.Equals(COM.Constant.RES_SUC))
-            {
-                var result = this.clientBus.InsertBenhNhan(patient);
-                completion(result, null);
-                return;
-            }
-
-            completion(checkInputResult, listMessageError);
+            var result = this.clientBus.InsertBenhNhan(patient);
+            completion(result);
         }
 
         //MARK: - Reception
@@ -158,7 +149,20 @@ namespace ClinicManagement.Features.Reception.Bus
         }
 
 
-        public void confirmReception(DTO.HoSoBenhAnDTO hoso, DTO.ThanhToanDTO thanhToan, Action<int, string, List<string>> completion)
+        public void confirmReception(DTO.HoSoBenhAnDTO hoso, DTO.ThanhToanDTO thanhToan, Action<int, string> completion)
+        {
+            var result = this.clientBus.SaveHoSo(hoso, thanhToan);
+            completion(hoso.SoThuTu, result);
+        }
+
+        public void BenhNhanInputCheck(DTO.BenhNhanDTO benhNhan, Action<string, List<string>> completion)
+        {
+            var listMessageError = new List<string>();
+            var result = this.clientBus.BenhNhanInputCheck(benhNhan, ref listMessageError);
+            completion(result, listMessageError);
+        }
+
+        public void TiepNhanInputCheck(DTO.HoSoBenhAnDTO hoso, DTO.ThanhToanDTO thanhToan, Action<string, List<string>> completion)
         {
             var listMessageError = new List<string>();
             var tiepNhanEntity = new BUS.Inc.TiepNhanInputCheck.TiepNhanEntity()
@@ -171,16 +175,8 @@ namespace ClinicManagement.Features.Reception.Bus
                 ChiPhiKham = thanhToan.ChiPhiKham,
                 YeuCauKham = hoso.YeuCauKham
             };
-            var checkInputResult = this.clientBus.TiepNhanInputCheck(tiepNhanEntity, ref listMessageError);
-
-            if (checkInputResult.Equals(COM.Constant.RES_SUC))
-            {
-                var result = this.clientBus.SaveHoSo(hoso, thanhToan);
-                completion(hoso.SoThuTu, result, null);
-                return;
-            }
-            completion(0, checkInputResult, listMessageError);
-           
+            var result = this.clientBus.TiepNhanInputCheck(tiepNhanEntity, ref listMessageError);
+            completion(result, listMessageError);
         }
         //=============================================
 

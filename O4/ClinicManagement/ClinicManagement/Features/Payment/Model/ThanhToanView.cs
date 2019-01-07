@@ -9,6 +9,6 @@ namespace ClinicManagement.Features.Payment.Model
     public class ThanhToanView
     {
         public string TenThanhToan { get; set; }
-        public string ChiPhi { get; set; }
+        public decimal ChiPhi { get; set; }
     }
 }

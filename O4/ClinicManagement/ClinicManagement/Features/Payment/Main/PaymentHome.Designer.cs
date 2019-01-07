@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnAccess = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -38,8 +40,6 @@
             this.col_HoTen = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col_CMND = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col_Sdt = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btnAccess = new System.Windows.Forms.Button();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -55,6 +55,28 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(837, 68);
             this.panel1.TabIndex = 0;
+            // 
+            // btnAccess
+            // 
+            this.btnAccess.BackColor = System.Drawing.Color.White;
+            this.btnAccess.Image = global::ClinicManagement.Properties.Resources.ico_edit;
+            this.btnAccess.Location = new System.Drawing.Point(3, 17);
+            this.btnAccess.Name = "btnAccess";
+            this.btnAccess.Size = new System.Drawing.Size(45, 45);
+            this.btnAccess.TabIndex = 5;
+            this.btnAccess.UseVisualStyleBackColor = false;
+            this.btnAccess.Click += new System.EventHandler(this.btnAccess_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackColor = System.Drawing.Color.White;
+            this.btnRefresh.Image = global::ClinicManagement.Properties.Resources.ico_refresh;
+            this.btnRefresh.Location = new System.Drawing.Point(54, 17);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(45, 45);
+            this.btnRefresh.TabIndex = 4;
+            this.btnRefresh.UseVisualStyleBackColor = false;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // panel2
             // 
@@ -106,13 +128,16 @@
             this.col_STT.Name = "col_STT";
             this.col_STT.Visible = true;
             this.col_STT.VisibleIndex = 0;
-            this.col_STT.Width = 98;
+            this.col_STT.Width = 86;
             // 
             // col_MaHoSo
             // 
             this.col_MaHoSo.Caption = "Mã Hồ Sơ";
             this.col_MaHoSo.FieldName = "MaHoSo";
             this.col_MaHoSo.Name = "col_MaHoSo";
+            this.col_MaHoSo.Visible = true;
+            this.col_MaHoSo.VisibleIndex = 1;
+            this.col_MaHoSo.Width = 128;
             // 
             // col_MaBenhNhan
             // 
@@ -120,8 +145,8 @@
             this.col_MaBenhNhan.FieldName = "MaBenhNhan";
             this.col_MaBenhNhan.Name = "col_MaBenhNhan";
             this.col_MaBenhNhan.Visible = true;
-            this.col_MaBenhNhan.VisibleIndex = 1;
-            this.col_MaBenhNhan.Width = 185;
+            this.col_MaBenhNhan.VisibleIndex = 2;
+            this.col_MaBenhNhan.Width = 147;
             // 
             // col_HoTen
             // 
@@ -129,8 +154,8 @@
             this.col_HoTen.FieldName = "HoTen";
             this.col_HoTen.Name = "col_HoTen";
             this.col_HoTen.Visible = true;
-            this.col_HoTen.VisibleIndex = 2;
-            this.col_HoTen.Width = 185;
+            this.col_HoTen.VisibleIndex = 3;
+            this.col_HoTen.Width = 147;
             // 
             // col_CMND
             // 
@@ -138,8 +163,8 @@
             this.col_CMND.FieldName = "CMND";
             this.col_CMND.Name = "col_CMND";
             this.col_CMND.Visible = true;
-            this.col_CMND.VisibleIndex = 3;
-            this.col_CMND.Width = 185;
+            this.col_CMND.VisibleIndex = 4;
+            this.col_CMND.Width = 147;
             // 
             // col_Sdt
             // 
@@ -147,30 +172,8 @@
             this.col_Sdt.FieldName = "SoDienThoai";
             this.col_Sdt.Name = "col_Sdt";
             this.col_Sdt.Visible = true;
-            this.col_Sdt.VisibleIndex = 4;
-            this.col_Sdt.Width = 196;
-            // 
-            // btnAccess
-            // 
-            this.btnAccess.BackColor = System.Drawing.Color.White;
-            this.btnAccess.Image = global::ClinicManagement.Properties.Resources.ico_edit;
-            this.btnAccess.Location = new System.Drawing.Point(3, 17);
-            this.btnAccess.Name = "btnAccess";
-            this.btnAccess.Size = new System.Drawing.Size(45, 45);
-            this.btnAccess.TabIndex = 5;
-            this.btnAccess.UseVisualStyleBackColor = false;
-            this.btnAccess.Click += new System.EventHandler(this.btnAccess_Click);
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.BackColor = System.Drawing.Color.White;
-            this.btnRefresh.Image = global::ClinicManagement.Properties.Resources.ico_refresh;
-            this.btnRefresh.Location = new System.Drawing.Point(54, 17);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(45, 45);
-            this.btnRefresh.TabIndex = 4;
-            this.btnRefresh.UseVisualStyleBackColor = false;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            this.col_Sdt.VisibleIndex = 5;
+            this.col_Sdt.Width = 162;
             // 
             // PaymentHome
             // 

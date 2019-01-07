@@ -29,7 +29,6 @@ namespace ClinicManagement.Features.Reception.SubForms
             this.setupView();
             this.patient = patient;
             this.setupData(patient);
-            this.fillMainInformation();
         }
 
         private void setupView()
@@ -48,16 +47,15 @@ namespace ClinicManagement.Features.Reception.SubForms
 
         public void setupData(DTO.BenhNhanDTO patient)
         {
+            this.patient = patient;
             this.patientMainInformation1.binding(patient);
+            this.fillMainInformation();
         }
 
         private void fillMainInformation() {
             var toDay = DateTime.Today;
-            var day = toDay.Day;
-            var month = toDay.Month;
-            var year = toDay.Year;
 
-            this.txtNgayTiepNhan.Text = String.Format("{0}/{1}/{2}", day, month, year);
+            this.txtNgayTiepNhan.Text = toDay.ToString("dd/MM/yyyy");
             this.bus.getListLoaiHoSo((listResult, result) =>
             {
                 if (result.Equals(COM.Constant.RES_SUC))
@@ -126,7 +124,7 @@ namespace ClinicManagement.Features.Reception.SubForms
             };
             var thanhToan = new DTO.ThanhToanDTO() { ChiPhiKham = ClinicManagement.Common.SourceLibrary.PhiKhamTiepNhan };
 
-            this.bus.confirmReception(hoso, thanhToan,(stt, result, listMessageError) =>
+            this.bus.confirmReception(hoso, thanhToan,(stt, result) =>
             {
                 if (result.Equals(COM.Constant.RES_SUC))
                 {
@@ -136,15 +134,6 @@ namespace ClinicManagement.Features.Reception.SubForms
                         var formParent = (Form)this.Parent;
                         formParent.Close();
                     }
-                }
-                else
-                {
-                    var msg = "";
-                    listMessageError.ForEach(error =>
-                    {
-                        msg += error + "\n";
-                    });
-                    MessageBox.Show(msg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             });
         }
@@ -163,34 +152,44 @@ namespace ClinicManagement.Features.Reception.SubForms
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            this.btnConfirm.BringToFront();
-            this.btnBack.Visible = true;
-            this.cbLoaiHoSo.Enabled
-                = this.cbMaHoSoTruoc.Enabled
-                = this.cbNguoiTiepNhan.Enabled
-                = this.cbPhong.Enabled
-                = this.txtYeuCauKham.Enabled
-                = false;
-        }
+            var loaiHoSo = (DTO.LoaiHoSoDTO)this.cbLoaiHoSo.SelectedItem;
+            var nguoiTiepNhan = (DTO.NhanVienDTO)this.cbNguoiTiepNhan.SelectedItem;
+            var phongKham = (DTO.PhongKhamDTO)this.cbPhong.SelectedItem;
 
-        private void btnXemThem_Click(object sender, EventArgs e)
-        {
-            var content = new Label() {
-                AutoSize = true,
-                Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right,
-                ForeColor = Color.Black,
-                BackColor = Color.White,
-                Font = new Font(Font.FontFamily, 10),
-                MaximumSize = new Size(450,0)
+            if (this.patient == null) return;
+
+            var hoso = new DTO.HoSoBenhAnDTO()
+            {
+                MaBenhNhan = this.patient.MaBenhNhan,
+                MaHoSoTruoc = this.cbMaHoSoTruoc.Text,
+                MaLoaiHoSo = loaiHoSo != null ? loaiHoSo.MaLoaiHoSo : "",
+                MaNguoiTN = nguoiTiepNhan != null ? nguoiTiepNhan.MaNV : "",
+                NgayTiepNhan = ClinicManagement.Common.ClinicBus.convertViewToDate(this.txtNgayTiepNhan.Text),
+                YeuCauKham = this.txtYeuCauKham.Text,
+                MaPhongKham = phongKham != null ? phongKham.MaPhong : ""
             };
-            var containerPanel = new Panel() { Left = Top = 0, Size = new Size(500, 500), AutoScroll = true, BackColor = Color.White };
-            containerPanel.Controls.Add(content);
-            content.Text = this.patient?.GhiChu;
+            var thanhToan = new DTO.ThanhToanDTO() { ChiPhiKham = ClinicManagement.Common.SourceLibrary.PhiKhamTiepNhan };
 
-            var formContainer = new Form() { StartPosition = FormStartPosition.CenterParent, AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink };
-            formContainer.Controls.Add(containerPanel);
 
-            formContainer.ShowDialog();
+            this.bus.TiepNhanInputCheck(hoso, thanhToan, (result, listMessageError) =>
+            {
+                if (result.Equals(COM.Constant.RES_FAI))
+                {
+                    var msg = "";
+                    listMessageError.ForEach(m => msg += String.Format("{0}\n", m));
+                    MessageBox.Show(msg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                this.btnConfirm.BringToFront();
+                this.btnBack.Visible = true;
+                this.cbLoaiHoSo.Enabled
+                    = this.cbMaHoSoTruoc.Enabled
+                    = this.cbNguoiTiepNhan.Enabled
+                    = this.cbPhong.Enabled
+                    = this.txtYeuCauKham.Enabled
+                    = false;
+            });
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -215,6 +214,7 @@ namespace ClinicManagement.Features.Reception.SubForms
             {
                 this.cbMaHoSoTruoc.Text = "";
                 this.cbMaHoSoTruoc.Enabled = false;
+                this.btnSearch.Enabled = false;
             } else
             {
                 this.cbMaHoSoTruoc.Enabled = true;

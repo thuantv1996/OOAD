@@ -153,7 +153,7 @@ namespace ClinicManagement.Features.Reception.Main
 
         private void AddPatientControl_CreateCompleted(object sender, DTO.BenhNhanDTO e)
         {
-            this.bus.insertBenhNhan(e, (result, listMessageError) =>
+            this.bus.insertBenhNhan(e, result =>
             {
                 if (result.Equals(COM.Constant.RES_SUC))
                 {
@@ -161,16 +161,6 @@ namespace ClinicManagement.Features.Reception.Main
                     var parentForm = (Form)((Control)sender).Parent;
                     parentForm.Close();
                     this.fetchData((msg, rslt) => { });
-                }
-                else
-                {
-                    var msg = "";
-                    listMessageError.ForEach(error =>
-                    {
-                        msg += error + "\n";
-                    });
-                    MessageBox.Show(msg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
                 }
             });
         }

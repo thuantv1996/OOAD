@@ -23,17 +23,12 @@ namespace ClinicManagement.Features.Examination.Main
         {
             this.danhSachChoKeDon.RefreshClick += DanhSachChoKeDon_RefreshClick;
             this.danhSachChoKeDon.AccessClick += DanhSachChoKeDon_AccessClick;
-            this.fillWaitingExaminationTable(null);
+            this.fetchData(null);
         }
 
         private void DanhSachChoKeDon_AccessClick(object sender, Model.HoSoBenhAnView e)
         {
-            var hoso = new DTO.HoSoBenhAnDTO()
-            {
-                MaHoSo = e.MaHoSo,
-                MaBenhNhan = e.MaBenhNhan
-            };
-
+            var hoso = this.bus.getHoSoKham(e.MaHoSo);
             var formContainer = new Form()
             {
                 AutoSize = true,
@@ -47,13 +42,20 @@ namespace ClinicManagement.Features.Examination.Main
                 Anchor = AnchorStyles.Left | AnchorStyles.Top
             };
 
+            control.reloadRequest += Control_reloadRequest;
+
             formContainer.Controls.Add(control);
             formContainer.ShowDialog();
         }
 
+        private void Control_reloadRequest(object sender, EventArgs e)
+        {
+            this.fetchData(null);
+        }
+
         private void DanhSachChoKeDon_RefreshClick(object sender, EventArgs e)
         {
-            this.fillWaitingExaminationTable(status =>
+            this.fetchData(status =>
             {
                 if (status)
                     MessageBox.Show("Dữ liệu đã được làm mới!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -62,23 +64,12 @@ namespace ClinicManagement.Features.Examination.Main
             });
         }
 
-        private void fillWaitingExaminationTable(Action<bool> completion)
+        private void fetchData(Action<bool> completion)
         {
             this.bus.getListHoSoSauXetNghiem((listHoSo, result) =>
             {
                 if (result.Equals(COM.Constant.RES_SUC))
                 {
-                    //dummy data
-                    listHoSo.Add(new Model.HoSoBenhAnView()
-                    {
-                        MaBenhNhan = "BN00000001",
-                        HoTen = "Nguyễn Văn A",
-                        CMND = "184313135",
-                        MaHoSo = "HS00000001",
-                        SoDienThoai = "0968329208",
-                        SoThuTu = 1
-
-                    });
                     this.danhSachChoKeDon.binding(listHoSo);
                     completion?.Invoke(true);
                 }

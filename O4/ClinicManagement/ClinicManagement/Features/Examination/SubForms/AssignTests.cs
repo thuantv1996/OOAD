@@ -12,12 +12,15 @@ namespace ClinicManagement.Features.Examination.SubForms
 {
     public partial class AssignTests : UserControl
     {
-        public event EventHandler<decimal> ChiPhiChanged;
-        public event EventHandler<bool> ActiveConfirm;
+        private decimal totalCharge = 0;
+        public delegate void AssignTestsDelegate(decimal totalCharge, List<DTO.XetNghiemDTO> listTest);
+        public event AssignTestsDelegate DidAssign;
+        private List<DTO.XetNghiemDTO> listXetNghiem;
 
-        public AssignTests()
+        public AssignTests(List<DTO.XetNghiemDTO> listXetNghiem)
         {
             InitializeComponent();
+            this.listXetNghiem = listXetNghiem ?? new List<DTO.XetNghiemDTO>();
             this.setupView();
         }
 
@@ -33,13 +36,20 @@ namespace ClinicManagement.Features.Examination.SubForms
                     });
                 }
             });
+
+            this.listXetNghiem.ForEach(xetNghiem =>
+            {
+                var newItem = new DevExpress.XtraEditors.Controls.CheckedListBoxItem(xetNghiem, true);
+                this.checkListXetNghiem.Items.Add(newItem);
+            });
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             if (this.cbLoaiXetNghiem.SelectedItem == null)
                 return;
-            DevExpress.XtraEditors.Controls.CheckedListBoxItem newItem = new DevExpress.XtraEditors.Controls.CheckedListBoxItem(this.cbLoaiXetNghiem.SelectedItem, true);
+            var newItem = new DevExpress.XtraEditors.Controls.CheckedListBoxItem(this.cbLoaiXetNghiem.SelectedItem, true);
+
             var foundItem = this.checkListXetNghiem.Items.ToList().Find(item =>
             {
                 var xetNghiem = (DTO.XetNghiemDTO)item.Value;
@@ -47,12 +57,14 @@ namespace ClinicManagement.Features.Examination.SubForms
                 return xetNghiem.TenXetNghiem.Equals(newXetNghiem.TenXetNghiem);
             });
 
+            //Each item just add only one times.
             if (foundItem == null)
             {
                 this.checkListXetNghiem.Items.Add(newItem);
-                var newXetNghiem = (DTO.XetNghiemDTO)newItem.Value;
-                this.ChiPhiChanged?.Invoke(this, newXetNghiem.ChiPhi);
-                this.ActiveConfirm?.Invoke(this, true);
+
+                DTO.XetNghiemDTO xetNghiem = (DTO.XetNghiemDTO)newItem.Value;
+                this.totalCharge += xetNghiem.ChiPhi;
+                this.btnAssign.Enabled = true;
             }
         }
 
@@ -77,15 +89,16 @@ namespace ClinicManagement.Features.Examination.SubForms
             var item = this.checkListXetNghiem.Items[e.Index];
             var xetNghiem = (DTO.XetNghiemDTO)item.Value;
             var chiphi = e.State == CheckState.Unchecked ? -xetNghiem.ChiPhi : xetNghiem.ChiPhi;
-            this.ChiPhiChanged?.Invoke(this, chiphi);
+
+            this.totalCharge += chiphi;
 
             var existsCheckedItem = this.checkListXetNghiem.Items.ToList().FindAll(i => i.CheckState == CheckState.Checked).Count > 0;
-            this.ActiveConfirm?.Invoke(this, existsCheckedItem);
+            this.btnAssign.Enabled = existsCheckedItem;
         }
 
-        public void refresh()
+        private void btnAssign_Click(object sender, EventArgs e)
         {
-            this.checkListXetNghiem.Items.Clear();
+            this.DidAssign?.Invoke(this.totalCharge, this.getListXetNghiem());
         }
     }
 }

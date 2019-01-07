@@ -111,7 +111,7 @@ namespace ClinicManagement.Features.Payment.Bus
                     danhSachView.Add(new Model.ThanhToanView()
                     {
                         TenThanhToan = xetNghiem.TenXetNghiem,
-                        ChiPhi = kqxn.TongChiPhi.ToString()
+                        ChiPhi = xetNghiem.ChiPhi
                     });
                 }
             });

@@ -14,7 +14,7 @@ namespace BUS.Mdl
         public string GetListHoSoKhamByPhong(string MaPhong, out List<HoSoBenhAnDTO> listHoSoBenhAn)
         {
             HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();
-            using(QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
                 hoSoBenhAnBUS.GetListHoSo(db, MaPhong, BusConstant.NODE_KHAM, out listHoSoBenhAn);
             }
@@ -31,7 +31,7 @@ namespace BUS.Mdl
             }
             return Constant.RES_SUC;
         }
-        
+
         // lấy thông tin toàn bồ hồ sơ
         public string GetInformationHoSo(string MaHoSo, out HoSoBenhAnDTO hoSoBenhAn)
         {
@@ -47,7 +47,7 @@ namespace BUS.Mdl
         public string GetListNhanVien(string MaPhong, out List<NhanVienDTO> nhanVienDTOs)
         {
             NhanVienBUS nhanVienBUS = new NhanVienBUS();
-            using(QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
                 nhanVienBUS.GetListNhanVienWithIdRoom(db, MaPhong, out nhanVienDTOs);
             }
@@ -58,7 +58,7 @@ namespace BUS.Mdl
         public string GetListXetNghiem(out List<XetNghiemDTO> xetNghiemDTOs)
         {
             XetNghiemBUS xetNghiemBUS = new XetNghiemBUS();
-            using(QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
                 xetNghiemBUS.GetListXetNghiem(db, out xetNghiemDTOs);
             }
@@ -113,7 +113,7 @@ namespace BUS.Mdl
         public string GetInformationBenhNhan(string MaBenhNhan, out BenhNhanDTO benhNhan)
         {
             BenhNhanBUS benhNhanBUS = new BenhNhanBUS();
-            using(QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
                 benhNhanBUS.GetInformationBenhNhan(db, MaBenhNhan, out benhNhan);
             }
@@ -126,7 +126,7 @@ namespace BUS.Mdl
             HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();
             using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
-                hoSoBenhAnBUS.GetListHoSoWithIdBenhNhan(db, MaBenhNhan,out hoSoBenhAnDTOs);
+                hoSoBenhAnBUS.GetListHoSoWithIdBenhNhan(db, MaBenhNhan, out hoSoBenhAnDTOs);
             }
             return Constant.RES_SUC;
         }
@@ -137,40 +137,26 @@ namespace BUS.Mdl
             DonThuocBUS donThuocBUS = new DonThuocBUS();
             ChiTietDonThuocBUS chiTietDonThuocBUS = new ChiTietDonThuocBUS();
             HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();
-            using(QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
-                using(var trans = db.Database.BeginTransaction())
+                using (var trans = db.Database.BeginTransaction())
                 {
+                    string maDonThuoc = donThuocBUS.getMaDonThuoc(db);
+                    donThuoc.MaDonThuoc = maDonThuoc;
                     if (donThuocBUS.SaveDonThuoc(db, donThuoc).Equals(Constant.RES_FAI))
                     {
                         trans.Rollback();
                         return Constant.RES_FAI;
                     }
-                    // xoá tất cả ctdt
-                    if (chiTietDonThuocBUS.DeleteAllWithId(db, donThuoc.MaDonThuoc) == Constant.RES_FAI)
-                    {
-                        trans.Rollback();
-                        return Constant.RES_FAI;
-                    }
+
                     foreach (var ct in chiTietDonThuocs)
                     {
+                        ct.MaDonThuoc = maDonThuoc;
                         if (chiTietDonThuocBUS.SaveChiTietDonThuoc(db, ct).Equals(Constant.RES_FAI))
                         {
                             trans.Rollback();
                             return Constant.RES_FAI;
                         }
-                    }
-                    HoSoBenhAnDTO hoSo = new HoSoBenhAnDTO();
-                    if(hoSoBenhAnBUS.GetInfomationHoSo(db, donThuoc.MaHoSo, out hoSo) == Constant.RES_FAI)
-                    {
-                        trans.Rollback();
-                        return Constant.RES_FAI;
-                    }
-                    hoSo.CoKeDon = true;
-                    if (hoSoBenhAnBUS.UpdateHoSoBenhAn(db, hoSo) == Constant.RES_FAI)
-                    {
-                        trans.Rollback();
-                        return Constant.RES_FAI;
                     }
                     trans.Commit();
                 }
@@ -221,7 +207,7 @@ namespace BUS.Mdl
         }
 
         // Lay thong tin don thuoc
-        public string GetDonThuoc(string MaHoSo,out DonThuocDTO donThuoc, out List<ChiTietDonThuocDTO> chiTietDonThuocs)
+        public string GetDonThuoc(string MaHoSo, out DonThuocDTO donThuoc, out List<ChiTietDonThuocDTO> chiTietDonThuocs)
         {
             donThuoc = new DonThuocDTO();
             chiTietDonThuocs = new List<ChiTietDonThuocDTO>();
@@ -247,12 +233,12 @@ namespace BUS.Mdl
             ThuocBUS thuocBUS = new ThuocBUS();
             using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
             {
-                if (thuocBUS.GetListThuoc(db, out thuocs) == Constant.RES_FAI) 
+                if (thuocBUS.GetListThuoc(db, out thuocs) == Constant.RES_FAI)
                 {
                     return Constant.RES_FAI;
                 }
             }
-            if(thuocs == null)
+            if (thuocs == null)
             {
                 return Constant.RES_FAI;
             }
@@ -267,7 +253,7 @@ namespace BUS.Mdl
             {
                 return phongKhamBUS.GetInformationPhongKham(db, MaPhong, out phong);
             }
-        }   
+        }
 
         // lay danh sach ket qua xet nghiem da xet nghiem
         public string GetListKetQuaXetNghiem(string MaHoSo, out List<KetQuaXetNghiemDTO> ketQuaXetNghiems)
@@ -277,6 +263,24 @@ namespace BUS.Mdl
             {
                 return bus.GetListHasResWithIdHoSo(db, MaHoSo, out ketQuaXetNghiems);
             }
+        }
+
+        //Update hồ sơ bệnh án
+        public string UpdateHoSo(DTO.HoSoBenhAnDTO hoso)
+        {
+            HoSoBenhAnBUS bus = new HoSoBenhAnBUS();
+
+            using (QLPHONGKHAMEntities db = new QLPHONGKHAMEntities())
+            {
+                if (bus.UpdateHoSoBenhAn(db, hoso) == COM.Constant.RES_FAI)
+                {
+                    return COM.Constant.RES_FAI;
+                }
+
+                db.SaveChanges();
+            }
+
+            return COM.Constant.RES_SUC;
         }
     }
 }

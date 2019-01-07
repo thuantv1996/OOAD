@@ -117,13 +117,16 @@
             this.col_STT.Name = "col_STT";
             this.col_STT.Visible = true;
             this.col_STT.VisibleIndex = 0;
-            this.col_STT.Width = 98;
+            this.col_STT.Width = 100;
             // 
             // col_MaHoSo
             // 
             this.col_MaHoSo.Caption = "Mã Hồ Sơ";
             this.col_MaHoSo.FieldName = "MaHoSo";
             this.col_MaHoSo.Name = "col_MaHoSo";
+            this.col_MaHoSo.Visible = true;
+            this.col_MaHoSo.VisibleIndex = 1;
+            this.col_MaHoSo.Width = 141;
             // 
             // col_MaBenhNhan
             // 
@@ -131,8 +134,8 @@
             this.col_MaBenhNhan.FieldName = "MaBenhNhan";
             this.col_MaBenhNhan.Name = "col_MaBenhNhan";
             this.col_MaBenhNhan.Visible = true;
-            this.col_MaBenhNhan.VisibleIndex = 1;
-            this.col_MaBenhNhan.Width = 185;
+            this.col_MaBenhNhan.VisibleIndex = 2;
+            this.col_MaBenhNhan.Width = 172;
             // 
             // col_HoTen
             // 
@@ -140,8 +143,8 @@
             this.col_HoTen.FieldName = "HoTen";
             this.col_HoTen.Name = "col_HoTen";
             this.col_HoTen.Visible = true;
-            this.col_HoTen.VisibleIndex = 2;
-            this.col_HoTen.Width = 185;
+            this.col_HoTen.VisibleIndex = 3;
+            this.col_HoTen.Width = 172;
             // 
             // col_CMND
             // 
@@ -149,8 +152,8 @@
             this.col_CMND.FieldName = "CMND";
             this.col_CMND.Name = "col_CMND";
             this.col_CMND.Visible = true;
-            this.col_CMND.VisibleIndex = 3;
-            this.col_CMND.Width = 185;
+            this.col_CMND.VisibleIndex = 4;
+            this.col_CMND.Width = 172;
             // 
             // col_Sdt
             // 
@@ -158,8 +161,8 @@
             this.col_Sdt.FieldName = "SoDienThoai";
             this.col_Sdt.Name = "col_Sdt";
             this.col_Sdt.Visible = true;
-            this.col_Sdt.VisibleIndex = 4;
-            this.col_Sdt.Width = 196;
+            this.col_Sdt.VisibleIndex = 5;
+            this.col_Sdt.Width = 186;
             // 
             // WaitingPatientTable
             // 

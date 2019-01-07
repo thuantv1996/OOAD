@@ -33,6 +33,9 @@ namespace ClinicManagement.Features.Payment.Subforms
         {
             this.chkLstChuaThanhToan.Items.Clear();
             this.danhSachChonThanhToan.Clear();
+            this.btnSave.Enabled = false;
+            this.tongChiPhi = 0;
+            this.txtTongSoTien.Text = String.Format("{0} VNĐ", this.tongChiPhi);
 
             var benhNhan = this.bus.getBenhNhan(this.hoso.MaBenhNhan);
             this.txtHoTen.Text = benhNhan.HoTen;
@@ -46,7 +49,7 @@ namespace ClinicManagement.Features.Payment.Subforms
                     danhSachDaThanhToan.Add(new Model.ThanhToanView()
                     {
                         TenThanhToan = "Chi phí khám",
-                        ChiPhi = Common.SourceLibrary.PhiKhamTiepNhan.ToString()
+                        ChiPhi = Common.SourceLibrary.PhiKhamTiepNhan
                     });
 
                     listKQXN.ForEach(kqxn =>
@@ -59,7 +62,7 @@ namespace ClinicManagement.Features.Payment.Subforms
                                 danhSachDaThanhToan.Add(new Model.ThanhToanView()
                                 {
                                     TenThanhToan = xetNghiem.TenXetNghiem,
-                                    ChiPhi = xetNghiem.ChiPhi.ToString()
+                                    ChiPhi = xetNghiem.ChiPhi
                                 });
                             } else
                             {
@@ -111,6 +114,12 @@ namespace ClinicManagement.Features.Payment.Subforms
                 AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 StartPosition = FormStartPosition.CenterParent
             };
+
+            danhSachChonThanhToan.ForEach(kqxn =>
+            {
+                var xetNghiem = this.bus.getXetNghiemInformation(kqxn.MaXetNghiem);
+                kqxn.TongChiPhi = xetNghiem.ChiPhi;
+            });
 
             var confirmControl = new Subforms.PaymentConfirm(this.hoso, this.danhSachChonThanhToan)
             {

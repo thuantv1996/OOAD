@@ -37,64 +37,58 @@ namespace ClinicManagement.Features.Examination.Bus
 
         public void getListHoSo(Action<List<Model.HoSoBenhAnView>, string> completion)
         {
-            Task.Run(() =>
+            var listResult = new List<DTO.HoSoBenhAnDTO>();
+            var result = this.clientBus.GetListHoSoKhamByPhong(user.RoomId, out listResult);
+            var listHoSoView = new List<Model.HoSoBenhAnView>();
+
+            //Convert from List of HoSoBenhAnDTO to HoSoBenhAnView
+            listResult.ForEach(hoso =>
             {
-                var listResult = new List<DTO.HoSoBenhAnDTO>();
-                var result = this.clientBus.GetListHoSoKhamByPhong(user.RoomId, out listResult);
-                var listHoSoView = new List<Model.HoSoBenhAnView>();
-                
-                //Convert from List of HoSoBenhAnDTO to HoSoBenhAnView
-                listResult.ForEach(hoso =>
+                var patient = this.getBenhNhan(hoso.MaBenhNhan);
+                if (patient != null)
                 {
-                    var patient = this.getBenhNhan(hoso.MaBenhNhan);
-                    if (patient != null)
+                    var hosoView = new Model.HoSoBenhAnView()
                     {
-                        var hosoView = new Model.HoSoBenhAnView()
-                        {
-                            MaHoSo = hoso.MaHoSo,
-                            MaBenhNhan = patient.MaBenhNhan,
-                            SoThuTu = hoso.SoThuTu,
-                            HoTen = patient.HoTen,
-                            CMND = patient.CMND,
-                            SoDienThoai = patient.SoDienThoai
-                        };
-                        listHoSoView.Add(hosoView);
-                    }
-                });
-                listHoSoView.Sort((x, y) => x.SoThuTu < y.SoThuTu ? 1 : 0);
-                completion(listHoSoView, result);
+                        MaHoSo = hoso.MaHoSo,
+                        MaBenhNhan = patient.MaBenhNhan,
+                        SoThuTu = hoso.SoThuTu,
+                        HoTen = patient.HoTen,
+                        CMND = patient.CMND,
+                        SoDienThoai = patient.SoDienThoai
+                    };
+                    listHoSoView.Add(hosoView);
+                }
             });
+            listHoSoView.Sort((x, y) => x.SoThuTu < y.SoThuTu ? 1 : 0);
+            completion(listHoSoView, result);
         }
 
         public void getListHoSoSauXetNghiem(Action<List<Model.HoSoBenhAnView>, string> completion)
         {
-            Task.Run(() =>
-            {
-                var listResult = new List<DTO.HoSoBenhAnDTO>();
-                var result = this.clientBus.GetListHoSoXetNgiemByPhong(user.RoomId, out listResult);
-                var listHoSoView = new List<Model.HoSoBenhAnView>();
+            var listResult = new List<DTO.HoSoBenhAnDTO>();
+            var result = this.clientBus.GetListHoSoXetNgiemByPhong(user.RoomId, out listResult);
+            var listHoSoView = new List<Model.HoSoBenhAnView>();
 
-                //Convert from List of HoSoBenhAnDTO to HoSoBenhAnView
-                listResult.ForEach(hoso =>
+            //Convert from List of HoSoBenhAnDTO to HoSoBenhAnView
+            listResult.ForEach(hoso =>
+            {
+                var patient = this.getBenhNhan(hoso.MaBenhNhan);
+                if (patient != null)
                 {
-                    var patient = this.getBenhNhan(hoso.MaBenhNhan);
-                    if (patient != null)
+                    var hosoView = new Model.HoSoBenhAnView()
                     {
-                        var hosoView = new Model.HoSoBenhAnView()
-                        {
-                            MaHoSo = hoso.MaHoSo,
-                            MaBenhNhan = patient.MaBenhNhan,
-                            SoThuTu = hoso.SoThuTu,
-                            HoTen = patient.HoTen,
-                            CMND = patient.CMND,
-                            SoDienThoai = patient.SoDienThoai
-                        };
-                        listHoSoView.Add(hosoView);
-                    }
-                });
-                listHoSoView.Sort((x, y) => x.SoThuTu < y.SoThuTu ? 1 : 0);
-                completion(listHoSoView, result);
+                        MaHoSo = hoso.MaHoSo,
+                        MaBenhNhan = patient.MaBenhNhan,
+                        SoThuTu = hoso.SoThuTu,
+                        HoTen = patient.HoTen,
+                        CMND = patient.CMND,
+                        SoDienThoai = patient.SoDienThoai
+                    };
+                    listHoSoView.Add(hosoView);
+                }
             });
+            listHoSoView.Sort((x, y) => x.SoThuTu < y.SoThuTu ? 1 : 0);
+            completion(listHoSoView, result);
         }
 
         public void searchHoSo(DTO.BenhNhanDTO patient, Action<List<Model.HoSoBenhAnView>, string> completion)
@@ -119,18 +113,24 @@ namespace ClinicManagement.Features.Examination.Bus
         public void getListKetQuaXetNghiem(string MaHoSo, Action<List<Model.KetQuaXetNghiemView>, string> completion)
         {
             var listResult = new List<Model.KetQuaXetNghiemView>();
+            var listKQXN = new List<DTO.KetQuaXetNghiemDTO>();
+            var result = this.clientBus.GetListKetQuaXetNghiem(MaHoSo, out listKQXN);
 
-            listResult.Add(new Model.KetQuaXetNghiemView()
+            listKQXN.ForEach(kqxn =>
             {
-                MaXetNghiem = "XN00000001",
-                MaBacSi = "BS00000001",
-                TenXetNghiem = "Xet nghiem mau",
-                TenBacSi = "Nguyen Van A",
-                NgayXetNghiem = Common.ClinicBus.convertDateToView("20181203"),
-                KetQua = "Het mau Het mau Het mau Het mau Het mau \nHet mau Het mau Het mau Het mau Het mau Het mau Het mau Het \nmau Het mau Het mau Het mau Het mau Het mau Het mau Het mau Het mau Het mau Het mau"
+                var xetNghiem = this.getXetNghiem(kqxn.MaXetNghiem);
+                var bacsi = this.getBenhNhan(kqxn.MaBacSi);
+                listResult.Add(new Model.KetQuaXetNghiemView()
+                {
+                    MaXetNghiem = kqxn.MaXetNghiem,
+                    MaBacSi = kqxn.MaBacSi,
+                    NgayXetNghiem = Common.ClinicBus.convertDateToView(kqxn.NgayXetNghiem),
+                    TenXetNghiem = xetNghiem?.TenXetNghiem,
+                    KetQua = kqxn.KetQua,
+                    TenBacSi = bacsi?.HoTen
+                });
             });
 
-            var result = COM.Constant.RES_SUC;
             completion(listResult, result);
         }
 
@@ -174,6 +174,25 @@ namespace ClinicManagement.Features.Examination.Bus
                 thuoc = listResult.Find(t => t.MaThuoc.Equals(MaThuoc));
             });
             return thuoc;
+        }
+
+        public List<Model.ThuocView> convertListChiTietToThuocView(List<DTO.ChiTietDonThuocDTO> listCTDT)
+        {
+            var listThuoc = new List<Model.ThuocView>();
+            listCTDT?.ForEach(chiTiet =>
+            {
+                var thuoc = this.getThuoc(chiTiet.MaThuoc);
+
+                listThuoc.Add(new Model.ThuocView()
+                {
+                    MaThuoc = chiTiet.MaThuoc,
+                    TenThuoc = thuoc.TenThuoc,
+                    GhiChu = chiTiet.GhiChu,
+                    SoLuong = chiTiet.SoLuong
+                });
+
+            });
+            return listThuoc;
         }
 
         public DTO.PhongKhamDTO getPhong(string maPhong)
@@ -248,22 +267,86 @@ namespace ClinicManagement.Features.Examination.Bus
             completion(ngayTiepNhan, bacSi.HoTenNV, chuanDoan, listThuoc, COM.Constant.RES_SUC);
         }
 
-        public void assignTests(List<DTO.KetQuaXetNghiemDTO> danhSachXN, Action<string> completion)
+        public void assignTests(DTO.HoSoBenhAnDTO hoso, List<DTO.XetNghiemDTO> danhSachXN, Action<string> completion)
         {
-            var result = this.xetNghiemBus.AssignXetNghiem(danhSachXN);
+            this.updateHoSo(hoso, rslt =>
+            {
+                if (rslt.Equals(COM.Constant.RES_SUC))
+                {
+                    var listKQXN = new List<DTO.KetQuaXetNghiemDTO>();
+                    danhSachXN.ForEach(xn =>
+                    {
+                        listKQXN.Add(new DTO.KetQuaXetNghiemDTO()
+                        {
+                            MaHoSo = hoso.MaHoSo,
+                            MaXetNghiem = xn.MaXetNghiem,
+                            ThanhToan = false,
+                            MaBacSi = Common.User.SharedInstance.UserId
+                        });
+                    });
+
+
+                    var result = this.xetNghiemBus.AssignXetNghiem(listKQXN);
+                    completion(result);
+                }
+                else
+                {
+                    completion(COM.Constant.RES_FAI);
+                }
+            });
+
+        }
+
+        public void keDonThuoc(DTO.HoSoBenhAnDTO hoso, List<DTO.ChiTietDonThuocDTO> danhSachThuoc, Action<string> completion)
+        {
+            var donThuoc = new DTO.DonThuocDTO()
+            {
+                MaHoSo = hoso.MaHoSo,
+                NgayLap = DateTime.Now.ToString("yyyyMMdd")
+            };
+
+            this.saveDonThuoc(donThuoc, danhSachThuoc, result =>
+            {
+                if (result.Equals(COM.Constant.RES_SUC))
+                {
+                    hoso.CoKeDon = true;
+                    this.finishKham(hoso, (isFinish) =>
+                    {
+                        completion(isFinish);
+                    });
+                }
+                else
+                {
+                    completion(COM.Constant.RES_FAI);
+                }
+            });
+        }
+
+        public void finishKham(DTO.HoSoBenhAnDTO hoso, Action<string> completion)
+        {
+            var processingResult = this.clientBus.KhamProcessing(hoso);
+            completion(processingResult);
+        }
+
+        public void updateHoSo(DTO.HoSoBenhAnDTO hoso, Action<string> completion)
+        {
+            var result = this.clientBus.UpdateHoSo(hoso);
             completion(result);
         }
 
-        public void khamProcessing(DTO.HoSoBenhAnDTO hoso, DTO.DonThuocDTO donThuoc, List<DTO.ChiTietDonThuocDTO> danhSachChiTietThuoc, Action<string> completion)
+        public void checkInput(DTO.HoSoBenhAnDTO hoso, Action<string, List<string>> completion)
         {
-            var processingResult = this.clientBus.KhamProcessing(hoso);
-            if (processingResult.Equals(COM.Constant.RES_FAI))
-            {
-                completion(processingResult);
-                return;
-            }
-            var resultSaveThuoc = this.clientBus.SaveDonthuoc(donThuoc, danhSachChiTietThuoc);
-            completion(resultSaveThuoc);
+            var listMessageError = new List<string>();
+            var result = this.clientBus.InputCheck(hoso, ref listMessageError);
+            completion(result, listMessageError);
+        }
+
+        public void getListNhanVien(Action<List<DTO.NhanVienDTO>, string> completion)
+        {
+            var maPhong = Common.User.SharedInstance.RoomId;
+            var listNhanVien = new List<DTO.NhanVienDTO>();
+            var result = this.clientBus.GetListNhanVien(maPhong, out listNhanVien);
+            completion(listNhanVien, result);
         }
     }
 }

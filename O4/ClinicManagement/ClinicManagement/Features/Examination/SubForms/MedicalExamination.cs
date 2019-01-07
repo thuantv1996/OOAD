@@ -13,12 +13,14 @@ namespace ClinicManagement.Features.Examination.SubForms
 {
     public partial class MedicalExamination : UserControl, IMessageFilter
     {
-        private const int topPadding = 20;
-        private AssignTests assignTest;
-        private CreatePrescriptions createPrescription;
         private Bus.ExaminationBus bus = Bus.ExaminationBus.SharedInstance;
         private DTO.HoSoBenhAnDTO hoSoBenhAn;
-        private decimal tongChiPhi = 0;
+        private decimal totalCharge = 0;
+        private Size resultSize = new Size(1115, 280);
+
+        private List<DTO.XetNghiemDTO> listXetNghiem;
+        private List<DTO.ChiTietDonThuocDTO> listThuoc;
+        private DTO.BenhNhanDTO benhNhan;
 
         public event EventHandler reloadRequest;
 
@@ -30,19 +32,28 @@ namespace ClinicManagement.Features.Examination.SubForms
         }
 
         private void setupView()
-        {
-            this.setupAssignTests();
-            this.setupCreatePrescriptions();
-
-            this.createPrescription.Visible = false;
-
+        { 
             Application.AddMessageFilter(this);
 
-            this.txtChiPhi.Text = tongChiPhi.ToString();
-
-            var benhNhan = this.bus.getBenhNhan(this.hoSoBenhAn.MaBenhNhan);
+            this.txtChiPhi.Text = totalCharge.ToString();
+            this.benhNhan = this.bus.getBenhNhan(this.hoSoBenhAn.MaBenhNhan);
             this.patientMainInformation.binding(benhNhan);
             this.txtYeuCauKham.Text = this.hoSoBenhAn.YeuCauKham;
+            var phong = this.bus.getPhong(Common.User.SharedInstance.RoomId);
+            this.txtPhong.Text = phong != null ? phong.TenPhong : "";
+            this.bus.getListNhanVien((listNhanVien, result) =>
+            {
+                if (result.Equals(COM.Constant.RES_SUC))
+                {
+                    listNhanVien.ForEach(nv =>
+                    {
+                        cbBacSi.Items.Add(nv);
+                    });
+                    this.cbBacSi.SelectedIndex = listNhanVien.FindIndex(nv => nv.MaNV.Equals(Common.User.SharedInstance.UserId));
+                }
+            });
+
+            this.panelResult.Height = 0;
         }
 
         //==================================================================
@@ -65,74 +76,6 @@ namespace ClinicManagement.Features.Examination.SubForms
         private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
         //==================================================================
 
-        private void setupAssignTests()
-        {
-            var location = new Point(this.radioLayout.Location.X, this.radioLayout.Location.Y + this.radioLayout.Height + topPadding);
-            this.assignTest = new SubForms.AssignTests()
-            {
-                Location = location,
-                Width = this.radioLayout.Width,
-                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
-            };
-            this.assignTest.ChiPhiChanged += AssignTest_AddAssign;
-            this.assignTest.ActiveConfirm += AssignTest_CheckedListControlChanged;
-            this.mainPanel.Controls.Add(assignTest);
-        }
-
-        private void AssignTest_CheckedListControlChanged(object sender, bool e)
-        {
-            this.btnXacNhan.Enabled = e;
-        }
-
-        private void AssignTest_AddAssign(object sender, decimal e)
-        {
-            this.tongChiPhi += e;
-            this.txtChiPhi.Text = this.tongChiPhi.ToString();
-        }
-
-        private void setupCreatePrescriptions()
-        {
-            var location = new Point(this.radioLayout.Location.X, this.radioLayout.Location.Y + this.radioLayout.Height + topPadding);
-            this.createPrescription = new SubForms.CreatePrescriptions()
-            {
-                Location = location,
-                Width = this.radioLayout.Width,
-                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
-            };
-
-            this.createPrescription.ActiveConfirm += (obj, isActive) =>
-            {
-                this.btnXacNhan.Enabled = isActive;
-            };
-
-            this.mainPanel.Controls.Add(createPrescription);
-        }
-
-        private void radKeThuoc_CheckedChanged(object sender, EventArgs e)
-        {
-            this.radXetNghiem.Checked = !this.radKeThuoc.Checked;
-            if (this.radKeThuoc.Checked)
-            {
-                this.createPrescription.Visible = true;
-                this.assignTest.Visible = false;
-                this.assignTest.refresh();
-                this.tongChiPhi = 0;
-                this.txtChiPhi.Text = this.tongChiPhi.ToString();
-                this.btnXacNhan.Enabled = false;
-            }
-        }
-
-        private void radXetNghiem_CheckedChanged(object sender, EventArgs e)
-        {
-            this.radKeThuoc.Checked = !this.radXetNghiem.Checked;
-            if (this.radXetNghiem.Checked)
-            {
-                this.createPrescription.Visible = false;
-                this.assignTest.Visible = true;
-                this.btnXacNhan.Enabled = false;
-            }
-        }
-
         private void ExaminationHome_ControlRemoved(object sender, ControlEventArgs e)
         {
             Application.RemoveMessageFilter(this);
@@ -140,43 +83,72 @@ namespace ClinicManagement.Features.Examination.SubForms
 
         private void btnXacNhan_Click(object sender, EventArgs e)
         {
-            this.hoSoBenhAn.ChuanDoan = this.txtChuanDoanBenh.Text;
-            Model.ConfirmUserControl control = null;
-            var formContainer = new Form()
+            this.hoSoBenhAn.NgayKham = DateTime.Now.ToString("yyyyMMdd");
+            this.hoSoBenhAn.ChuanDoan = this.txtChuanDoanBenh.getText;
+            this.hoSoBenhAn.TrieuChung = this.txtTrieuChung.getText;
+
+            if (this.cbBacSi.SelectedIndex >= 0)
             {
-                AutoSize = true,
-                AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                StartPosition = FormStartPosition.CenterParent
+                var bacsi = (DTO.NhanVienDTO)this.cbBacSi.SelectedItem;
+                this.hoSoBenhAn.MaBacSi = bacsi.MaNV;
+            }
+            
+            if (this.listXetNghiem == null)
+            {
+                this.bus.checkInput(this.hoSoBenhAn, (result, listMessageError) =>
+                {
+                    if (result.Equals(COM.Constant.RES_FAI))
+                    {
+                        string msg = "";
+                        listMessageError.ForEach(m => msg += m + "\n");
+                        MessageBox.Show(msg, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    //If success
+                    this.showConfirm();
+                });
+            } else
+            {
+                this.showConfirm();
+            }
+
+        }
+
+        private void showConfirm()
+        {
+            var chiphiString = String.Format("{0} VNĐ", this.totalCharge);
+            var confirmControl = new ExaminationConfirm(this.hoSoBenhAn, this.txtPhong.Text, this.benhNhan, chiphiString, this.listThuoc, this.listXetNghiem)
+            {
+                Left = Top = 0,
+                Dock = DockStyle.Fill
             };
 
+            confirmControl.DidBack += ConfirmControl_DidBack;
+            confirmControl.DidConfirm += ConfirmControl_DidConfirm;
+            this.Parent?.Controls.Add(confirmControl);
+            confirmControl.BringToFront();
+        }
 
-            if (radXetNghiem.Checked)
+        private void ConfirmControl_DidConfirm(UserControl control)
+        {
+            if (this.listThuoc != null)
             {
-                var listXetNghiem = this.assignTest.getListXetNghiem();
-                control = new SubForms.AssignTestsConfirm(this.hoSoBenhAn, listXetNghiem, this.tongChiPhi)
-                {
-                    Left = Top = 0,
-                    Anchor = AnchorStyles.Left | AnchorStyles.Top
-                };
+                this.assignMedical();
             }
-            else
+            else if (this.listXetNghiem != null)
             {
-                var listOfMedicine = this.createPrescription.getListOfMedicine();
-                control = new SubForms.CreatePrescriptionsConfirm(this.hoSoBenhAn, listOfMedicine, this.tongChiPhi)
-                {
-                    Left = Top = 0,
-                    Anchor = AnchorStyles.Left | AnchorStyles.Top
-                };
+                this.assignTest();
+                //Save hoso not finish
+            } else
+            {
+                this.finishHoSo();
             }
-            control.DidConfirm += (obj, eag) =>
-            {
-                formContainer.Close();
-                var parent = (Form)this.Parent;
-                parent.Close();
-                this.reloadRequest?.Invoke(this, e);
-            };
-            formContainer.Controls.Add(control);
-            formContainer.ShowDialog();
+        }
+
+        private void ConfirmControl_DidBack(UserControl control)
+        {
+            this.BringToFront();
+            this.Parent?.Controls.Remove(control);
         }
 
         private void lnkDonThuocGanNhat_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -207,6 +179,176 @@ namespace ClinicManagement.Features.Examination.SubForms
 
             formContainer.Controls.Add(ctrl);
             formContainer.ShowDialog();
+        }
+
+        private void btnAssignTests_Click(object sender, EventArgs e)
+        {
+            var formContainer = new Form()
+            {
+                Size = new Size(850, 600),
+                StartPosition = FormStartPosition.CenterParent
+            };
+
+            var assignControl = new AssignTests(this.listXetNghiem)
+            {
+                Dock = DockStyle.Fill
+            };
+
+            assignControl.DidAssign += (totalCharge, listTest) =>
+            {
+                formContainer.Close();
+
+                this.btnCreateMedical.Enabled = false;
+
+                this.totalCharge = totalCharge;
+                this.txtChiPhi.Text = totalCharge + " VNĐ";
+
+                this.panelResult.Height = this.resultSize.Height;
+
+                var testResult = new AssignTestsConfirm(listTest)
+                {
+                    Dock = DockStyle.Fill
+                };
+
+                testResult.ClearEvent += (obj, er) =>
+                {
+                    this.clearResultGroup();
+                };
+                this.listXetNghiem = testResult.DanhSachXetNghiem;
+
+                this.groupResult.Controls.Clear();
+                this.groupResult.Controls.Add(testResult);
+                this.groupResult.Text = "Danh sách xét nghiệm";
+            };
+
+            formContainer.Controls.Add(assignControl);
+            formContainer.ShowDialog();
+        }
+
+        private void btnCreateMedical_Click(object sender, EventArgs e)
+        {
+            var formContainer = new Form()
+            {
+                Size = new Size(850, 600),
+                StartPosition = FormStartPosition.CenterParent
+            };
+
+            var createPrescriptionControl = new CreatePrescriptions(this.listThuoc)
+            {
+                Dock = DockStyle.Fill
+            };
+
+            createPrescriptionControl.DidCreate += (listThuoc) =>
+            {
+                formContainer.Close();
+
+                this.btnAssignTests.Enabled = false;
+
+                this.panelResult.Height = this.resultSize.Height;
+
+                this.listThuoc = listThuoc;
+                var medicalResult = new CreatePrescriptionsConfirm(listThuoc)
+                {
+                    Dock = DockStyle.Fill
+                };
+
+                medicalResult.ClearEvent += (obj, er) =>
+                {
+                    this.clearResultGroup();
+                };
+
+                this.groupResult.Controls.Clear();
+                this.groupResult.Controls.Add(medicalResult);
+                this.groupResult.Text = "Đơn thuốc";
+            };
+
+            formContainer.Controls.Add(createPrescriptionControl);
+            formContainer.ShowDialog();
+        }
+
+        private void clearResultGroup()
+        {
+            this.panelResult.Height = 0;
+            this.totalCharge = 0;
+            this.txtChiPhi.Text = String.Format("{0} VNĐ", this.totalCharge);
+            this.groupResult.Controls.Clear();
+            this.listXetNghiem?.Clear();
+            this.listXetNghiem = null;
+            this.listThuoc?.Clear();
+            this.listThuoc = null;
+            this.btnCreateMedical.Enabled = this.btnAssignTests.Enabled = true;
+        }
+
+        //MARK: - Logic
+        //Chỉ định xét nghiệm
+        private void assignTest()
+        {
+            this.bus.assignTests(this.hoSoBenhAn, this.listXetNghiem, result =>
+            {
+                this.checkResult(result);
+            });
+        }
+
+        //Kê đơn thuốc
+        private void assignMedical()
+        {
+            this.bus.keDonThuoc(this.hoSoBenhAn, this.listThuoc, result =>
+            {
+                this.checkResult(result);
+            });
+        }
+
+        //Khám bệnh không kê đơn và không xét nghiệm
+        private void finishHoSo()
+        {
+            this.bus.finishKham(this.hoSoBenhAn, result=>
+            {
+                this.checkResult(result);
+            });
+        }
+
+        private void showFinalResultScreen()
+        {
+            var parentForm = (Form)this.Parent;
+
+            var chiphiString = String.Format("{0} VNĐ", this.totalCharge);
+            var finalScreen = new ExaminationConfirm(this.hoSoBenhAn, this.txtPhong.Text, this.benhNhan, chiphiString, this.listThuoc, this.listXetNghiem, false)
+            {
+                Left = Top = 0,
+                Anchor = AnchorStyles.Left | AnchorStyles.Top
+            };
+
+            finalScreen.DidConfirm += (control) =>
+            {
+                reloadRequest?.Invoke(this, null);
+                parentForm.Close();
+            };
+
+
+            parentForm.Controls.Clear();
+            parentForm.Controls.Add(finalScreen);
+        }
+
+        private void checkResult(string result)
+        {
+            if (result.Equals(COM.Constant.RES_SUC))
+            {
+                if (MessageBox.Show("Lưu thông tin khám thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
+                {
+                    this.showFinalResultScreen();
+                }
+            }
+            else
+            {
+                if (MessageBox.Show("Lưu thông tin thất bại", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error) == DialogResult.OK)
+                {
+                    this.BringToFront();
+                    if (this.Parent?.Controls.Count >= 2)
+                    {
+                        this.Parent.Controls.RemoveAt(1);
+                    }
+                }
+            }
         }
     }
 }

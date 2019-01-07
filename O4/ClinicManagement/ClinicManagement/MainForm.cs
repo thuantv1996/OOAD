@@ -66,7 +66,7 @@ namespace ClinicManagement
                     }
             }
 
-            var vitri = user.RoomId.Equals(COM.Constant.ID_LNV_BS) ? "Bác sĩ khám" : user.RoomId.Equals(COM.Constant.ID_LNV_TN) ? "Nhân viên tiếp nhận" : "Bác sĩ xét nghiệm";
+            var vitri = user.UserType == Common.UserType.examination ? "Bác sĩ khám" : user.UserType == Common.UserType.reception ? "Nhân viên tiếp nhận" : "Bác sĩ xét nghiệm";
             this.menuControl.updateUserInformation(user.UserName, vitri);
             this.listContent.ForEach(control =>
             {

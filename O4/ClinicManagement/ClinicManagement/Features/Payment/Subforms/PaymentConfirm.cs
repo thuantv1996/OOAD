@@ -39,6 +39,10 @@ namespace ClinicManagement.Features.Payment.Subforms
 
             var listView = this.bus.convertThanhToanToView(this.danhSachCanThanhToan);
             this.grdCanThanhToanControl.DataSource = Common.ClinicBus.ConvertToDatatable(listView);
+
+            decimal tongChiPhi = 0;
+            listView.ForEach(thanhToan => tongChiPhi += thanhToan.ChiPhi);
+            this.txtTongSoTien.Text = String.Format("{0} VNĐ", tongChiPhi);
         }
 
         private void btnConfirm_Click(object sender, EventArgs e)

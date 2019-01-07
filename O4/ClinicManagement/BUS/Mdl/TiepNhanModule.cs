@@ -101,9 +101,7 @@ namespace BUS.Mdl
         {
             TrangThaiPhongDTO trangThaiPhong = null;
             // get System date
-            string SystemDate = DateTime.Now.Year.ToString()
-                              + DateTime.Now.Month.ToString()
-                              + DateTime.Now.Day.ToString();
+            string SystemDate = DateTime.Now.ToString("yyyyMMdd");
 
             ThanhToanBUS thanhToanBUS = new ThanhToanBUS();
             HoSoBenhAnBUS hoSoBenhAnBUS = new HoSoBenhAnBUS();

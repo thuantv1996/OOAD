@@ -16,22 +16,27 @@ namespace ClinicManagement.Features.Examination.SubForms
         private List<Model.ThuocView> listOfMedicineAdded = new List<Model.ThuocView>();
         private List<DTO.ThuocDTO> listOfMedicine = new List<DTO.ThuocDTO>();
 
+
+        public event Action<List<DTO.ChiTietDonThuocDTO>> DidCreate;
+
         public event EventHandler<bool> ActiveConfirm;
 
-        public CreatePrescriptions()
+        public CreatePrescriptions(List<DTO.ChiTietDonThuocDTO> listOfAlreadyMedicine)
         {
             InitializeComponent();
-            this.getData();
+            listOfMedicineAdded  = this.bus.convertListChiTietToThuocView(listOfAlreadyMedicine);
+            this.gridThuoc.DataSource = Common.ClinicBus.ConvertToDatatable(listOfMedicineAdded);
+            this.fetchData();
         }
 
-        private void getData()
+        private void fetchData()
         {
             this.bus.getListThuoc((result, listResult) =>
             {
                 listResult.ForEach(thuoc =>
                 {
                     this.cbTenThuoc.Properties.Items.Add(thuoc);
-                    this.listOfMedicine.Add(thuoc);
+                    //this.listOfMedicine.Add(thuoc);
                 });
             });
         }
@@ -50,6 +55,7 @@ namespace ClinicManagement.Features.Examination.SubForms
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            if (this.cbTenThuoc.SelectedIndex < 0) return;
             var selectedItem = (DTO.ThuocDTO)this.cbTenThuoc.SelectedItem;
             if (this.listOfMedicineAdded.Find(t => t.MaThuoc == selectedItem.MaThuoc) != null) return;
 
@@ -61,7 +67,6 @@ namespace ClinicManagement.Features.Examination.SubForms
                 SoLuong = int.Parse(this.txtSoLuong.Text)
             };
 
-
             this.listOfMedicineAdded.Add(thuoc);
             this.reloadData();
             this.activeConfirmChanged();
@@ -69,7 +74,7 @@ namespace ClinicManagement.Features.Examination.SubForms
 
         private void activeConfirmChanged()
         {
-            this.ActiveConfirm?.Invoke(this, this.gridView1.RowCount > 0);
+            this.btnCreate.Enabled = this.gridView1.RowCount > 0;
         }
 
         private void txtSoLuong_TextChanged(object sender, EventArgs e)
@@ -104,17 +109,6 @@ namespace ClinicManagement.Features.Examination.SubForms
             return list;
         }
 
-        private void gridView1_Click(object sender, EventArgs e)
-        {
-            var index = this.gridView1.GetSelectedRows().First();
-            var thuoc = this.listOfMedicineAdded[index];
-            this.txtSoLuong.Text = thuoc.SoLuong.ToString();
-            this.txtGhiChu.Text = thuoc.GhiChu;
-            this.cbTenThuoc.SelectedItem = this.listOfMedicine.Find(t => t.MaThuoc == thuoc.MaThuoc);
-            this.btnSaveChanged.Enabled = true;
-            this.btnDelete.Enabled = true;
-        }
-
         private void btnSaveChanged_Click(object sender, EventArgs e)
         {
             var index = this.gridView1.GetSelectedRows().First();
@@ -144,6 +138,22 @@ namespace ClinicManagement.Features.Examination.SubForms
             }
 
             this.activeConfirmChanged();
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            this.DidCreate?.Invoke(this.getListOfMedicine());
+        }
+
+        private void gridView1_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        {
+            var index = this.gridView1.GetSelectedRows().First();
+            var thuoc = this.listOfMedicineAdded[index];
+            this.txtSoLuong.Text = thuoc.SoLuong.ToString();
+            this.txtGhiChu.Text = thuoc.GhiChu;
+            this.cbTenThuoc.SelectedItem = this.listOfMedicine.Find(t => t.MaThuoc == thuoc.MaThuoc);
+            this.btnSaveChanged.Enabled = true;
+            this.btnDelete.Enabled = true;
         }
     }
 }

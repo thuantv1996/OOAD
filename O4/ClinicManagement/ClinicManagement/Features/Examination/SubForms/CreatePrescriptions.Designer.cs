@@ -45,6 +45,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtSoLuong = new System.Windows.Forms.TextBox();
             this.btnSaveChanged = new System.Windows.Forms.Button();
+            this.btnCreate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gridThuoc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -71,7 +72,7 @@
             this.gridThuoc.Location = new System.Drawing.Point(0, 226);
             this.gridThuoc.MainView = this.gridView1;
             this.gridThuoc.Name = "gridThuoc";
-            this.gridThuoc.Size = new System.Drawing.Size(940, 331);
+            this.gridThuoc.Size = new System.Drawing.Size(940, 352);
             this.gridThuoc.TabIndex = 4;
             this.gridThuoc.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -88,7 +89,7 @@
             this.gridView1.OptionsBehavior.Editable = false;
             this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
-            this.gridView1.Click += new System.EventHandler(this.gridView1_Click);
+            this.gridView1.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gridView1_RowClick);
             // 
             // col_TenThuoc
             // 
@@ -230,10 +231,25 @@
             this.btnSaveChanged.UseVisualStyleBackColor = false;
             this.btnSaveChanged.Click += new System.EventHandler(this.btnSaveChanged_Click);
             // 
+            // btnCreate
+            // 
+            this.btnCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCreate.BackColor = System.Drawing.Color.White;
+            this.btnCreate.Enabled = false;
+            this.btnCreate.Location = new System.Drawing.Point(810, 602);
+            this.btnCreate.Name = "btnCreate";
+            this.btnCreate.Size = new System.Drawing.Size(117, 35);
+            this.btnCreate.TabIndex = 9;
+            this.btnCreate.Text = "Tạo đơn";
+            this.btnCreate.UseVisualStyleBackColor = false;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
+            // 
             // CreatePrescriptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.btnSaveChanged);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnDelete);
@@ -241,7 +257,7 @@
             this.Controls.Add(this.btnThem);
             this.MinimumSize = new System.Drawing.Size(659, 348);
             this.Name = "CreatePrescriptions";
-            this.Size = new System.Drawing.Size(940, 557);
+            this.Size = new System.Drawing.Size(940, 651);
             ((System.ComponentModel.ISupportInitialize)(this.gridThuoc)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -268,5 +284,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn col_GhiChu;
         private DevExpress.XtraGrid.Columns.GridColumn col_MaThuoc;
         private System.Windows.Forms.Button btnSaveChanged;
+        private System.Windows.Forms.Button btnCreate;
     }
 }

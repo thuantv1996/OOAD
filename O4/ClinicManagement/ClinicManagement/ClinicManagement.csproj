@@ -195,6 +195,12 @@
     <Compile Include="Features\Examination\SubForms\CreatePrescriptionsConfirm.Designer.cs">
       <DependentUpon>CreatePrescriptionsConfirm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Features\Examination\SubForms\ExaminationConfirm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Features\Examination\SubForms\ExaminationConfirm.Designer.cs">
+      <DependentUpon>ExaminationConfirm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Features\Examination\SubForms\MedicalExaminationAfterTests.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -206,12 +212,6 @@
     </Compile>
     <Compile Include="Features\Examination\SubForms\LatestPrescription.Designer.cs">
       <DependentUpon>LatestPrescription.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Features\Examination\SubForms\TestsResult.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Features\Examination\SubForms\TestsResult.Designer.cs">
-      <DependentUpon>TestsResult.cs</DependentUpon>
     </Compile>
     <Compile Include="Features\Examination\SubForms\WaitingPatientTable.cs">
       <SubType>UserControl</SubType>
@@ -406,6 +406,9 @@
     <EmbeddedResource Include="Features\Examination\SubForms\CreatePrescriptionsConfirm.resx">
       <DependentUpon>CreatePrescriptionsConfirm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Features\Examination\SubForms\ExaminationConfirm.resx">
+      <DependentUpon>ExaminationConfirm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Features\Examination\SubForms\MedicalExamination.resx">
       <DependentUpon>MedicalExamination.cs</DependentUpon>
     </EmbeddedResource>
@@ -420,9 +423,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Examination\SubForms\LatestPrescription.resx">
       <DependentUpon>LatestPrescription.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Features\Examination\SubForms\TestsResult.resx">
-      <DependentUpon>TestsResult.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Features\Examination\SubForms\WaitingPatientTable.resx">
       <DependentUpon>WaitingPatientTable.cs</DependentUpon>
