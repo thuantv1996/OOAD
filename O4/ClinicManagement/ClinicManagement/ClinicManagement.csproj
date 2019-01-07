@@ -84,6 +84,9 @@
     <Compile Include="Common\ClinicComponents\FilterUserControl.Designer.cs">
       <DependentUpon>FilterUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\ClinicComponents\MainUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Common\ClinicComponents\MenuControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

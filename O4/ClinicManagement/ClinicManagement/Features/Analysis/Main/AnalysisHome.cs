@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ClinicManagement.Features.Analysis.Main
 {
-    public partial class AnalysisHome : UserControl
+    public partial class AnalysisHome : Common.ClinicComponents.MainUserControl
     {
         private Bus.AnalysisBus bus = Bus.AnalysisBus.SharedInstance;
 

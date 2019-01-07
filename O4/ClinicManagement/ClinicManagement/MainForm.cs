@@ -27,14 +27,14 @@ namespace ClinicManagement
             this.menuControl = new Common.ClinicComponents.MenuControl();
             this.menuControl.Dock = DockStyle.Fill;
             this.panelMenu.Controls.Add(this.menuControl);
-            this.listContent = new List<UserControl>();
+            this.listContent = new List<Common.ClinicComponents.MainUserControl>();
             switch (this.user.UserType)
             {
                 case ClinicManagement.Common.UserType.reception:
                     {
                         this.updateMenuControl(new string[] { "Trang chủ", "Tiếp nhận bệnh nhân", "Hồ sơ mới", "Thanh toán"});
                         this.listContent.Clear();
-                        this.listContent.AddRange(new UserControl[]
+                        this.listContent.AddRange(new Common.ClinicComponents.MainUserControl[]
                         {
                             new ClinicManagement.Features.Reception.Main.ReceptionHome(),
                             new ClinicManagement.Features.Reception.Main.Reception(),
@@ -47,7 +47,7 @@ namespace ClinicManagement
                     {
                         this.updateMenuControl(new string[] { "Trang chủ", "Kết quả xét nghiệm" });
                         this.listContent.Clear();
-                        this.listContent.AddRange(new UserControl[]
+                        this.listContent.AddRange(new Common.ClinicComponents.MainUserControl[]
                         {
                             new ClinicManagement.Features.Examination.Main.ExaminationHome(),
                             new ClinicManagement.Features.Examination.Main.ExaminationAfterTests()
@@ -58,7 +58,7 @@ namespace ClinicManagement
                     {
                         this.updateMenuControl(new string[] { "Trang chủ"});
                         this.listContent.Clear();
-                        this.listContent.AddRange(new UserControl[]
+                        this.listContent.AddRange(new Common.ClinicComponents.MainUserControl[]
                         {
                             new ClinicManagement.Features.Analysis.Main.AnalysisHome()
                         });
@@ -72,7 +72,10 @@ namespace ClinicManagement
             {
                 control.Dock = DockStyle.Fill;
                 this.panelContent.Controls.Add(control);
-                this.menuControl.listAction.Add((sender, e) => { control.BringToFront(); });
+                this.menuControl.listAction.Add((sender, e) => {
+                    control.refreshControlData();
+                    control.BringToFront();
+                });
             });
 
             this.menuControl.LogOut += MenuControl_LogOut;
@@ -113,6 +116,6 @@ namespace ClinicManagement
 
         private ClinicManagement.Common.User user;
         private Common.ClinicComponents.MenuControl menuControl;
-        private List<UserControl> listContent;
+        private List<Common.ClinicComponents.MainUserControl> listContent;
     }
 }

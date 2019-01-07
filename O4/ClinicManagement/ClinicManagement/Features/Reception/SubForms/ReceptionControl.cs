@@ -147,6 +147,7 @@ namespace ClinicManagement.Features.Reception.SubForms
 
                     soThuTuForm.FormClosed += (obj, er) =>
                     {
+                        this.refreshEvent?.Invoke(this, null);
                         if (this.Parent is Form)
                         {
                             var formParent = (Form)this.Parent;
@@ -229,6 +230,7 @@ namespace ClinicManagement.Features.Reception.SubForms
         }
 
         private Common.ClinicComponents.PatientMainInformation patientMainInformation1;
+        public event EventHandler refreshEvent;
 
         private void cbLoaiHoSo_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -243,6 +245,11 @@ namespace ClinicManagement.Features.Reception.SubForms
                 this.cbMaHoSoTruoc.Enabled = true;
                 this.btnSearch.Enabled = true;
             }
+        }
+
+        public void refreshData()
+        {
+            this.patientMainInformation1.refreshData();
         }
     }
 }

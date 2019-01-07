@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ClinicManagement.Features.Payment.Main
 {
-    public partial class PaymentHome : UserControl
+    public partial class PaymentHome : Common.ClinicComponents.MainUserControl
     {
         private Bus.PaymentBus bus = Bus.PaymentBus.SharedInstance;
         public PaymentHome()
@@ -21,6 +21,11 @@ namespace ClinicManagement.Features.Payment.Main
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+            this.fetchData(null);
+        }
+
+        public override void refreshControlData()
+        {
             this.fetchData(null);
         }
 

@@ -10,13 +10,18 @@ using System.Windows.Forms;
 
 namespace ClinicManagement.Features.Examination.Main
 {
-    public partial class ExaminationHome : UserControl
+    public partial class ExaminationHome : Common.ClinicComponents.MainUserControl
     {
         private Bus.ExaminationBus bus = Bus.ExaminationBus.SharedInstance;
         public ExaminationHome()
         {
             InitializeComponent();
             this.setupView();
+        }
+
+        public override void refreshControlData()
+        {
+            this.fetchData(null);
         }
 
         private void setupView()

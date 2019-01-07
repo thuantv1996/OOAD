@@ -64,5 +64,17 @@ namespace ClinicManagement.Common.ClinicComponents
             this.txtDiaChi.Text = patient.DiaChi;
             this.txtGhiChu.Text = patient.GhiChu.Split('\n').First();
         }
+
+        public void refreshData()
+        {
+            this.txtMaBenhNhan.Text = "";
+            this.txtCMND.Text = "";
+            this.txtNgaySinh.Text = "";
+            this.txtGioiTinh.Text = "";
+            this.txtHoTen.Text = "";
+            this.txtSoDienThoai.Text = "";
+            this.txtDiaChi.Text = "";
+            this.txtGhiChu.Text = "";
+        }
     }
 }

@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace ClinicManagement.Features.Reception.Main
 {
-    public partial class Reception : UserControl
+    public partial class Reception : Common.ClinicComponents.MainUserControl
     {
         public Reception()
         {
             InitializeComponent();
+            this.receptionControl.refreshEvent += ReceptionControl_refreshEvent;
+        }
+
+        private void ReceptionControl_refreshEvent(object sender, EventArgs e)
+        {
+            this.receptionControl.refreshData();
+            this.receptionControl.Enabled = false;
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -37,6 +44,7 @@ namespace ClinicManagement.Features.Reception.Main
                 containerForm.Close();
                 this.receptionControl.Enabled = true;
             };
+
 
             containerForm.Controls.Add(tableWithSearch);
             containerForm.ShowDialog();

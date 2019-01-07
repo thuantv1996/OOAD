@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace ClinicManagement.Features.Reception.Main
 {
-    public partial class ReceptionCreatePatientRecord : UserControl
+    public partial class ReceptionCreatePatientRecord : Common.ClinicComponents.MainUserControl
     {
         private Bus.ReceptionBus bus = Bus.ReceptionBus.SharedInstance;
         public ReceptionCreatePatientRecord()
