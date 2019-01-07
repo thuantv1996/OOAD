@@ -16,7 +16,14 @@ namespace ClinicManagement
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+            if(!System.IO.File.Exists("connections.config") || !System.IO.File.Exists("connectionString.txt"))
+            {
+                Application.Run(new SetupForm());
+            }
+            else
+            {
+                Application.Run(new LoginForm());
+            } 
         }
     }
 }
