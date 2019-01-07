@@ -102,6 +102,11 @@ namespace ClinicManagement.Features.Reception.Bus
             completion(listResult, result);
         }
 
+        public DTO.PhongKhamDTO getCurrentRoom()
+        {
+            return new DTO.PhongKhamDTO();
+        }
+
         public void getListNhanVien(Action<List<DTO.NhanVienDTO>, string> completion)
         {
             var listResult = new List<DTO.NhanVienDTO>();

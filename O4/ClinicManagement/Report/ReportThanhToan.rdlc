@@ -341,7 +341,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>="Mã hồ sơ: " &amp; Parameters!DiaChi.Value</Value>
+                    <Value>="Mã hồ sơ: " &amp; Parameters!MaHoSo.Value</Value>
                     <Style>
                       <Color>Indigo</Color>
                     </Style>

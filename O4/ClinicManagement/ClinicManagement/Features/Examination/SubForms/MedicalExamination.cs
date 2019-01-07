@@ -285,7 +285,7 @@ namespace ClinicManagement.Features.Examination.SubForms
         {
             this.bus.assignTests(this.hoSoBenhAn, this.listXetNghiem, result =>
             {
-                this.checkResult(result);
+                this.checkResult(result, false);
             });
         }
 
@@ -298,6 +298,40 @@ namespace ClinicManagement.Features.Examination.SubForms
             });
         }
 
+        private void showReport(Form currentForm)
+        {
+            string tenBacSi = "";
+            if (this.cbBacSi.SelectedIndex >= 0)
+            {
+                var bacsi = (DTO.NhanVienDTO)this.cbBacSi.SelectedItem;
+                tenBacSi = bacsi.HoTenNV;
+            }
+            Report.FormHoSo hosoForm = new Report.FormHoSo()
+            {
+                StartPosition = FormStartPosition.CenterParent,
+                DataReport = new Report.DataReportPhieuKhamBenh()
+                {
+                    TenBenhNhan = this.benhNhan.HoTen,
+                    DiaChi = this.benhNhan.DiaChi,
+                    TenBacSi = tenBacSi,
+                    ChieuChung = this.txtTrieuChung.getText,
+                    NgayKham = DateTime.Now.ToString("dd/MM/yyyy"),
+                    SDTBenhNhan = this.benhNhan.SoDienThoai,
+                    NgaySinh = Common.ClinicBus.convertDateToView(this.benhNhan.NgaySinh),
+                    ChuanDoan = this.txtChuanDoanBenh.getText,
+                    MaHoSo = this.hoSoBenhAn.MaHoSo
+                }
+            };
+
+            hosoForm.FormClosed += (obj, er) =>
+            {
+                reloadRequest?.Invoke(this, null);
+                currentForm.Close();
+            };
+
+            hosoForm.ShowDialog();
+        }
+
         //Khám bệnh không kê đơn và không xét nghiệm
         private void finishHoSo()
         {
@@ -307,7 +341,7 @@ namespace ClinicManagement.Features.Examination.SubForms
             });
         }
 
-        private void showFinalResultScreen()
+        private void showFinalResultScreen(bool isFinish)
         {
             var parentForm = (Form)this.Parent;
 
@@ -320,8 +354,14 @@ namespace ClinicManagement.Features.Examination.SubForms
 
             finalScreen.DidConfirm += (control) =>
             {
-                reloadRequest?.Invoke(this, null);
-                parentForm.Close();
+                if (isFinish)
+                {
+                    this.showReport(parentForm);
+                } else
+                {
+                    parentForm.Close();
+                    reloadRequest?.Invoke(this, null);
+                }
             };
 
 
@@ -329,13 +369,13 @@ namespace ClinicManagement.Features.Examination.SubForms
             parentForm.Controls.Add(finalScreen);
         }
 
-        private void checkResult(string result)
+        private void checkResult(string result, bool isFinish = true)
         {
             if (result.Equals(COM.Constant.RES_SUC))
             {
                 if (MessageBox.Show("Lưu thông tin khám thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
                 {
-                    this.showFinalResultScreen();
+                    this.showFinalResultScreen(isFinish);
                 }
             }
             else

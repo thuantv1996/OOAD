@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DTO;
 
 namespace ClinicManagement.Features.Payment.Subforms
 {
@@ -16,6 +17,7 @@ namespace ClinicManagement.Features.Payment.Subforms
         private DTO.HoSoBenhAnDTO hoso;
         private List<DTO.KetQuaXetNghiemDTO> danhSachChonThanhToan = new List<DTO.KetQuaXetNghiemDTO>();
         private decimal tongChiPhi = 0;
+        private BenhNhanDTO benhNhan;
 
         public PaymentDetail(DTO.HoSoBenhAnDTO hoso)
         {
@@ -37,7 +39,7 @@ namespace ClinicManagement.Features.Payment.Subforms
             this.tongChiPhi = 0;
             this.txtTongSoTien.Text = String.Format("{0} VNĐ", this.tongChiPhi);
 
-            var benhNhan = this.bus.getBenhNhan(this.hoso.MaBenhNhan);
+            this.benhNhan = this.bus.getBenhNhan(this.hoso.MaBenhNhan);
             this.txtHoTen.Text = benhNhan.HoTen;
             this.txtSTT.Text = this.hoso.SoThuTu.ToString();
 
@@ -135,8 +137,27 @@ namespace ClinicManagement.Features.Payment.Subforms
                     {
                         if (MessageBox.Show("Thanh toán thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
                         {
-                            formContainer.Close();
-                            this.fetchData();
+                            Report.FormThanhToan thanhToanReport = new Report.FormThanhToan()
+                            {
+                                DataReport = new Report.DataReportThanhToan()
+                                {
+                                    NgayKham = Common.ClinicBus.convertDateToView(hoso.NgayKham),
+                                    TenBenhNhan = this.benhNhan.HoTen,
+                                    NgaySinh = Common.ClinicBus.convertDateToView(this.benhNhan.NgaySinh),
+                                    DiaChi = this.benhNhan.DiaChi,
+                                    MaHoSo = hoso.MaHoSo,
+                                    ChiPhiKham = String.Format("{0} VNĐ", Common.SourceLibrary.PhiKhamTiepNhan),
+                                    TongChiPhi = String.Format("{0} VNĐ", this.tongChiPhi)
+                                }
+                            };
+
+
+                            thanhToanReport.FormClosed += (objt, er) =>
+                            {
+                                formContainer.Close();
+                                this.fetchData();
+                            };
+                            thanhToanReport.ShowDialog();
                         }
                     } else
                     {

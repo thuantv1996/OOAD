@@ -44,7 +44,7 @@ namespace ClinicManagement.Common.ClinicComponents
                 HoTen = this.txtName.Text,
                 GioiTinh = this.txtGender.Text.Equals("Nam") ? true : false,
                 MaBenhNhan = this.idNumber,
-                NgaySinh = string.Format("{0}{1}{2}", year, month > 10 ? month.ToString(): "0" + month, day > 10 ? day.ToString() : "0" + day),
+                NgaySinh = string.Format("{0}{1}{2}", year, month >= 10 ? month.ToString(): "0" + month, day >= 10 ? day.ToString() : "0" + day),
                 SoDienThoai = this.txtPhoneNumber.Text,
                 GhiChu = this.txtNote.Text,
                 DiaChi = this.txtAddress.Text,

@@ -48,14 +48,11 @@ namespace ClinicManagement.Common.ClinicComponents
         {
             var patient = new DTO.BenhNhanDTO();
             DateTime birthDay = this.birthDay.DateTime;
+
             patient.HoTen = this.name.Text;
             patient.GioiTinh = this.gender.Text.Equals("Nam") ? true : false;
             patient.MaBenhNhan = this.maBenhNhan;
-            var birthDayString = birthDay.ToShortDateString();
-            var year = birthDay.Year;
-            var month = birthDay.Month;
-            var day = birthDay.Day;
-            patient.NgaySinh = string.Format("{0}{1}{2}", year, month > 10 ? month.ToString() : "0" + month, day > 10 ? day.ToString() : "0" + day);
+            patient.NgaySinh = birthDay.ToString("yyyyMMdd");
             patient.SoDienThoai = this.phoneNumber.Text;
             patient.GhiChu = this.note.Text;
             patient.DiaChi = this.address.Text;
