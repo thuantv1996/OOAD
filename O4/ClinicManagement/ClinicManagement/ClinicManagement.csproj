@@ -529,6 +529,10 @@
       <Project>{8173ea14-8393-4540-b2df-1ad6f7a9967e}</Project>
       <Name>DTO</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Report\Report.csproj">
+      <Project>{c538a96d-f0c3-4fc5-b64a-ed0b42332285}</Project>
+      <Name>Report</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon\ico_key_24.png" />

@@ -15,7 +15,6 @@ namespace ClinicManagement.Features.Reception.SubForms
         private DTO.BenhNhanDTO patient;
         private List<DTO.HoSoBenhAnDTO> listHoSoTruoc = new List<DTO.HoSoBenhAnDTO>();
         private Reception.Bus.ReceptionBus bus = Bus.ReceptionBus.SharedInstance;
-        public event EventHandler Recepted;
 
         public ReceptionControl()
         {
@@ -118,7 +117,7 @@ namespace ClinicManagement.Features.Reception.SubForms
                 MaHoSoTruoc = this.cbMaHoSoTruoc.Text,
                 MaLoaiHoSo = loaiHoSo != null ? loaiHoSo.MaLoaiHoSo : "",
                 MaNguoiTN = nguoiTiepNhan != null ? nguoiTiepNhan.MaNV : "",
-                NgayTiepNhan = ClinicManagement.Common.ClinicBus.convertViewToDate(this.txtNgayTiepNhan.Text),
+                NgayTiepNhan = DateTime.Now.ToString("yyyyMMdd"),
                 YeuCauKham = this.txtYeuCauKham.Text,
                 MaPhongKham = phongKham != null ? phongKham.MaPhong : ""
             };
@@ -128,12 +127,36 @@ namespace ClinicManagement.Features.Reception.SubForms
             {
                 if (result.Equals(COM.Constant.RES_SUC))
                 {
-                    MessageBox.Show(String.Format("Tiếp nhận thành công!\nSố thứ tự là: {0}", stt), "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Recepted?.Invoke(this, e);
-                    if (this.Parent is Form) {
-                        var formParent = (Form)this.Parent;
-                        formParent.Close();
-                    }
+                    DevExpress.Utils.WaitDialogForm f = new DevExpress.Utils.WaitDialogForm();
+                    f.Show();
+
+                    Report.FormSoThuTu soThuTuForm = new Report.FormSoThuTu()
+                    {
+                        AutoSize = true,
+                        StartPosition = FormStartPosition.CenterParent,
+                        DataReport = new Report.DataReportSoThuTu()
+                        {
+                            MaHoSo = hoso.MaHoSo,
+                            TenBenhNhan = patient.HoTen,
+                            DiaChi = patient.DiaChi,
+                            NgayKham = DateTime.Now.ToString("dd/MM/yyyy"),
+                            SoThuTu = hoso.SoThuTu.ToString(),
+                            TenPhong = phongKham?.TenPhong
+                        }
+                    };
+
+                    soThuTuForm.FormClosed += (obj, er) =>
+                    {
+                        if (this.Parent is Form)
+                        {
+                            var formParent = (Form)this.Parent;
+                            formParent.Close();
+                        }
+                    };
+
+
+                    f.Close();
+                    soThuTuForm.ShowDialog();
                 }
             });
         }
@@ -164,8 +187,8 @@ namespace ClinicManagement.Features.Reception.SubForms
                 MaHoSoTruoc = this.cbMaHoSoTruoc.Text,
                 MaLoaiHoSo = loaiHoSo != null ? loaiHoSo.MaLoaiHoSo : "",
                 MaNguoiTN = nguoiTiepNhan != null ? nguoiTiepNhan.MaNV : "",
-                NgayTiepNhan = ClinicManagement.Common.ClinicBus.convertViewToDate(this.txtNgayTiepNhan.Text),
-                YeuCauKham = this.txtYeuCauKham.Text,
+                NgayTiepNhan = DateTime.Now.ToString("yyyyMMdd"),
+                YeuCauKham = this.txtYeuCauKham.getText,
                 MaPhongKham = phongKham != null ? phongKham.MaPhong : ""
             };
             var thanhToan = new DTO.ThanhToanDTO() { ChiPhiKham = ClinicManagement.Common.SourceLibrary.PhiKhamTiepNhan };
@@ -218,6 +241,7 @@ namespace ClinicManagement.Features.Reception.SubForms
             } else
             {
                 this.cbMaHoSoTruoc.Enabled = true;
+                this.btnSearch.Enabled = true;
             }
         }
     }

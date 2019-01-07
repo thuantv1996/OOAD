@@ -49,15 +49,6 @@ namespace ClinicManagement.Common
             var day = date.Substring(6, 2);
             return String.Format("{0}/{1}/{2}", day, month, year);
         }
-
-        static public string convertViewToDate(string date)
-        {
-            var list = date.Split('/');
-            var day = list.First();
-            var month = list[1];
-            var year = list.Last();
-            return String.Format("{0}{1}{2}", year, month, day);
-        }
     }
 
    
